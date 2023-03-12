@@ -1,0 +1,46 @@
+nav {
+    margin: 0;
+    padding: 6.7vh 30px 4vh;
+    width: 270px;
+    background-color: #111111;
+    height: 100%; /* Full height */
+    position: fixed; /* Make it stick, even on scroll */
+    overflow: auto;
+    color: white;
+}
+
+.menu__links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu__info {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    line-height: 24px;
+    cursor: pointer;
+
+}
+
+.menu__info .name {
+    font-weight: 600;
+}
+
+.menu__info .value {
+    font-weight: 500;
+}
+
+.menu__info .tucoin {
+    width: 17px;
+    height: 17px;
+    vertical-align: text-top;
+}
+
+.menu__info .photo {
+    width: 60px;
+    border-radius: 50px;
+}
