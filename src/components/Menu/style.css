@@ -1,33 +1,27 @@
 nav {
     margin: 0;
-    padding: 6.7vh 30px 4vh;
-    width: 270px;
+    padding: 6.7vh 30px;
+    width: 25vw;
+    min-width: 150px;
     background-color: #111111;
-    height: 100%; /* Full height */
-    position: fixed; /* Make it stick, even on scroll */
-    overflow: auto;
+    height: 100%;
+    position: fixed;
     color: white;
 }
 
-.menu__links {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
 
 .menu__info {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    font-size: 16px;
-    line-height: 24px;
+    line-height: 1.5;
     cursor: pointer;
-
 }
 
 .menu__info .name {
     font-weight: 600;
+    font-size: calc(12px + 4 * (25vw/ 268));
 }
 
 .menu__info .value {
@@ -38,9 +32,63 @@ nav {
     width: 17px;
     height: 17px;
     vertical-align: text-top;
+    margin-left: 6px;
 }
 
 .menu__info .photo {
     width: 60px;
     border-radius: 50px;
 }
+
+.menu__links {
+    list-style-type: none;
+    padding: 0;
+    font-weight: 600;
+    line-height: 1.5;
+    color: white;
+    text-decoration: none;
+    margin-top: 7vh;
+}
+
+.menu__links a {
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+    transition: 0.1s;
+    margin-bottom: 2vh;
+    display: inline-block;
+}
+
+.menu__links a:hover {
+    color: #F50106;
+    transition: 0.25s;
+}
+
+.menu__links .ico {
+    width: 20px;
+    vertical-align: text-top;
+    margin-right: 12px;
+}
+
+.social {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    cursor: pointer;
+    text-align: center;
+    position: fixed;
+    bottom: 4vh;
+    width: 25vw;
+}
+
+.networks {
+    margin-top: 7px;
+}
+
+.logo {
+    margin-bottom: 8px;
+    margin-right: 5px;
+}
+
+
