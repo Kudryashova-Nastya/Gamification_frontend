@@ -2,6 +2,7 @@ nav {
     margin: 0;
     padding: 6.7vh 30px;
     width: 25vw;
+    max-width: 260px;
     min-width: 150px;
     background-color: #111111;
     height: 100%;
@@ -26,6 +27,7 @@ nav {
 
 .menu__info .value {
     font-weight: 500;
+    font-size: 16px;
 }
 
 .menu__info .tucoin {
@@ -80,6 +82,7 @@ nav {
     position: fixed;
     bottom: 4vh;
     width: 25vw;
+    max-width: 260px;
 }
 
 .networks {

@@ -1,6 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {getHostInformation, POSTCORS} from "./helper";
-import Cookie from 'mobx-cookie'
+import {getHostInformation, POSTCORS} from "./helper/Helper";
 
 const host = getHostInformation()
 
