@@ -5,6 +5,7 @@ import {observer} from "mobx-react";
 import {useEffect} from "react";
 import Auth from "./store/helper/Auth";
 import Login from "./components/Login/Login";
+import Profile from "./components/Profile/Profile";
 
 
 const App = observer(() => {
@@ -30,8 +31,9 @@ const App = observer(() => {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/login" element={<Login/>}/>
-				<Route path="/student" element={(token && role === 'student') ? <Menu/> : <Navigate to="/login" replace/>}>
-					{/*<Route path="two" element={<PageTwo/>}/>*/}
+				{/*<Route path="/student" element={(token && role === 'student') ? <Menu/> : <Navigate to="/login" replace/>}>*/}
+				<Route path="/student" element={<Menu/>}>
+					<Route path="" element={<Profile/>}/>
 				</Route>
 				<Route path="/manager" element={(token && role === 'manager') ? <Menu/> : <Navigate to="/login" replace/>}>
 					{/*<Route path='/registration' element={<StudentRegistration/>}/>*/}

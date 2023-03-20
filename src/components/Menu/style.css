@@ -1,8 +1,8 @@
 nav {
     margin: 0;
-    padding: 6.7vh 30px;
+    padding: 6.7vh 30px 0;
     width: 25vw;
-    max-width: 260px;
+    max-width: 250px;
     min-width: 150px;
     background-color: #111111;
     height: 100%;
@@ -10,6 +10,21 @@ nav {
     color: white;
 }
 
+.main-container {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.fake-nav {
+    height: 100%;
+    margin: 0;
+    width: 22vw;
+    max-width: 250px;
+    min-width: 150px;
+    padding: 6.7vh 30px 0;
+    flex-shrink: 0;
+}
 
 .menu__info {
     display: flex;
@@ -22,7 +37,7 @@ nav {
 
 .menu__info .name {
     font-weight: 600;
-    font-size: calc(12px + 4 * (25vw/ 268));
+    font-size: calc(11px + 4 * (25vw / 268));
 }
 
 .menu__info .value {
@@ -69,7 +84,7 @@ nav {
 .menu__links .ico {
     width: 20px;
     vertical-align: text-top;
-    margin-right: 12px;
+    margin-right: 14px;
 }
 
 .social {

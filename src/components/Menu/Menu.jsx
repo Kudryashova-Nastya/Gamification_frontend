@@ -23,7 +23,7 @@ const Menu = () => {
             <nav>
                 <div className="menu__info">
                     <div>
-                        <div className="name">Иван Иванов</div>
+                        <div className="name">Иван Иваненков</div>
                         <div className="value"> 125
                             <img src={TUCOIN_MENU_MINI} className="tucoin" alt="игровой валюты"/>
                         </div>
@@ -100,7 +100,13 @@ const Menu = () => {
                     </div>
                 </div>
             </nav>
-            <Outlet/>
+            <div className="main-container">
+                <div className="fake-nav">
+
+                </div>
+                <Outlet/>
+            </div>
+
         </>
     );
 };
