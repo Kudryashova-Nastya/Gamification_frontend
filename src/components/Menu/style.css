@@ -1,7 +1,7 @@
 nav {
     margin: 0;
     padding: 6.7vh 30px 0;
-    width: 25vw;
+    width: 22vw;
     max-width: 250px;
     min-width: 150px;
     background-color: #111111;
@@ -9,6 +9,30 @@ nav {
     position: fixed;
     color: white;
 }
+
+nav a {
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+    transition: 0.1s;
+    margin-bottom: 2vh;
+    display: inline-block;
+}
+
+nav a:hover {
+    color: #F50106;
+    transition: 0.25s;
+}
+
+nav a:hover .value {
+    color: white;
+}
+
+.student-link {
+    display: block;
+}
+
+
 
 .main-container {
     display: flex;
@@ -43,6 +67,7 @@ nav {
 .menu__info .value {
     font-weight: 500;
     font-size: 16px;
+    color:white
 }
 
 .menu__info .tucoin {
@@ -67,19 +92,6 @@ nav {
     margin-top: 7vh;
 }
 
-.menu__links a {
-    font-size: 14px;
-    color: white;
-    text-decoration: none;
-    transition: 0.1s;
-    margin-bottom: 2vh;
-    display: inline-block;
-}
-
-.menu__links a:hover {
-    color: #F50106;
-    transition: 0.25s;
-}
 
 .menu__links .ico {
     width: 20px;

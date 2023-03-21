@@ -7,6 +7,8 @@ import MAINTUCOIN from '../../images/icons/black-tucoin18.svg'
 import TELEGRAM from '../../images/icons/telegram-black.svg'
 import MAIL from '../../images/icons/mail.svg'
 import PORTFOLIO from '../../images/icons/portfolio.svg'
+import ACHI from '../../images/icons/achi16.svg'
+import SEND from '../../images/icons/send.svg'
 import D3 from '../../images/directions/3D.svg'
 import Animation from '../../images/directions/Анимация.svg'
 import Game from '../../images/directions/Геймдев.svg'
@@ -26,8 +28,8 @@ const Profile = () => {
 					<img alt="фото" src="https://www.peoples.ru/state/citizen/william_franklyn-miller/franklyn-miller_8.jpg"/>
 				</div>
 				<div className="info">
-					<h2 className="header2">Иван Иваненков</h2>
-					<h3 className="header3"> 125 <img alt="тукоинов" src={MAINTUCOIN}/></h3>
+					<h2 className="header3">Иван Иваненков</h2>
+					<h3 className="header4"> 125 <img alt="тукоинов" src={MAINTUCOIN}/></h3>
 					<div className="contacts">
 						<div className="contact">
 							<img alt="почта" src={MAIL}/> ivan.ivanov.m@tumo.world
@@ -54,6 +56,27 @@ const Profile = () => {
 					</div>
 				</div>
 			</div>
+			<div className="header-block">
+				<h2 className="header3">Мои ачивки</h2>
+				<button className="button">Все ачивки <img className="button-icon" alt="ачивки" src={ACHI}/></button>
+			</div>
+			<hr color="#CCCCCC" size="4"/>
+			<div className="achives">
+				<div className="achive">
+					<img alt="ачивка" src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+				</div>
+				<div className="achive">
+					<img alt="ачивка" src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+				</div>
+				<div className="achive">
+					<img alt="ачивка" src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+				</div>
+			</div>
+			<div className="header-block">
+				<h2 className="header3">Моя история операций</h2>
+				<button className="button">Перевести <img className="button-icon" alt="перевод" src={SEND}/></button>
+			</div>
+			<hr color="#CCCCCC" size="4"/>
 		</div>
 	);
 };

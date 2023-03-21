@@ -1,5 +1,6 @@
 .profile-container {
     height: 100%;
+    width: 100%;
     padding: 2vw 7vw;
 }
 
@@ -16,7 +17,7 @@
 
 .profile-window {
     border: 3px solid #111111;
-    padding: 2.1vw 3.8vw;
+    padding: 2.1vw 3.2vw;
     border-radius: 40px;
     display: flex;
     flex-wrap: nowrap;
@@ -26,8 +27,8 @@
 
 
 .profile-window .avatar {
-    max-width: 150px;
-    min-width: 90px;
+    max-width: 140px;
+    min-width: 80px;
     flex-shrink: 2;
 }
 
@@ -37,9 +38,15 @@
     width: 100%;
 }
 
-.profile-window .header2 {
-    margin: 0 0 8px;
+.profile-window .header3 {
+    margin: 0 0 2px;
 }
+
+.profile-window .header4 {
+    margin: 0;
+    font-size: 21px;
+}
+
 
 .contact {
     font-weight: 600;
@@ -68,13 +75,14 @@
 
 }
 
-.directions img{
+.directions {
+    margin-top: 8px;
+}
+
+.directions img {
     margin-right: 7px;
 }
 
-/*.about {*/
-/*    flex-shrink: 3*/
-/*}*/
 
 .about .label {
     font-weight: 600;
@@ -90,6 +98,45 @@
     font-size: 15px;
     line-height: 140%;
     max-width: 350px;
+}
+
+.header-block {
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-end;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    margin: 23px 15px 13px;
+}
+
+.header-block .button {
+    padding: 8px 30px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.header-block .button-icon {
+    vertical-align: middle;
+}
+
+hr {
+    border-radius: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.achives {
+    display: flex;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.achive {
+    width: 60px;
+}
+
+.achive img {
+    width: 100%;
 }
 
 @media (max-width: 1000px) {
