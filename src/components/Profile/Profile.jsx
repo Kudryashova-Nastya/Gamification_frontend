@@ -4,11 +4,14 @@ import './style.css'
 import EDIT from '../../images/icons/edit.svg'
 import LINK from '../../images/icons/link.svg'
 import MAINTUCOIN from '../../images/icons/black-tucoin18.svg'
+import TUCOIN from '../../images/icons/black-tucoin16.svg'
 import TELEGRAM from '../../images/icons/telegram-black.svg'
 import MAIL from '../../images/icons/mail.svg'
 import PORTFOLIO from '../../images/icons/portfolio.svg'
 import ACHI from '../../images/icons/achi16.svg'
 import SEND from '../../images/icons/send.svg'
+import ARROWTO from '../../images/icons/arrow-to.svg'
+import ARROWFROM from '../../images/icons/arrow-from.svg'
 import D3 from '../../images/directions/3D.svg'
 import Animation from '../../images/directions/Анимация.svg'
 import Game from '../../images/directions/Геймдев.svg'
@@ -77,6 +80,33 @@ const Profile = () => {
 				<button className="button">Перевести <img className="button-icon" alt="перевод" src={SEND}/></button>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
+			<div className="transaction-block">
+				<div className="datetime">20 декабря 12:20</div>
+				<div className="transaction">
+					<div className="groups">
+						<div className="ico"><img alt="arrow" src={ARROWTO}/></div>
+						<div className="sender">Петя Пимашков</div>
+					</div>
+					<div className="groups">
+						<div className="count">+20 <img alt="tucoin" src={TUCOIN}/></div>
+						<div className="message">На прокачку)</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="transaction-block">
+				<div className="datetime">19 декабря 15:26</div>
+				<div className="transaction">
+					<div className="groups">
+						<div className="ico"><img alt="arrow" src={ARROWFROM}/></div>
+						<div className="sender">Сергей Разумовский</div>
+					</div>
+					<div className="groups">
+						<div className="count">-200 <img alt="tucoin" src={TUCOIN}/></div>
+						<div className="message">Анекдот: заходит как-то улитка в бар...</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };
