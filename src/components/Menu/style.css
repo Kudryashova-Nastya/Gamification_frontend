@@ -32,8 +32,6 @@ nav a:hover .value {
     display: block;
 }
 
-
-
 .main-container {
     display: flex;
     flex-wrap: nowrap;
@@ -107,9 +105,13 @@ nav a:hover .value {
     cursor: pointer;
     text-align: center;
     position: fixed;
-    bottom: 4vh;
+    bottom: 3vh;
     width: 25vw;
     max-width: 260px;
+}
+
+.social a {
+    margin-bottom: 0;
 }
 
 .networks {

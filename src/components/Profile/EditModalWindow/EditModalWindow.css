@@ -1,0 +1,81 @@
+.close-ico {
+    position: absolute;
+    top: 25px;
+    left: 35px;
+}
+
+.modal .blockname {
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 14px;
+}
+
+.modal .blockname__about {
+    margin-left: 30px;
+}
+
+.modal .columns {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 23px;
+}
+
+.modal .mydirection {
+    margin-bottom: 3px;
+}
+
+.modal .aboutme {
+    background-color: #CCCCCC;
+    border-radius: 30px;
+    padding: 20px 30px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 140%;
+    max-width: 350px;
+    border: none;
+    outline: none;
+    flex: 1 1 auto;
+}
+
+.modal .aboutblock {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.mydirections label {
+    font-weight: 500;
+    font-size: 15px;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+.modal .refinput {
+    background-color: #CCCCCC;
+    border-radius: 30px;
+    padding: 20px 25px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 140%;
+    max-width: 350px;
+    border: none;
+    outline: none;
+}
+
+.modal .myrefs {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.myrefs .blockname {
+    margin: 0;
+}

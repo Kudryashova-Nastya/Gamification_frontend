@@ -16,13 +16,18 @@ import D3 from '../../images/directions/3D.svg'
 import Animation from '../../images/directions/Анимация.svg'
 import Game from '../../images/directions/Геймдев.svg'
 import Dis from '../../images/directions/Дизайн.svg'
+import StudentProfileStore from "../../store/StudentProfileStore";
+import {EditModalWindow} from "./EditModalWindow/EditModalWindow";
+import {observer} from "mobx-react";
 
-const Profile = () => {
+const Profile = observer(() => {
 
 	return (
 		<div className="profile-container">
 			<div className="buttons-block">
-				<button className="button">Редактировать <img className="button-icon" alt="редактировать" src={EDIT}/></button>
+				<button className="button" onClick={() => StudentProfileStore.setEditVisible()}>Редактировать
+					<img className="button-icon" alt="редактировать" src={EDIT}/>
+				</button>
 				<button className="button">Копировать ссылку <img className="button-icon" alt="копировать ссылку" src={LINK}/>
 				</button>
 			</div>
@@ -107,8 +112,9 @@ const Profile = () => {
 					</div>
 				</div>
 			</div>
+			{StudentProfileStore.modalEditVisible ? <EditModalWindow/> : null}
 		</div>
 	);
-};
+});
 
 export default Profile;
