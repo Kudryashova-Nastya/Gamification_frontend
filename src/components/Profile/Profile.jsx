@@ -66,23 +66,23 @@ const Profile = observer(() => {
 			</div>
 			<div className="header-block">
 				<h2 className="header3">Мои ачивки</h2>
-				<button className="button">Все ачивки <img className="button-icon" alt="ачивки" src={ACHI}/></button>
+				<button className="button">Все ачивки <img className="button-icon achive-icon" alt="ачивки" src={ACHI}/></button>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="achives">
 				<div className="achive">
-					<img alt="ачивка" src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+					<img title="ачивка" alt="ачивка" src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
 				</div>
 				<div className="achive">
-					<img alt="ачивка" src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+					<img title="ачивка" alt="ачивка" src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
 				</div>
 				<div className="achive">
-					<img alt="ачивка" src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+					<img title="ачивка" alt="ачивка" src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
 				</div>
 			</div>
 			<div className="header-block">
 				<h2 className="header3">Моя история операций</h2>
-				<button className="button">Перевести <img className="button-icon" alt="перевод" src={SEND}/></button>
+				<button className="button">Перевести <img className="send button-icon" alt="перевод" src={SEND}/></button>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="transaction-block">

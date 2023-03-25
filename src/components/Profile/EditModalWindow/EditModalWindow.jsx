@@ -5,6 +5,24 @@ import StudentProfileStore from "../../../store/StudentProfileStore";
 import './EditModalWindow.css';
 
 export const EditModalWindow = observer(() => {
+
+	const checkboxes = document.querySelectorAll('input[type=checkbox]')
+	const limit = 4 // максимальное количество выбранных чекбоксов
+
+	checkboxes.forEach((checkbox) => {
+		checkbox.addEventListener('change', () => {
+			let checkedCount = 0
+			checkboxes.forEach((checkbox) => {
+				if (checkbox.checked) {
+					checkedCount++
+				}
+			})
+			if (checkedCount > limit) {
+				checkbox.checked = false
+			}
+		})
+	})
+
 	return (
 		<ModalWindow>
 			<svg className="close-ico" onClick={() => StudentProfileStore.closeModal()} width="22" height="22"
@@ -17,10 +35,10 @@ export const EditModalWindow = observer(() => {
 			<div className="header3">Редактирование профиля</div>
 			<div className="columns">
 				<div className="mydirections">
-					<div className="blockname">Мои направления:</div>
+					<div className="blockname">Мои направления (max 4):</div>
 					<div className="mydirection">
-						<input type="checkbox"/>
-						<label>Программирование</label>
+						<input type="checkbox" id="prog" name="prog"/>
+						<label htmlFor="prog">Программирование</label>
 					</div>
 					<div className="mydirection">
 						<input type="checkbox"/>
@@ -62,7 +80,7 @@ export const EditModalWindow = observer(() => {
 			</div>
 			<div className="myrefs">
 				<label className="blockname">Мой телеграм: &nbsp;</label>
-				<input type="text" className="input"/>
+				<input type="text" className="input" size="40"  maxLength="40"/>
 			</div>
 			<button onClick={() => StudentProfileStore.closeModal()} className="button">Сохранить</button>
 		</ModalWindow>

@@ -16,16 +16,15 @@
 
 .modal .columns {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: stretch;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 30px;
     margin-top: 30px;
     margin-bottom: 23px;
 }
 
 .modal .mydirection {
-    margin-bottom: 3px;
+    margin-bottom: 4px;
 }
 
 .modal .aboutme {
@@ -68,14 +67,18 @@
 
 .modal .myrefs {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     flex-direction: row;
     width: 100%;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
     margin-bottom: 22px;
 }
 
 .myrefs .blockname {
     margin: 0;
+}
+
+.mydirections input[type=checkbox] {
+    transform: scale(1.2);
 }

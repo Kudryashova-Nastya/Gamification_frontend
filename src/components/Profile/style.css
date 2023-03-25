@@ -116,7 +116,7 @@
     letter-spacing: 0.5px;
 }
 
-.header-block .button-icon {
+.header-block .achive-icon {
     vertical-align: middle;
 }
 
@@ -190,6 +190,10 @@ hr {
     font-size: 14px;
     line-height: 140%;
     max-width: 350px;
+}
+
+.send {
+    height: 15px;
 }
 
 @media (max-width: 1000px) {
