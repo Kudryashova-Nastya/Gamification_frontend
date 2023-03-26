@@ -1,17 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import '../base.css';
 import './style.css'
 import EDIT from '../../images/icons/edit.svg'
 import LINK from '../../images/icons/link.svg'
 import MAINTUCOIN from '../../images/icons/black-tucoin18.svg'
-import TUCOIN from '../../images/icons/black-tucoin16.svg'
 import TELEGRAM from '../../images/icons/telegram-black.svg'
 import MAIL from '../../images/icons/mail.svg'
 import PORTFOLIO from '../../images/icons/portfolio.svg'
 import ACHI from '../../images/icons/achi16.svg'
 import SEND from '../../images/icons/send.svg'
-import ARROWTO from '../../images/icons/arrow-to.svg'
-import ARROWFROM from '../../images/icons/arrow-from.svg'
 import D3 from '../../images/directions/3D.svg'
 import Animation from '../../images/directions/Анимация.svg'
 import Game from '../../images/directions/Геймдев.svg'
@@ -19,8 +16,36 @@ import Dis from '../../images/directions/Дизайн.svg'
 import StudentProfileStore from "../../store/StudentProfileStore";
 import {EditModalWindow} from "./EditModalWindow/EditModalWindow";
 import {observer} from "mobx-react";
+import StudentTransactions from "./StudentTransactions/StudentTransactions";
+import Pagination from "../Pagination/Pagination";
 
 const Profile = observer(() => {
+
+	const [posts, setPosts] = useState([])
+	// const [loading, setLoading] = useState(false)
+	const [currentPage, setCurrentPage] = useState(1)
+	const [postsPerPage] = useState(10)
+
+	// useEffect(() => {
+	// 	const fetchPosts = async () => {
+	// 		setLoading(true)
+	// 		// const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
+	// 		// setPosts(res.data)
+	// 		setLoading(false)
+	// 	}
+	//
+	// 	fetchPosts().then()
+	// }, [])
+
+	// if (loading && posts.length === 0) {
+	// 	return <h2>Loading...</h2>
+	// }
+
+	//Get current posts
+	// const indexOfLastPost = currentPage * postsPerPage;
+	// const indexOfFirstPost = indexOfLastPost - postsPerPage;
+	// const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+	// const howManyPages = Math.ceil(posts.length/postsPerPage)
 
 	return (
 		<div className="profile-container">
@@ -85,33 +110,8 @@ const Profile = observer(() => {
 				<button className="button">Перевести <img className="send button-icon" alt="перевод" src={SEND}/></button>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
-			<div className="transaction-block">
-				<div className="datetime">20 декабря 12:20</div>
-				<div className="transaction">
-					<div className="groups">
-						<div className="ico"><img alt="arrow" src={ARROWTO}/></div>
-						<div className="sender">Петя Пимашков</div>
-					</div>
-					<div className="groups">
-						<div className="count">+20 <img alt="tucoin" src={TUCOIN}/></div>
-						<div className="message">На прокачку)</div>
-					</div>
-				</div>
-			</div>
-
-			<div className="transaction-block">
-				<div className="datetime">19 декабря 15:26</div>
-				<div className="transaction">
-					<div className="groups">
-						<div className="ico"><img alt="arrow" src={ARROWFROM}/></div>
-						<div className="sender">Сергей Разумовский</div>
-					</div>
-					<div className="groups">
-						<div className="count">-200 <img alt="tucoin" src={TUCOIN}/></div>
-						<div className="message">Анекдот: заходит как-то улитка в бар...</div>
-					</div>
-				</div>
-			</div>
+			<StudentTransactions/>
+			<Pagination pages = {10} setCurrentPage={setCurrentPage}/>
 			{StudentProfileStore.modalEditVisible ? <EditModalWindow/> : null}
 		</div>
 	);
