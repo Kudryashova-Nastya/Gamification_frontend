@@ -98,7 +98,7 @@ const Menu = () => {
 						<Link to='/student'><img src={SETTINGS} className="networks" alt="SETTINGS"/></Link><br/>
 					</div>
 					<div>
-						<Link to='/student'><img src={LOGO} className="networks logo" alt="LOGO"/></Link><br/>
+						<a target="_blank" href="https://tumo.moscow/"><img src={LOGO} className="networks logo" alt="LOGO"/></a><br/>
 					</div>
 				</div>
 			</nav>

@@ -3,8 +3,9 @@ import '../base.css';
 import './style.css'
 import Auth from "../../store/helper/Auth";
 import {useNavigate} from "react-router-dom";
+import {observer} from "mobx-react";
 
-const Login = () => {
+const Login = observer(() => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const history = useNavigate()
@@ -73,6 +74,6 @@ const Login = () => {
 			</div>
 		</div>
 	);
-};
+})
 
 export default Login;
