@@ -19,6 +19,8 @@ const StudentRegistration = observer(() => {
 			"email": email,
 			"tarif": tarif,
 		}
+
+		console.log(data)
 	}
 
 
@@ -34,6 +36,7 @@ const StudentRegistration = observer(() => {
 						<div>
 							<label id="namelabel" htmlFor="name">Имя</label>
 							<input
+								required
 								id="name"
 								className="input"
 								name="name"
@@ -45,6 +48,7 @@ const StudentRegistration = observer(() => {
 						<div>
 							<label htmlFor="lastname">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Фамилия</label>
 							<input
+								required
 								id="lastname"
 								className="input"
 								name="lastname"
@@ -56,6 +60,7 @@ const StudentRegistration = observer(() => {
 						<div>
 							<label htmlFor="email">Почта TUMO</label>
 							<input
+								required
 								id="email"
 								className="input"
 								name="email"

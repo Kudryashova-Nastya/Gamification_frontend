@@ -7,6 +7,7 @@ import Auth from "./store/helper/Auth";
 import Login from "./components/Auth/Login";
 import Profile from "./components/Profile/Profile";
 import StudentRegistration from "./components/Auth/StudentRegistration";
+import TransactionPage from "./components/TransactionPage/TransactionPage";
 
 
 const App = observer(() => {
@@ -36,6 +37,7 @@ const App = observer(() => {
 				{/*<Route path="/student" element={(token && role === 'student') ? <Menu/> : <Navigate to="/login" replace/>}>*/}
 				<Route path="/student" element={<Menu/>}>
 					<Route path="" element={<Profile/>}/>
+					<Route path="send" element={<TransactionPage/>}/>
 				</Route>
 				<Route path="/manager" element={(token && role === 'manager') ? <Menu/> : <Navigate to="/login" replace/>}>
 					{/*<Route path='/registration' element={<StudentRegistration/>}/>*/}

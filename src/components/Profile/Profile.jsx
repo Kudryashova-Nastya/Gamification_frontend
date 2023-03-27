@@ -18,6 +18,7 @@ import {EditModalWindow} from "./EditModalWindow/EditModalWindow";
 import {observer} from "mobx-react";
 import StudentTransactions from "./StudentTransactions/StudentTransactions";
 import Pagination from "../Pagination/Pagination";
+import {useNavigate} from "react-router-dom";
 
 const Profile = observer(() => {
 
@@ -25,6 +26,7 @@ const Profile = observer(() => {
 	// const [loading, setLoading] = useState(false)
 	const [currentPage, setCurrentPage] = useState(1)
 	const [postsPerPage] = useState(10)
+	const history = useNavigate()
 
 	// useEffect(() => {
 	// 	const fetchPosts = async () => {
@@ -48,7 +50,7 @@ const Profile = observer(() => {
 	// const howManyPages = Math.ceil(posts.length/postsPerPage)
 
 	return (
-		<div className="profile-container">
+		<div className="container">
 			<div className="buttons-block">
 				<button className="button" onClick={() => StudentProfileStore.setEditVisible()}>Редактировать
 					<img className="button-icon" alt="редактировать" src={EDIT}/>
@@ -107,7 +109,7 @@ const Profile = observer(() => {
 			</div>
 			<div className="header-block">
 				<h2 className="header3">Моя история операций</h2>
-				<button className="button">Перевести <img className="send button-icon" alt="перевод" src={SEND}/></button>
+				<button onClick={()=> history("send")} className="button button-send">Перевести <img className="send button-icon" alt="перевод" src={SEND}/></button>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<StudentTransactions/>

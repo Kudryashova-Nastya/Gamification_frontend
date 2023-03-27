@@ -56,6 +56,7 @@ const Login = observer(() => {
 							name="email"
 							type="email"
 							value={email}
+							required
 							onChange={(e) => setEmail(e.target.value)}
 						/>
 					</div>
@@ -66,6 +67,7 @@ const Login = observer(() => {
 							name="password"
 							type="password"
 							value={password}
+							required
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</div>
