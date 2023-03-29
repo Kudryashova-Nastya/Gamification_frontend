@@ -19,28 +19,29 @@ const Login = observer(() => {
 		const log = await Auth.login(data)
 		if (log) {
 			// setAuthErrors(await Auth.login(data))
-			console.log(log)
+			console.log("косяк", log)
 		} else {
+			console.log("успех", log)
 			const role = Auth.getRole()
-			switch (role) {
-				case "student":
-					history("/student")
-					break;
-				case "manager":
-					history("/manager")
-					break;
-				case "main-admin":
-					history("/main-admin")
-					break;
-				case "curator":
-					history("/curator")
-					break;
-				case "couch":
-					history("/couch")
-					break;
-				default:
-					alert("Ты кто?")
-			}
+			// switch (role) {
+			// 	case "student":
+			// 		history("/student")
+			// 		break;
+			// 	case "manager":
+			// 		history("/manager")
+			// 		break;
+			// 	case "main-admin":
+			// 		history("/main-admin")
+			// 		break;
+			// 	case "curator":
+			// 		history("/curator")
+			// 		break;
+			// 	case "couch":
+			// 		history("/couch")
+			// 		break;
+			// 	default:
+			// 		alert("Ты кто?")
+			// }
 		}
 	};
 

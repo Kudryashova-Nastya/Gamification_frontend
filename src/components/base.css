@@ -11,6 +11,13 @@
     height: 100%;
     width: 100%;
     padding: 2vw 7vw;
+    box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding: 30px 3vw;
+    }
 }
 
 .header1 {

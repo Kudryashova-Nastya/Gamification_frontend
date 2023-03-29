@@ -30,7 +30,7 @@ class Auth {
 		}
 		console.log(LOGIN_CORS)
 
-		const req = await fetch(`${host}/login`, LOGIN_CORS)
+		const req = await fetch(`${host}/api/v1/token`, LOGIN_CORS)
 		const res = await req.json()
 		if (req.ok && res?.status_code === 201) {
 			this.setToken(res.detail)
@@ -67,7 +67,7 @@ class Auth {
 
 		// проверка не протух ли аксес-токен
 		if (this.isExpired(this.getExpirationDate(this.token.access))) {
-			const updatedToken = await fetch(`${host}/refresh`, CORS(this.token?.refresh)).then(
+			const updatedToken = await fetch(`${host}/api/v1/token/refresh`, CORS(this.token?.refresh)).then(
 				(r) => r.json()
 			);
 
