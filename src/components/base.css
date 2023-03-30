@@ -14,11 +14,6 @@
     box-sizing: border-box;
 }
 
-@media (max-width: 767px) {
-    .container {
-        padding: 30px 3vw;
-    }
-}
 
 .header1 {
     font-weight: 700;
@@ -62,6 +57,7 @@
     padding: 8px 30px;
     font-size: 14px;
     letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .header-back {
@@ -111,4 +107,23 @@ hr {
     border: 2px solid #111111;
     padding: 9px 12px;
     width: 100%;
+}
+
+body.lock {
+    /*height: 100vh;*/
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding: 30px 3vw;
+    }
+
+    .header3 {
+        font-size: 18px;
+    }
 }

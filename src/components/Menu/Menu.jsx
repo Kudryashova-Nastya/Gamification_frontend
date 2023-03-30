@@ -15,18 +15,27 @@ import TELEGRAM from "../../images/icons/Telegram.svg"
 import VK from "../../images/icons/VK.svg"
 import SETTINGS from "../../images/icons/Settings.svg"
 import LOGO from "../../images/icons/Logo_white.svg"
+import {bodyFixPosition, bodyUnfixPosition} from "../../store/helper/Helper";
 
 
 const Menu = () => {
-	const  toggleMenu = () => {
+	const toggleMenu = () => {
 		document.getElementsByClassName("burger-container")[0].classList.toggle("active")
 		document.getElementsByTagName("nav")[0].classList.toggle("active")
-		document.getElementsByClassName("main-container")[0].classList.toggle("lock")
+		if (!document.body.hasAttribute('data-body-scroll-fix')) {
+			document.body.style.top = '';
+			bodyFixPosition()
+			document.body.style.top = '';
+		} else {
+			bodyUnfixPosition()
+		}
 	}
 
 	return (
 		<>
-			<div className="burger-container"><div className="burger" onClick={()=> toggleMenu()}><span></span></div></div>
+			<div className="burger-container">
+				<div className="burger" onClick={() => toggleMenu()}><span></span></div>
+			</div>
 			<nav>
 				<div className="nav-container">
 					<Link className="student-link" to='/student'>
@@ -37,9 +46,9 @@ const Menu = () => {
 									<img src={TUCOIN_MENU_MINI} className="tucoin" alt="игровой валюты"/>
 								</div>
 							</div>
-							<div>
+							<div className="photo">
 								<img src="https://www.peoples.ru/state/citizen/william_franklyn-miller/franklyn-miller_8.jpg"
-										 alt="avatar" className="photo"/>
+										 alt="avatar"/>
 							</div>
 						</div>
 					</Link>

@@ -79,8 +79,12 @@ nav a:hover .value {
 }
 
 .menu__info .photo {
-    width: 60px;
-    border-radius: 50px;
+    max-width: 60px;
+}
+
+.photo img {
+    width: 100%;
+    border-radius: 60px;
 }
 
 .menu__links {
@@ -130,27 +134,28 @@ nav a:hover .value {
     display: none;
 }
 
+@media (max-width: 1330px) {
+    .social {
+        max-width: 190px;
+    }
+}
+
 
 @media (max-width: 767px) {
-
-    .main-container.lock {
-        height: 100vh;
-        overflow: hidden;
-    }
 
     .burger-container {
         display: inline-block;
         position: fixed;
-        top: 30px;
-        left: 30px;
+        top: 21px;
+        left: 21px;
         z-index: 200;
         transition: all 0.3s ease 0s;
     }
 
-    .burger-container.active {
-        top: 20px;
-        left: 20px;
-    }
+    /*.burger-container.active {*/
+    /*    top: 20px;*/
+    /*    left: 20px;*/
+    /*}*/
 
     .burger {
         position: relative;
@@ -158,6 +163,7 @@ nav a:hover .value {
         height: 40px;
         background-color: #111111;
         border-radius: 30px;
+        transition: all 0.5s ease 0s;
     }
 
     .burger-container.active .burger {
@@ -169,7 +175,7 @@ nav a:hover .value {
         background-color: white;
         position: absolute;
         height: 3px;
-        left: 10px;
+        left: 9px;
         border-radius: 10px;
         transition: all 0.3s ease 0s;
         width: 21px;
@@ -184,7 +190,7 @@ nav a:hover .value {
 
     .burger-container.active .burger:before {
         transform: rotate(45deg);
-        top:18px
+        top:18px;
     }
 
     .burger-container.active .burger:after {
@@ -197,7 +203,7 @@ nav a:hover .value {
         position: absolute;
         width: 21px;
         height: 3px;
-        left: 10px;
+        left: 9px;
         border-radius: 10px;
         top: 19px;
         transition: all 0.3s ease 0s;
@@ -210,7 +216,7 @@ nav a:hover .value {
 
     nav {
         position: fixed;
-        top: -100%;
+        top: -110%;
         left: 0;
         width: 100vw;
         height: 100vh;
@@ -225,6 +231,8 @@ nav a:hover .value {
 
     nav .nav-container {
         padding: 6.9vh 15vw 0;
+        overflow: auto;
+
     }
 
     .fake-nav {
@@ -233,13 +241,14 @@ nav a:hover .value {
 
     .social {
         width: 100vw;
-        max-width: 260px;
+        max-width: 80%;
         bottom: -100%;
         transition: all 0.4s ease 0s;
     }
 
     nav.active .social {
         bottom: 3vh;
+        left: 30px;
     }
 
 }

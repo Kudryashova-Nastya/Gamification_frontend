@@ -19,3 +19,31 @@ export const CORS = (token) => {
 		}
 	})
 };
+
+// Фиксация body
+export const bodyFixPosition = () => {
+	console.log("заблок")
+	// Получаем позицию прокрутки
+	let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+	// Ставим нужные стили
+	document.body.setAttribute('data-body-scroll-fix', scrollPosition); // Ставим атрибут со значением прокрутки
+	document.body.style.top = '-' + scrollPosition + 'px';
+	document.body.classList.add("lock")
+}
+
+// Расфиксация body
+export const bodyUnfixPosition = () => {
+
+	// Получаем позицию прокрутки из атрибута
+	let scrollPosition = document.body.getAttribute('data-body-scroll-fix');
+	document.body.removeAttribute('data-body-scroll-fix');
+
+	document.body.style.top = '';
+	document.body.classList.remove("lock")
+
+	// Прокручиваем страницу на полученное из атрибута значение
+	window.scroll(0, scrollPosition);
+
+	// }
+}

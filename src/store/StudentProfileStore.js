@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {getHostInformation, POSTCORS} from "./helper/Helper";
+import {bodyFixPosition, bodyUnfixPosition, getHostInformation, POSTCORS} from "./helper/Helper";
 
 const host = getHostInformation()
 
@@ -15,9 +15,12 @@ class StudentProfileStore {
     setEditVisible = () => {
         runInAction(() => {
             this.modalEditVisible = true
-            // document.body.style.overflow = 'hidden';
-            document.body.style.position = 'fixed';
             document.body.style.overflowY = 'scroll';
+            if (!document.body.hasAttribute('data-body-scroll-fix')) {
+                bodyFixPosition()
+            } else {
+                bodyUnfixPosition()
+            }
         })
     }
 
@@ -59,6 +62,11 @@ class StudentProfileStore {
             document.body.style.position = 'static';
             document.body.style.overflowY = 'auto';
         })
+        if (!document.body.hasAttribute('data-body-scroll-fix')) {
+            bodyFixPosition()
+        } else {
+            bodyUnfixPosition()
+        }
     }
 
     // Лоадер
