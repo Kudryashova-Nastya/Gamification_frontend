@@ -40,6 +40,7 @@ nav a:hover .value {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
+    width: 100%;
 }
 
 .fake-nav {

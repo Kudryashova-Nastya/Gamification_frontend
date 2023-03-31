@@ -28,7 +28,8 @@ export const bodyFixPosition = () => {
 
 	// Ставим нужные стили
 	document.body.setAttribute('data-body-scroll-fix', scrollPosition); // Ставим атрибут со значением прокрутки
-	document.body.style.top = '-' + scrollPosition + 'px';
+	document.getElementsByClassName("main-container")[0].style.top = '-' + scrollPosition + 'px';
+	document.getElementsByClassName("main-container")[0].style.position = 'fixed';
 	document.body.classList.add("lock")
 }
 
@@ -39,7 +40,8 @@ export const bodyUnfixPosition = () => {
 	let scrollPosition = document.body.getAttribute('data-body-scroll-fix');
 	document.body.removeAttribute('data-body-scroll-fix');
 
-	document.body.style.top = '';
+	document.getElementsByClassName("main-container")[0].style.top = '';
+	document.getElementsByClassName("main-container")[0].style.position = 'static';
 	document.body.classList.remove("lock")
 
 	// Прокручиваем страницу на полученное из атрибута значение

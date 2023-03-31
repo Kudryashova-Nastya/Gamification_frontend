@@ -4,79 +4,69 @@ import {bodyFixPosition, bodyUnfixPosition, getHostInformation, POSTCORS} from "
 const host = getHostInformation()
 
 class StudentProfileStore {
-    constructor() {
-        makeAutoObservable(this)
-    }
+	constructor() {
+		makeAutoObservable(this)
+	}
 
 
+	// Модальные окна
+	modalEditVisible = false
+	setEditVisible = () => {
+		runInAction(() => {
+			this.modalEditVisible = true
+				bodyFixPosition()
+			document.body.style.overflowY = 'scroll';
+		})
+	}
 
-    // Модальные окна
-    modalEditVisible = false
-    setEditVisible = () => {
-        runInAction(() => {
-            this.modalEditVisible = true
-            document.body.style.overflowY = 'scroll';
-            if (!document.body.hasAttribute('data-body-scroll-fix')) {
-                bodyFixPosition()
-            } else {
-                bodyUnfixPosition()
-            }
-        })
-    }
+	// modalNoBalanceVisible = false
+	// setNoBalanceVisible = () => {
+	//     runInAction(() => {
+	//         this.modalNoBalanceVisible = true
+	//         document.body.style.overflow = 'hidden';
+	//     })
+	// }
+	//
+	// bookDelete = ''
+	//
+	// modalDeletePositionVisible = false
+	// setDeletePositionVisible = (name) => {
+	//     runInAction(() => {
+	//         this.bookDelete = name
+	//         this.modalDeletePositionVisible = true
+	//         document.body.style.overflow = 'hidden';
+	//     })
+	// }
+	//
+	// modalClearCartVisible = false
+	// setClearCartVisible = () => {
+	//     runInAction(() => {
+	//         this.modalClearCartVisible = true
+	//         document.body.style.overflow = 'hidden';
+	//     })
+	// }
 
-    // modalNoBalanceVisible = false
-    // setNoBalanceVisible = () => {
-    //     runInAction(() => {
-    //         this.modalNoBalanceVisible = true
-    //         document.body.style.overflow = 'hidden';
-    //     })
-    // }
-    //
-    // bookDelete = ''
-    //
-    // modalDeletePositionVisible = false
-    // setDeletePositionVisible = (name) => {
-    //     runInAction(() => {
-    //         this.bookDelete = name
-    //         this.modalDeletePositionVisible = true
-    //         document.body.style.overflow = 'hidden';
-    //     })
-    // }
-    //
-    // modalClearCartVisible = false
-    // setClearCartVisible = () => {
-    //     runInAction(() => {
-    //         this.modalClearCartVisible = true
-    //         document.body.style.overflow = 'hidden';
-    //     })
-    // }
+	closeModal = () => {
+		bodyUnfixPosition()
+		runInAction(() => {
+			this.modalEditVisible = false
+			this.modalNoBalanceVisible = false
+			this.modalDeletePositionVisible = false
+			this.modalClearCartVisible = false
+			this.bookDelete = ''
+			document.body.style.overflowY = 'auto';
+		})
 
-    closeModal = () => {
-        runInAction(() => {
-            this.modalEditVisible = false
-            this.modalNoBalanceVisible = false
-            this.modalDeletePositionVisible = false
-            this.modalClearCartVisible = false
-            this.bookDelete = ''
-            // document.body.style.overflow = 'unset';
-            document.body.style.position = 'static';
-            document.body.style.overflowY = 'auto';
-        })
-        if (!document.body.hasAttribute('data-body-scroll-fix')) {
-            bodyFixPosition()
-        } else {
-            bodyUnfixPosition()
-        }
-    }
+	}
 
-    // Лоадер
+	// Лоадер
 
-    isLoading = true
-    setLoading = (bool) => {
-        runInAction(() => {
-            this.isLoading = bool
-        })
-    }
+	isLoading = true
+	setLoading = (bool) => {
+		runInAction(() => {
+			this.isLoading = bool
+		})
+	}
 
 }
 
