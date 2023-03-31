@@ -16,12 +16,13 @@ const Login = observer(() => {
 			"email": email,
 			"password": password
 		}
+		// log вернет ошибку, если пусто, значит ошибки нет
 		const log = await Auth.login(data)
 		if (log) {
 			// setAuthErrors(await Auth.login(data))
 			console.log("косяк", log)
 		} else {
-			console.log("успех", log)
+			console.log("успех")
 			const role = Auth.getRole()
 			// switch (role) {
 			// 	case "student":

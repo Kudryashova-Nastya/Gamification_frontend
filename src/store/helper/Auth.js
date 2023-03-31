@@ -30,14 +30,17 @@ class Auth {
 		}
 		console.log(LOGIN_CORS)
 
-		const req = await fetch(`${host}/api/v1/token`, LOGIN_CORS)
+		const req = await fetch(`${host}/api/v1/token/`, LOGIN_CORS)
 		const res = await req.json()
-		if (req.ok && res?.status_code === 201) {
-			this.setToken(res.detail)
-			console.log(res)
+		console.log('req', req)
+		if (req?.ok && req?.status === 200) {
+			console.log("200")
+			this.setToken(res)
+
 			return false // возвращает false в случае успешной авторизации
 		} else {
-			return JSON.stringify(res.detail) // возвращает текст ошибки в случае ошибки авторизации
+			console.log("не 200")
+			return JSON.stringify(res) // возвращает текст ошибки в случае ошибки авторизации
 		}
 	};
 
@@ -67,7 +70,7 @@ class Auth {
 
 		// проверка не протух ли аксес-токен
 		if (this.isExpired(this.getExpirationDate(this.token.access))) {
-			const updatedToken = await fetch(`${host}/api/v1/token/refresh`, CORS(this.token?.refresh)).then(
+			const updatedToken = await fetch(`${host}/api/v1/token/refresh/`, CORS(this.token?.refresh)).then(
 				(r) => r.json()
 			);
 
@@ -83,6 +86,7 @@ class Auth {
 
 	setToken = (token) => {
 		if (token) {
+			console.log("кладём в сторедж")
 			localStorage.setItem("TOKEN_AUTH", JSON.stringify(token))
 		} else {
 			localStorage.removeItem("TOKEN_AUTH")
@@ -95,11 +99,11 @@ class Auth {
 
 	getRole = async () => {
 		if (!this.role) {
-			const usersInfoReq = await fetch(`${host}/profile`, CORS(this.token?.access))
+			const usersInfoReq = await fetch(`${host}/profile/`, CORS(this.token?.access))
 			const usersInfoRes = await usersInfoReq.json()
-			if (usersInfoReq.ok && usersInfoRes?.status_code === 200) {
+			if (usersInfoReq.ok && usersInfoReq?.status === 200) {
 			runInAction(() => {
-				this.role = usersInfoReq.role
+				this.role = usersInfoRes.role
 			})}
 		}
 
