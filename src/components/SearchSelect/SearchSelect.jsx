@@ -23,18 +23,14 @@ const SearchSelect = observer(({props}) => {
 
 	useEffect(() => {
 		let wrapper = document.getElementsByClassName("wrapper")[0]
-		const selectBtn = wrapper.getElementsByClassName("select-btn")[0]
 		const searchInp = wrapper.getElementsByClassName("search-input")[0]
-		console.log("wrapper", wrapper)
-		console.log("selectBtn", selectBtn)
 
 		searchInp.addEventListener("keyup", () => {
 			let searchWord = searchInp.value.toLowerCase();
 			setArr(allArr.filter(data => {
-				return data.toLowerCase().startsWith(searchWord);
+				return data.toLowerCase().includes(searchWord);
 			}))
 		});
-
 
 	}, [])
 
