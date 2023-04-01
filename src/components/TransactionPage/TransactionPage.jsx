@@ -5,9 +5,16 @@ import {observer} from "mobx-react";
 import BACK from "../../images/icons/back.svg";
 import TUCOIN from "../../images/icons/black-tucoin45.svg";
 import {useNavigate} from "react-router-dom";
+import SearchSelect from "../SearchSelect/SearchSelect";
 
 const TransactionPage = observer(() => {
 	const history = useNavigate()
+	const names = ["Afghanistan", "Algeria", "Argentina", "Australia", "Bangladesh", "Belgium", "Bhutan",
+		"Brazil", "Canada", "China", "Denmark", "Ethiopia", "Finland", "France", "Germany",
+		"Hungary", "Iceland", "India", "Indonesia", "Iran", "Italy", "Japan", "Malaysia",
+		"Maldives", "Mexico", "Morocco", "Nepal", "Netherlands", "Nigeria", "Norway", "Pakistan",
+		"Peru", "Russia", "Romania", "South Africa", "Spain", "Sri Lanka", "Sweden", "Switzerland",
+		"Thailand", "Turkey", "Uganda", "Ukraine", "United States", "United Kingdom", "Vietnam"]
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const form = e.target
@@ -31,12 +38,7 @@ const TransactionPage = observer(() => {
 				<label>Мой счёт</label>
 				<div className="mybalance">125 <img src={TUCOIN} width="39" alt="тукоин"/></div>
 				<label>Кому перевести</label><br/>
-				<input required list="brow" placeholder="Выберите получателя" className="datalist" name="to"/>
-				<datalist id="brow">
-					<option value="0">Катя Авочкина</option>
-					<option value="1">Алиса Котова</option>
-					<option value="3">Борис Ивов</option>
-				</datalist>
+				<SearchSelect props={names}/>
 				<label>Cумма перевода</label><br/>
 				<input required placeholder="Введите сумму перевода" type="number" className="datalist" min="1"
 							 step="1" maxLength="4" name="number"/>

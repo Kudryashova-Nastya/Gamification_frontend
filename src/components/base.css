@@ -105,8 +105,9 @@ hr {
 .datalist {
     border-radius: 20px;
     border: 2px solid #111111;
-    padding: 9px 12px;
+    padding: 10px 15px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 body.lock {

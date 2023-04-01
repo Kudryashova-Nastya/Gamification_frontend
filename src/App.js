@@ -24,9 +24,9 @@ const App = observer(() => {
 
 	useEffect(() => {
 		// проверяем наличие токенов и роль пользователя
-		getToken().then((token) => {
-			token ? getRole() : role = null
-		});
+		// getToken().then((token) => {
+		// 	token ? getRole() : role = null
+		// });
 	});
 
 	return (
