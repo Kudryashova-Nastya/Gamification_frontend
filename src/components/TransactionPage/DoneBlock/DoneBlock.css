@@ -1,0 +1,49 @@
+.minus-value {
+    font-size: 54px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.send-container .done {
+    font-weight: 600;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.send-container .card {
+    box-sizing: border-box;
+    border: 3px solid #CCCCCC;
+    border-radius: 30px;
+    margin-bottom: 30px;
+}
+
+.send-container .body {
+    text-align: center;
+    margin-top: -30px;
+    padding-bottom: 25px;
+}
+
+.card .ava {
+    width: 70px;
+    border-radius: 70px;
+    border: 5px solid white;
+}
+
+.card .name {
+    font-weight: 500;
+    font-size: 22px;
+    text-align: center;
+    background-color: #CCCCCC;
+    border-radius: 25px 25px 0 0;
+    padding-top: 20px;
+    padding-bottom: 44px;
+    /*border: 3px solid #CCCCCC;*/
+}
+
+.card span {
+    font-size: 33px;
+    font-weight: 600;
+}

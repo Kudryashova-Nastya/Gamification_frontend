@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import SearchSelect from "../SearchSelect/SearchSelect";
 import TransactionPageStore from "../../store/TransactionPageStore";
 import {CheckModalWindow} from "./CheckModalWindow/CheckModalWindow";
+import DoneBlock from "./DoneBlock/DoneBlock";
 
 const TransactionPage = observer(() => {
 	const history = useNavigate()
@@ -18,10 +19,11 @@ const TransactionPage = observer(() => {
 		"Peru", "Russia", "Romania", "South Africa", "Spain", "Sri Lanka", "Sweden", "Switzerland",
 		"Thailand", "Turkey", "Uganda", "Ukraine", "United States", "United Kingdom", "Vietnam"]
 	const [data, setData] = useState({})
+	const [isDone, setIsDone] = useState(false)
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const form = e.target
-		setData( {
+		setData({
 			// "to": form.to.value,
 			"number": parseInt(form.number.value),
 			"comment": form.comment.value,
@@ -30,30 +32,36 @@ const TransactionPage = observer(() => {
 	}
 
 	return (
-		<div className="container">
-			<div className="header-block">
-				<h1 className="header1"><img src={BACK} alt="Назад" className="header-back" onClick={() => history(-1)}/>
-					Мои ачивки</h1>
-			</div>
-			<hr color="#CCCCCC" size="4"/>
+		<>
+			{isDone ? <DoneBlock data={data}/> :
 
-			<form className="send-container" onSubmit={handleSubmit}>
+				<div className="container">
+
+				<div className="header-block">
+				<h1 className="header1"><img src={BACK} alt="Назад" className="header-back" onClick={() => history(-1)}/>
+				Перевод</h1>
+				</div>
+				<hr color="#CCCCCC" size="4"/>
+
+				<form className="send-container" onSubmit={handleSubmit}>
 				<label>Мой счёт</label>
 				<div className="mybalance">125 <img src={TUCOIN} width="39" alt="тукоин"/></div>
 				<label>Кому перевести</label><br/>
 				<SearchSelect props={names}/>
 				<label>Cумма перевода</label><br/>
 				<input required placeholder="Введите сумму перевода" type="number" className="datalist" min="1"
-							 step="1" maxLength="4" name="number"/>
+				step="1" maxLength="4" name="number"/>
 				<label>Сообщение получателю</label><br/>
 				<textarea rows="4" required name="comment" maxLength="150" className="datalist"
-									placeholder="Введите сообщение"></textarea>
+				placeholder="Введите сообщение"></textarea>
 				<div className="button-block">
-					<button className="button btn-large">Перевести</button>
+				<button className="button btn-large">Перевести</button>
 				</div>
-			</form>
-			{TransactionPageStore.modalVisible ? <CheckModalWindow data={data}/> : null}
-		</div>
+				</form>
+			{TransactionPageStore.modalVisible ? <CheckModalWindow data={data} setIsDone={setIsDone}/> : null}
+				</div>
+			}
+		</>
 	);
 });
 

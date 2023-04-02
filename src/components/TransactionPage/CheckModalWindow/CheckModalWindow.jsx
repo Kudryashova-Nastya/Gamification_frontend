@@ -5,7 +5,7 @@ import TransactionPageStore from "../../../store/TransactionPageStore";
 import "./CheckModalWindow.css"
 import TUCOIN from "../../../images/icons/black-tucoin16.svg";
 
-export const CheckModalWindow = observer(({data}) => {
+export const CheckModalWindow = observer(({data, setIsDone}) => {
 	console.log(data)
 
 	return (
@@ -39,7 +39,7 @@ export const CheckModalWindow = observer(({data}) => {
 				</div>
 
 			</div>
-			<button onClick={() => TransactionPageStore.closeModal()} className="button btn-large">Перевести</button>
+			<button onClick={() => {setIsDone(true); TransactionPageStore.closeModal()}} className="button btn-large">Перевести</button>
 
 		</ModalWindow>
 	);
