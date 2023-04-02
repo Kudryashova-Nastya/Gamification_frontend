@@ -1,5 +1,5 @@
 .send-container {
-    max-width: 450px;
+    max-width: 400px;
     margin: auto;
 }
 
@@ -15,7 +15,7 @@
     background: #CCCCCC;
     border-radius: 40px;
     font-weight: 600;
-    font-size: 52px;
+    font-size: 50px;
     text-align: center;
     padding: 10px 20px;
     white-space: nowrap;
@@ -29,4 +29,10 @@
 .button-block {
     text-align: center;
     margin-top: 10px;
+}
+
+@media (max-width: 767px) {
+    .send-container {
+        max-width: 450px;
+    }
 }

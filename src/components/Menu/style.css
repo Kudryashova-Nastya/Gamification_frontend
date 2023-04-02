@@ -149,7 +149,7 @@ nav a:hover .value {
         position: fixed;
         top: 21px;
         left: 21px;
-        z-index: 200;
+        z-index: 101;
         transition: all 0.3s ease 0s;
     }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import '../base.css';
 import './style.css';
 import {observer} from "mobx-react";
@@ -6,6 +6,8 @@ import BACK from "../../images/icons/back.svg";
 import TUCOIN from "../../images/icons/black-tucoin45.svg";
 import {useNavigate} from "react-router-dom";
 import SearchSelect from "../SearchSelect/SearchSelect";
+import TransactionPageStore from "../../store/TransactionPageStore";
+import {CheckModalWindow} from "./CheckModalWindow/CheckModalWindow";
 
 const TransactionPage = observer(() => {
 	const history = useNavigate()
@@ -15,15 +17,16 @@ const TransactionPage = observer(() => {
 		"Maldives", "Mexico", "Morocco", "Nepal", "Netherlands", "Nigeria", "Norway", "Pakistan",
 		"Peru", "Russia", "Romania", "South Africa", "Spain", "Sri Lanka", "Sweden", "Switzerland",
 		"Thailand", "Turkey", "Uganda", "Ukraine", "United States", "United Kingdom", "Vietnam"]
+	const [data, setData] = useState({})
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const form = e.target
-		const data = {
-			"to": form.to.value,
+		setData( {
+			// "to": form.to.value,
 			"number": parseInt(form.number.value),
 			"comment": form.comment.value,
-		}
-		console.log(data)
+		})
+		TransactionPageStore.setModalVisible()
 	}
 
 	return (
@@ -46,9 +49,10 @@ const TransactionPage = observer(() => {
 				<textarea rows="4" required name="comment" maxLength="150" className="datalist"
 									placeholder="Введите сообщение"></textarea>
 				<div className="button-block">
-					<button className="button">Перевести</button>
+					<button className="button btn-large">Перевести</button>
 				</div>
 			</form>
+			{TransactionPageStore.modalVisible ? <CheckModalWindow data={data}/> : null}
 		</div>
 	);
 });
