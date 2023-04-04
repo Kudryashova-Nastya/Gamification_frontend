@@ -1,0 +1,46 @@
+import React from 'react';
+import TUCOIN from "../../images/icons/black-tucoin16.svg";
+import "./style.css"
+import D3 from "../../images/directions/3D.svg";
+import Game from "../../images/directions/Геймдев.svg";
+import Animation from "../../images/directions/Анимация.svg";
+import Dis from "../../images/directions/Дизайн.svg";
+
+const Students = () => {
+
+	const students = [{name: "Петя Пимашков", balance: 125}, {
+		name: "Екатерина Рудная",
+		balance: 225
+	}, {name: "Артемий Пимашковнидзе", balance: 125},]
+	return (
+		<div className="container">
+
+			<div className="header-block">
+				<h1 className="header1">Студенты</h1>
+			</div>
+			<hr color="#CCCCCC" size="4"/>
+			<div className="student-container">
+				{students.map((el) =>
+
+					<div className="student-card">
+						<div className="avatar">
+							<img alt="avatar" src="https://www.revelio.cz/system/stranka/profil/img/9593.jpg"/>
+						</div>
+						<div className="info">
+							<div className="name">{el.name}</div>
+							<div className="balance"><span>{el.balance}</span> <img src={TUCOIN} alt=""/></div>
+							<div className="directions">
+								<img alt="направление" src={D3}/>
+								<img alt="направление" src={Game}/>
+								<img alt="направление" src={Animation}/>
+								<img alt="направление" src={Dis}/>
+							</div>
+						</div>
+					</div>
+				)}
+			</div>
+		</div>
+	);
+};
+
+export default Students;

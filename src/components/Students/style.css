@@ -1,0 +1,63 @@
+.student-container {
+    grid-gap: 1rem;
+    display: grid;
+    grid-template-rows: auto;
+    margin: 0 auto;
+    padding: 0 1rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+.student-card {
+    max-width: 440px;
+    min-width: 310px;
+    border-radius: 100px;
+    border: 3px solid #111111;
+    box-sizing: border-box;
+    padding: 8px 30px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.2s ease;
+}
+
+.student-card:hover {
+    background-color: #CCCCCC;
+    transition: all 0.5s ease;
+}
+
+.student-card .avatar {
+    max-width: 84px;
+}
+
+.student-card .name {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.student-card .balance {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.student-card .balance span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.student-card .balance img {
+    /*vertical-align: text-top;*/
+    vertical-align: middle;
+}
+
+.student-card .directions img{
+    width: 21px;
+    margin-right: 8px;
+}
+
+@media (max-width: 767px) {
+    .student-container {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+    }
+}

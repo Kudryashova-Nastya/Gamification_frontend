@@ -90,7 +90,7 @@ const Menu = () => {
 							</Link>
 						</li>
 						<li>
-							<Link to='/one'>
+							<Link to='students'>
 								<img src={Students} className="ico" alt="Students"/>
 								Студенты
 							</Link>

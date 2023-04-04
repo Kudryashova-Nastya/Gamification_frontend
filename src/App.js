@@ -8,6 +8,7 @@ import Login from "./components/Auth/Login";
 import Profile from "./components/Profile/Profile";
 import StudentRegistration from "./components/Auth/StudentRegistration";
 import TransactionPage from "./components/TransactionPage/TransactionPage";
+import Students from "./components/Students/Students";
 
 
 const App = observer(() => {
@@ -38,6 +39,7 @@ const App = observer(() => {
 				<Route path="/student" element={<Menu/>}>
 					<Route path="" element={<Profile/>}/>
 					<Route path="send" element={<TransactionPage/>}/>
+					<Route path="students" element={<Students/>}/>
 				</Route>
 				<Route path="/manager" element={(token && role === 'manager') ? <Menu/> : <Navigate to="/login" replace/>}>
 					{/*<Route path='/registration' element={<StudentRegistration/>}/>*/}
