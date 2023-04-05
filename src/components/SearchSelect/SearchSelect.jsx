@@ -43,7 +43,7 @@ const SearchSelect = observer(({props}) => {
 			<div className="content">
 				<div className="search">
 					<img alt="" src={SEARCH}/>
-					<input className="search-input" spellCheck="false" type="text" placeholder="Search"/>
+					<input className="search-input" spellCheck="false" type="text" placeholder="Поиск"/>
 				</div>
 				<ul className="options">
 					{arr.map((name, index) => {

@@ -1,0 +1,27 @@
+.search-block {
+    position: relative;
+}
+
+.search-block img {
+    top: 50%;
+    left: 15px;
+    pointer-events: none;
+    transform: translateY(-50%);
+    position: absolute;
+    height: 20px;
+}
+
+.search-block input {
+    box-sizing: border-box;
+    height: 40px;
+    width: 100%;
+    font-size: 17px;
+    border-radius: 40px;
+    padding: 0 20px 0 43px;
+    border: 2px solid #111111;
+}
+
+
+.search-block input::placeholder {
+    color: #CCCCCC;
+}

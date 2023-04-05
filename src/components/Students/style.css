@@ -13,21 +13,23 @@
     border-radius: 100px;
     border: 3px solid #111111;
     box-sizing: border-box;
-    padding: 8px 30px;
+    padding: 6px 20px;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     gap: 15px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .student-card:hover {
     background-color: #CCCCCC;
     transition: all 0.5s ease;
+    border: 3px solid #8d8d8d;
 }
 
 .student-card .avatar {
-    max-width: 84px;
+    max-width: 80px;
+    margin-top: 5px;
 }
 
 .student-card .name {
