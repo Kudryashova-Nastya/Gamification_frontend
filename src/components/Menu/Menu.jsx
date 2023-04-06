@@ -20,14 +20,16 @@ import {bodyFixPosition, bodyUnfixPosition} from "../../store/helper/Helper";
 
 const Menu = () => {
 	const toggleMenu = () => {
-		document.getElementsByClassName("burger-container")[0].classList.toggle("active")
-		document.getElementsByTagName("nav")[0].classList.toggle("active")
-		if (!document.body.hasAttribute('data-body-scroll-fix')) {
-			document.body.style.top = '';
-			bodyFixPosition()
-			document.body.style.top = '';
-		} else {
-			bodyUnfixPosition()
+		if (document.documentElement.clientWidth < 768) {
+			document.getElementsByClassName("burger-container")[0].classList.toggle("active")
+			document.getElementsByTagName("nav")[0].classList.toggle("active")
+			if (!document.body.hasAttribute('data-body-scroll-fix')) {
+				document.body.style.top = '';
+				bodyFixPosition()
+				document.body.style.top = '';
+			} else {
+				bodyUnfixPosition()
+			}
 		}
 	}
 
@@ -110,8 +112,10 @@ const Menu = () => {
 					</ul>
 					<div className="social">
 						<div>
-							<a target="_blank" href="https://t.me/+VyZ5tKf3SOoyMGYy"><img src={TELEGRAM} className="networks" alt="TELEGRAM"/></a><br/>
-							<a target="_blank" href="https://vk.com/tumomoscow/"><img src={VK} className="networks" alt="VK"/></a><br/>
+							<a target="_blank" href="https://t.me/+VyZ5tKf3SOoyMGYy"><img src={TELEGRAM} className="networks"
+																																						alt="TELEGRAM"/></a><br/>
+							<a target="_blank" href="https://vk.com/tumomoscow/"><img src={VK} className="networks"
+																																				alt="VK"/></a><br/>
 							<Link to='/student'><img src={SETTINGS} className="networks" alt="SETTINGS"/></Link><br/>
 						</div>
 						<div>
