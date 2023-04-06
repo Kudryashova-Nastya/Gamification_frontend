@@ -38,7 +38,7 @@ const Menu = () => {
 			</div>
 			<nav>
 				<div className="nav-container">
-					<Link className="student-link" to='/student'>
+					<Link className="student-link" to='/student' onClick={() => toggleMenu()}>
 						<div className="menu__info">
 							<div>
 								<div className="name">Иван Иваненков</div>
@@ -54,55 +54,55 @@ const Menu = () => {
 					</Link>
 					<ul className="menu__links">
 						<li>
-							<Link to='/one'>
+							<Link to='/one' onClick={() => toggleMenu()}>
 								<img src={NOTIFICATION} className="ico" alt="уведомления"/>
 								Уведомления
 							</Link>
 						</li>
 						<li>
-							<Link to='/one'>
+							<Link to='/one' onClick={() => toggleMenu()}>
 								<img src={TUCOIN} className="ico" alt="TUCOIN"/>
 								TUCOIN
 							</Link>
 						</li>
 						<li>
-							<Link to='/one'>
+							<Link to='/one' onClick={() => toggleMenu()}>
 								<img src={MARKET} className="ico" alt="MARKET"/>
 								Маркет
 							</Link>
 						</li>
 						<li>
-							<Link to='/one'>
+							<Link to='/one' onClick={() => toggleMenu()}>
 								<img src={QUESTS} className="ico" alt="QUESTS"/>
 								Витрина заданий
 							</Link>
 						</li>
 						<li>
-							<Link to='/one'>
+							<Link to='/one' onClick={() => toggleMenu()}>
 								<img src={Achievements} className="ico" alt="Achievements"/>
 								Зал ачивок
 							</Link>
 						</li>
 						<li>
-							<Link to='/one'>
+							<Link to='/one' onClick={() => toggleMenu()}>
 								<img src={Curators} className="ico" alt="Curators"/>
 								Кураторы и коучи
 							</Link>
 						</li>
 						<li>
-							<Link to='students'>
+							<Link to='students' onClick={() => toggleMenu()}>
 								<img src={Students} className="ico" alt="Students"/>
 								Студенты
 							</Link>
 						</li>
 						<li>
-							<Link to='/one'>
+							<Link to='/one' onClick={() => toggleMenu()}>
 								<img src={Traectoria} className="ico" alt="Traectoria"/>
 								Траектория
 							</Link>
 						</li>
 						<li>
-							<Link to='/one'>
+							<Link to='/one' onClick={() => toggleMenu()}>
 								<img src={Events} className="ico" alt="Events"/>
 								Календарь мероприятий
 							</Link>
@@ -110,8 +110,8 @@ const Menu = () => {
 					</ul>
 					<div className="social">
 						<div>
-							<Link to='/student'><img src={TELEGRAM} className="networks" alt="TELEGRAM"/></Link><br/>
-							<Link to='/student'><img src={VK} className="networks" alt="VK"/></Link><br/>
+							<a target="_blank" href="https://t.me/+VyZ5tKf3SOoyMGYy"><img src={TELEGRAM} className="networks" alt="TELEGRAM"/></a><br/>
+							<a target="_blank" href="https://vk.com/tumomoscow/"><img src={VK} className="networks" alt="VK"/></a><br/>
 							<Link to='/student'><img src={SETTINGS} className="networks" alt="SETTINGS"/></Link><br/>
 						</div>
 						<div>

@@ -9,7 +9,7 @@
 
 .student-card {
     max-width: 440px;
-    min-width: 310px;
+    min-width: 305px;
     border-radius: 100px;
     border: 3px solid #111111;
     box-sizing: border-box;
@@ -61,5 +61,6 @@
     .student-container {
         grid-template-columns: 1fr;
         max-width: 440px;
+        padding: 0;
     }
 }
