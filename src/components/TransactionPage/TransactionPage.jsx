@@ -53,7 +53,7 @@ const TransactionPage = observer(() => {
 				step="1" maxLength="4" name="number"/>
 				<label>Сообщение получателю</label><br/>
 				<textarea rows="4" required name="comment" maxLength="150" className="datalist"
-				placeholder="Введите сообщение"></textarea>
+				placeholder="Введите сообщение"/>
 				<div className="button-block">
 				<button className="button btn-large">Перевести</button>
 				</div>

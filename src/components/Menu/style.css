@@ -147,8 +147,10 @@ nav a:hover .value {
     .burger-container {
         display: inline-block;
         position: fixed;
-        top: 21px;
-        left: 21px;
+        top: 18px;
+        left: 19px;
+        /*top: 21px;*/
+        /*left: 21px;*/
         z-index: 101;
         transition: all 0.3s ease 0s;
     }

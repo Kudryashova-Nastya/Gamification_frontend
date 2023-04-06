@@ -42,6 +42,7 @@
     border-radius: 30px;
     border: none;
     padding: 9px 12px;
+    max-width: 90%;
 }
 
 .header-block {

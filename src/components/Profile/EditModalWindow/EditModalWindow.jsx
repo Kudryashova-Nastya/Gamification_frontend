@@ -24,7 +24,7 @@ export const EditModalWindow = observer(() => {
 	})
 
 	return (
-		<ModalWindow>
+		<ModalWindow isBig={true}>
 			<svg className="close-ico" onClick={() => StudentProfileStore.closeModal()} width="22" height="22"
 					 viewBox="0 0 22 22" fill="none"
 					 xmlns="http://www.w3.org/2000/svg">
@@ -72,10 +72,8 @@ export const EditModalWindow = observer(() => {
 				</div>
 				<div className="aboutblock">
 					<div className="blockname blockname__about">О себе:</div>
-					<textarea className="aboutme">
-						Привет! Я Ваня, мне 13 лет. Люблю играть в майнкрафт, кто тоже любит, го на мой сервер:
-						Gamer123
-					</textarea>
+					<textarea className="aboutme" defaultValue={"Привет! Я Ваня, мне 13 лет. Люблю играть в майнкрафт, кто тоже любит, го на мой сервер:\n" +
+						"\t\t\t\t\t\tGamer123"}/>
 				</div>
 			</div>
 			<div className="myrefs">

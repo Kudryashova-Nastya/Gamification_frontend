@@ -22,7 +22,6 @@ export const CORS = (token) => {
 
 // Фиксация body
 export const bodyFixPosition = () => {
-	console.log("заблок")
 	// Получаем позицию прокрутки
 	let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 

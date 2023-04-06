@@ -23,3 +23,36 @@
     position: relative;
     padding: 25px 35px;
 }
+
+.close-ico {
+    position: absolute;
+    top: 25px;
+    left: 35px;
+    cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    .modal {
+        box-sizing: border-box;
+        max-width: 95vw;
+
+        overflow-y: auto;
+        max-height: 99vh;
+    }
+
+    .modal.big-modal {
+        padding: 50px 15px 20px;
+    }
+
+    .close-ico {
+        position: absolute;
+        top: 20px;
+        left: inherit;
+        right: 25px;
+        height: 18px;
+    }
+
+    /*.modal .header3 {*/
+    /*    margin-top: 30px;*/
+    /*}*/
+}
