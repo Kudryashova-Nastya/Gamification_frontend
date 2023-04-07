@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import TUCOIN from "../../images/icons/black-tucoin16.svg";
 import "./style.css"
+import '../base.css';
 import D3 from "../../images/directions/3D.svg";
 import Game from "../../images/directions/Геймдев.svg";
 import Animation from "../../images/directions/Анимация.svg";
@@ -24,7 +25,7 @@ const Students = () => {
 	return (
 		<div className="container">
 
-			<div className="header-block">
+			<div className="header-block header-search">
 				<h1 className="header1">Студенты</h1>
 				<Search students={students} setArr={setArr}/>
 			</div>

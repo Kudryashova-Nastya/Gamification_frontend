@@ -48,7 +48,7 @@ nav a:hover .value {
     margin: 0;
     width: 22vw;
     max-width: 320px;
-    min-width: 200px;
+    min-width: 210px;
     flex-shrink: 0;
 }
 
@@ -149,16 +149,9 @@ nav a:hover .value {
         position: fixed;
         top: 18px;
         left: 19px;
-        /*top: 21px;*/
-        /*left: 21px;*/
         z-index: 101;
         transition: all 0.3s ease 0s;
     }
-
-    /*.burger-container.active {*/
-    /*    top: 20px;*/
-    /*    left: 20px;*/
-    /*}*/
 
     .burger {
         position: relative;
@@ -252,6 +245,10 @@ nav a:hover .value {
     nav.active .social {
         bottom: 3vh;
         left: 30px;
+    }
+
+    .menu__info .name {
+        font-size: 15px;
     }
 
 }

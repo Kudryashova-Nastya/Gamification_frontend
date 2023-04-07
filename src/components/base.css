@@ -124,7 +124,7 @@ body.lock {
     width: 100%;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .container {
         padding: 30px 3vw;
     }
@@ -136,5 +136,22 @@ body.lock {
     .header1 {
         font-size: 30px;
         margin-top: 10px;
+    }
+
+    .header-block {
+        margin: 23px 5px 13px;
+        align-items: center;
+    }
+
+    .header-block.header-search {
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .header-block .button {
+        padding: 8px 20px;
+        font-size: 13px;
+        letter-spacing: initial;
     }
 }

@@ -108,7 +108,7 @@ const Profile = observer(() => {
 				</div>
 			</div>
 			<div className="header-block">
-				<h2 className="header3">Моя история операций</h2>
+				<h2 className="header3">Моя история {document.documentElement.clientWidth < 768 ? '' : 'операций'}</h2>
 				<button onClick={()=> history("send")} className="button button-send">Перевести <img className="send button-icon" alt="перевод" src={SEND}/></button>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
