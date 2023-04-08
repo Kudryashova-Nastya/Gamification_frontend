@@ -46,5 +46,4 @@ export const bodyUnfixPosition = () => {
 	// Прокручиваем страницу на полученное из атрибута значение
 	window.scroll(0, scrollPosition);
 
-	// }
 }

@@ -6,6 +6,7 @@ import SEARCH from "../../images/icons/search-black.svg";
 
 const Search = observer(({students, setArr}) => {
 	const allArr = students
+	console.log(allArr)
 
 	useEffect(() => {
 		const searchInp = document.getElementsByClassName("search-input")[0]
@@ -13,11 +14,11 @@ const Search = observer(({students, setArr}) => {
 		searchInp.addEventListener("keyup", () => {
 			let searchWord = searchInp.value.toLowerCase();
 			setArr(allArr.filter(data => {
-				return data.name.toLowerCase().includes(searchWord);
+				return data.name?.toLowerCase().includes(searchWord);
 			}))
 		});
 
-	}, [])
+	})
 
 	return (
 		<div className="search-block">

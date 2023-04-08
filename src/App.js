@@ -9,6 +9,7 @@ import Profile from "./components/Profile/Profile";
 import StudentRegistration from "./components/Auth/StudentRegistration";
 import TransactionPage from "./components/TransactionPage/TransactionPage";
 import Students from "./components/Students/Students";
+import {SkeletonTheme} from "react-loading-skeleton";
 
 
 const App = observer(() => {
@@ -31,22 +32,24 @@ const App = observer(() => {
 	});
 
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path="/login" element={<Login/>}/>
-				<Route path="/regist" element={<StudentRegistration/>}/>
-				{/*<Route path="/student" element={(token && role === 'student') ? <Menu/> : <Navigate to="/login" replace/>}>*/}
-				<Route path="/student" element={<Menu/>}>
-					<Route path="" element={<Profile/>}/>
-					<Route path="send" element={<TransactionPage/>}/>
-					<Route path="students" element={<Students/>}/>
-				</Route>
-				<Route path="/manager" element={(token && role === 'manager') ? <Menu/> : <Navigate to="/login" replace/>}>
-					{/*<Route path='/registration' element={<StudentRegistration/>}/>*/}
-				</Route>
+		<SkeletonTheme baseColor="#CCCCCC" highlightColor="#ffffff">
+			<BrowserRouter>
+				<Routes>
+					<Route path="/login" element={<Login/>}/>
+					<Route path="/regist" element={<StudentRegistration/>}/>
+					{/*<Route path="/student" element={(token && role === 'student') ? <Menu/> : <Navigate to="/login" replace/>}>*/}
+					<Route path="/student" element={<Menu/>}>
+						<Route path="" element={<Profile/>}/>
+						<Route path="send" element={<TransactionPage/>}/>
+						<Route path="students" element={<Students/>}/>
+					</Route>
+					<Route path="/manager" element={(token && role === 'manager') ? <Menu/> : <Navigate to="/login" replace/>}>
+						{/*<Route path='/registration' element={<StudentRegistration/>}/>*/}
+					</Route>
 
-			</Routes>
-		</BrowserRouter>
+				</Routes>
+			</BrowserRouter>
+		</SkeletonTheme>
 	);
 })
 
