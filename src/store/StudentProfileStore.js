@@ -1,5 +1,6 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {bodyFixPosition, bodyUnfixPosition, getHostInformation, POSTCORS} from "./helper/Helper";
+import {bodyFixPosition, bodyUnfixPosition, getHostInformation, POSTCORS, CORS} from "./helper/Helper";
+import Auth from "./helper/Auth";
 
 const host = getHostInformation()
 
@@ -14,37 +15,59 @@ class StudentProfileStore {
 	setEditVisible = () => {
 		runInAction(() => {
 			this.modalEditVisible = true
-				bodyFixPosition()
+			bodyFixPosition()
 			document.body.style.overflowY = 'scroll';
 		})
 	}
 
-	// modalNoBalanceVisible = false
-	// setNoBalanceVisible = () => {
-	//     runInAction(() => {
-	//         this.modalNoBalanceVisible = true
-	//         document.body.style.overflow = 'hidden';
-	//     })
-	// }
-	//
-	// bookDelete = ''
-	//
-	// modalDeletePositionVisible = false
-	// setDeletePositionVisible = (name) => {
-	//     runInAction(() => {
-	//         this.bookDelete = name
-	//         this.modalDeletePositionVisible = true
-	//         document.body.style.overflow = 'hidden';
-	//     })
-	// }
-	//
-	// modalClearCartVisible = false
-	// setClearCartVisible = () => {
-	//     runInAction(() => {
-	//         this.modalClearCartVisible = true
-	//         document.body.style.overflow = 'hidden';
-	//     })
-	// }
+// Лоадер
+	isLoading = true
+	setLoading = (bool) => {
+		runInAction(() => {
+			this.isLoading = bool
+		})
+	}
+	// информация для шапки
+	myInfo = {}
+	// информация о студенте по id
+	studentInfo = {}
+	fetchStudentInfo = async () => {
+		this.setLoading(true)
+		const req = await fetch(`${host}/api/v1/profile`, CORS(Auth.token));
+		const res = await req.json();
+		console.log(res);
+		if (req.ok) {
+			runInAction(() => {
+				this.studentInfo = res
+			})
+		} else {
+			runInAction(() => {
+				// временный дефолтный студент
+				setTimeout(
+					() => {
+						this.studentInfo = {
+							"email": "ivan.ivanov.m@tumo.world",
+							"first_name": "Иван",
+							"last_name": "Иваненков",
+							"image": "/uploads/users/6ee89e1216724ab9ba1e14775fd1b7d1.jpg",
+							"telegram": "/ivan_ivanovvv",
+							"balance": 125,
+							"portfolio_link": null,
+							"directions": [
+								{
+									"name": "aaaaaa",
+									"link": "aaaaaaaaaa"
+								}
+							],
+							"about": "Привет! Я Ваня, мне 13 лет. Люблю играть в майнкрафт, кто тоже любит, го на мой сервер: Gamer123"
+						}
+					}, 5000)
+
+			})
+		}
+
+		this.setLoading(false)
+	}
 
 	closeModal = () => {
 		bodyUnfixPosition()
@@ -57,15 +80,6 @@ class StudentProfileStore {
 			document.body.style.overflowY = 'auto';
 		})
 
-	}
-
-	// Лоадер
-
-	isLoading = true
-	setLoading = (bool) => {
-		runInAction(() => {
-			this.isLoading = bool
-		})
 	}
 
 }

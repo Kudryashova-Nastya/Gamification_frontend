@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import '../base.css';
 import './style.css'
 import EDIT from '../../images/icons/edit.svg'
@@ -19,6 +19,7 @@ import {observer} from "mobx-react";
 import StudentTransactions from "./StudentTransactions/StudentTransactions";
 import Pagination from "../Pagination/Pagination";
 import {useNavigate} from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 
 const Profile = observer(() => {
 
@@ -27,7 +28,11 @@ const Profile = observer(() => {
 	const [currentPage, setCurrentPage] = useState(1)
 	// const [postsPerPage] = useState(10)
 	const history = useNavigate()
+	const  screenWidth = document.documentElement.clientWidth
 
+	useEffect(() => {
+		void StudentProfileStore.fetchStudentInfo()
+	}, [])
 	// useEffect(() => {
 	// 	const fetchPosts = async () => {
 	// 		setLoading(true)
@@ -63,37 +68,45 @@ const Profile = observer(() => {
 					<img alt="фото" src="https://www.peoples.ru/state/citizen/william_franklyn-miller/franklyn-miller_8.jpg"/>
 				</div>
 				<div className="info">
-					<h2 className="header3">Иван Иваненков</h2>
-					<h3 className="header4"> 125 <img alt="тукоинов" src={MAINTUCOIN}/></h3>
+					<h2
+						className="header3">{StudentProfileStore.studentInfo.first_name || <Skeleton width={150}/>} {StudentProfileStore.studentInfo.last_name}</h2>
+					<h3 className="header4"> {StudentProfileStore.studentInfo.balance || <Skeleton width={50}/>} {StudentProfileStore.studentInfo.balance && <img alt="тукоинов" src={MAINTUCOIN}/>}</h3>
 					<div className="contacts">
 						<div className="contact">
-							<img alt="почта" src={MAIL}/> ivan.ivanov.m@tumo.world
+							{StudentProfileStore.studentInfo.email ? <><img alt="почта" src={MAIL}/> {StudentProfileStore.studentInfo.email}</> : <Skeleton width={120} count={3} style={{marginBottom: "10px"}}/>}
 						</div>
-						<div className="contact">
-							<img alt="телеграм" src={TELEGRAM}/> /ivan_ivanovvv
-						</div>
-						<div className="contact">
-							<img alt="портфолио" src={PORTFOLIO}/> <a href="">Портфолио</a>
-						</div>
-						<div className="contact directions">
-							<img alt="направление" width="29" src={D3}/>
-							<img alt="направление" width="29" src={Game}/>
-							<img alt="направление" width="29" src={Animation}/>
-							<img alt="направление" width="29" src={Dis}/>
-						</div>
+						{StudentProfileStore.studentInfo.telegram &&
+							<div className="contact">
+								<img alt="телеграм" src={TELEGRAM}/> {StudentProfileStore.studentInfo.telegram}
+							</div>
+						}
+						{StudentProfileStore.studentInfo.portfolio_link &&
+							<div className="contact">
+								<img alt="портфолио" src={PORTFOLIO}/> <a
+								href={StudentProfileStore.studentInfo.portfolio_link}>Портфолио</a>
+							</div>
+						}
+						{StudentProfileStore.studentInfo.directions &&
+							<div className="contact directions">
+								<img alt="направление" width="29" src={D3}/>
+								<img alt="направление" width="29" src={Game}/>
+								<img alt="направление" width="29" src={Animation}/>
+								<img alt="направление" width="29" src={Dis}/>
+							</div>
+						}
 					</div>
 				</div>
 				<div className="about">
 					<div className="label">О себе:</div>
 					<div className="about-text">
-						Привет! Я Ваня, мне 13 лет. Люблю играть в майнкрафт, кто тоже любит, го на мой сервер:
-						Gamer123
+						{StudentProfileStore.studentInfo.about ? StudentProfileStore.studentInfo.about : screenWidth < 769 ? <Skeleton width={230} count={3}/> : <Skeleton width={300} count={3}/>}
 					</div>
 				</div>
 			</div>
 			<div className="header-block">
 				<h2 className="header3">Мои ачивки</h2>
-				<button className="button">Все ачивки <img className="button-icon achive-icon" alt="ачивки" src={ACHI}/></button>
+				<button className="button">Все ачивки <img className="button-icon achive-icon" alt="ачивки" src={ACHI}/>
+				</button>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="achives">
@@ -108,12 +121,13 @@ const Profile = observer(() => {
 				</div>
 			</div>
 			<div className="header-block">
-				<h2 className="header3">Моя история {document.documentElement.clientWidth < 768 ? '' : 'операций'}</h2>
-				<button onClick={()=> history("send")} className="button button-send">Перевести <img className="send button-icon" alt="перевод" src={SEND}/></button>
+				<h2 className="header3">Моя история {screenWidth < 768 ? '' : 'операций'}</h2>
+				<button onClick={() => history("send")} className="button button-send">Перевести <img
+					className="send button-icon" alt="перевод" src={SEND}/></button>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<StudentTransactions/>
-			<Pagination pages = {10} setCurrentPage={setCurrentPage}/>
+			<Pagination pages={10} setCurrentPage={setCurrentPage}/>
 			{StudentProfileStore.modalEditVisible ? <EditModalWindow/> : null}
 		</div>
 	);
