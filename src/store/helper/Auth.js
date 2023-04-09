@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {getHostInformation, CORS} from "./Helper";
+import {getHostInformation, CORS, POSTCORS} from "./Helper";
 
 const host = getHostInformation()
 
@@ -13,10 +13,9 @@ class Auth {
 	//         "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NTgwMTUxMzEsImlhdCI6MTY1NzkyODczMSwic2NvcGUiOiJyZWZyZXNoX3Rva2VuIiwic3ViIjoidXNlciJ9.Db62JMi1qnY48NLgD_VIN84Awf25hh0My-KcKCl3QoE",
 	//     }
 	token = JSON.parse(localStorage.getItem("TOKEN_AUTH")) || null
-	role = null
+	profileInfo = JSON.parse(localStorage.getItem("PROFILE")) || null
 
 	login = async (data) => {
-		console.log(data)
 
 		if (!data) {
 			return null
@@ -28,18 +27,18 @@ class Auth {
 				"Content-Type": "application/json"
 			},
 		}
-		console.log(LOGIN_CORS)
+		// console.log(LOGIN_CORS)
 
 		const req = await fetch(`${host}/api/v1/token/`, LOGIN_CORS)
 		const res = await req.json()
-		console.log('req', req)
+		// console.log('req', req)
 		if (req?.ok && req?.status === 200) {
-			console.log("200")
+			// console.log("200")
 			this.setToken(res)
 
 			return false // возвращает false в случае успешной авторизации
 		} else {
-			console.log("не 200")
+			// console.log("не 200")
 			return JSON.stringify(res) // возвращает текст ошибки в случае ошибки авторизации
 		}
 	};
@@ -70,15 +69,20 @@ class Auth {
 
 		// проверка не протух ли аксес-токен
 		if (this.isExpired(this.getExpirationDate(this.token.access))) {
-			const updatedToken = await fetch(`${host}/api/v1/token/refresh/`, CORS(this.token?.refresh)).then(
-				(r) => r.json()
-			);
-
-			if (updatedToken.access) {
-				this.setToken(updatedToken)
-			} else {
-				this.setToken(null)
-			}
+			console.log("токен протух")
+			await fetch(`${host}/api/v1/token/refresh/`, POSTCORS({"refresh": this.token?.refresh}))
+			.then(
+				(r) => {
+					console.log("попытка рефреша ответ", r.json())
+					if (r.json()?.access) {
+						console.log("новый токен получен после рефреш")
+						this.setToken(r.json())
+					} else {
+						console.log("токен удалён, рефреш не удался")
+						this.setToken(null)
+					}
+				}
+			)
 		}
 
 		return this.token
@@ -90,24 +94,31 @@ class Auth {
 			localStorage.setItem("TOKEN_AUTH", JSON.stringify(token))
 		} else {
 			localStorage.removeItem("TOKEN_AUTH")
+			this.profileInfo = null
+			localStorage.removeItem("PROFILE")
 		}
 		runInAction(() => {
 			this.token = token
 		})
-		console.log("обновление токена", this.token)
+		console.log("обновление/удаление токена", this.token)
 	}
 
 	getRole = async () => {
-		if (!this.role) {
-			const usersInfoReq = await fetch(`${host}/profile/`, CORS(this.token?.access))
+		if (!this.profileInfo) {
+			const usersInfoReq = await fetch(`${host}/api/v1/profile`, CORS(this.token?.access))
 			const usersInfoRes = await usersInfoReq.json()
 			if (usersInfoReq.ok && usersInfoReq?.status === 200) {
-			runInAction(() => {
-				this.role = usersInfoRes.role
-			})}
+				runInAction(() => {
+					this.profileInfo = usersInfoRes
+					localStorage.setItem("PROFILE", JSON.stringify(usersInfoRes))
+				})
+			} else {
+				alert("ошибка получения данных профиля")
+			}
 		}
-
-		return this.role
+		// console.log("профиль существует", JSON.stringify(this.profileInfo))
+		// console.log("и вот его роль", this.profileInfo.user_role)
+		return this.profileInfo?.user_role
 	}
 }
 

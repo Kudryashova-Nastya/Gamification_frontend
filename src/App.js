@@ -14,7 +14,7 @@ import {SkeletonTheme} from "react-loading-skeleton";
 
 const App = observer(() => {
 	let token = Auth.token
-	let role = Auth.role
+	let role = Auth.profileInfo?.user_role
 
 	const getToken = async () => {
 		token = await Auth.getToken();
@@ -26,9 +26,12 @@ const App = observer(() => {
 
 	useEffect(() => {
 		// проверяем наличие токенов и роль пользователя
-		// getToken().then((token) => {
-		// 	token ? getRole() : role = null
-		// });
+		getToken().then((token) => {
+			token?.access ? role = getRole() : role = null
+		});
+		console.log('role', role, Auth.profileInfo?.user_role)
+		console.log('info', Auth.profileInfo)
+		console.log('token',token, Auth.token)
 	});
 
 	return (
@@ -37,8 +40,8 @@ const App = observer(() => {
 				<Routes>
 					<Route path="/login" element={<Login/>}/>
 					<Route path="/regist" element={<StudentRegistration/>}/>
-					{/*<Route path="/student" element={(token && role === 'student') ? <Menu/> : <Navigate to="/login" replace/>}>*/}
-					<Route path="/student" element={<Menu/>}>
+					<Route path="/student" element={(token && role === 'student') ? <Menu/> : <Navigate to="/login" replace/>}>
+					{/*<Route path="/student" element={<Menu/>}>*/}
 						<Route path="" element={<Profile/>}/>
 						<Route path="send" element={<TransactionPage/>}/>
 						<Route path="students" element={<Students/>}/>

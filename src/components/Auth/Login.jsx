@@ -22,27 +22,27 @@ const Login = observer(() => {
 			// setAuthErrors(await Auth.login(data))
 			console.log("косяк", log)
 		} else {
-			console.log("успех")
-			const role = Auth.getRole()
-			// switch (role) {
-			// 	case "student":
-			// 		history("/student")
-			// 		break;
-			// 	case "manager":
-			// 		history("/manager")
-			// 		break;
-			// 	case "main-admin":
-			// 		history("/main-admin")
-			// 		break;
-			// 	case "curator":
-			// 		history("/curator")
-			// 		break;
-			// 	case "couch":
-			// 		history("/couch")
-			// 		break;
-			// 	default:
-			// 		alert("Ты кто?")
-			// }
+			const role = await Auth.getRole()
+			console.log("успех", role)
+			switch (role) {
+				case "student":
+					history("/student")
+					break;
+				case "manager":
+					history("/manager")
+					break;
+				case "main-admin":
+					history("/main-admin")
+					break;
+				case "curator":
+					history("/curator")
+					break;
+				case "couch":
+					history("/couch")
+					break;
+				default:
+					alert("Ты кто?")
+			}
 		}
 	};
 

@@ -16,9 +16,11 @@ import VK from "../../images/icons/VK.svg"
 import SETTINGS from "../../images/icons/Settings.svg"
 import LOGO from "../../images/icons/Logo_white.svg"
 import {bodyFixPosition, bodyUnfixPosition} from "../../store/helper/Helper";
+import {observer} from "mobx-react";
+import Auth from "../../store/helper/Auth";
 
 
-const Menu = () => {
+const Menu = observer(() => {
 	const toggleMenu = () => {
 		if (document.documentElement.clientWidth < 768) {
 			document.getElementsByClassName("burger-container")[0].classList.toggle("active")
@@ -43,8 +45,8 @@ const Menu = () => {
 					<Link className="student-link" to='/student' onClick={() => toggleMenu()}>
 						<div className="menu__info">
 							<div>
-								<div className="name">Иван Иваненков</div>
-								<div className="value"> 125
+								<div className="name">{Auth.profileInfo.first_name} {Auth.profileInfo.last_name}</div>
+								<div className="value"> {Auth.profileInfo.balance}
 									<img src={TUCOIN_MENU_MINI} className="tucoin" alt="игровой валюты"/>
 								</div>
 							</div>
@@ -116,7 +118,7 @@ const Menu = () => {
 																																						alt="TELEGRAM"/></a><br/>
 							<a target="_blank" href="https://vk.com/tumomoscow/"><img src={VK} className="networks"
 																																				alt="VK"/></a><br/>
-							<Link to='/student'><img src={SETTINGS} className="networks" alt="SETTINGS"/></Link><br/>
+							<span onClick={()=> Auth.logout()}><img src={SETTINGS} className="networks" alt="SETTINGS"/></span><br/>
 						</div>
 						<div>
 							<a target="_blank" href="https://tumo.moscow/"><img src={LOGO} className="networks logo" alt="LOGO"/></a>
@@ -134,6 +136,6 @@ const Menu = () => {
 
 		</>
 	);
-};
+})
 
 export default Menu;

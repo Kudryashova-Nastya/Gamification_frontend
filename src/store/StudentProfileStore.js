@@ -9,7 +9,6 @@ class StudentProfileStore {
 		makeAutoObservable(this)
 	}
 
-
 	// Модальные окна
 	modalEditVisible = false
 	setEditVisible = () => {
@@ -20,7 +19,7 @@ class StudentProfileStore {
 		})
 	}
 
-// Лоадер
+	// Лоадер
 	isLoading = true
 	setLoading = (bool) => {
 		runInAction(() => {
@@ -33,14 +32,24 @@ class StudentProfileStore {
 	studentInfo = {}
 	fetchStudentInfo = async () => {
 		this.setLoading(true)
-		const req = await fetch(`${host}/api/v1/profile`, CORS(Auth.token));
+		const req = await fetch(`${host}/api/v1/profile`, CORS(Auth.token?.access));
 		const res = await req.json();
-		console.log(res);
+		console.log("ответ профиля", res);
 		if (req.ok) {
 			runInAction(() => {
 				this.studentInfo = res
 			})
 		} else {
+			if (res.code === "token_not_valid") {
+				console.log("проблема протухшего токена обнаружена")
+				Auth.getToken().then((token) => {
+					if (token?.access) {
+						console.log("проблема протухания решена, перезапуск запроса")
+						this.fetchStudentInfo()
+					}
+				})
+			}
+
 			runInAction(() => {
 				// временный дефолтный студент
 				setTimeout(
@@ -61,7 +70,7 @@ class StudentProfileStore {
 							],
 							"about": "Привет! Я Ваня, мне 13 лет. Люблю играть в майнкрафт, кто тоже любит, го на мой сервер: Gamer123"
 						}
-					}, 5000)
+					}, 3000)
 
 			})
 		}
@@ -73,10 +82,7 @@ class StudentProfileStore {
 		bodyUnfixPosition()
 		runInAction(() => {
 			this.modalEditVisible = false
-			this.modalNoBalanceVisible = false
-			this.modalDeletePositionVisible = false
-			this.modalClearCartVisible = false
-			this.bookDelete = ''
+			// this.modalNoBalanceVisible = false
 			document.body.style.overflowY = 'auto';
 		})
 
