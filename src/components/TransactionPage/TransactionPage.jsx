@@ -37,7 +37,7 @@ const TransactionPage = observer(() => {
 
 				<div className="container">
 
-				<div className="header-block">
+				<div className="header-block main-header">
 				<h1 className="header1"><img src={BACK} alt="Назад" className="header-back" onClick={() => history(-1)}/>
 				Перевод</h1>
 				</div>

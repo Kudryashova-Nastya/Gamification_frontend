@@ -51,8 +51,9 @@ const Profile = observer(() => {
 				<div className="avatar">
 					{StudentProfileStore.studentInfo.image ?
 						<img alt="фото" src={`${host}${StudentProfileStore.studentInfo.image}`}/> :
-						<img alt="фото" src={DEFAULT_AVATAR}/>}
-					{/*<Skeleton width={100} height={100} circle={true}/>*/}
+						StudentProfileStore.studentInfo.hasOwnProperty('image') ?
+							<img alt="фото" src={DEFAULT_AVATAR}/> :
+							<Skeleton width={100} height={100} circle={true}/>}
 				</div>
 				<div className="info">
 					<h2

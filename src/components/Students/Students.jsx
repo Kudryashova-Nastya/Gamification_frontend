@@ -7,6 +7,7 @@ import {CORS, getHostInformation} from "../../store/helper/Helper";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Auth from "../../store/helper/Auth";
+import DEFAULT_AVATAR from "../../images/icons/default-avatar.svg";
 
 const Students = () => {
 	const host = getHostInformation()
@@ -22,31 +23,36 @@ const Students = () => {
 		{},
 	])
 	// массив с результатами поиска
-	const [arr, setArr] = useState(students)
+	const [arr, setArr] = useState([ // временно!!!
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+	])
 
 	useEffect(() => {
 		const host = getHostInformation()
 		fetch(`${host}/api/v1/short_student`, CORS(Auth.token?.access))
 		.then(async (res) => await res.json())
 		.then((data) => {
-			setArr(data)
-			setStudents(data)
+			console.log("data", data)
+			if (data.length > 0) {
+				setArr(data)
+				setStudents(data)
+			}
 		})
 		.catch((err) => {
 			console.log("err", err)
-			// const data = [ // временно!!!
-			// 	{name: "Петя Пимашков", balance: 125},
-			// 	{name: "Екатерина Рудная", balance: 225},
-			// 	{name: "Артемий Пимашковнидзе", balance: 125},
-			// 	{name: "Карина Карамбеби", balance: 325},
-			// 	{name: "Александр Гамильтон", balance: 325},
-			// 	{name: "Валерий Меладзе", balance: 325},
-			// 	{name: "Тимофей Тимофеев", balance: 325},
-			// 	{name: "Рудольф Ван", balance: 205},
-			// 	{name: "Игорь Гром", balance: 205},
-			// ]
-			// setStudents(data)
-			// setArr(data)
+			const data = [ // временно!!!
+				{name: "Петя Пимашков", balance: 125},
+				{name: "Екатерина Рудная", balance: 225},
+				{name: "Артемий Пимашковнидзе", balance: 125},
+				{name: "Карина Карамбеби", balance: 325},
+			]
+			setArr(data)
+			setStudents(data)
 		})
 
 		setIsLoading(false)
@@ -56,7 +62,7 @@ const Students = () => {
 	return (
 		<div className="container">
 
-			<div className="header-block header-search">
+			<div className="header-block header-search main-header">
 				<h1 className="header1">Студенты</h1>
 				{!isLoading && <Search students={students} setArr={setArr}/>}
 			</div>
@@ -66,6 +72,8 @@ const Students = () => {
 					<div key={i} className="student-card">
 						<div className="avatar">
 							{el?.image ? <img alt="avatar" src={`${host}${el.image}`}/> :
+								el.hasOwnProperty('image') ?
+									<img alt="avatar" src={DEFAULT_AVATAR}/> :
 								<Skeleton width={80} height={80} circle={true}/>}
 						</div>
 						<div className="info">

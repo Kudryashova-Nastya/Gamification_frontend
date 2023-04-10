@@ -59,7 +59,7 @@ class Auth {
 
 	// узнать просрочен ли токен
 	isExpired = (exp) => {
-		return Date.now() > exp
+		return Date.now() >= exp
 	};
 
 	getToken = async () => {

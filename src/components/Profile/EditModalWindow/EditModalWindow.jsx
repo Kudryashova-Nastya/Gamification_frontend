@@ -36,7 +36,20 @@ export const EditModalWindow = observer(() => {
 		},
 		{
 			"name": "Музыка",
-		}])
+		},
+		{
+			"name": "3D-моделирование",
+		},
+		{
+			"name": "Графический дизайн",
+		},
+		{
+			"name": "Разработка игр",
+		},
+		{
+			"name": "Кинопроизводство",
+		}
+		])
 
 	useEffect(() => {
 		const host = getHostInformation()
