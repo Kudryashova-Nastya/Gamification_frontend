@@ -70,21 +70,17 @@ class Auth {
 		// проверка не протух ли аксес-токен
 		if (this.isExpired(this.getExpirationDate(this.token.access))) {
 			console.log("токен протух")
-			await fetch(`${host}/api/v1/token/refresh/`, POSTCORS({"refresh": this.token?.refresh}))
-			.then(
-				(r) => {
-					console.log("попытка рефреша ответ", r.json())
-					if (r.json()?.access) {
-						console.log("новый токен получен после рефреш")
-						this.setToken(r.json())
-					} else {
-						console.log("токен удалён, рефреш не удался")
-						this.setToken(null)
-					}
-				}
-			)
+			const req = await fetch(`${host}/api/v1/token/refresh/`, POSTCORS({"refresh": this.token?.refresh}))
+			const res = await req.json()
+			console.log("попытка рефреша ответ", res)
+			if (res?.access) {
+				console.log("новый токен получен после рефреш")
+				this.setToken(res)
+			} else {
+				console.log("токен удалён, рефреш не удался")
+				this.setToken(null)
+			}
 		}
-
 		return this.token
 	}
 

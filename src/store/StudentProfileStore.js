@@ -46,6 +46,8 @@ class StudentProfileStore {
 					if (token?.access) {
 						console.log("проблема протухания решена, перезапуск запроса")
 						this.fetchStudentInfo()
+					} else {
+						console.log("проблема протухания не решена", token)
 					}
 				})
 			}

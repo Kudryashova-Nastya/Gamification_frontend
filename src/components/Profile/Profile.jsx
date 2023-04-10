@@ -20,15 +20,16 @@ import StudentTransactions from "./StudentTransactions/StudentTransactions";
 import Pagination from "../Pagination/Pagination";
 import {useNavigate} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
+import {getHostInformation} from "../../store/helper/Helper";
 
 const Profile = observer(() => {
 
-
+	const host = getHostInformation()
 	// const [loading, setLoading] = useState(false)
 	const [currentPage, setCurrentPage] = useState(1)
 	// const [postsPerPage] = useState(10)
 	const history = useNavigate()
-	const  screenWidth = document.documentElement.clientWidth
+	const screenWidth = document.documentElement.clientWidth
 
 	useEffect(() => {
 		void StudentProfileStore.fetchStudentInfo()
@@ -65,15 +66,23 @@ const Profile = observer(() => {
 			</div>
 			<div className="profile-window">
 				<div className="avatar">
-					<img alt="фото" src="https://www.peoples.ru/state/citizen/william_franklyn-miller/franklyn-miller_8.jpg"/>
+					{StudentProfileStore.studentInfo.image ?
+						<img alt="фото" src={`${host}${StudentProfileStore.studentInfo.image}`}/> :
+						<Skeleton width={100} height={100} circle={true}/>}
+
 				</div>
 				<div className="info">
 					<h2
-						className="header3">{StudentProfileStore.studentInfo.first_name || <Skeleton width={150}/>} {StudentProfileStore.studentInfo.last_name}</h2>
-					<h3 className="header4"> {StudentProfileStore.studentInfo.balance || <Skeleton width={50}/>} {StudentProfileStore.studentInfo.balance && <img alt="тукоинов" src={MAINTUCOIN}/>}</h3>
+						className="header3">{StudentProfileStore.studentInfo.first_name ||
+						<Skeleton width={150}/>} {StudentProfileStore.studentInfo.last_name}</h2>
+					<h3 className="header4"> {StudentProfileStore.studentInfo.balance ||
+						<Skeleton width={50}/>} {StudentProfileStore.studentInfo.balance &&
+						<img alt="тукоинов" src={MAINTUCOIN}/>}</h3>
 					<div className="contacts">
 						<div className="contact">
-							{StudentProfileStore.studentInfo.email ? <><img alt="почта" src={MAIL}/> {StudentProfileStore.studentInfo.email}</> : <Skeleton width={120} count={3} style={{marginBottom: "10px"}}/>}
+							{StudentProfileStore.studentInfo.email ? <><img alt="почта"
+																															src={MAIL}/> {StudentProfileStore.studentInfo.email}</> :
+								<Skeleton width={120} count={3} style={{marginBottom: "10px"}}/>}
 						</div>
 						{StudentProfileStore.studentInfo.telegram &&
 							<div className="contact">
@@ -99,7 +108,8 @@ const Profile = observer(() => {
 				<div className="about">
 					<div className="label">О себе:</div>
 					<div className="about-text">
-						{StudentProfileStore.studentInfo.about ? StudentProfileStore.studentInfo.about : screenWidth < 769 ? <Skeleton width={230} count={3}/> : <Skeleton width={300} count={3}/>}
+						{StudentProfileStore.studentInfo.about ? StudentProfileStore.studentInfo.about : StudentProfileStore.studentInfo.hasOwnProperty('about') ? "no comments": screenWidth < 769 ?
+							<Skeleton width={230} count={3}/> : <Skeleton width={300} count={3}/>}
 					</div>
 				</div>
 			</div>

@@ -3,15 +3,15 @@ import TUCOIN from "../../images/icons/black-tucoin16.svg";
 import "./style.css"
 import '../base.css';
 import D3 from "../../images/directions/3D.svg";
-import Game from "../../images/directions/Геймдев.svg";
-import Animation from "../../images/directions/Анимация.svg";
-import Dis from "../../images/directions/Дизайн.svg";
 import Search from "../Search/Search";
-import {getHostInformation} from "../../store/helper/Helper";
+import {CORS, getHostInformation} from "../../store/helper/Helper";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import StudentProfileStore from "../../store/StudentProfileStore";
+import Auth from "../../store/helper/Auth";
 
 const Students = () => {
+	const host = getHostInformation()
 	const [isLoading, setIsLoading] = useState(true)
 
 	// полный массив студентов
@@ -28,13 +28,14 @@ const Students = () => {
 
 	useEffect(() => {
 		const host = getHostInformation()
-		fetch(`${host}/api/v1/student`)
-		.then((res) => res.json())
+		fetch(`${host}/api/v1/short_student`, CORS(Auth.token?.access))
+		.then(async (res) => await res.json())
 		.then((data) => {
 			setStudents(data)
 			setArr(data)
 		})
-		.catch(() => {
+		.catch((err) => {
+			console.log("err", err)
 			const data = [ // временно!!!
 				{name: "Петя Пимашков", balance: 125},
 				{name: "Екатерина Рудная", balance: 225},
@@ -66,21 +67,18 @@ const Students = () => {
 				{arr.map((el, i) =>
 					<div key={i} className="student-card">
 						<div className="avatar">
-							<img alt="avatar" src="https://www.revelio.cz/system/stranka/profil/img/9593.jpg"/>
+							{el.image ?<img alt="avatar" src={`${host}${el.image}`}/> :
+								<Skeleton width={80} height={80} circle={true}/>}
 						</div>
 						<div className="info">
-							<div className="name">{el.name || <Skeleton width={100}/>}</div>
+							<div className="name">{el.first_name || <Skeleton width={100}/>} {el.last_name}</div>
 							<div className="balance"><span>{el.balance || <Skeleton width={40}/>}</span> {el.balance &&
 								<img src={TUCOIN} alt=""/>}</div>
 							<div className="directions">
-								{el.directions ? <>
+								{el.direction ? el.direction.length === 0 ? "": <>
 									<img alt="направление" src={D3}/>
-									<img alt="направление" src={Game}/>
-									<img alt="направление" src={Animation}/>
-									<img alt="направление" src={Dis}/>
-								</> : <>
+								</> :
 									<Skeleton circle={true} height={21} width={21}/>
-								</>
 								}
 							</div>
 						</div>

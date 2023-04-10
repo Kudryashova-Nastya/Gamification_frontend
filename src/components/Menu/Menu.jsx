@@ -15,12 +15,14 @@ import TELEGRAM from "../../images/icons/Telegram.svg"
 import VK from "../../images/icons/VK.svg"
 import SETTINGS from "../../images/icons/Settings.svg"
 import LOGO from "../../images/icons/Logo_white.svg"
-import {bodyFixPosition, bodyUnfixPosition} from "../../store/helper/Helper";
+import {bodyFixPosition, bodyUnfixPosition, getHostInformation} from "../../store/helper/Helper";
 import {observer} from "mobx-react";
 import Auth from "../../store/helper/Auth";
+import StudentProfileStore from "../../store/StudentProfileStore";
 
 
 const Menu = observer(() => {
+	const host = getHostInformation()
 	const toggleMenu = () => {
 		if (document.documentElement.clientWidth < 768) {
 			document.getElementsByClassName("burger-container")[0].classList.toggle("active")
@@ -51,8 +53,7 @@ const Menu = observer(() => {
 								</div>
 							</div>
 							<div className="photo">
-								<img src="https://www.peoples.ru/state/citizen/william_franklyn-miller/franklyn-miller_8.jpg"
-										 alt="avatar"/>
+								<img src={`${host}${StudentProfileStore.studentInfo.image}`} alt="avatar"/>
 							</div>
 						</div>
 					</Link>
