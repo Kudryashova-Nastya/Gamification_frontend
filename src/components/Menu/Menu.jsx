@@ -18,7 +18,7 @@ import LOGO from "../../images/icons/Logo_white.svg"
 import {bodyFixPosition, bodyUnfixPosition, getHostInformation} from "../../store/helper/Helper";
 import {observer} from "mobx-react";
 import Auth from "../../store/helper/Auth";
-import StudentProfileStore from "../../store/StudentProfileStore";
+import DEFAULT_AVATAR from "../../images/icons/default-avatar.svg";
 
 
 const Menu = observer(() => {
@@ -53,7 +53,7 @@ const Menu = observer(() => {
 								</div>
 							</div>
 							<div className="photo">
-								<img src={`${host}${StudentProfileStore.studentInfo.image}`} alt="avatar"/>
+								{Auth.profileInfo.image ? <img src={`${host}${Auth.profileInfo.image}`} alt="ava"/> : <img alt="ava" src={DEFAULT_AVATAR}/>}
 							</div>
 						</div>
 					</Link>

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from 'mobx-react';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
 import StudentProfileStore from "../../../store/StudentProfileStore";
 import './EditModalWindow.css';
+import {CORS, getHostInformation} from "../../../store/helper/Helper";
+import Auth from "../../../store/helper/Auth";
 
 export const EditModalWindow = observer(() => {
 
@@ -23,6 +25,31 @@ export const EditModalWindow = observer(() => {
 		})
 	})
 
+	const [directions, setDirections] = useState([{
+		"name": "Программирование",
+	},
+		{
+			"name": "Анимация",
+		},
+		{
+			"name": "Робототехника",
+		},
+		{
+			"name": "Музыка",
+		}])
+
+	useEffect(() => {
+		const host = getHostInformation()
+		fetch(`${host}/api/v1/direction`, CORS(Auth.token?.access))
+		.then(async (res) => await res.json())
+		.then((data) => {
+			setDirections(data)
+		})
+		.catch((err) => {
+			console.log("err", err)
+		})
+	}, [])
+
 	return (
 		<ModalWindow isBig={true}>
 			<svg className="close-ico" onClick={() => StudentProfileStore.closeModal()} width="22" height="22"
@@ -36,49 +63,21 @@ export const EditModalWindow = observer(() => {
 			<div className="columns">
 				<div className="mydirections">
 					<div className="blockname">Мои направления (max 4):</div>
-					<div className="mydirection">
-						<input type="checkbox" id="prog" name="prog"/>
-						<label htmlFor="prog">Программирование</label>
-					</div>
-					<div className="mydirection">
-						<input type="checkbox"/>
-						<label>Программирование</label>
-					</div>
-					<div className="mydirection">
-						<input type="checkbox"/>
-						<label>Программирование</label>
-					</div>
-					<div className="mydirection">
-						<input type="checkbox"/>
-						<label>Программирование</label>
-					</div>
-					<div className="mydirection">
-						<input type="checkbox"/>
-						<label>Программирование</label>
-					</div>
-					<div className="mydirection">
-						<input type="checkbox"/>
-						<label>Программирование</label>
-					</div>
-					<div className="mydirection">
-						<input type="checkbox"/>
-						<label>Программирование</label>
-					</div>
-					<div className="mydirection">
-						<input type="checkbox"/>
-						<label>Программирование</label>
-					</div>
-
+					{directions.map((dir, i) =>
+						<div className="mydirection" key={i}>
+							<input type="checkbox" defaultChecked={StudentProfileStore.studentInfo.direction.find(d => d.name === dir.name)}/>
+							<label>{dir.name}</label>
+						</div>
+					)}
 				</div>
 				<div className="aboutblock">
 					<div className="blockname blockname__about">О себе:</div>
-					<textarea className="aboutme" defaultValue={"Привет! Я Ваня, мне 13 лет. Люблю играть в майнкрафт, кто тоже любит, го на мой сервер:\n" +
-						"\t\t\t\t\t\tGamer123"}/>
+					<textarea className="aboutme" defaultValue={StudentProfileStore.studentInfo.about}/>
 				</div>
 			</div>
 			<div className="myrefs">
 				<label className="blockname">Мой телеграм: &nbsp;</label>
-				<input type="text" className="input" size="40"  maxLength="40"/>
+				<input type="text" className="input" size="40" defaultValue={StudentProfileStore.studentInfo?.telegram || ""}  maxLength="40"/>
 			</div>
 			<button onClick={() => StudentProfileStore.closeModal()} className="button">Сохранить</button>
 		</ModalWindow>

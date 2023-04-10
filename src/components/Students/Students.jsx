@@ -2,12 +2,10 @@ import React, {useEffect, useState} from 'react';
 import TUCOIN from "../../images/icons/black-tucoin16.svg";
 import "./style.css"
 import '../base.css';
-import D3 from "../../images/directions/3D.svg";
 import Search from "../Search/Search";
 import {CORS, getHostInformation} from "../../store/helper/Helper";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import StudentProfileStore from "../../store/StudentProfileStore";
 import Auth from "../../store/helper/Auth";
 
 const Students = () => {
@@ -31,24 +29,24 @@ const Students = () => {
 		fetch(`${host}/api/v1/short_student`, CORS(Auth.token?.access))
 		.then(async (res) => await res.json())
 		.then((data) => {
-			setStudents(data)
 			setArr(data)
+			setStudents(data)
 		})
 		.catch((err) => {
 			console.log("err", err)
-			const data = [ // временно!!!
-				{name: "Петя Пимашков", balance: 125},
-				{name: "Екатерина Рудная", balance: 225},
-				{name: "Артемий Пимашковнидзе", balance: 125},
-				{name: "Карина Карамбеби", balance: 325},
-				{name: "Александр Гамильтон", balance: 325},
-				{name: "Валерий Меладзе", balance: 325},
-				{name: "Тимофей Тимофеев", balance: 325},
-				{name: "Рудольф Ван", balance: 205},
-				{name: "Игорь Гром", balance: 205},
-			]
-			setStudents(data)
-			setArr(data)
+			// const data = [ // временно!!!
+			// 	{name: "Петя Пимашков", balance: 125},
+			// 	{name: "Екатерина Рудная", balance: 225},
+			// 	{name: "Артемий Пимашковнидзе", balance: 125},
+			// 	{name: "Карина Карамбеби", balance: 325},
+			// 	{name: "Александр Гамильтон", balance: 325},
+			// 	{name: "Валерий Меладзе", balance: 325},
+			// 	{name: "Тимофей Тимофеев", balance: 325},
+			// 	{name: "Рудольф Ван", balance: 205},
+			// 	{name: "Игорь Гром", balance: 205},
+			// ]
+			// setStudents(data)
+			// setArr(data)
 		})
 
 		setIsLoading(false)
@@ -64,10 +62,10 @@ const Students = () => {
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="student-container">
-				{arr.map((el, i) =>
+				{arr?.map((el, i) =>
 					<div key={i} className="student-card">
 						<div className="avatar">
-							{el.image ?<img alt="avatar" src={`${host}${el.image}`}/> :
+							{el?.image ? <img alt="avatar" src={`${host}${el.image}`}/> :
 								<Skeleton width={80} height={80} circle={true}/>}
 						</div>
 						<div className="info">
@@ -75,8 +73,9 @@ const Students = () => {
 							<div className="balance"><span>{el.balance || <Skeleton width={40}/>}</span> {el.balance &&
 								<img src={TUCOIN} alt=""/>}</div>
 							<div className="directions">
-								{el.direction ? el.direction.length === 0 ? "": <>
-									<img alt="направление" src={D3}/>
+								{el?.direction ? el.direction?.length === 0 ? "": <>
+								{el.direction?.map((icon, id)=> <img alt="направление" title={icon.name} key={id} src={`${host}${icon.icon}`}/>
+								)}
 								</> :
 									<Skeleton circle={true} height={21} width={21}/>
 								}

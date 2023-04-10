@@ -9,10 +9,7 @@ import MAIL from '../../images/icons/mail.svg'
 import PORTFOLIO from '../../images/icons/portfolio.svg'
 import ACHI from '../../images/icons/achi16.svg'
 import SEND from '../../images/icons/send.svg'
-import D3 from '../../images/directions/3D.svg'
-import Animation from '../../images/directions/Анимация.svg'
-import Game from '../../images/directions/Геймдев.svg'
-import Dis from '../../images/directions/Дизайн.svg'
+import DEFAULT_AVATAR from '../../images/icons/default-avatar.svg'
 import StudentProfileStore from "../../store/StudentProfileStore";
 import {EditModalWindow} from "./EditModalWindow/EditModalWindow";
 import {observer} from "mobx-react";
@@ -34,20 +31,6 @@ const Profile = observer(() => {
 	useEffect(() => {
 		void StudentProfileStore.fetchStudentInfo()
 	}, [])
-	// useEffect(() => {
-	// 	const fetchPosts = async () => {
-	// 		setLoading(true)
-	// 		// const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
-	// 		// setPosts(res.data)
-	// 		setLoading(false)
-	// 	}
-	//
-	// 	fetchPosts().then()
-	// }, [])
-
-	// if (loading && posts.length === 0) {
-	// 	return <h2>Loading...</h2>
-	// }
 
 	//Get current posts
 	// const indexOfLastPost = currentPage * postsPerPage;
@@ -68,8 +51,8 @@ const Profile = observer(() => {
 				<div className="avatar">
 					{StudentProfileStore.studentInfo.image ?
 						<img alt="фото" src={`${host}${StudentProfileStore.studentInfo.image}`}/> :
-						<Skeleton width={100} height={100} circle={true}/>}
-
+						<img alt="фото" src={DEFAULT_AVATAR}/>}
+					{/*<Skeleton width={100} height={100} circle={true}/>*/}
 				</div>
 				<div className="info">
 					<h2
@@ -84,31 +67,32 @@ const Profile = observer(() => {
 																															src={MAIL}/> {StudentProfileStore.studentInfo.email}</> :
 								<Skeleton width={120} count={3} style={{marginBottom: "10px"}}/>}
 						</div>
-						{StudentProfileStore.studentInfo.telegram &&
+						{StudentProfileStore.studentInfo?.telegram &&
 							<div className="contact">
 								<img alt="телеграм" src={TELEGRAM}/> {StudentProfileStore.studentInfo.telegram}
 							</div>
 						}
-						{StudentProfileStore.studentInfo.portfolio_link &&
+						{StudentProfileStore.studentInfo?.portfolio_link &&
 							<div className="contact">
 								<img alt="портфолио" src={PORTFOLIO}/> <a
 								href={StudentProfileStore.studentInfo.portfolio_link}>Портфолио</a>
 							</div>
 						}
-						{StudentProfileStore.studentInfo.directions &&
-							<div className="contact directions">
-								<img alt="направление" width="29" src={D3}/>
-								<img alt="направление" width="29" src={Game}/>
-								<img alt="направление" width="29" src={Animation}/>
-								<img alt="направление" width="29" src={Dis}/>
-							</div>
+						{StudentProfileStore.studentInfo.direction ? StudentProfileStore.studentInfo.direction.length === 0 ? "" :
+								<div className="contact directions">
+									{StudentProfileStore.studentInfo.direction?.map((icon, id) => <img alt="направление" width="29"
+																																										 title={icon.name} key={id}
+																																										 src={`${host}${icon.icon}`}/>
+									)}
+								</div> :
+							<Skeleton circle={true} height={29} width={29}/>
 						}
 					</div>
 				</div>
 				<div className="about">
 					<div className="label">О себе:</div>
 					<div className="about-text">
-						{StudentProfileStore.studentInfo.about ? StudentProfileStore.studentInfo.about : StudentProfileStore.studentInfo.hasOwnProperty('about') ? "no comments": screenWidth < 769 ?
+						{StudentProfileStore.studentInfo.about ? StudentProfileStore.studentInfo.about : StudentProfileStore.studentInfo.hasOwnProperty('about') ? "no comments" : screenWidth < 769 ?
 							<Skeleton width={230} count={3}/> : <Skeleton width={300} count={3}/>}
 					</div>
 				</div>

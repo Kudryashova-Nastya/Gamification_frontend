@@ -52,29 +52,29 @@ class StudentProfileStore {
 				})
 			}
 
-			runInAction(() => {
-				// временный дефолтный студент
-				setTimeout(
-					() => {
-						this.studentInfo = {
-							"email": "ivan.ivanov.m@tumo.world",
-							"first_name": "Иван",
-							"last_name": "Иваненков",
-							"image": "/uploads/users/6ee89e1216724ab9ba1e14775fd1b7d1.jpg",
-							"telegram": "/ivan_ivanovvv",
-							"balance": 125,
-							"portfolio_link": null,
-							"directions": [
-								{
-									"name": "aaaaaa",
-									"link": "aaaaaaaaaa"
-								}
-							],
-							"about": "Привет! Я Ваня, мне 13 лет. Люблю играть в майнкрафт, кто тоже любит, го на мой сервер: Gamer123"
-						}
-					}, 3000)
-
-			})
+			// runInAction(() => {
+			// 	// временный дефолтный студент
+			// 	setTimeout(
+			// 		() => {
+			// 			this.studentInfo = {
+			// 				"email": "ivan.ivanov.m@tumo.world",
+			// 				"first_name": "Иван",
+			// 				"last_name": "Иваненков",
+			// 				"image": "/uploads/users/6ee89e1216724ab9ba1e14775fd1b7d1.jpg",
+			// 				"telegram": "/ivan_ivanovvv",
+			// 				"balance": 125,
+			// 				"portfolio_link": null,
+			// 				"directions": [
+			// 					{
+			// 						"name": "aaaaaa",
+			// 						"link": "aaaaaaaaaa"
+			// 					}
+			// 				],
+			// 				"about": "Привет! Я Ваня, мне 13 лет. Люблю играть в майнкрафт, кто тоже любит, го на мой сервер: Gamer123"
+			// 			}
+			// 		}, 3000)
+			//
+			// })
 		}
 
 		this.setLoading(false)
