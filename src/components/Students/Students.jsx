@@ -28,7 +28,7 @@ const Students = () => {
 
 	// пагинация
 	const [currentPage, setCurrentPage] = useState(1)
-	const postsPerPage = 2
+	const postsPerPage = 10
 
 
 	useEffect(() => {

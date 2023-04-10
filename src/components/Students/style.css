@@ -13,7 +13,7 @@
     border-radius: 100px;
     border: 3px solid #111111;
     box-sizing: border-box;
-    padding: 5px 15px;
+    padding: 8px 12px;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -28,8 +28,8 @@
 }
 
 .student-card .avatar {
-    max-width: 80px;
-    max-height: 80px;
+    max-width: 75px;
+    max-height: 75px;
     /*margin-top: 3px;*/
     overflow: hidden;
     border-radius: 50px;
