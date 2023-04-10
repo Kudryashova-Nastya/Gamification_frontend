@@ -4,7 +4,7 @@ import '../base.css';
 import './Search.css'
 import SEARCH from "../../images/icons/search-black.svg";
 
-const Search = observer(({students, setArr}) => {
+const Search = observer(({students, setArr, setCurrentPage}) => {
 	const allArr = students
 
 	useEffect(() => {
@@ -15,6 +15,7 @@ const Search = observer(({students, setArr}) => {
 			setArr(allArr.filter(data => {
 				return `${data?.first_name} ${data?.last_name}`.toLowerCase().includes(searchWord);
 			}))
+			setCurrentPage(1)
 		});
 
 	})

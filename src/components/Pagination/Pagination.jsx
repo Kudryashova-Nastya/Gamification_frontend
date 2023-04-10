@@ -4,18 +4,15 @@ import "./pagination.css"
 import LEFT from "../../images/icons/arrow-left.svg"
 import RIGHT from "../../images/icons/arrow-right.svg"
 
-const Pagination = observer(({pages = 10, setCurrentPage}) => {
+const Pagination = observer(({pages = 10, currentPage, setCurrentPage}) => {
 
-	//Set number of pages
 	const numberOfPages = []
 	for (let i = 1; i <= pages; i++) {
 		numberOfPages.push(i)
 	}
 
-	// Current active button number
 	const [currentButton, setCurrentButton] = useState(1)
 
-	// Array of buttons what we see on the page
 	const [arrOfCurrButtons, setArrOfCurrButtons] = useState([])
 
 	useEffect(() => {
@@ -49,8 +46,11 @@ const Pagination = observer(({pages = 10, setCurrentPage}) => {
 
 		setArrOfCurrButtons(tempNumberOfPages)
 		setCurrentPage(currentButton)
-	}, [currentButton])
+	}, [currentButton, pages])
 
+	if (pages === 0) {
+		return <div className="noinformation">По вашему запросу ничего не найдено</div>
+	}
 
 	return (
 		<div className="pagination-container">
@@ -64,7 +64,7 @@ const Pagination = observer(({pages = 10, setCurrentPage}) => {
 			{arrOfCurrButtons.map(((item, index) => {
 				return <span
 					key={index}
-					className={`${currentButton === item ? 'active' : ''}`}
+					className={`${currentPage === item ? 'active' : ''}`}
 					onClick={() => setCurrentButton(item)}
 				>
 					{item}
