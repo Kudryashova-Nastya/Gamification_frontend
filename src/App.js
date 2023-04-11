@@ -32,7 +32,7 @@ const App = observer(() => {
 		console.log('role', role, Auth.profileInfo?.user_role)
 		console.log('info', Auth.profileInfo)
 		console.log('token',token, Auth.token)
-	});
+	}, []);
 
 	return (
 		<SkeletonTheme baseColor="#CCCCCC" highlightColor="#ffffff">
@@ -45,6 +45,7 @@ const App = observer(() => {
 						<Route path="" element={<Profile/>}/>
 						<Route path="send" element={<TransactionPage/>}/>
 						<Route path="students" element={<Students/>}/>
+						<Route path=":id" element={<Profile/>}/>
 					</Route>
 					<Route path="/manager" element={(token && role === 'manager') ? <Menu/> : <Navigate to="/login" replace/>}>
 						{/*<Route path='/registration' element={<StudentRegistration/>}/>*/}

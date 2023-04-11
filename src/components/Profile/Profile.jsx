@@ -15,12 +15,13 @@ import {EditModalWindow} from "./EditModalWindow/EditModalWindow";
 import {observer} from "mobx-react";
 import StudentTransactions from "./StudentTransactions/StudentTransactions";
 import Pagination from "../Pagination/Pagination";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import {getHostInformation} from "../../store/helper/Helper";
 
 const Profile = observer(() => {
-
+	const {id} = useParams()
+	console.log(id, "id!!!")
 	const host = getHostInformation()
 	// const [loading, setLoading] = useState(false)
 	const [currentPage, setCurrentPage] = useState(1)
@@ -29,8 +30,8 @@ const Profile = observer(() => {
 	const screenWidth = document.documentElement.clientWidth
 
 	useEffect(() => {
-		void StudentProfileStore.fetchStudentInfo()
-	}, [])
+		void StudentProfileStore.fetchStudentInfo(id)
+	}, [id])
 
 	//Get current posts
 	// const indexOfLastPost = currentPage * postsPerPage;

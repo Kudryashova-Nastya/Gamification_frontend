@@ -19,6 +19,8 @@
     align-items: center;
     gap: 15px;
     transition: all 0.3s ease;
+    color: #111111;
+    text-decoration: none;
 }
 
 .student-card:hover {

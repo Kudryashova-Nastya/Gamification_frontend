@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {bodyFixPosition, bodyUnfixPosition, getHostInformation, POSTCORS, CORS} from "./helper/Helper";
+import {bodyFixPosition, bodyUnfixPosition, getHostInformation, CORS} from "./helper/Helper";
 import Auth from "./helper/Auth";
 
 const host = getHostInformation()
@@ -26,13 +26,20 @@ class StudentProfileStore {
 			this.isLoading = bool
 		})
 	}
-	// информация для шапки
-	myInfo = {}
-	// информация о студенте по id
+
+	// информация о студенте по id либо о владельце профиля через токен
 	studentInfo = {}
-	fetchStudentInfo = async () => {
+	fetchStudentInfo = async (student_id) => {
 		this.setLoading(true)
-		const req = await fetch(`${host}/api/v1/profile`, CORS(Auth.token?.access));
+		const token = await Auth.getToken()
+		let req
+		if (student_id) {
+			console.log("профиль с id", student_id)
+			req = await fetch(`${host}/api/v1/student/${student_id}`, CORS(token?.access));
+		} else {
+			console.log("мой профиль")
+			req = await fetch(`${host}/api/v1/profile`, CORS(token?.access));
+		}
 		const res = await req.json();
 		console.log("ответ профиля", res);
 		if (req.ok) {

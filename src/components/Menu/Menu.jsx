@@ -44,7 +44,7 @@ const Menu = observer(() => {
 			</div>
 			<nav>
 				<div className="nav-container">
-					<Link className="student-link" to='/student' onClick={() => toggleMenu()}>
+					<Link className="student-link" to='/student/' onClick={() => toggleMenu()}>
 						<div className="menu__info">
 							<div>
 								<div className="name">{Auth.profileInfo.first_name} {Auth.profileInfo.last_name}</div>

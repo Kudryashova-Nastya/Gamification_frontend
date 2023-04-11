@@ -9,6 +9,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import Auth from "../../store/helper/Auth";
 import DEFAULT_AVATAR from "../../images/icons/default-avatar.svg";
 import Pagination from "../Pagination/Pagination";
+import {Link} from "react-router-dom";
 
 const Students = () => {
 	const host = getHostInformation()
@@ -34,10 +35,11 @@ const Students = () => {
 	useEffect(() => {
 		const host = getHostInformation()
 		const fetchData = async () => {
-			await fetch(`${host}/api/v1/short_student`, CORS(Auth.token?.access))
+			const token = await Auth.getToken()
+			await fetch(`${host}/api/v1/short_student`, CORS(token?.access))
 			.then((res) => res.json())
 			.then((data) => {
-				console.log("data", data)
+				// console.log("data", data)
 				if (data.code === "token_not_valid") {
 					console.log("проблема протухшего токена в студентах, перезапуск запроса")
 					fetchData()
@@ -78,7 +80,7 @@ const Students = () => {
 			<hr color="#CCCCCC" size="4"/>
 			<div className="student-container">
 				{currentPosts?.map((el, i) =>
-					<div key={i} className="student-card">
+					<Link to={`/student/${el.id}`} key={i} className="student-card">
 						<div className="avatar">
 							{el?.image ? <img alt="avatar" src={`${host}${el.image}`}/> :
 								el.hasOwnProperty('image') ?
@@ -99,7 +101,7 @@ const Students = () => {
 								}
 							</div>
 						</div>
-					</div>
+					</Link>
 				)}
 			</div>
 			<Pagination pages={howManyPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
