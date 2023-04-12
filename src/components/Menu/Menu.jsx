@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './style.css';
 import {Link, Outlet} from "react-router-dom";
 import TUCOIN_MENU_MINI from "../../images/icons/Tucoin_menu_mini.svg"
@@ -36,6 +36,17 @@ const Menu = observer(() => {
 			}
 		}
 	}
+
+	let role = Auth.role
+	const getProfileInfo = async () => {
+		role = await Auth.getProfileInfo();
+	};
+
+	useEffect(() => {
+		// проверяем наличие токенов и роль пользователя
+		void getProfileInfo()
+		console.log('info from menu', JSON.stringify(Auth.profileInfo))
+	}, []);
 
 	return (
 		<>

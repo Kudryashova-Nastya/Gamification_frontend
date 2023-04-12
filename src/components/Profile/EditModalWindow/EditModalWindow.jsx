@@ -81,7 +81,8 @@ export const EditModalWindow = observer(() => {
 		if (imageRef.current.files.length > 0) formData.append("image", imageRef.current.files[0])
 		if (aboutRef.current.value) formData.append("about", aboutRef.current.value)
 		if (telegramRef.current.value) formData.append("telegram", telegramRef.current.value)
-		formData.append("direction", JSON.stringify(dirArray))
+		// formData.append("direction", JSON.stringify(dirArray))
+
 		// const data = {
 		// 	"about": aboutRef.current.value || null,
 		// 	"telegram": telegramRef.current.value || null,
@@ -98,6 +99,7 @@ export const EditModalWindow = observer(() => {
 			}
 		} else {
 			void StudentProfileStore.fetchStudentInfo()
+			void await Auth.getProfileInfo()
 			console.log("успех")
 		}
 

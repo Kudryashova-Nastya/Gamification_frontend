@@ -14,7 +14,7 @@ import {SkeletonTheme} from "react-loading-skeleton";
 
 const App = observer(() => {
 	let token = Auth.token
-	let role = Auth.profileInfo?.user_role
+	let role = Auth.role
 
 	const getToken = async () => {
 		token = await Auth.getToken();
@@ -29,8 +29,7 @@ const App = observer(() => {
 		getToken().then((token) => {
 			token?.access ? role = getRole() : role = null
 		});
-		console.log('role', role, Auth.profileInfo?.user_role)
-		console.log('info', Auth.profileInfo)
+		console.log('role', role, Auth.role)
 		console.log('token',token, Auth.token)
 	}, []);
 

@@ -13,7 +13,8 @@ class Auth {
 	//         "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NTgwMTUxMzEsImlhdCI6MTY1NzkyODczMSwic2NvcGUiOiJyZWZyZXNoX3Rva2VuIiwic3ViIjoidXNlciJ9.Db62JMi1qnY48NLgD_VIN84Awf25hh0My-KcKCl3QoE",
 	//     }
 	token = JSON.parse(localStorage.getItem("TOKEN_AUTH")) || null
-	profileInfo = JSON.parse(localStorage.getItem("PROFILE")) || null
+	profileInfo = {}
+	role = localStorage.getItem("ROLE") || null
 
 	login = async (data) => {
 
@@ -91,7 +92,8 @@ class Auth {
 		} else {
 			localStorage.removeItem("TOKEN_AUTH")
 			this.profileInfo = null
-			localStorage.removeItem("PROFILE")
+			this.role = null
+			localStorage.removeItem("ROLE")
 		}
 		runInAction(() => {
 			this.token = token
@@ -100,13 +102,15 @@ class Auth {
 	}
 
 	getRole = async () => {
-		if (!this.profileInfo) {
+		if (!this.role) {
 			const usersInfoReq = await fetch(`${host}/api/v1/profile`, CORS(this.token?.access))
 			const usersInfoRes = await usersInfoReq.json()
 			if (usersInfoReq.ok && usersInfoReq?.status === 200) {
 				runInAction(() => {
+					console.log("запрос на роль")
 					this.profileInfo = usersInfoRes
-					localStorage.setItem("PROFILE", JSON.stringify(usersInfoRes))
+					this.role = usersInfoRes?.user_role
+					localStorage.setItem("ROLE", usersInfoRes?.user_role)
 				})
 			} else {
 				alert("ошибка получения данных профиля")
@@ -114,7 +118,22 @@ class Auth {
 		}
 		// console.log("профиль существует", JSON.stringify(this.profileInfo))
 		// console.log("и вот его роль", this.profileInfo.user_role)
-		return this.profileInfo?.user_role
+		return this.role
+	}
+
+	getProfileInfo = async () => {
+		const usersInfoReq = await fetch(`${host}/api/v1/profile`, CORS(this.token?.access))
+		const usersInfoRes = await usersInfoReq.json()
+		if (usersInfoReq.ok && usersInfoReq?.status === 200) {
+			runInAction(() => {
+				console.log("запрос на инфу о профиле")
+				this.profileInfo = usersInfoRes
+				this.role = usersInfoRes?.user_role
+				localStorage.setItem("ROLE", usersInfoRes?.user_role)
+			})
+		} else {
+			alert("ошибка получения данных профиля")
+		}
 	}
 }
 
