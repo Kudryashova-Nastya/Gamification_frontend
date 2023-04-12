@@ -20,13 +20,13 @@ export const CORS = (token) => {
 	})
 };
 
+// сюда передавать только формдатой!
 export const PATCHCORS = (data, token = '') => {
 	return ({
 		method: 'PATCH',
-		body: JSON.stringify(data),
+		body: data,
 		headers: {
-			"Authorization": `Bearer ${token}`,
-			'Content-Type': 'application/json'
+			"Authorization": `Bearer ${token}`
 		}
 	})
 }

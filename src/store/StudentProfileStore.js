@@ -105,7 +105,7 @@ class StudentProfileStore {
 		if (req?.ok && req?.status === 200) {
 			return false // возвращает false в случае успеха
 		} else {
-			return JSON.stringify(res) // возвращает текст ошибки в случае ошибки авторизации
+			return res // возвращает текст ошибки в случае ошибки
 		}
 	};
 

@@ -1,4 +1,4 @@
-import React, {createRef, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {observer} from 'mobx-react';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
 import StudentProfileStore from "../../../store/StudentProfileStore";
@@ -61,25 +61,41 @@ export const EditModalWindow = observer(() => {
 		}
 	])
 
-
-	const aboutRef = useRef(null);
-	const telegramRef = useRef(null);
-	let directionsRef = useRef(directions?.map(() => createRef())); // для чекбоксов
+	const aboutRef = useRef(null)
+	const telegramRef = useRef(null)
+	let directionsRef = useRef({}) // для чекбоксов
+	let imageRef = useRef(null)
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const data = {
-			"about": aboutRef.current.value || null,
-			"telegram": telegramRef.current.value || null
-		}
-		console.log("edit", data);
-		const dir = directionsRef.current?.map(
-			ref => ref.current?.checked
-		);
-		console.log(dir)
+		let dirArray = []
+		directions.forEach((d) => {
+			// console.log(`${d.id}: ${directionsRef.current[d.id].checked}`);
+			if (directionsRef.current[d.id].checked) {
+				dirArray.push(d.id)
+			}
+		});
+
+		// console.log(imageRef.current.files[0]?.name)
+		console.log(dirArray)
+		let formData = new FormData();
+		if (imageRef.current.files.length > 0) formData.append("image", imageRef.current.files[0])
+		if (aboutRef.current.value) formData.append("about", aboutRef.current.value)
+		if (telegramRef.current.value) formData.append("telegram", telegramRef.current.value)
+		formData.append("direction", JSON.stringify(dirArray))
+		// const data = {
+		// 	"about": aboutRef.current.value || null,
+		// 	"telegram": telegramRef.current.value || null,
+		// 	"direction": dirArray,
+		// 	"image": imageRef
+		// }
+
 		// log вернет ошибку, если пусто, значит ошибки нет
-		const log = await StudentProfileStore.editProfile(data)
+		const log = await StudentProfileStore.editProfile(formData)
 		if (log) {
 			console.log("косяк", log)
+			if (log?.code === "token_not_valid") {
+				await StudentProfileStore.editProfile(formData)
+			}
 		} else {
 			void StudentProfileStore.fetchStudentInfo()
 			console.log("успех")
@@ -88,18 +104,27 @@ export const EditModalWindow = observer(() => {
 		StudentProfileStore.closeModal()
 	}
 
-	useEffect(() => {
-		setIsLoading(true)
+	const fetchDirections = async () => {
 		const host = getHostInformation()
-		fetch(`${host}/api/v1/direction`, CORS(Auth.token?.access))
+		const token = await Auth.getToken()
+		await fetch(`${host}/api/v1/direction`, CORS(token?.access))
 		.then(async (res) => await res.json())
 		.then((data) => {
-			setDirections(data)
-			setIsLoading(false)
+			if (data?.code === "token_not_valid") {
+				fetchDirections()
+			} else {
+				setDirections(data)
+				setIsLoading(false)
+			}
 		})
 		.catch((err) => {
 			console.log("err", err)
 		})
+	}
+
+	useEffect(() => {
+		setIsLoading(true)
+		void fetchDirections()
 	}, [])
 
 
@@ -121,7 +146,8 @@ export const EditModalWindow = observer(() => {
 							<div className="mydirection" key={i}>
 								<input type="checkbox"
 											 // ref={directionsRef?.current[dir.id]}
-											 ref={isLoading ? null: directionsRef?.current[dir.id]}
+											 // ref={isLoading ? null: directionsRef?.current[dir.id]}
+											 ref={(el) => (directionsRef.current[dir.id] = el)}
 											 defaultChecked={StudentProfileStore.studentInfo.direction.find(d => d.id === dir.id)}/>
 								<label>{dir.name}</label>
 							</div>
@@ -136,6 +162,10 @@ export const EditModalWindow = observer(() => {
 					<label className="blockname">Мой телеграм: &nbsp;</label>
 					<input type="text" className="input" size="40" defaultValue={StudentProfileStore.studentInfo?.telegram}
 								 maxLength="40" ref={telegramRef}/>
+				</div>
+				<div className="myrefs">
+					<label className="blockname">Загрузить аватарку: &nbsp; &nbsp; &nbsp;</label>
+					<input type="file" ref={imageRef} accept=".jpeg, .jpg, .png, .svg"/>
 				</div>
 				<div className="button-block">
 					<button type="submit" disabled={isLoading} className="button">Сохранить</button>
