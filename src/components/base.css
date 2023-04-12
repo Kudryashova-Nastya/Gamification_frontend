@@ -132,6 +132,11 @@ body.lock {
     text-align: center;
 }
 
+.balance-icon {
+    vertical-align: middle;
+}
+
+
 @media (max-width: 768px) {
     .container {
         padding: 30px 3vw;

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {createRef, useEffect, useRef, useState} from 'react';
 import {observer} from 'mobx-react';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
 import StudentProfileStore from "../../../store/StudentProfileStore";
@@ -10,6 +10,7 @@ export const EditModalWindow = observer(() => {
 
 	const checkboxes = document.querySelectorAll('input[type=checkbox]')
 	const limit = 4 // максимальное количество выбранных чекбоксов
+	const [isLoading, setIsLoading] = useState(true)
 
 	checkboxes.forEach((checkbox) => {
 		checkbox.addEventListener('change', () => {
@@ -25,43 +26,82 @@ export const EditModalWindow = observer(() => {
 		})
 	})
 
-	const [directions, setDirections] = useState([{
-		"name": "Программирование",
-	},
+	const [directions, setDirections] = useState([
 		{
 			"name": "Анимация",
+			"id": 1
 		},
 		{
 			"name": "Робототехника",
+			"id": 2
 		},
 		{
 			"name": "Музыка",
+			"id": 3
 		},
 		{
 			"name": "3D-моделирование",
+			"id": 4
 		},
 		{
 			"name": "Графический дизайн",
+			"id": 5
 		},
 		{
 			"name": "Разработка игр",
+			"id": 6
 		},
 		{
 			"name": "Кинопроизводство",
+			"id": 7
+		},
+		{
+			"name": "Программирование",
+			"id": 8
 		}
-		])
+	])
+
+
+	const aboutRef = useRef(null);
+	const telegramRef = useRef(null);
+	let directionsRef = useRef(directions?.map(() => createRef())); // для чекбоксов
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const data = {
+			"about": aboutRef.current.value || null,
+			"telegram": telegramRef.current.value || null
+		}
+		console.log("edit", data);
+		const dir = directionsRef.current?.map(
+			ref => ref.current?.checked
+		);
+		console.log(dir)
+		// log вернет ошибку, если пусто, значит ошибки нет
+		const log = await StudentProfileStore.editProfile(data)
+		if (log) {
+			console.log("косяк", log)
+		} else {
+			void StudentProfileStore.fetchStudentInfo()
+			console.log("успех")
+		}
+
+		StudentProfileStore.closeModal()
+	}
 
 	useEffect(() => {
+		setIsLoading(true)
 		const host = getHostInformation()
 		fetch(`${host}/api/v1/direction`, CORS(Auth.token?.access))
 		.then(async (res) => await res.json())
 		.then((data) => {
 			setDirections(data)
+			setIsLoading(false)
 		})
 		.catch((err) => {
 			console.log("err", err)
 		})
 	}, [])
+
 
 	return (
 		<ModalWindow isBig={true}>
@@ -73,26 +113,34 @@ export const EditModalWindow = observer(() => {
 					fill="#111111"/>
 			</svg>
 			<div className="header3">Редактирование профиля</div>
-			<div className="columns">
-				<div className="mydirections">
-					<div className="blockname">Мои направления (max 4):</div>
-					{directions.map((dir, i) =>
-						<div className="mydirection" key={i}>
-							<input type="checkbox" defaultChecked={StudentProfileStore.studentInfo.direction.find(d => d.name === dir.name)}/>
-							<label>{dir.name}</label>
-						</div>
-					)}
+			<form onSubmit={handleSubmit}>
+				<div className="columns">
+					<div className="mydirections">
+						<div className="blockname">Мои направления (max 4):</div>
+						{directions?.map((dir, i) =>
+							<div className="mydirection" key={i}>
+								<input type="checkbox"
+											 // ref={directionsRef?.current[dir.id]}
+											 ref={isLoading ? null: directionsRef?.current[dir.id]}
+											 defaultChecked={StudentProfileStore.studentInfo.direction.find(d => d.id === dir.id)}/>
+								<label>{dir.name}</label>
+							</div>
+						)}
+					</div>
+					<div className="aboutblock">
+						<div className="blockname blockname__about">О себе:</div>
+						<textarea className="aboutme" ref={aboutRef} defaultValue={StudentProfileStore.studentInfo?.about}/>
+					</div>
 				</div>
-				<div className="aboutblock">
-					<div className="blockname blockname__about">О себе:</div>
-					<textarea className="aboutme" defaultValue={StudentProfileStore.studentInfo.about}/>
+				<div className="myrefs">
+					<label className="blockname">Мой телеграм: &nbsp;</label>
+					<input type="text" className="input" size="40" defaultValue={StudentProfileStore.studentInfo?.telegram}
+								 maxLength="40" ref={telegramRef}/>
 				</div>
-			</div>
-			<div className="myrefs">
-				<label className="blockname">Мой телеграм: &nbsp;</label>
-				<input type="text" className="input" size="40" defaultValue={StudentProfileStore.studentInfo?.telegram || ""}  maxLength="40"/>
-			</div>
-			<button onClick={() => StudentProfileStore.closeModal()} className="button">Сохранить</button>
+				<div className="button-block">
+					<button type="submit" disabled={isLoading} className="button">Сохранить</button>
+				</div>
+			</form>
 		</ModalWindow>
 	);
 });

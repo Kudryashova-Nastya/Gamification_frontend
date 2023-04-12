@@ -61,9 +61,9 @@ const Profile = observer(() => {
 					<h2
 						className="header3">{StudentProfileStore.studentInfo.first_name ||
 						<Skeleton width={150}/>} {StudentProfileStore.studentInfo.last_name}</h2>
-					<h3 className="header4"> {StudentProfileStore.studentInfo.balance ||
-						<Skeleton width={50}/>} {StudentProfileStore.studentInfo.balance &&
-						<img alt="тукоинов" src={MAINTUCOIN}/>}</h3>
+					<div className="header4"> <span className="balance-icon">{StudentProfileStore.studentInfo.balance ||
+						<Skeleton width={50}/>}</span> {StudentProfileStore.studentInfo.balance &&
+						<img alt="тукоинов" className="balance-icon" src={MAINTUCOIN}/>}</div>
 					<div className="contacts">
 						<div className="contact">
 							{StudentProfileStore.studentInfo.email ? <><img alt="почта"

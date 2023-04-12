@@ -20,6 +20,17 @@ export const CORS = (token) => {
 	})
 };
 
+export const PATCHCORS = (data, token = '') => {
+	return ({
+		method: 'PATCH',
+		body: JSON.stringify(data),
+		headers: {
+			"Authorization": `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		}
+	})
+}
+
 // Фиксация body
 export const bodyFixPosition = () => {
 	// Получаем позицию прокрутки

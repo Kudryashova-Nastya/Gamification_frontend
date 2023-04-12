@@ -61,7 +61,7 @@ const Students = () => {
 			})
 		}
 
-		fetchData()
+		void fetchData()
 		setIsLoading(false)
 	}, [])
 
@@ -89,8 +89,9 @@ const Students = () => {
 						</div>
 						<div className="info">
 							<div className="name">{el.first_name || <Skeleton width={100}/>} {el.last_name}</div>
-							<div className="balance"><span>{el.balance || <Skeleton width={40}/>}</span> {el.balance &&
-								<img src={TUCOIN} alt=""/>}</div>
+							<div className="balance"><span className="balance-icon">{el.balance ||
+								<Skeleton width={40}/>}</span> {el.balance &&
+								<img className="balance-icon" src={TUCOIN} alt=""/>}</div>
 							<div className="directions">
 								{el?.direction ? el.direction?.length === 0 ? "" : <>
 										{el.direction?.map((icon, id) => <img alt="направление" title={icon.name} key={id}
