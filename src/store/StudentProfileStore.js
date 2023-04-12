@@ -29,6 +29,7 @@ class StudentProfileStore {
 
 	// информация о студенте по id либо о владельце профиля через токен
 	studentInfo = {}
+	isMyProfile = true
 	fetchStudentInfo = async (student_id) => {
 		this.setLoading(true)
 		const token = await Auth.getToken()
@@ -36,9 +37,15 @@ class StudentProfileStore {
 		if (student_id) {
 			console.log("профиль с id", student_id)
 			req = await fetch(`${host}/api/v1/student/${student_id}`, CORS(token?.access));
+			runInAction(() => {
+				this.isMyProfile = false
+			})
 		} else {
 			console.log("мой профиль")
 			req = await fetch(`${host}/api/v1/profile`, CORS(token?.access));
+			runInAction(() => {
+				this.isMyProfile = true
+			})
 		}
 		const res = await req.json();
 		console.log("ответ профиля", res);

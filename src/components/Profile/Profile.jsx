@@ -21,7 +21,6 @@ import {getHostInformation} from "../../store/helper/Helper";
 
 const Profile = observer(() => {
 	const {id} = useParams()
-	console.log(id, "id!!!")
 	const host = getHostInformation()
 	// const [loading, setLoading] = useState(false)
 	const [currentPage, setCurrentPage] = useState(1)
@@ -42,9 +41,11 @@ const Profile = observer(() => {
 	return (
 		<div className="container">
 			<div className="buttons-block">
-				<button className="button" onClick={() => StudentProfileStore.setEditVisible()}>Редактировать
-					<img className="button-icon" alt="редактировать" src={EDIT}/>
-				</button>
+				{StudentProfileStore.isMyProfile &&
+					<button className="button" onClick={() => StudentProfileStore.setEditVisible()}>Редактировать
+						<img className="button-icon" alt="редактировать" src={EDIT}/>
+					</button>
+				}
 				<button className="button">Копировать ссылку <img className="button-icon" alt="копировать ссылку" src={LINK}/>
 				</button>
 			</div>
@@ -100,9 +101,11 @@ const Profile = observer(() => {
 				</div>
 			</div>
 			<div className="header-block">
-				<h2 className="header3">Мои ачивки</h2>
-				<button className="button">Все ачивки <img className="button-icon achive-icon" alt="ачивки" src={ACHI}/>
-				</button>
+				<h2 className="header3">{StudentProfileStore.isMyProfile ? "Мои ачивки" : "Ачивки"}</h2>
+				{StudentProfileStore.isMyProfile &&
+					<button className="button">Все ачивки <img className="button-icon achive-icon" alt="ачивки" src={ACHI}/>
+					</button>
+				}
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="achives">
@@ -117,16 +120,19 @@ const Profile = observer(() => {
 				</div>
 			</div>
 			<div className="header-block">
-				<h2 className="header3">Моя история {screenWidth < 768 ? '' : 'операций'}</h2>
+				<h2 className="header3">{StudentProfileStore.isMyProfile ? "Моя история" : "История"} {screenWidth < 768 ? '' : 'операций'}</h2>
 				<button onClick={() => history("send")} className="button button-send">Перевести <img
 					className="send button-icon" alt="перевод" src={SEND}/></button>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<StudentTransactions/>
 			<Pagination pages={10} setCurrentPage={setCurrentPage}/>
-			{StudentProfileStore.modalEditVisible ? <EditModalWindow/> : null}
+			{
+				StudentProfileStore.modalEditVisible ? <EditModalWindow/> : null
+			}
 		</div>
-	);
+	)
+		;
 });
 
 export default Profile;
