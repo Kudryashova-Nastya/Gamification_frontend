@@ -21,6 +21,7 @@
     transition: all 0.3s ease;
     color: #111111;
     text-decoration: none;
+    min-height: 80px;
 }
 
 .student-card:hover {
@@ -67,5 +68,34 @@
         grid-template-columns: 1fr;
         max-width: 440px;
         padding: 0;
+        grid-gap: 0.8rem;
+    }
+
+    .student-card .avatar {
+        max-width: 60px;
+        max-height: 60px;
+    }
+
+    .student-card .name {
+        font-size: 15px;
+        margin-bottom: 2px;
+    }
+
+    .student-card .balance {
+        font-size: 15px;
+    }
+
+    .directions {
+        margin-top: 4px;
+    }
+
+    .student-card {
+        padding: 5px 10px;
+        gap: 13px;
+    }
+
+    .student-card .directions img {
+        width: 18px;
+        margin-right: 5px;
     }
 }
