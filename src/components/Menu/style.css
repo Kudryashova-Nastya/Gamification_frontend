@@ -59,6 +59,7 @@ nav a:hover .value {
     align-items: center;
     line-height: 1.5;
     cursor: pointer;
+    gap: 5px;
 }
 
 .menu__info .name {
@@ -81,6 +82,9 @@ nav a:hover .value {
 
 .menu__info .photo {
     max-width: 55px;
+    max-height: 55px;
+    overflow: hidden;
+    border-radius: 60px;
 }
 
 .photo img {
