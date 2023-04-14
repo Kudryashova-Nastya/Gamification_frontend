@@ -11,8 +11,6 @@ const DoneBlock = ({data}) => {
 	const history = useNavigate()
 	return (
 		<div className="container">
-
-
 			<div className="header-block">
 				<h1 className="header1"><img src={BACK} alt="Назад" className="header-back" onClick={() => history(-1)}/>
 					Успешный перевод</h1>
@@ -22,7 +20,7 @@ const DoneBlock = ({data}) => {
 				<div className="minus-value">-{data.number} <img alt="" src={TUCOIN42}/></div>
 				<div className="done">Перевод отправлен</div>
 				<div className="card">
-					<div className="name">Иван Иваненков</div>
+					<div className="name">{data.name}</div>
 					<div className="body">
 						<img className="ava" alt="avatar"
 								 src="http://static.ngs.ru/news/2020/99/preview/51a4e7fc7246f3bbba4d05258b9e7cae06f70b8a_1024.jpg"/><br/>
@@ -32,7 +30,6 @@ const DoneBlock = ({data}) => {
 				<div className="button-block">
 					<button onClick={() => history(-1)} className="button btn-large">Готово</button>
 				</div>
-
 			</div>
 		</div>
 	);
