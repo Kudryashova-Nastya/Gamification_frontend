@@ -53,25 +53,13 @@ const Login = observer(() => {
 				<form className="form" onSubmit={handleSubmit}>
 					<div>
 						<label htmlFor="login">&nbsp;&nbsp;&nbsp;&nbsp;Email</label>
-						<input
-							className="input"
-							name="email"
-							type="email"
-							value={email}
-							required
-							onChange={(e) => setEmail(e.target.value)}
-						/>
+						<input className="input" name="email" type="email" value={email} required
+							onChange={(e) => setEmail(e.target.value)}/>
 					</div>
 					<div>
 						<label htmlFor="password">Пароль</label>
-						<input
-							className="input"
-							name="password"
-							type="password"
-							value={password}
-							required
-							onChange={(e) => setPassword(e.target.value)}
-						/>
+						<input className="input" name="password" type="password" value={password} required
+							onChange={(e) => setPassword(e.target.value)}/>
 					</div>
 					<button className="button">Войти</button>
 				</form>

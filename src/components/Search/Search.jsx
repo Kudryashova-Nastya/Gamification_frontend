@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react';
 import {observer} from "mobx-react";
+
 import '../base.css';
-import './Search.css'
+import './Search.css';
+
 import SEARCH from "../../images/icons/search-black.svg";
 
 const Search = observer(({students, setArr, setCurrentPage}) => {

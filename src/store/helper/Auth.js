@@ -63,11 +63,11 @@ class Auth {
 		return Date.now() >= exp
 	};
 
+	// получить актуальный набор токенов
 	getToken = async () => {
 		if (!this.token) {
 			return null
 		}
-
 		// проверка не протух ли аксес-токен
 		if (this.isExpired(this.getExpirationDate(this.token.access))) {
 			console.log("токен протух")
@@ -87,7 +87,7 @@ class Auth {
 
 	setToken = (token) => {
 		if (token) {
-			console.log("кладём в сторедж")
+			console.log("кладём в локальное хранилище")
 			localStorage.setItem("TOKEN_AUTH", JSON.stringify(token))
 		} else {
 			localStorage.removeItem("TOKEN_AUTH")

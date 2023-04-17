@@ -34,15 +34,12 @@ const TransactionPage = observer(() => {
 	return (
 		<>
 			{isDone ? <DoneBlock data={data}/> :
-
 				<div className="container">
-
 				<div className="header-block main-header">
 				<h1 className="header1"><img src={BACK} alt="Назад" className="header-back" onClick={() => history(-1)}/>
 				Перевод</h1>
 				</div>
 				<hr color="#CCCCCC" size="4"/>
-
 				<form className="send-container" onSubmit={handleSubmit}>
 				<label>Мой счёт</label>
 				<div className="mybalance">125 <img src={TUCOIN} width="39" alt="тукоин"/></div>

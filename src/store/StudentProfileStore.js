@@ -92,22 +92,31 @@ class StudentProfileStore {
 		this.setLoading(false)
 	}
 
+	// Запрос на редактирование профиля
 	editProfile = async (data) => {
-
 		if (!data) {
 			return null
 		}
-		// console.log(LOGIN_CORS)
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/profile/`, PATCHCORS(data, token?.access))
 		const res = await req.json()
-		console.log('edit res', res)
 		if (req?.ok && req?.status === 200) {
 			return false // возвращает false в случае успеха
 		} else {
+			if (res.code === "token_not_valid") {
+				console.log("проблема протухшего токена обнаружена")
+				Auth.getToken().then((token) => {
+					if (token?.access) {
+						console.log("проблема протухания решена, перезапуск запроса")
+						this.editProfile(data)
+					} else {
+						console.log("проблема протухания не решена", token)
+					}
+				})
+			}
 			return res // возвращает текст ошибки в случае ошибки
 		}
-	};
+	}
 
 	closeModal = () => {
 		bodyUnfixPosition()
