@@ -100,9 +100,9 @@ const Menu = observer(() => {
 							</Link>
 						</li>
 						<li>
-							<Link to='/one' onClick={() => toggleMenu()}>
+							<Link to='employees' onClick={() => toggleMenu()}>
 								<img src={Curators} className="ico" alt="Curators"/>
-								Кураторы и коучи
+								Кураторы, коучи, админы
 							</Link>
 						</li>
 						<li>

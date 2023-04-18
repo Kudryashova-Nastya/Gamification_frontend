@@ -113,7 +113,7 @@ class Auth {
 					localStorage.setItem("ROLE", usersInfoRes?.user_role)
 				})
 			} else {
-				alert("ошибка получения данных профиля")
+				console.log("ошибка получения данных профиля")
 			}
 		}
 		// console.log("профиль существует", JSON.stringify(this.profileInfo))
@@ -132,7 +132,7 @@ class Auth {
 				localStorage.setItem("ROLE", usersInfoRes?.user_role)
 			})
 		} else {
-			alert("ошибка получения данных профиля")
+			console.log("ошибка получения данных профиля")
 		}
 	}
 }

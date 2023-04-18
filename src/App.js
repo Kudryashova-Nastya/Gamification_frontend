@@ -10,6 +10,7 @@ import StudentRegistration from "./components/Auth/StudentRegistration";
 import TransactionPage from "./components/TransactionPage/TransactionPage";
 import Students from "./components/Students/Students";
 import {SkeletonTheme} from "react-loading-skeleton";
+import Employees from "./components/Employees/Employees";
 
 
 const App = observer(() => {
@@ -43,11 +44,12 @@ const App = observer(() => {
 					{/*<Route path="/student" element={<Menu/>}>*/}
 						<Route path="" element={<Profile/>}/>
 						<Route path="send" element={<TransactionPage/>}/>
+						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students/>}/>
 						<Route path=":id" element={<Profile/>}/>
 					</Route>
 					<Route path="/manager" element={(token && role === 'manager') ? <Menu/> : <Navigate to="/login" replace/>}>
-						{/*<Route path='/registration' element={<StudentRegistration/>}/>*/}
+						<Route path="registration" element={<StudentRegistration/>}/>
 					</Route>
 
 				</Routes>
