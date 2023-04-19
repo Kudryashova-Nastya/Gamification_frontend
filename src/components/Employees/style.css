@@ -56,7 +56,11 @@
 }
 
 .show-false .false-fact {
-    color: #F50106;
+    color: #6F5FFE;
+}
+
+.show-false .false-fact path {
+    fill: #6F5FFE;
 }
 
 

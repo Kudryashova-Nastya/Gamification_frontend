@@ -4,7 +4,6 @@ import Auth from "../../store/helper/Auth";
 import "./style.css"
 import '../base.css';
 import EmployeeCard from "./EmployeeCard";
-import FACT from "../../images/icons/fact.svg";
 
 const Employees = () => {
 	const [employeeRole, setEmployeeRole] = useState("curator")
@@ -65,11 +64,10 @@ const Employees = () => {
 			<hr color="#CCCCCC" size="4"/>
 			<div className="employee-container">
 				{employees?.map((el, i) =>
-					<EmployeeCard el={el} randomFacts={shuffle([<div className="fact">
-						<img className="balance-icon" src={FACT} alt="fact"/>&nbsp;{el?.first_fact}</div>,
-						<div className="fact"><img className="balance-icon" src={FACT} alt="fact"/>&nbsp;{el?.second_fact}</div>,
-						<div className="fact false-fact">
-							<img className="balance-icon" src={FACT} alt="fact"/>&nbsp;{el?.false_fact}</div>
+					<EmployeeCard el={el} randomFacts={shuffle([
+						{fact: el.first_fact, is_true: true},
+						{fact: el.second_fact, is_true: true},
+						{fact: el.false_fact, is_true: false}
 					])} key={i}/>
 				)}
 			</div>
