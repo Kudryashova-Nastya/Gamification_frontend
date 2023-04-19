@@ -4,11 +4,12 @@ import Auth from "../../store/helper/Auth";
 import "./style.css"
 import '../base.css';
 import EmployeeCard from "./EmployeeCard";
+import INFO from "../../images/icons/i-violet.svg";
 
 const Employees = () => {
-	const [employeeRole, setEmployeeRole] = useState("curator")
+	const [activeTab, setActiveTab] = useState("curator")
 
-	const [employees, setEmployees] = useState([ // временно!!!
+	const [employees, setEmployees] = useState([
 		{},
 		{},
 		{},
@@ -57,13 +58,18 @@ const Employees = () => {
 	}, [])
 
 	return (
-		<div className="container">
-			<div className="header-block header-search main-header">
-				<h1 className="header1">Кураторы</h1>
+		<div className="container employee-page">
+			<div className="header-block main-header tabs-container">
+				<div className={activeTab === "curator" ? "tab active" : "tab"} onClick={()=> setActiveTab("curator")}>Кураторы</div>
+				<div className={activeTab === "coach" ? "tab active" : "tab"} onClick={()=> setActiveTab("coach")}>Коучи</div>
+				<div className={activeTab === "manager" ? "tab active" : "tab"} onClick={()=> setActiveTab("manager")}>Админы</div>
+				<div className="info-facts">
+					<div><img src={INFO} alt="info"/></div>
+					<div>Один из написанных фактов ложный. Ложный факт будет отмечен цветом после клика по нему</div>
+				</div>
 			</div>
-			<hr color="#CCCCCC" size="4"/>
 			<div className="employee-container">
-				{employees?.map((el, i) =>
+				{employees.filter(data => data?.user_role === activeTab)?.map((el, i) =>
 					<EmployeeCard el={el} randomFacts={shuffle([
 						{fact: el.first_fact, is_true: true},
 						{fact: el.second_fact, is_true: true},

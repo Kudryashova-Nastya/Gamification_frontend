@@ -3,7 +3,7 @@
     display: grid;
     grid-template-rows: auto;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0;
     grid-template-columns: 1fr 1fr;
 }
 
@@ -55,6 +55,10 @@
     flex-direction: column;
 }
 
+.fact {
+    cursor: pointer;
+}
+
 .show-false .false-fact {
     color: #6F5FFE;
 }
@@ -63,6 +67,52 @@
     fill: #6F5FFE;
 }
 
+.tabs-container {
+    gap: 5px;
+    align-items: center;
+}
+
+.tab {
+    font-weight: 700;
+    font-size: 30px;
+    display: inline-block;
+    border-radius: 100px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    box-sizing: border-box;
+    border: 3px solid #111111;
+    cursor: pointer;
+    width: 23%;
+    text-align: center;
+}
+
+.tab.active {
+    color: white;
+    background-color: #111111;
+}
+
+.info-facts {
+    display: flex;
+    color: #6F5FFE;
+    font-weight: 600;
+    font-size: 12px;
+    max-width: 250px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1280px) {
+    .employee-page {
+        padding: 2vw 4vw;
+    }
+
+    .tab {
+        font-size: 24px;
+        width: 85%;
+    }
+}
 
 @media (max-width: 768px) {
     .employee-card {
@@ -70,6 +120,10 @@
         gap: 12px;
         align-items: flex-start;
         padding: 15px 20px;
+    }
+
+    .info-facts {
+        font-weight: 500;
     }
 }
 
@@ -102,4 +156,32 @@
     .employee-card .facts {
         font-size: 13px;
     }
+}
+
+@media (max-width: 680px) {
+    .tabs-container {
+        flex-wrap: wrap;
+        margin: 57px 5px 23px;
+        gap: 5px;
+    }
+
+    .tab {
+        font-size: 23px;
+        width: 32%;
+    }
+
+    .info-facts {
+        max-width: 360px;
+        margin-top: 10px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 515px) {
+    .tab {
+        font-size: 14px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
 }

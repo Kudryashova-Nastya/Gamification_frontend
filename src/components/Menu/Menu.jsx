@@ -60,7 +60,7 @@ const Menu = observer(() => {
 							<div>
 								<div className="name">{Auth.profileInfo.first_name} {Auth.profileInfo.last_name}</div>
 								<div className="value"> {Auth.profileInfo.balance}
-									<img src={TUCOIN_MENU_MINI} className="tucoin" alt="игровой валюты"/>
+									{Auth.profileInfo.balance && <img src={TUCOIN_MENU_MINI} className="tucoin" alt="игровой валюты"/>}
 								</div>
 							</div>
 							<div className="photo">
