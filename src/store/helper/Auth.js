@@ -132,7 +132,12 @@ class Auth {
 				localStorage.setItem("ROLE", usersInfoRes?.user_role)
 			})
 		} else {
-			console.log("ошибка получения данных профиля")
+			if (usersInfoRes.code === "token_not_valid") {
+				console.log("проблема протухшего токена в меню, перезапуск запроса")
+				void this.getProfileInfo()
+			} else {
+				console.log("ошибка получения данных профиля")
+			}
 		}
 	}
 }
