@@ -5,34 +5,34 @@ import './SearchSelect.css'
 import ARROW from "../../images/icons/arrow-bottom.svg";
 import SEARCH from "../../images/icons/search-gray.svg";
 
-const SearchSelect = observer(({props}) => {
-	const allArr = props
+const SearchSelect = observer(({allArr, setRecipient}) => {
 	const [arr, setArr] = useState(allArr)
 	const [mainValue, setMainValue] = useState('')
 	const toggleSelect = () => {
 		document.getElementsByClassName("wrapper")[0].classList.toggle("active")
 	}
-	const updateName = (e) => {
+	const updateName = (e, student) => {
 		let el = e.target;
 		let wrapper = document.getElementsByClassName("wrapper")[0]
-		// document.getElementsByClassName("search-input")[0].value = "";
 		wrapper.classList.remove("active");
 		setMainValue(el.innerText)
+		setRecipient(student)
 	}
 
 
 	useEffect(() => {
+		setArr(allArr)
 		let wrapper = document.getElementsByClassName("wrapper")[0]
 		const searchInp = wrapper.getElementsByClassName("search-input")[0]
 
 		searchInp.addEventListener("keyup", () => {
 			let searchWord = searchInp.value.toLowerCase();
 			setArr(allArr.filter(data => {
-				return data.toLowerCase().includes(searchWord);
+				return `${data?.first_name} ${data?.last_name}`.toLowerCase().includes(searchWord);
 			}))
 		});
 
-	}, [])
+	}, [allArr])
 
 	return (
 		<div className="wrapper">
@@ -46,11 +46,11 @@ const SearchSelect = observer(({props}) => {
 					<input className="search-input" spellCheck="false" type="text" placeholder="Поиск"/>
 				</div>
 				<ul className="options">
-					{arr.map((name, index) => {
-						return (<li onClick={(e) => updateName(e)}
+					{arr.length > 0 ? arr.map((name, index) => {
+						return (<li onClick={(e) => updateName(e, name)}
 												className={name === mainValue ? "selected" : ""}
-												key={index}>{name}</li>)
-					})}
+												key={index}>{name.first_name} {name.last_name}</li>)
+					}) : "Студентов по вашему запросу не найдено"}
 				</ul>
 			</div>
 		</div>

@@ -4,9 +4,26 @@ import {ModalWindow} from '../../ModalWindow/ModalWindow';
 import TransactionPageStore from "../../../store/TransactionPageStore";
 import "./CheckModalWindow.css"
 import TUCOIN from "../../../images/icons/black-tucoin16.svg";
+import DEFAULT_AVATAR from "../../../images/icons/default-avatar.svg";
+import Skeleton from "react-loading-skeleton";
+import {getHostInformation} from "../../../store/helper/Helper";
 
-export const CheckModalWindow = observer(({data, setIsDone}) => {
-	console.log(data)
+export const CheckModalWindow = observer(({data, setIsDone, setError}) => {
+	const host = getHostInformation()
+
+	const tryTransfer = async () => {
+		// перезаписываем данные для запроса так, чтобы в поле отправителя был id
+		const form = {...data, to_id: data.to_id.id}
+
+		console.log(form)
+		const res = await TransactionPageStore.makeTransaction(form)
+		if (res) {
+			setError(res)
+		} else {
+			setIsDone(true)
+		}
+		TransactionPageStore.closeModal()
+	}
 
 	return (
 		<ModalWindow>
@@ -23,14 +40,16 @@ export const CheckModalWindow = observer(({data, setIsDone}) => {
 					<div>
 						<div className="blockname">Получатель:</div>
 						<div className="value">
-							<img className="ava" alt="avatar"
-									 src="http://static.ngs.ru/news/2020/99/preview/51a4e7fc7246f3bbba4d05258b9e7cae06f70b8a_1024.jpg"/>
-							Иван Иваненков
+							{data.to_id?.image ? <img className="ava" alt="avatar" src={`${host}${data.to_id.image}`}/> :
+								data.to_id.hasOwnProperty('image') ?
+									<img className="ava" alt="avatar" src={DEFAULT_AVATAR}/> :
+									<Skeleton width={32} height={32} circle={true}/>}
+							{data.to_id?.first_name} {data.to_id?.last_name}
 						</div>
 					</div>
 					<div>
 						<div className="blockname">Сумма:</div>
-						<div className="value">{data.number} <img alt="" src={TUCOIN}/></div>
+						<div className="value">{data.sum_count} <img alt="" src={TUCOIN}/></div>
 					</div>
 					<div>
 						<div className="blockname">Комментарий:</div>
@@ -39,7 +58,7 @@ export const CheckModalWindow = observer(({data, setIsDone}) => {
 				</div>
 
 			</div>
-			<button onClick={() => {setIsDone(true); TransactionPageStore.closeModal()}} className="button btn-large">Перевести</button>
+			<button onClick={() => tryTransfer()} className="button btn-large">Перевести</button>
 
 		</ModalWindow>
 	);

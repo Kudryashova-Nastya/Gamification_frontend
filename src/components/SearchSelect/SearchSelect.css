@@ -10,6 +10,7 @@
 
 .select-btn img {
     transition: transform 0.3s linear;
+    width: 20px;
 }
 
 .wrapper.active .select-btn img {
