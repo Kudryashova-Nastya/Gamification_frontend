@@ -4,8 +4,9 @@ import '../base.css';
 import './SearchSelect.css'
 import ARROW from "../../images/icons/arrow-bottom.svg";
 import SEARCH from "../../images/icons/search-gray.svg";
+import Auth from "../../store/helper/Auth";
 
-const SearchSelect = observer(({allArr, setRecipient}) => {
+const SearchSelect = observer(({allArr, setRecipient, id}) => {
 	const [arr, setArr] = useState(allArr)
 	const [mainValue, setMainValue] = useState('')
 	const toggleSelect = () => {
@@ -22,6 +23,14 @@ const SearchSelect = observer(({allArr, setRecipient}) => {
 
 	useEffect(() => {
 		setArr(allArr)
+		if (id) {
+			// console.log("allArr", allArr)
+			let defaultRec = allArr.find(item => item.id === +id)
+			// console.log(defaultRec)
+			setRecipient(defaultRec)
+			setMainValue(`${defaultRec?.first_name} ${defaultRec?.last_name}`)
+		}
+
 		let wrapper = document.getElementsByClassName("wrapper")[0]
 		const searchInp = wrapper.getElementsByClassName("search-input")[0]
 
@@ -47,9 +56,11 @@ const SearchSelect = observer(({allArr, setRecipient}) => {
 				</div>
 				<ul className="options">
 					{arr.length > 0 ? arr.map((name, index) => {
-						return (<li onClick={(e) => updateName(e, name)}
-												className={name === mainValue ? "selected" : ""}
-												key={index}>{name.first_name} {name.last_name}</li>)
+						if (name.id !== Auth.profileInfo.id) {
+							return (<li onClick={(e) => updateName(e, name)}
+													className={`${name?.first_name} ${name?.last_name}` === mainValue ? "selected" : ""}
+													key={index}>{name.first_name} {name.last_name}</li>)
+						}
 					}) : "Студентов по вашему запросу не найдено"}
 				</ul>
 			</div>

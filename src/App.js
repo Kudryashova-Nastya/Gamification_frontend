@@ -47,6 +47,7 @@ const App = observer(() => {
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students/>}/>
 						<Route path=":id" element={<Profile/>}/>
+						<Route path=":id/send" element={<TransactionPage/>}/>
 					</Route>
 					<Route path="/manager" element={(token && role === 'manager') ? <Menu/> : <Navigate to="/login" replace/>}>
 						<Route path="registration" element={<StudentRegistration/>}/>

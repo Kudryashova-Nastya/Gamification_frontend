@@ -4,7 +4,7 @@ import './style.css';
 import {observer} from "mobx-react";
 import BACK from "../../images/icons/back.svg";
 import TUCOIN from "../../images/icons/black-tucoin45.svg";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import SearchSelect from "../SearchSelect/SearchSelect";
 import TransactionPageStore from "../../store/TransactionPageStore";
 import {CheckModalWindow} from "./CheckModalWindow/CheckModalWindow";
@@ -14,6 +14,8 @@ import Auth from "../../store/helper/Auth";
 
 const TransactionPage = observer(() => {
 	const history = useNavigate()
+	const {id} = useParams()
+
 	const [data, setData] = useState({})
 	const [error, setError] = useState(false)
 	const [recipient, setRecipient] = useState({})
@@ -39,7 +41,7 @@ const TransactionPage = observer(() => {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.code === "token_not_valid") {
-					console.log("проблема протухшего токена в студентах, перезапуск запроса")
+					console.log("проблема протухшего токена в селекторе студентов, перезапуск запроса")
 					fetchData()
 				} else {
 					setNames(data)
@@ -67,7 +69,7 @@ const TransactionPage = observer(() => {
 						<label>Мой счёт</label>
 						<div className="mybalance">{Auth.profileInfo.balance} <img src={TUCOIN} width="39" alt="тукоин"/></div>
 						<label>Кому перевести</label><br/>
-						<SearchSelect allArr={names} setRecipient={setRecipient}/>
+						<SearchSelect allArr={names} setRecipient={setRecipient} id={id}/>
 						<label>Cумма перевода</label><br/>
 						<input required placeholder="Введите сумму перевода" type="number" className="datalist" min="1"
 									 step="1" maxLength="4" name="number"/>
