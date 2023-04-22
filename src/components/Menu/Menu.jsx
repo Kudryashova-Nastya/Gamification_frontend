@@ -112,16 +112,16 @@ const Menu = observer(() => {
 							</Link>
 						</li>
 						<li>
-							<Link to='/one' onClick={() => toggleMenu()}>
+							<a href="https://ru.tumo.world" target="_blank">
 								<img src={Traectoria} className="ico" alt="Traectoria"/>
 								Траектория
-							</Link>
+							</a>
 						</li>
 						<li>
-							<Link to='/one' onClick={() => toggleMenu()}>
+							<a href="http://eventtumo.tilda.ws/" target="_blank">
 								<img src={Events} className="ico" alt="Events"/>
 								Календарь мероприятий
-							</Link>
+							</a>
 						</li>
 					</ul>
 					<div className="social">
