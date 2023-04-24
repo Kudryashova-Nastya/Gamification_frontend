@@ -99,7 +99,7 @@ export const EditModalWindow = observer(() => {
 			}
 		} else {
 			void StudentProfileStore.fetchStudentInfo()
-			void await Auth.getProfileInfo()
+			void Auth.getProfileInfo()
 			console.log("успех")
 		}
 

@@ -140,6 +140,21 @@ body.lock {
     vertical-align: middle;
 }
 
+.error-message {
+    font-weight: 500;
+    font-size: 14px;
+    color: #F50106;
+    padding: 13px 20px;
+    background-color: #FDCCCD;
+    border: 2px solid #F50106;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
 
 @media (max-width: 768px) {
     .container {

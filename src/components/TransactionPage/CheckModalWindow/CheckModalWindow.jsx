@@ -7,6 +7,7 @@ import TUCOIN from "../../../images/icons/black-tucoin16.svg";
 import DEFAULT_AVATAR from "../../../images/icons/default-avatar.svg";
 import Skeleton from "react-loading-skeleton";
 import {getHostInformation} from "../../../store/helper/Helper";
+import Auth from "../../../store/helper/Auth";
 
 export const CheckModalWindow = observer(({data, setIsDone, setError}) => {
 	const host = getHostInformation()
@@ -21,6 +22,8 @@ export const CheckModalWindow = observer(({data, setIsDone, setError}) => {
 			setError(res)
 		} else {
 			setIsDone(true)
+			setError(null)
+			void Auth.getProfileInfo()
 		}
 		TransactionPageStore.closeModal()
 	}

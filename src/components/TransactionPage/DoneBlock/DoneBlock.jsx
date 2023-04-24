@@ -32,7 +32,7 @@ const DoneBlock = ({data}) => {
 									<img className="ava" alt="avatar" src={DEFAULT_AVATAR}/> :
 									<Skeleton width={70} height={70} circle={true}/>}
 						<br/>
-						<span>170 <img src={TUCOIN26} alt=""/></span>
+						<span>{data.to_id.balance + data.sum_count} <img src={TUCOIN26} alt=""/></span>
 					</div>
 				</div>
 				<div className="button-block">

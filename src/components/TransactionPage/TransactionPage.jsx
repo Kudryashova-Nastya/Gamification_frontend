@@ -4,6 +4,7 @@ import './style.css';
 import {observer} from "mobx-react";
 import BACK from "../../images/icons/back.svg";
 import TUCOIN from "../../images/icons/black-tucoin45.svg";
+import ERROR from "../../images/icons/error.svg";
 import {useNavigate, useParams} from "react-router-dom";
 import SearchSelect from "../SearchSelect/SearchSelect";
 import TransactionPageStore from "../../store/TransactionPageStore";
@@ -65,7 +66,12 @@ const TransactionPage = observer(() => {
 					</div>
 					<hr color="#CCCCCC" size="4"/>
 					<form className="send-container" onSubmit={handleSubmit}>
-						<div>{error}</div>
+						{error &&
+							<div className="error-message">
+								<div><img src={ERROR} alt="error"/></div>
+								<div>{error}</div>
+							</div>
+						}
 						<label>Мой счёт</label>
 						<div className="mybalance">{Auth.profileInfo.balance} <img src={TUCOIN} width="39" alt="тукоин"/></div>
 						<label>Кому перевести</label><br/>
@@ -80,7 +86,8 @@ const TransactionPage = observer(() => {
 							<button className="button btn-large">Перевести</button>
 						</div>
 					</form>
-					{TransactionPageStore.modalVisible ? <CheckModalWindow data={data} setIsDone={setIsDone} setError={setError}/> : null}
+					{TransactionPageStore.modalVisible ?
+						<CheckModalWindow data={data} setIsDone={setIsDone} setError={setError}/> : null}
 				</div>
 			}
 		</>

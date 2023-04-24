@@ -3,7 +3,6 @@ import BIGTUCOIN from "../../images/icons/black-tucoin45.svg";
 import "./style.css"
 import '../base.css';
 import {CORS, getHostInformation} from "../../store/helper/Helper";
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Auth from "../../store/helper/Auth";
 import Pagination from "../Pagination/Pagination";
@@ -68,7 +67,7 @@ const Bank = () => {
 		<div className="container">
 			<div className="header-block main-header">
 				<h1 className="header1">TUCOIN Банк</h1>
-				<button onClick={() => history("send")} className="button button-send">Перевести <img
+				<button onClick={() => history("/student/send")} className="button button-send">Перевести <img
 					className="send button-icon" alt="перевод" src={SEND}/></button>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
