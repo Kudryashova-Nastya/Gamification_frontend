@@ -1,0 +1,103 @@
+.transaction {
+    display: flex;
+    padding: 11px 20px;
+    border: 2px solid #111111;
+    border-radius: 50px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.transaction-block {
+    width: 85%;
+    margin: auto auto 10px;
+}
+
+.transactions-container .transaction-block {
+    width: 95%;
+}
+
+.transaction-block .datetime {
+    font-weight: 500;
+    font-size: 12px;
+    text-align: right;
+    margin-right: 35px;
+    margin-bottom: 3px;
+}
+
+.transaction .groups {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.transaction .groups.info {
+    gap: 10px;
+}
+
+.transaction .member {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.transaction .sender {
+    text-align: right;
+}
+
+.transaction .count {
+    font-weight: 700;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.transaction .message {
+    background-color: #CCCCCC;
+    border-radius: 30px;
+    padding: 8px 24px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    max-width: 350px;
+}
+
+@media (max-width: 767px) {
+    .transaction-block {
+        width: 100%;
+    }
+
+    .transactions-container .transaction-block {
+        width: 100%;
+    }
+
+    .transaction {
+        padding: 16px 16px;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        gap: 10px;
+        border-radius: 32px;
+    }
+
+    .transaction .member {
+        font-size: 14px;
+    }
+
+    .transaction .message {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .transaction .count {
+        font-size: 17px;
+    }
+
+    .transaction .groups {
+        gap: 12px;
+    }
+
+    .transaction .groups.info {
+        gap: 8px;
+    }
+}

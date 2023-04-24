@@ -1,0 +1,42 @@
+.transactions-header {
+    font-weight: 700;
+    font-size: 24px;
+    box-sizing: border-box;
+    padding-left: 6%;
+}
+
+.bank-value {
+    font-weight: 700;
+    font-size: 53px;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 35px;
+}
+
+.bank-value-container {
+    text-align: center;
+}
+
+.bank-sub {
+    font-weight: 600;
+    font-size: 20px;
+    position: absolute;
+    right: 0;
+    bottom: -17px;
+}
+
+@media (max-width: 767px) {
+
+    .transactions-header {
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    .bank-value {
+        font-size: 48px;
+    }
+
+    .bank-sub {
+        font-size: 18px;
+    }
+}

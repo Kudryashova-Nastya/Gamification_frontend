@@ -11,6 +11,7 @@ import TransactionPage from "./components/TransactionPage/TransactionPage";
 import Students from "./components/Students/Students";
 import {SkeletonTheme} from "react-loading-skeleton";
 import Employees from "./components/Employees/Employees";
+import Bank from "./components/Bank/Bank";
 
 
 const App = observer(() => {
@@ -48,6 +49,7 @@ const App = observer(() => {
 						<Route path="students" element={<Students/>}/>
 						<Route path=":id" element={<Profile/>}/>
 						<Route path=":id/send" element={<TransactionPage/>}/>
+						<Route path="bank" element={<Bank/>}/>
 					</Route>
 					<Route path="/manager" element={(token && role === 'manager') ? <Menu/> : <Navigate to="/login" replace/>}>
 						<Route path="registration" element={<StudentRegistration/>}/>

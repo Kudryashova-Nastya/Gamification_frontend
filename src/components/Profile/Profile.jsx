@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import '../base.css';
 import './style.css'
+import '../Transaction/Transaction.css'
 import EDIT from '../../images/icons/edit.svg'
 import LINK from '../../images/icons/link.svg'
 import MAINTUCOIN from '../../images/icons/black-tucoin18.svg'

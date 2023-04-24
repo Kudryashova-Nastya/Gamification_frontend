@@ -76,7 +76,7 @@ const Menu = observer(() => {
 							</Link>
 						</li>
 						<li>
-							<Link to='/one' onClick={() => toggleMenu()}>
+							<Link to='bank' onClick={() => toggleMenu()}>
 								<img src={TUCOIN} className="ico" alt="TUCOIN"/>
 								TUCOIN
 							</Link>
