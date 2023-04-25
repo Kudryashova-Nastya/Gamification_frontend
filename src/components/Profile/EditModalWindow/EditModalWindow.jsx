@@ -75,10 +75,18 @@ export const EditModalWindow = observer(() => {
 			}
 		});
 
-		// console.log(imageRef.current.files[0]?.name)
+		let maxSize = 5 * 1024 * 1024 // ограничение по размеру файла 5 Мб
+
 		console.log(dirArray)
 		let formData = new FormData();
-		if (imageRef.current.files.length > 0) formData.append("image", imageRef.current.files[0])
+		if (imageRef.current.files.length > 0) {
+			if (imageRef.current.files[0].size < maxSize) {
+				formData.append("image", imageRef.current.files[0])
+			} else {
+				alert("Размер изображения не должен превышать 5 Мб")
+				return false
+			}
+		}
 		if (aboutRef.current.value) formData.append("about", aboutRef.current.value)
 		if (telegramRef.current.value) formData.append("telegram", telegramRef.current.value)
 		// formData.append("direction", JSON.stringify(dirArray))
@@ -101,9 +109,8 @@ export const EditModalWindow = observer(() => {
 			void StudentProfileStore.fetchStudentInfo()
 			void Auth.getProfileInfo()
 			console.log("успех")
+			StudentProfileStore.closeModal()
 		}
-
-		StudentProfileStore.closeModal()
 	}
 
 	const fetchDirections = async () => {
