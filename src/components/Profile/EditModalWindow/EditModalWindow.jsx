@@ -69,7 +69,6 @@ export const EditModalWindow = observer(() => {
 		e.preventDefault();
 		let dirArray = []
 		directions.forEach((d) => {
-			// console.log(`${d.id}: ${directionsRef.current[d.id].checked}`);
 			if (directionsRef.current[d.id].checked) {
 				dirArray.push(d.id)
 			}
@@ -93,16 +92,8 @@ export const EditModalWindow = observer(() => {
 				}
 			} else {
 				alert("Размер изображения не должен превышать 5 Мб")
-				// return false
 			}
 		}
-		// if (aboutRef.current.value) formData.append("about", aboutRef.current.value)
-		// if (telegramRef.current.value) formData.append("telegram", telegramRef.current.value)
-		// formData.append("direction", new Blob([JSON.stringify(dirArray)], { type: 'application/json' }))
-		// dirArray.forEach((value, index) => {
-		// 	formData.append(`direction[${index}]`, value);
-		// });
-		// console.log("formData", ...formData)
 
 		const data = {
 			"about": aboutRef.current.value || null,
@@ -166,8 +157,6 @@ export const EditModalWindow = observer(() => {
 						{directions?.map((dir, i) =>
 							<div className="mydirection" key={i}>
 								<input type="checkbox"
-											 // ref={directionsRef?.current[dir.id]}
-											 // ref={isLoading ? null: directionsRef?.current[dir.id]}
 											 ref={(el) => (directionsRef.current[dir.id] = el)}
 											 defaultChecked={StudentProfileStore.studentInfo.direction.find(d => d.id === dir.id)}/>
 								<label>{dir.name}</label>

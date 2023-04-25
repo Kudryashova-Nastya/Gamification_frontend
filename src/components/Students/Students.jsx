@@ -17,12 +17,7 @@ const Students = () => {
 
 	// полный массив студентов
 	const [students, setStudents] = useState([ // временно!!!
-		{},
-		{},
-		{},
-		{},
-		{},
-		{},
+		{}, {}, {}, {}, {}, {}, {}, {}, {}, {}
 	])
 	// массив с результатами поиска
 	const [arr, setArr] = useState(students)
@@ -50,11 +45,8 @@ const Students = () => {
 			})
 			.catch((err) => {
 				console.log("err", err)
-				const data = [ // временно!!!
-					{},
-					{},
-					{},
-					{},
+				const data = [
+					{}, {}, {}, {},
 				]
 				setArr(data)
 				setStudents(data)

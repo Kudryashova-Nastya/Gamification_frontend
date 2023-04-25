@@ -10,10 +10,7 @@ const Employees = () => {
 	const [activeTab, setActiveTab] = useState("curator")
 
 	const [employees, setEmployees] = useState([
-		{},
-		{},
-		{},
-		{},
+		{}, {}, {}, {}, {}, {}, {}, {}
 	])
 
 	const shuffle = (arr) => {
@@ -39,16 +36,12 @@ const Employees = () => {
 					fetchData()
 				} else {
 					setEmployees(data)
-					console.log("сотрудники", data)
 				}
 			})
 			.catch((err) => {
 				console.log("err", err)
-				const data = [ // временно!!!
-					{},
-					{},
-					{},
-					{},
+				const data = [
+					{}, {}, {}, {}
 				]
 				setEmployees(data)
 			})
@@ -60,9 +53,12 @@ const Employees = () => {
 	return (
 		<div className="container employee-page">
 			<div className="header-block main-header tabs-container">
-				<div className={activeTab === "curator" ? "tab active" : "tab"} onClick={()=> setActiveTab("curator")}>Кураторы</div>
-				<div className={activeTab === "coach" ? "tab active" : "tab"} onClick={()=> setActiveTab("coach")}>Коучи</div>
-				<div className={activeTab === "manager" ? "tab active" : "tab"} onClick={()=> setActiveTab("manager")}>Админы</div>
+				<div className={activeTab === "curator" ? "tab active" : "tab"}
+						 onClick={() => setActiveTab("curator")}>Кураторы
+				</div>
+				<div className={activeTab === "coach" ? "tab active" : "tab"} onClick={() => setActiveTab("coach")}>Коучи</div>
+				<div className={activeTab === "manager" ? "tab active" : "tab"} onClick={() => setActiveTab("manager")}>Админы
+				</div>
 				<div className="info-facts">
 					<div><img src={INFO} alt="info"/></div>
 					<div>Один из написанных фактов ложный. Ложный факт будет отмечен цветом после клика по нему</div>
