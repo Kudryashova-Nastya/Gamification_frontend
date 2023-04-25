@@ -24,6 +24,7 @@ const Profile = observer(() => {
 	const {id} = useParams()
 	const host = getHostInformation()
 	// const [loading, setLoading] = useState(false)
+	const [isCopy, setIsCopy] = useState(false)
 	const [currentPage, setCurrentPage] = useState(1)
 	// const [postsPerPage] = useState(10)
 	const history = useNavigate()
@@ -32,6 +33,21 @@ const Profile = observer(() => {
 	useEffect(() => {
 		void StudentProfileStore.fetchStudentInfo(id)
 	}, [id])
+
+	const copy = () => {
+		const el = document.createElement('input')
+		// если это профиль текущего пользователя, дописать его id в конце, чтобы другие смогли перейти на его акк по ссылке
+		if (StudentProfileStore.isMyProfile) {
+			el.value = window.location.href + StudentProfileStore.studentInfo.id
+		} else {
+			el.value = window.location.href
+		}
+		document.body.appendChild(el)
+		el.select()
+		document.execCommand('copy')
+		document.body.removeChild(el)
+		setIsCopy(true)
+	}
 
 	//Get current posts
 	// const indexOfLastPost = currentPage * postsPerPage;
@@ -47,7 +63,8 @@ const Profile = observer(() => {
 						<img className="button-icon" alt="редактировать" src={EDIT}/>
 					</button>
 				}
-				<button className="button">Копировать ссылку <img className="button-icon" alt="копировать ссылку" src={LINK}/>
+				<button onClick={copy} className="button">{isCopy ? "Успешно скопировано" : "Копировать ссылку"}
+					<img className="button-icon" alt="копировать" src={LINK}/>
 				</button>
 			</div>
 			<div className="profile-window">
@@ -121,7 +138,8 @@ const Profile = observer(() => {
 				</div>
 			</div>
 			<div className="header-block">
-				<h2 className="header3">{StudentProfileStore.isMyProfile ? "Моя история" : "История"} {screenWidth < 768 ? '' : 'операций'}</h2>
+				<h2
+					className="header3">{StudentProfileStore.isMyProfile ? "Моя история" : "История"} {screenWidth < 768 ? '' : 'операций'}</h2>
 				<button onClick={() => history("send")} className="button button-send">Перевести <img
 					className="send button-icon" alt="перевод" src={SEND}/></button>
 			</div>
