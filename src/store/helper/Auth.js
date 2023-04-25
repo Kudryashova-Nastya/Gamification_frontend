@@ -40,7 +40,7 @@ class Auth {
 			return false // возвращает false в случае успешной авторизации
 		} else {
 			// console.log("не 200")
-			return JSON.stringify(res) // возвращает текст ошибки в случае ошибки авторизации
+			return res.detail // возвращает текст ошибки в случае ошибки авторизации
 		}
 	};
 

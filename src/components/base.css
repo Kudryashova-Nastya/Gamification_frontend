@@ -153,6 +153,8 @@ body.lock {
     justify-content: flex-start;
     gap: 10px;
     margin-bottom: 10px;
+    box-sizing: border-box;
+    max-width: 415px;
 }
 
 
@@ -185,5 +187,14 @@ body.lock {
         padding: 8px 20px;
         font-size: 13px;
         letter-spacing: initial;
+    }
+
+    .window {
+        padding: 35px 5%;
+    }
+
+    .window .form label {
+        font-size: 14px;
+        margin-right: 10px;
     }
 }

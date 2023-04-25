@@ -4,10 +4,12 @@ import './style.css'
 import Auth from "../../store/helper/Auth";
 import {useNavigate} from "react-router-dom";
 import {observer} from "mobx-react";
+import ERROR from "../../images/icons/error.svg";
 
 const Login = observer(() => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [error, setError] = useState(false)
 	const history = useNavigate()
 
 	const handleSubmit = async (e) => {
@@ -20,8 +22,10 @@ const Login = observer(() => {
 		const log = await Auth.login(data)
 		if (log) {
 			// setAuthErrors(await Auth.login(data))
+			setError(log)
 			console.log("косяк", log)
 		} else {
+			setError(false)
 			const role = await Auth.getRole()
 			console.log("успех", role)
 			switch (role) {
@@ -64,6 +68,12 @@ const Login = observer(() => {
 					<button className="button">Войти</button>
 				</form>
 			</div>
+			{error &&
+				<div className="error-message">
+					<div><img src={ERROR} alt="error"/></div>
+					<div>{error}</div>
+				</div>
+			}
 		</div>
 	);
 })
