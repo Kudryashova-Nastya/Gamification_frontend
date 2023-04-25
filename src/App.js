@@ -36,7 +36,7 @@ const App = observer(() => {
 	}, []);
 
 	return (
-		<SkeletonTheme baseColor="#CCCCCC" highlightColor="#ffffff">
+		<SkeletonTheme baseColor="#CCCCCC" highlightColor="#F0F0F0">
 			<BrowserRouter>
 				<Routes>
 					<Route path="/login" element={<Login/>}/>
