@@ -24,6 +24,17 @@ export const CORS = (token) => {
 export const PATCHCORS = (data, token = '') => {
 	return ({
 		method: 'PATCH',
+		body: JSON.stringify(data),
+		headers: {
+			"Authorization": `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		}
+	})
+}
+
+export const PATCHIMAGECORS = (data, token = '') => {
+	return ({
+		method: 'PATCH',
 		body: data,
 		headers: {
 			"Authorization": `Bearer ${token}`

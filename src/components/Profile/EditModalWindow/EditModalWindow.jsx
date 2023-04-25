@@ -78,32 +78,44 @@ export const EditModalWindow = observer(() => {
 		let maxSize = 5 * 1024 * 1024 // ограничение по размеру файла 5 Мб
 
 		console.log(dirArray)
-		let formData = new FormData();
 		if (imageRef.current.files.length > 0) {
 			if (imageRef.current.files[0].size < maxSize) {
+				let formData = new FormData();
 				formData.append("image", imageRef.current.files[0])
+				const logImg = await StudentProfileStore.editProfileImage(formData)
+				if (logImg) {
+					console.log("косяк в изображении", logImg)
+					if (logImg?.code === "token_not_valid") {
+						await StudentProfileStore.editProfileImage(formData)
+					}
+				} else {
+					console.log('шото выполнилось')
+				}
 			} else {
 				alert("Размер изображения не должен превышать 5 Мб")
-				return false
+				// return false
 			}
 		}
-		if (aboutRef.current.value) formData.append("about", aboutRef.current.value)
-		if (telegramRef.current.value) formData.append("telegram", telegramRef.current.value)
-		// formData.append("direction", JSON.stringify(dirArray))
+		// if (aboutRef.current.value) formData.append("about", aboutRef.current.value)
+		// if (telegramRef.current.value) formData.append("telegram", telegramRef.current.value)
+		// formData.append("direction", new Blob([JSON.stringify(dirArray)], { type: 'application/json' }))
+		// dirArray.forEach((value, index) => {
+		// 	formData.append(`direction[${index}]`, value);
+		// });
+		// console.log("formData", ...formData)
 
-		// const data = {
-		// 	"about": aboutRef.current.value || null,
-		// 	"telegram": telegramRef.current.value || null,
-		// 	"direction": dirArray,
-		// 	"image": imageRef
-		// }
-
+		const data = {
+			"about": aboutRef.current.value || null,
+			"telegram": telegramRef.current.value || null,
+			"direction": dirArray
+		}
+		console.log("data", data)
 		// log вернет ошибку, если пусто, значит ошибки нет
-		const log = await StudentProfileStore.editProfile(formData)
+		const log = await StudentProfileStore.editProfile(data)
 		if (log) {
-			console.log("косяк", log)
+			console.log("косяк в общих данных", log)
 			if (log?.code === "token_not_valid") {
-				await StudentProfileStore.editProfile(formData)
+				await StudentProfileStore.editProfile(data)
 			}
 		} else {
 			void StudentProfileStore.fetchStudentInfo()

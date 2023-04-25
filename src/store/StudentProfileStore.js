@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {bodyFixPosition, bodyUnfixPosition, getHostInformation, CORS, PATCHCORS} from "./helper/Helper";
+import {bodyFixPosition, bodyUnfixPosition, getHostInformation, CORS, PATCHCORS, PATCHIMAGECORS} from "./helper/Helper";
 import Auth from "./helper/Auth";
 
 const host = getHostInformation()
@@ -92,13 +92,38 @@ class StudentProfileStore {
 		this.setLoading(false)
 	}
 
-	// Запрос на редактирование профиля
+	// Запрос на редактирование общей информации профиля
 	editProfile = async (data) => {
 		if (!data) {
 			return null
 		}
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/profile/`, PATCHCORS(data, token?.access))
+		const res = await req.json()
+		if (req?.ok && req?.status === 200) {
+			return false // возвращает false в случае успеха
+		} else {
+			if (res.code === "token_not_valid") {
+				console.log("проблема протухшего токена обнаружена")
+				Auth.getToken().then((token) => {
+					if (token?.access) {
+						console.log("проблема протухания решена, перезапуск запроса")
+						this.editProfile(data)
+					} else {
+						console.log("проблема протухания не решена", token)
+					}
+				})
+			}
+			return res // возвращает текст ошибки в случае ошибки
+		}
+	}
+
+	editProfileImage = async (data) => {
+		if (!data) {
+			return null
+		}
+		const token = await Auth.getToken()
+		const req = await fetch(`${host}/api/v1/profile/`, PATCHIMAGECORS(data, token?.access))
 		const res = await req.json()
 		if (req?.ok && req?.status === 200) {
 			return false // возвращает false в случае успеха
