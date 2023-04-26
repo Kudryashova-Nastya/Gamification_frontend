@@ -9,8 +9,9 @@ import Pagination from "../Pagination/Pagination";
 import {useNavigate} from "react-router-dom";
 import SEND from "../../images/icons/send.svg";
 import Transaction from "../Transaction/Transaction";
+import {observer} from "mobx-react";
 
-const Bank = () => {
+const Bank = observer(() => {
 	const history = useNavigate()
 
 	const [transactions, setTransactions] = useState([
@@ -88,6 +89,6 @@ const Bank = () => {
 			<Pagination pages={howManyPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 		</div>
 	);
-};
+});
 
 export default Bank;

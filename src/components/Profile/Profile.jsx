@@ -15,7 +15,6 @@ import StudentProfileStore from "../../store/StudentProfileStore";
 import {EditModalWindow} from "./EditModalWindow/EditModalWindow";
 import {observer} from "mobx-react";
 import StudentTransactions from "./StudentTransactions/StudentTransactions";
-import Pagination from "../Pagination/Pagination";
 import {useNavigate, useParams} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import {getHostInformation} from "../../store/helper/Helper";
@@ -23,10 +22,7 @@ import {getHostInformation} from "../../store/helper/Helper";
 const Profile = observer(() => {
 	const {id} = useParams()
 	const host = getHostInformation()
-	// const [loading, setLoading] = useState(false)
 	const [isCopy, setIsCopy] = useState(false)
-	const [currentPage, setCurrentPage] = useState(1)
-	// const [postsPerPage] = useState(10)
 	const history = useNavigate()
 	const screenWidth = document.documentElement.clientWidth
 
@@ -105,8 +101,7 @@ const Profile = observer(() => {
 																																										 title={icon.name} key={id}
 																																										 src={`${host}${icon.icon}`}/>
 									)}
-								</div> :
-							<Skeleton circle={true} height={29} width={29}/>
+								</div> :""
 						}
 					</div>
 				</div>
@@ -144,8 +139,7 @@ const Profile = observer(() => {
 					className="send button-icon" alt="перевод" src={SEND}/></button>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
-			<StudentTransactions/>
-			<Pagination pages={10} setCurrentPage={setCurrentPage}/>
+			<StudentTransactions id={StudentProfileStore.studentInfo.id}/>
 			{
 				StudentProfileStore.modalEditVisible ? <EditModalWindow/> : null
 			}
