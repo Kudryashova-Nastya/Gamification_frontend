@@ -12,6 +12,7 @@ import Students from "./components/Students/Students";
 import {SkeletonTheme} from "react-loading-skeleton";
 import Employees from "./components/Employees/Employees";
 import Bank from "./components/Bank/Bank";
+import EmployeeProfile from "./components/Employees/EmployeeProfile/EmployeeProfile";
 
 
 const App = observer(() => {
@@ -41,7 +42,7 @@ const App = observer(() => {
 				<Routes>
 					<Route path="/login" element={<Login/>}/>
 					<Route path="/regist" element={<StudentRegistration/>}/>
-					<Route path="/student" element={(token && role === 'student') ? <Menu/> : <Navigate to="/login" replace/>}>
+					<Route path="/student" element={(token && role === 'student') ? <Menu role={"student"}/> : <Navigate to="/login" replace/>}>
 					{/*<Route path="/student" element={<Menu/>}>*/}
 						<Route path="" element={<Profile/>}/>
 						<Route path="send" element={<TransactionPage/>}/>
@@ -51,8 +52,24 @@ const App = observer(() => {
 						<Route path=":id/send" element={<TransactionPage/>}/>
 						<Route path="bank" element={<Bank/>}/>
 					</Route>
-					<Route path="/manager" element={(token && role === 'manager') ? <Menu/> : <Navigate to="/login" replace/>}>
+
+					<Route path="/manager" element={(token && role === 'manager') ? <Menu role={"manager"}/> : <Navigate to="/login" replace/>}>
+						<Route path="" element={<EmployeeProfile/>}/>
+						<Route path="employees" element={<Employees/>}/>
 						<Route path="registration" element={<StudentRegistration/>}/>
+						<Route path="students" element={<Students/>}/>
+					</Route>
+
+					<Route path="/couch" element={(token && role === 'couch') ? <Menu role={"couch"}/> : <Navigate to="/login" replace/>}>
+						<Route path="registration" element={<StudentRegistration/>}/>
+						<Route path="employees" element={<Employees/>}/>
+						<Route path="students" element={<Students/>}/>
+					</Route>
+
+					<Route path="/curator" element={(token && role === 'curator') ? <Menu role={"curator"}/> : <Navigate to="/login" replace/>}>
+						{/*<Route path="registration" element={<StudentRegistration/>}/>*/}
+						<Route path="employees" element={<Employees/>}/>
+						<Route path="students" element={<Students/>}/>
 					</Route>
 
 				</Routes>

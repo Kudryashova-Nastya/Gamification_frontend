@@ -21,7 +21,7 @@ import Auth from "../../store/helper/Auth";
 import DEFAULT_AVATAR from "../../images/icons/default-avatar.svg";
 
 
-const Menu = observer(() => {
+const Menu = observer(({role}) => {
 	const host = getHostInformation()
 	const toggleMenu = () => {
 		if (document.documentElement.clientWidth < 768) {
@@ -37,10 +37,9 @@ const Menu = observer(() => {
 		}
 	}
 
-	let role = Auth.role
 	const getProfileInfo = async () => {
-		role = await Auth.getProfileInfo();
-	};
+		await Auth.getProfileInfo();
+	}
 
 	useEffect(() => {
 		// проверяем наличие токенов и роль пользователя
@@ -55,16 +54,21 @@ const Menu = observer(() => {
 			</div>
 			<nav>
 				<div className="nav-container">
-					<Link className="student-link" to='/student/' onClick={() => toggleMenu()}>
+					<Link className="student-link" to='' onClick={() => toggleMenu()}>
 						<div className="menu__info">
 							<div>
 								<div className="name">{Auth.profileInfo.first_name} {Auth.profileInfo.last_name}</div>
-								<div className="value"> {Auth.profileInfo.balance}
+								{role === "student" ? <div className="value"> {Auth.profileInfo.balance}
 									{Auth.profileInfo.balance && <img src={TUCOIN_MENU_MINI} className="tucoin" alt="игровой валюты"/>}
-								</div>
+								</div> : role === "manager" ? <div className="value">Админ</div>
+									: role === "couch" ? <div className="value">Коуч</div>
+										: role === "curator" ? <div className="value">Куратор</div>
+											: ""
+								}
 							</div>
 							<div className="photo">
-								{Auth.profileInfo.image ? <img src={`${host}${Auth.profileInfo.image}`} alt="ava"/> : <img alt="ava" src={DEFAULT_AVATAR}/>}
+								{Auth.profileInfo.image ? <img src={`${host}${Auth.profileInfo.image}`} alt="ava"/> :
+									<img alt="ava" src={DEFAULT_AVATAR}/>}
 							</div>
 						</div>
 					</Link>
@@ -130,7 +134,7 @@ const Menu = observer(() => {
 																																						alt="TELEGRAM"/></a><br/>
 							<a target="_blank" href="https://vk.com/tumomoscow/"><img src={VK} className="networks"
 																																				alt="VK"/></a><br/>
-							<span onClick={()=> Auth.logout()}><img src={SETTINGS} className="networks" alt="SETTINGS"/></span><br/>
+							<span onClick={() => Auth.logout()}><img src={SETTINGS} className="networks" alt="SETTINGS"/></span><br/>
 						</div>
 						<div>
 							<a target="_blank" href="https://tumo.moscow/"><img src={LOGO} className="networks logo" alt="LOGO"/></a>
