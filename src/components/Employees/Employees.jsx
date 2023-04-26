@@ -65,12 +65,12 @@ const Employees = () => {
 				</div>
 			</div>
 			<div className="employee-container">
-				{employees.filter(data => data?.user_role === activeTab)?.map((el, i) =>
+				{employees.filter(data => data?.user_role === activeTab)?.map((el) =>
 					<EmployeeCard el={el} randomFacts={shuffle([
 						{fact: el.first_fact, is_true: true},
 						{fact: el.second_fact, is_true: true},
 						{fact: el.false_fact, is_true: false}
-					])} key={i}/>
+					])} key={el.id}/>
 				)}
 			</div>
 		</div>

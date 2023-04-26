@@ -36,9 +36,9 @@ const EmployeeCard = ({el, randomFacts}) => {
 				<div className="dir">{el?.direction?.name} </div>
 				<div className="email">{el?.email || <Skeleton width={80}/>}</div>
 				{el?.first_fact && <div className={showFalse ? "facts show-false" : "facts"} onClick={() => setShowFalse(true)}>
-					{randomFacts?.map((el, i) =>
-						<div key={i} className={el.is_true ? "fact" : "fact false-fact"}>
-							{factIco}&nbsp;{el?.fact}
+					{randomFacts?.map((fact, i) =>
+						<div key={i} className={fact.is_true ? "fact" : "fact false-fact"}>
+							{factIco}&nbsp;{fact?.fact}
 						</div>
 					)}
 				</div>
