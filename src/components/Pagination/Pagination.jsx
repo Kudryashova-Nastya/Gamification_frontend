@@ -4,7 +4,7 @@ import "./pagination.css"
 import LEFT from "../../images/icons/arrow-left.svg"
 import RIGHT from "../../images/icons/arrow-right.svg"
 
-const Pagination = observer(({pages = 10, currentPage, setCurrentPage}) => {
+const Pagination = observer(({pages = 10, currentPage, setCurrentPage, thereIsNothingPhrase}) => {
 
 	const numberOfPages = []
 	for (let i = 1; i <= pages; i++) {
@@ -49,7 +49,7 @@ const Pagination = observer(({pages = 10, currentPage, setCurrentPage}) => {
 	}, [currentButton, pages])
 
 	if (pages === 0) {
-		return <div className="noinformation">По вашему запросу ничего не найдено</div>
+		return <div className="noinformation">{thereIsNothingPhrase || "По вашему запросу ничего не найдено"}</div>
 	}
 
 	return (
