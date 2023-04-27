@@ -2,4 +2,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.myEmployeeCard-container .employee-card {
+    width: 60%;
+}
+
+.myEmployeeCard-container .button {
+    width: 55%;
+    min-width: 300px;
+    max-width: 462px;
+    padding: 11px 30px;
 }

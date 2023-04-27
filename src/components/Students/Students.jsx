@@ -9,10 +9,11 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import Auth from "../../store/helper/Auth";
 import DEFAULT_AVATAR from "../../images/icons/default-avatar.svg";
 import Pagination from "../Pagination/Pagination";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
-const Students = () => {
+const Students = ({canRegister = false}) => {
 	const host = getHostInformation()
+	const history = useNavigate()
 	const [isLoading, setIsLoading] = useState(true)
 
 	// полный массив студентов
@@ -67,7 +68,11 @@ const Students = () => {
 
 			<div className="header-block header-search main-header">
 				<h1 className="header1">Студенты</h1>
-				{!isLoading && <Search students={students} setArr={setArr} setCurrentPage={setCurrentPage}/>}
+				{!isLoading &&
+					<div className="two-elements-right">
+						{canRegister && <button onClick={() => history("../student-registration")} className="button">Регистрация</button>}
+						<Search students={students} setArr={setArr} setCurrentPage={setCurrentPage}/>
+					</div>}
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="student-container">

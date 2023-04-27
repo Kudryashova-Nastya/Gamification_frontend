@@ -56,18 +56,17 @@ const App = observer(() => {
 					<Route path="/manager" element={(token && role === 'manager') ? <Menu role={"manager"}/> : <Navigate to="/login" replace/>}>
 						<Route path="" element={<EmployeeProfile/>}/>
 						<Route path="employees" element={<Employees/>}/>
-						<Route path="registration" element={<StudentRegistration/>}/>
-						<Route path="students" element={<Students/>}/>
+						<Route path="student-registration" element={<StudentRegistration/>}/>
+						<Route path="students" element={<Students canRegister={true}/>}/>
 					</Route>
 
 					<Route path="/couch" element={(token && role === 'couch') ? <Menu role={"couch"}/> : <Navigate to="/login" replace/>}>
-						<Route path="registration" element={<StudentRegistration/>}/>
+						<Route path="student-registration" element={<StudentRegistration/>}/>
 						<Route path="employees" element={<Employees/>}/>
-						<Route path="students" element={<Students/>}/>
+						<Route path="students" element={<Students canRegister={true}/>}/>
 					</Route>
 
 					<Route path="/curator" element={(token && role === 'curator') ? <Menu role={"curator"}/> : <Navigate to="/login" replace/>}>
-						{/*<Route path="registration" element={<StudentRegistration/>}/>*/}
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students/>}/>
 					</Route>

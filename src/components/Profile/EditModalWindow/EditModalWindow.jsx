@@ -87,8 +87,6 @@ export const EditModalWindow = observer(() => {
 					if (logImg?.code === "token_not_valid") {
 						await StudentProfileStore.editProfileImage(formData)
 					}
-				} else {
-					console.log('шото выполнилось')
 				}
 			} else {
 				alert("Размер изображения не должен превышать 5 Мб")

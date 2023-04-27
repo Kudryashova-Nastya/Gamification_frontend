@@ -70,6 +70,15 @@
     margin-top: 8px;
 }
 
+.header-block .two-elements-right {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: stretch;
+    gap: 5px;
+}
+
 .input:focus-visible {
     outline: none
 }

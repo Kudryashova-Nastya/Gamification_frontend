@@ -1,5 +1,13 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {bodyFixPosition, bodyUnfixPosition, getHostInformation, CORS, PATCHCORS, PATCHIMAGECORS} from "./helper/Helper";
+import {
+	bodyFixPosition,
+	bodyUnfixPosition,
+	getHostInformation,
+	CORS,
+	PATCHCORS,
+	PATCHIMAGECORS,
+	POSTCORS
+} from "./helper/Helper";
 import Auth from "./helper/Auth";
 
 const host = getHostInformation()
@@ -64,29 +72,6 @@ class StudentProfileStore {
 				})
 			}
 
-			// runInAction(() => {
-			// 	// временный дефолтный студент
-			// 	setTimeout(
-			// 		() => {
-			// 			this.studentInfo = {
-			// 				"email": "ivan.ivanov.m@tumo.world",
-			// 				"first_name": "Иван",
-			// 				"last_name": "Иваненков",
-			// 				"image": "/uploads/users/6ee89e1216724ab9ba1e14775fd1b7d1.jpg",
-			// 				"telegram": "/ivan_ivanovvv",
-			// 				"balance": 125,
-			// 				"portfolio_link": null,
-			// 				"directions": [
-			// 					{
-			// 						"name": "aaaaaa",
-			// 						"link": "aaaaaaaaaa"
-			// 					}
-			// 				],
-			// 				"about": "Привет! Я Ваня, мне 13 лет. Люблю играть в майнкрафт, кто тоже любит, го на мой сервер: Gamer123"
-			// 			}
-			// 		}, 3000)
-			//
-			// })
 		}
 
 		this.setLoading(false)
@@ -95,7 +80,7 @@ class StudentProfileStore {
 	// Запрос на редактирование общей информации профиля
 	editProfile = async (data) => {
 		if (!data) {
-			return null
+			return "Ничего не передано"
 		}
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/profile/`, PATCHCORS(data, token?.access))
@@ -108,7 +93,7 @@ class StudentProfileStore {
 				Auth.getToken().then((token) => {
 					if (token?.access) {
 						console.log("проблема протухания решена, перезапуск запроса")
-						this.editProfile(data)
+						return this.editProfile(data)
 					} else {
 						console.log("проблема протухания не решена", token)
 					}
@@ -120,7 +105,7 @@ class StudentProfileStore {
 
 	editProfileImage = async (data) => {
 		if (!data) {
-			return null
+			return "Ничего не передано"
 		}
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/profile/`, PATCHIMAGECORS(data, token?.access))
@@ -133,7 +118,7 @@ class StudentProfileStore {
 				Auth.getToken().then((token) => {
 					if (token?.access) {
 						console.log("проблема протухания решена, перезапуск запроса")
-						this.editProfile(data)
+						return this.editProfileImage(data)
 					} else {
 						console.log("проблема протухания не решена", token)
 					}
@@ -143,11 +128,37 @@ class StudentProfileStore {
 		}
 	}
 
+	registerStudent = async (data) => {
+		if (!data) {
+			return "Ничего не передано"
+		}
+		const token = await Auth.getToken()
+		const req = await fetch(`${host}/api/v1/student/`, POSTCORS(data, token?.access))
+		const res = await req.json()
+		console.log("res", res)
+		if (req?.ok && req?.status === 201) {
+			console.log("всё ок, статус 201")
+			return false // возвращает false в случае успеха
+		} else {
+			if (res.code === "token_not_valid") {
+				console.log("проблема протухшего токена обнаружена")
+				Auth.getToken().then((token) => {
+					if (token?.access) {
+						console.log("проблема протухания решена, перезапуск запроса")
+						return this.registerStudent(data)
+					} else {
+						console.log("проблема протухания не решена", token)
+					}
+				})
+			}
+			return res.detail || res.email || JSON.stringify(res) // возвращает текст ошибки в случае ошибки
+		}
+	}
+
 	closeModal = () => {
 		bodyUnfixPosition()
 		runInAction(() => {
 			this.modalEditVisible = false
-			// this.modalNoBalanceVisible = false
 			document.body.style.overflowY = 'auto';
 		})
 

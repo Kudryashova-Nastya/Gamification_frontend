@@ -14,9 +14,6 @@ const EmployeeProfile = observer(() => {
 		<div className="container">
 			<div className="header-block main-header">
 				<h1 className="header1">Моя карточка</h1>
-				<button className="button" onClick={() => setEditVisible(true)}>Редактировать
-					<img className="button-icon" alt="редактировать" src={EDIT}/>
-				</button>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="myEmployeeCard-container">
@@ -25,7 +22,11 @@ const EmployeeProfile = observer(() => {
 					{fact: Auth.profileInfo?.second_fact, is_true: true},
 					{fact: Auth.profileInfo?.false_fact, is_true: false}
 				]}/>
+				<button className="button" onClick={() => setEditVisible(true)}>Редактировать
+					<img className="button-icon" alt="редактировать" src={EDIT}/>
+				</button>
 			</div>
+
 		</div>
 	);
 });
