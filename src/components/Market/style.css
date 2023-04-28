@@ -1,0 +1,30 @@
+.market-card {
+    max-width: 450px;
+    min-width: 305px;
+    border-radius: 45px;
+    border: 2px solid #111111;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 20px;
+    min-height: 150px;
+}
+
+.market-card .avatar {
+    max-width: 88px;
+    max-height: 88px;
+    border-radius: 30px;
+}
+
+.market-card .name {
+    font-weight: 600;
+    font-size: 22px;
+}
+
+.market-card .description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+}

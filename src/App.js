@@ -13,6 +13,7 @@ import {SkeletonTheme} from "react-loading-skeleton";
 import Employees from "./components/Employees/Employees";
 import Bank from "./components/Bank/Bank";
 import EmployeeProfile from "./components/Employees/EmployeeProfile/EmployeeProfile";
+import Market from "./components/Market/Market";
 
 
 const App = observer(() => {
@@ -33,7 +34,7 @@ const App = observer(() => {
 			token?.access ? role = getRole() : role = null
 		});
 		console.log('role', role, Auth.role)
-		console.log('token',token, Auth.token)
+		console.log('token', token, Auth.token)
 	}, []);
 
 	return (
@@ -42,8 +43,8 @@ const App = observer(() => {
 				<Routes>
 					<Route path="/login" element={<Login/>}/>
 					<Route path="/regist" element={<StudentRegistration/>}/>
-					<Route path="/student" element={(token && role === 'student') ? <Menu role={"student"}/> : <Navigate to="/login" replace/>}>
-					{/*<Route path="/student" element={<Menu/>}>*/}
+					<Route path="/student"
+								 element={(token && role === 'student') ? <Menu role={"student"}/> : <Navigate to="/login" replace/>}>
 						<Route path="" element={<Profile/>}/>
 						<Route path="send" element={<TransactionPage/>}/>
 						<Route path="employees" element={<Employees/>}/>
@@ -51,24 +52,37 @@ const App = observer(() => {
 						<Route path=":id" element={<Profile/>}/>
 						<Route path=":id/send" element={<TransactionPage/>}/>
 						<Route path="bank" element={<Bank/>}/>
+						<Route path="market" element={<Market canBuy={true}/>}/>
 					</Route>
 
-					<Route path="/manager" element={(token && role === 'manager') ? <Menu role={"manager"}/> : <Navigate to="/login" replace/>}>
+					<Route path="/manager"
+								 element={(token && role === 'manager') ? <Menu role={"manager"}/> : <Navigate to="/login" replace/>}>
 						<Route path="" element={<EmployeeProfile/>}/>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="student-registration" element={<StudentRegistration/>}/>
 						<Route path="students" element={<Students canRegister={true}/>}/>
+						<Route path=":id" element={<Profile/>}/>
+						<Route path="bank" element={<Bank/>}/>
+						<Route path="market" element={<Market/>}/>
 					</Route>
 
-					<Route path="/couch" element={(token && role === 'couch') ? <Menu role={"couch"}/> : <Navigate to="/login" replace/>}>
+					<Route path="/couch"
+								 element={(token && role === 'couch') ? <Menu role={"couch"}/> : <Navigate to="/login" replace/>}>
 						<Route path="student-registration" element={<StudentRegistration/>}/>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students canRegister={true}/>}/>
+						<Route path=":id" element={<Profile/>}/>
+						<Route path="bank" element={<Bank/>}/>
+						<Route path="market" element={<Market/>}/>
 					</Route>
 
-					<Route path="/curator" element={(token && role === 'curator') ? <Menu role={"curator"}/> : <Navigate to="/login" replace/>}>
+					<Route path="/curator"
+								 element={(token && role === 'curator') ? <Menu role={"curator"}/> : <Navigate to="/login" replace/>}>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students/>}/>
+						<Route path=":id" element={<Profile/>}/>
+						<Route path="bank" element={<Bank/>}/>
+						<Route path="market" element={<Market/>}/>
 					</Route>
 
 				</Routes>
