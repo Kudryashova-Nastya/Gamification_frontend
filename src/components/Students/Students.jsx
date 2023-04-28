@@ -17,7 +17,7 @@ const Students = ({canRegister = false}) => {
 	const [isLoading, setIsLoading] = useState(true)
 
 	// полный массив студентов
-	const [students, setStudents] = useState([ // временно!!!
+	const [students, setStudents] = useState([
 		{}, {}, {}, {}, {}, {}, {}, {}, {}, {}
 	])
 	// массив с результатами поиска
@@ -82,7 +82,7 @@ const Students = ({canRegister = false}) => {
 							{el?.image ? <img alt="avatar" src={`${host}${el.image}`}/> :
 								el.hasOwnProperty('image') ?
 									<img alt="avatar" src={DEFAULT_AVATAR}/> :
-									<Skeleton width={80} height={80} circle={true}/>}
+									<Skeleton width={75} height={75} circle={true}/>}
 						</div>
 						<div className="info">
 							<div className="name">{el.first_name || <Skeleton width={100}/>} {el.last_name}</div>
