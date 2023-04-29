@@ -7,24 +7,70 @@
     padding: 20px;
     display: flex;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
     min-height: 150px;
 }
 
 .market-card .avatar {
-    max-width: 88px;
-    max-height: 88px;
+    min-width: 88px;
+    min-height: 88px;
     border-radius: 30px;
+}
+
+.market-card .avatar img {
+    border-radius: 0;
+    width: 88px;
 }
 
 .market-card .name {
     font-weight: 600;
     font-size: 22px;
+    margin-bottom: 10px;
 }
 
 .market-card .description {
     font-weight: 400;
     font-size: 14px;
     line-height: 140%;
+}
+
+.market-card .button {
+    white-space: nowrap;
+    padding: 7px 16px;
+}
+
+.market-card .left-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 767px) {
+    .market-card .name {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .market-card .avatar img {
+        width: 75px;
+    }
+
+    .market-card {
+        min-width: 300px;
+        border-radius: 40px;
+        padding: 18px;
+        gap: 15px;
+        min-height: 130px;
+    }
+
+    .market-card .avatar {
+        min-width: initial;
+        min-height: initial;
+    }
+
+    .market-card .description {
+        font-size: 13px;
+        line-height: 130%;
+    }
 }

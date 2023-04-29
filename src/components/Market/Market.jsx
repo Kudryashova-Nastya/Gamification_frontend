@@ -4,10 +4,11 @@ import Search from "../Search/Search";
 import {useNavigate} from "react-router-dom";
 import MY_BUYS from "../../images/icons/my-buys.svg";
 import Skeleton from "react-loading-skeleton";
-import TUCOIN from "../../images/icons/black-tucoin16.svg";
+import TUCOIN from "../../images/icons/white-tucoin16.svg";
 import "./style.css"
 import '../base.css';
 import {getHostInformation} from "../../store/helper/Helper";
+import MarketStore from "../../store/MarketStore";
 
 const Market = observer(({canBuy = false}) => {
 	const [isLoading, setIsLoading] = useState(true)
@@ -17,8 +18,12 @@ const Market = observer(({canBuy = false}) => {
 	const [arr, setArr] = useState([{}, {}, {}, {}])
 
 	useEffect(() => {
-		const goods = []
-		setIsLoading(false)
+		MarketStore.fetchGoodsInfo().then(
+			() => {
+				setArr(MarketStore.goodsInfo)
+				setIsLoading(false)
+			}
+		)
 	}, [])
 
 	return (
@@ -27,7 +32,7 @@ const Market = observer(({canBuy = false}) => {
 				<h1 className="header1">Маркет</h1>
 				{!isLoading &&
 					<div className="two-elements-right">
-						<Search students={goods} setArr={setArr}/>
+						<Search students={MarketStore.goodsInfo} setArr={setArr}/>
 						{canBuy &&
 							<button onClick={() => history("my-buys")} className="button">Мои покупки
 								<img className="button-icon" alt="buy" src={MY_BUYS}/></button>}
@@ -37,21 +42,32 @@ const Market = observer(({canBuy = false}) => {
 			<div className="student-container">
 				{arr?.map((el, i) =>
 					<div key={i} className="market-card">
-						<div className="avatar">
-							{el?.image ? <img alt="photo" src={`${host}${el.image}`}/> :
-								el.hasOwnProperty('image') ?
-									"" :
-									<Skeleton width={80} height={80} circle={true}/>}
+						<div className="left-side">
+							<div className="avatar">
+								{el?.image ? <img alt="photo" src={`${host}${el.image}`}/> :
+									el.hasOwnProperty('image') ?
+										"" :
+										<Skeleton width={88} height={88} circle={true}/>}
+							</div>
+							<div>
+								{!isLoading &&
+									<button className="button"><span className="balance-icon">{el.price} </span>
+										<img className="balance-icon" src={TUCOIN} alt=""/></button>
+								}
+							</div>
 						</div>
 						<div>
-							<div className="name">{el.first_name || <Skeleton width={100}/>} {el.last_name}</div>
-							<div className="description"><span className="balance-icon">{el.balance ||
-								<Skeleton width={40} count={3}/>}</span> {el.balance &&
-								<img className="balance-icon" src={TUCOIN} alt=""/>}</div>
+							<div className="name">{el.name || <Skeleton width={100}/>}</div>
+							<div className="description">
+								{el.description ||
+									<Skeleton width={150} count={2}/>}
+							</div>
 						</div>
 					</div>
 				)}
 			</div>
+			{arr.length === 0 && <div className="noinformation">По вашему запросу не найдено ни одного товара</div>}
+
 		</div>
 	);
 });

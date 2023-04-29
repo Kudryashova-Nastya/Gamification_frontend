@@ -70,10 +70,10 @@ class StudentProfileStore {
 						console.log("проблема протухания не решена", token)
 					}
 				})
+			} else {
+				console.log("error", JSON.stringify(res))
 			}
-
 		}
-
 		this.setLoading(false)
 	}
 
