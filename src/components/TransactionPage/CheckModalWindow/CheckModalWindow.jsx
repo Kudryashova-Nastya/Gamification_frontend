@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {observer} from 'mobx-react';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
 import TransactionPageStore from "../../../store/TransactionPageStore";
@@ -9,7 +9,7 @@ import Skeleton from "react-loading-skeleton";
 import {getHostInformation} from "../../../store/helper/Helper";
 import Auth from "../../../store/helper/Auth";
 
-export const CheckModalWindow = observer(({data, setIsDone, setError}) => {
+export const CheckModalWindow = observer(forwardRef(({data, setIsDone, setError}, ref) => {
 	const host = getHostInformation()
 
 	const tryTransfer = async () => {
@@ -28,7 +28,7 @@ export const CheckModalWindow = observer(({data, setIsDone, setError}) => {
 	}
 
 	return (
-		<ModalWindow>
+		<ModalWindow ref={ref}>
 			<svg className="close-ico" onClick={() => TransactionPageStore.closeModal()} width="22" height="22"
 					 viewBox="0 0 22 22" fill="none"
 					 xmlns="http://www.w3.org/2000/svg">
@@ -64,4 +64,4 @@ export const CheckModalWindow = observer(({data, setIsDone, setError}) => {
 
 		</ModalWindow>
 	);
-});
+}));

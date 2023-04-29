@@ -166,6 +166,22 @@ body.lock {
     max-width: 415px;
 }
 
+/*анимация плавного появления попапов*/
+.alert-enter {
+    opacity: 0;
+}
+.alert-enter-active {
+    opacity: 1;
+    transition: opacity 500ms;
+}
+.alert-exit {
+    opacity: 1;
+}
+.alert-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
+}
+
 
 @media (max-width: 768px) {
     .container {

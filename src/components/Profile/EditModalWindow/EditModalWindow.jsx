@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {forwardRef, useEffect, useRef, useState} from 'react';
 import {observer} from 'mobx-react';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
 import StudentProfileStore from "../../../store/StudentProfileStore";
@@ -6,7 +6,7 @@ import './EditModalWindow.css';
 import {CORS, getHostInformation} from "../../../store/helper/Helper";
 import Auth from "../../../store/helper/Auth";
 
-export const EditModalWindow = observer(() => {
+export const EditModalWindow = observer(forwardRef((props, ref) => {
 
 	const checkboxes = document.querySelectorAll('input[type=checkbox]')
 	const limit = 4 // максимальное количество выбранных чекбоксов
@@ -139,7 +139,7 @@ export const EditModalWindow = observer(() => {
 
 
 	return (
-		<ModalWindow isBig={true}>
+		<ModalWindow isBig={true} ref={ref}>
 			<svg className="close-ico" onClick={() => StudentProfileStore.closeModal()} width="22" height="22"
 					 viewBox="0 0 22 22" fill="none"
 					 xmlns="http://www.w3.org/2000/svg">
@@ -181,4 +181,4 @@ export const EditModalWindow = observer(() => {
 			</form>
 		</ModalWindow>
 	);
-});
+}));

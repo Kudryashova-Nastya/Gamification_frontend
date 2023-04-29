@@ -8,11 +8,15 @@
     margin-left: 30px;
 }
 
+.modal form {
+    width: 100%;
+}
+
 .modal .columns {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
+    justify-content: space-between;
+    gap: 10px;
     margin-top: 30px;
     margin-bottom: 23px;
 }
@@ -23,8 +27,8 @@
 
 .modal .aboutme {
     background-color: #CCCCCC;
-    border-radius: 30px;
-    padding: 20px 25px;
+    border-radius: 25px;
+    padding: 15px 20px;
     font-weight: 400;
     font-size: 15px;
     line-height: 140%;
@@ -38,6 +42,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+    width: 50%;
 }
 
 .mydirections label {
@@ -84,5 +89,10 @@
 
     .modal .aboutme {
         padding: 15px 20px;
+        border-radius: 20px;
+    }
+
+    .myrefs input {
+        margin-top: 10px;
     }
 }

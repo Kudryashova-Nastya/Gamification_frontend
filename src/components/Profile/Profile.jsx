@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import '../base.css';
 import './style.css'
 import '../Transaction/Transaction.css'
@@ -18,6 +18,7 @@ import StudentTransactions from "./StudentTransactions/StudentTransactions";
 import {useNavigate, useParams} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import {getHostInformation} from "../../store/helper/Helper";
+import { CSSTransition} from "react-transition-group";
 
 const Profile = observer(() => {
 	const {id} = useParams()
@@ -25,6 +26,7 @@ const Profile = observer(() => {
 	const [isCopy, setIsCopy] = useState(false)
 	const history = useNavigate()
 	const screenWidth = document.documentElement.clientWidth
+	const nodeRef = useRef(null)
 
 	useEffect(() => {
 		void StudentProfileStore.fetchStudentInfo(id)
@@ -140,9 +142,18 @@ const Profile = observer(() => {
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<StudentTransactions id={StudentProfileStore.studentInfo.id}/>
-			{
-				StudentProfileStore.modalEditVisible ? <EditModalWindow/> : null
-			}
+			<CSSTransition
+				in={StudentProfileStore.modalEditVisible}
+				timeout={300}
+				classNames="alert"
+				unmountOnExit
+				nodeRef={nodeRef}
+			>
+				<EditModalWindow ref={nodeRef}/>
+			</CSSTransition>
+			{/*{*/}
+			{/*	StudentProfileStore.modalEditVisible ? <EditModalWindow/> : null*/}
+			{/*}*/}
 		</div>
 	)
 		;

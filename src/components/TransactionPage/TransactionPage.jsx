@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import '../base.css';
 import './style.css';
 import {observer} from "mobx-react";
@@ -12,10 +12,12 @@ import {CheckModalWindow} from "./CheckModalWindow/CheckModalWindow";
 import DoneBlock from "./DoneBlock/DoneBlock";
 import {CORS, getHostInformation} from "../../store/helper/Helper";
 import Auth from "../../store/helper/Auth";
+import {CSSTransition} from "react-transition-group";
 
 const TransactionPage = observer(() => {
 	const history = useNavigate()
 	const {id} = useParams()
+	const nodeRef = useRef(null)
 
 	const [data, setData] = useState({})
 	const [error, setError] = useState(false)
@@ -86,8 +88,15 @@ const TransactionPage = observer(() => {
 							<button className="button btn-large">Перевести</button>
 						</div>
 					</form>
-					{TransactionPageStore.modalVisible ?
-						<CheckModalWindow data={data} setIsDone={setIsDone} setError={setError}/> : null}
+					<CSSTransition
+						in={TransactionPageStore.modalVisible}
+						timeout={300}
+						classNames="alert"
+						unmountOnExit
+						nodeRef={nodeRef}
+					>
+						<CheckModalWindow ref={nodeRef} data={data} setIsDone={setIsDone} setError={setError}/>
+					</CSSTransition>
 				</div>
 			}
 		</>
