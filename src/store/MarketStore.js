@@ -3,7 +3,7 @@ import {
 	bodyFixPosition,
 	bodyUnfixPosition,
 	getHostInformation,
-	CORS,
+	CORS, POSTCORS,
 } from "./helper/Helper";
 import Auth from "./helper/Auth";
 
@@ -15,13 +15,15 @@ class MarketStore {
 	}
 
 	// Модальные окна
-	modalCheckVisible = false
-	setCheckVisible = () => {
+	modalBuyVisible = false
+	currentBuy = {}
+	setBuyVisible = (el) => {
 		runInAction(() => {
-			this.modalCheckVisible = true
-			bodyFixPosition()
-			document.body.style.overflowY = 'scroll';
+			this.currentBuy = el
+			this.modalBuyVisible = true
+			// document.body.style.overflowY = 'scroll';
 		})
+		bodyFixPosition()
 	}
 
 	goodsInfo = [{},{},{},{}]
@@ -70,12 +72,40 @@ class MarketStore {
 		}
 	}
 
+	buy = async (data) => {
+		if (!data) {
+			return null
+		}
+
+		try {
+			const token = await Auth.getToken()
+			const req = await fetch(`${host}/api/v1/store/market_shop/`, POSTCORS(data, token?.access))
+			const res = await req.json() || {detail: "проблема сервера"}
+			if (req?.ok && req?.status === 201) {
+				return false // возвращает false в случае успеха
+			} else {
+				if (res.code === "token_not_valid") {
+					Auth.getToken().then((token) => {
+						if (token?.access) {
+							return this.buy(data)
+						}
+					})
+				}
+				console.log("error", JSON.stringify(req))
+				return res.detail || JSON.stringify(res) // возвращает текст ошибки в случае ошибки
+			}
+		} catch {
+			return "Что-то пошло не так, попробуйте повторить запрос позже"
+		}
+	}
+
 
 	closeModal = () => {
 		bodyUnfixPosition()
 		runInAction(() => {
-			this.modalEditVisible = false
-			document.body.style.overflowY = 'auto';
+			this.modalBuyVisible = false
+			// this.currentBuy = {}
+			// document.body.style.overflowY = 'auto';
 		})
 
 	}

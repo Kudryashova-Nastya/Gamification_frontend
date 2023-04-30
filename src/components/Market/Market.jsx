@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {observer} from "mobx-react";
 import Search from "../Search/Search";
 import {useNavigate} from "react-router-dom";
@@ -9,11 +9,15 @@ import "./style.css"
 import '../base.css';
 import {getHostInformation} from "../../store/helper/Helper";
 import MarketStore from "../../store/MarketStore";
+import {CSSTransition} from "react-transition-group";
+import {BuyModalWindow} from "./BuyModalWindow/BuyModalWindow";
 
 const Market = observer(({canBuy = false}) => {
 	const [isLoading, setIsLoading] = useState(true)
 	const host = getHostInformation()
 	const history = useNavigate()
+	const nodeRef = useRef(null)
+
 	// массив с результатами поиска
 	const [arr, setArr] = useState([{}, {}, {}, {}])
 
@@ -51,7 +55,7 @@ const Market = observer(({canBuy = false}) => {
 							</div>
 							<div>
 								{!isLoading &&
-									<button className="button"><span className="balance-icon">{el.price} </span>
+									<button className="button" onClick={()=> MarketStore.setBuyVisible(el)}><span className="balance-icon">{el.price} </span>
 										<img className="balance-icon" src={TUCOIN} alt=""/></button>
 								}
 							</div>
@@ -67,7 +71,15 @@ const Market = observer(({canBuy = false}) => {
 				)}
 			</div>
 			{arr.length === 0 && <div className="noinformation">По вашему запросу не найдено ни одного товара</div>}
-
+			<CSSTransition
+				in={MarketStore.modalBuyVisible}
+				timeout={300}
+				classNames="alert"
+				unmountOnExit
+				nodeRef={nodeRef}
+			>
+				<BuyModalWindow ref={nodeRef} data={MarketStore.currentBuy}/>
+			</CSSTransition>
 		</div>
 	);
 });
