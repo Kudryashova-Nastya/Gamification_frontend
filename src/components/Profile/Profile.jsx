@@ -151,9 +151,6 @@ const Profile = observer(() => {
 			>
 				<EditModalWindow ref={nodeRef}/>
 			</CSSTransition>
-			{/*{*/}
-			{/*	StudentProfileStore.modalEditVisible ? <EditModalWindow/> : null*/}
-			{/*}*/}
 		</div>
 	)
 		;

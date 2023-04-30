@@ -82,6 +82,15 @@
     transform: scale(1.2);
 }
 
+.edit-employee-form {
+    margin-top: 20px;
+}
+
+.edit-employee-form .myrefs {
+    margin-bottom: 14px;
+    justify-content: flex-end;
+}
+
 @media (max-width: 767px) {
     .modal .aboutblock {
         width: 100%;

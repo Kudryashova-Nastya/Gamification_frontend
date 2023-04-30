@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import EmployeeCard from "../EmployeeCard";
 import Auth from "../../../store/helper/Auth";
 import EDIT from "../../../images/icons/edit.svg";
@@ -6,9 +6,12 @@ import "../style.css"
 import '../../base.css';
 import "./EmployeeProfile.css"
 import {observer} from "mobx-react";
+import {CSSTransition} from "react-transition-group";
+import {EditEmployeeModalWindow} from "../../Profile/EditModalWindow/EditEmployeeModalWindow";
 
 const EmployeeProfile = observer(() => {
 	const [editVisible, setEditVisible] = useState(false)
+	const nodeRef = useRef(null)
 
 	return (
 		<div className="container">
@@ -26,6 +29,16 @@ const EmployeeProfile = observer(() => {
 					<img className="button-icon" alt="редактировать" src={EDIT}/>
 				</button>
 			</div>
+
+			<CSSTransition
+				in={editVisible}
+				timeout={300}
+				classNames="alert"
+				unmountOnExit
+				nodeRef={nodeRef}
+			>
+				<EditEmployeeModalWindow ref={nodeRef} setEditVisible={setEditVisible}/>
+			</CSSTransition>
 
 		</div>
 	);
