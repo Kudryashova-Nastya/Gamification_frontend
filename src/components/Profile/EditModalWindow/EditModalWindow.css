@@ -83,12 +83,16 @@
 }
 
 .edit-employee-form {
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .edit-employee-form .myrefs {
     margin-bottom: 14px;
     justify-content: flex-end;
+}
+
+.edit-employee-form .button-block {
+    margin-top: 20px;
 }
 
 @media (max-width: 767px) {
@@ -103,5 +107,21 @@
 
     .myrefs input {
         margin-top: 10px;
+    }
+
+    .edit-employee-form .myrefs {
+        margin-bottom: 12px;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .edit-employee-form .myrefs label {
+        margin-left: 15px;
+        font-size: 15px;
+    }
+
+    .edit-employee-form {
+        margin-top: 15px;
     }
 }

@@ -16,7 +16,7 @@ class TransactionPageStore {
 		runInAction(() => {
 			this.modalVisible = true
 			bodyFixPosition()
-			document.body.style.overflowY = 'scroll';
+			// document.body.style.overflowY = 'scroll';
 		})
 	}
 
