@@ -14,6 +14,7 @@ import Employees from "./components/Employees/Employees";
 import Bank from "./components/Bank/Bank";
 import EmployeeProfile from "./components/Employees/EmployeeProfile/EmployeeProfile";
 import Market from "./components/Market/Market";
+import MyBuys from "./components/Market/MyBuys";
 
 
 const App = observer(() => {
@@ -42,7 +43,6 @@ const App = observer(() => {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/login" element={<Login/>}/>
-					<Route path="/regist" element={<StudentRegistration/>}/>
 					<Route path="/student"
 								 element={(token && role === 'student') ? <Menu role={"student"}/> : <Navigate to="/login" replace/>}>
 						<Route path="" element={<Profile/>}/>
@@ -53,6 +53,7 @@ const App = observer(() => {
 						<Route path=":id/send" element={<TransactionPage/>}/>
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market canBuy={true}/>}/>
+						<Route path="market/my-buys" element={<MyBuys/>}/>
 					</Route>
 
 					<Route path="/manager"

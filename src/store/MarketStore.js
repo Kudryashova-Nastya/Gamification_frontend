@@ -30,7 +30,6 @@ class MarketStore {
 		const req = await fetch(`${host}/api/v1/store_product`, CORS(token?.access));
 		const res = await req.json();
 		if (req.ok) {
-			console.log("market", res)
 			runInAction(() => {
 				this.goodsInfo = res
 			})
@@ -41,6 +40,28 @@ class MarketStore {
 						this.fetchGoodsInfo()
 					} else {
 						console.log("проблема протухания не решена", token)
+					}
+				})
+			} else {
+				console.log("error", JSON.stringify(res))
+			}
+		}
+	}
+
+	myBuys = []
+	fetchMyBuys = async () => {
+		const token = await Auth.getToken()
+		const req = await fetch(`${host}/api/v1/store_product/all_student_product/`, CORS(token?.access));
+		const res = await req.json();
+		if (req.ok) {
+			runInAction(() => {
+				this.myBuys = res
+			})
+		} else {
+			if (res.code === "token_not_valid") {
+				Auth.getToken().then((token) => {
+					if (token?.access) {
+						this.fetchMyBuys()
 					}
 				})
 			} else {
