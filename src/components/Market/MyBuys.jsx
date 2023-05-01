@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {observer} from "mobx-react";
 import Search from "../Search/Search";
 import {useNavigate} from "react-router-dom";
@@ -8,11 +8,14 @@ import '../base.css';
 import {getHostInformation} from "../../store/helper/Helper";
 import MarketStore from "../../store/MarketStore";
 import BACK from "../../images/icons/back.svg";
+import {CSSTransition} from "react-transition-group";
+import {EditBuyModalWindow} from "./EditBuyModalWindow/EditBuyModalWindow";
 
 const MyBuys = observer(() => {
 	const [isLoading, setIsLoading] = useState(true)
 	const host = getHostInformation()
 	const history = useNavigate()
+	const nodeRef = useRef(null)
 	// массив с результатами поиска
 	const [arr, setArr] = useState([])
 
@@ -48,7 +51,7 @@ const MyBuys = observer(() => {
 							</div>
 							<div>
 								{!isLoading &&
-									<button className="button">Забрать</button>
+									<button className="button" onClick={()=> MarketStore.setEditVisible(el)}>Забрать/Применить</button>
 								}
 							</div>
 						</div>
@@ -63,7 +66,15 @@ const MyBuys = observer(() => {
 				)}
 			</div>
 			{arr.length === 0 && <div className="noinformation">Товары не найдены</div>}
-
+			<CSSTransition
+				in={MarketStore.modalEditVisible}
+				timeout={300}
+				classNames="alert"
+				unmountOnExit
+				nodeRef={nodeRef}
+			>
+				<EditBuyModalWindow ref={nodeRef} data={MarketStore.currentMyBuy}/>
+			</CSSTransition>
 		</div>
 	);
 });

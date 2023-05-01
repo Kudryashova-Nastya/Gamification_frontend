@@ -26,6 +26,16 @@ class MarketStore {
 		bodyFixPosition()
 	}
 
+	modalEditVisible = false
+	currentMyBuy = {}
+	setEditVisible = (el) => {
+		runInAction(() => {
+			this.currentMyBuy = el
+			this.modalEditVisible = true
+		})
+		bodyFixPosition()
+	}
+
 	goodsInfo = [{},{},{},{}]
 	fetchGoodsInfo = async () => {
 		const token = await Auth.getToken()
@@ -76,7 +86,6 @@ class MarketStore {
 		if (!data) {
 			return null
 		}
-
 		try {
 			const token = await Auth.getToken()
 			const req = await fetch(`${host}/api/v1/store/market_shop`, POSTCORS(data, token?.access))
@@ -104,6 +113,7 @@ class MarketStore {
 		bodyUnfixPosition()
 		runInAction(() => {
 			this.modalBuyVisible = false
+			this.modalEditVisible = false
 			// this.currentBuy = {}
 			// document.body.style.overflowY = 'auto';
 		})
