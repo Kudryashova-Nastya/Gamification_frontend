@@ -11,7 +11,7 @@ import DEFAULT_AVATAR from "../../images/icons/default-avatar.svg";
 import Pagination from "../Pagination/Pagination";
 import {Link, useNavigate} from "react-router-dom";
 
-const Students = ({canRegister = false}) => {
+const Students = ({canRegister = false, canFilter = false}) => {
 	const host = getHostInformation()
 	const history = useNavigate()
 	const [isLoading, setIsLoading] = useState(true)
@@ -70,11 +70,30 @@ const Students = ({canRegister = false}) => {
 				<h1 className="header1">Студенты</h1>
 				{!isLoading &&
 					<div className="two-elements-right">
-						{canRegister && <button onClick={() => history("../student-registration")} className="button">Регистрация</button>}
+						{canRegister &&
+							<button onClick={() => history("../student-registration")} className="button">Регистрация</button>}
 						<Search students={students} setArr={setArr} setCurrentPage={setCurrentPage}/>
 					</div>}
 			</div>
 			<hr color="#CCCCCC" size="4"/>
+			{canFilter &&
+				<div className="filter-container">
+					<div>Сортировка: </div>
+					<div className="filter-value">
+						<input type="radio" id="by-id" name="filter" value="id" defaultChecked/>
+						<label htmlFor="by-id">По id</label>
+					</div>
+					<div className="filter-value">
+						<input type="radio" id="by-lastname" name="filter" value="lastname"/>
+						<label htmlFor="by-lastname">По фамилии</label>
+
+					</div>
+					<div className="filter-value">
+						<input type="radio" id="by-balance" name="filter" value="balance"/>
+						<label htmlFor="by-balance">По балансу</label>
+					</div>
+				</div>
+			}
 			<div className="student-container">
 				{currentPosts?.map((el, i) =>
 					<Link to={`/student/${el.id}`} key={i} className="student-card">

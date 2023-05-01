@@ -61,7 +61,7 @@ const App = observer(() => {
 						<Route path="" element={<EmployeeProfile/>}/>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="student-registration" element={<StudentRegistration/>}/>
-						<Route path="students" element={<Students canRegister={true}/>}/>
+						<Route path="students" element={<Students canRegister={true} canFilter={true}/>}/>
 						<Route path=":id" element={<Profile/>}/>
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market/>}/>
@@ -71,7 +71,7 @@ const App = observer(() => {
 								 element={(token && role === 'couch') ? <Menu role={"couch"}/> : <Navigate to="/login" replace/>}>
 						<Route path="student-registration" element={<StudentRegistration/>}/>
 						<Route path="employees" element={<Employees/>}/>
-						<Route path="students" element={<Students canRegister={true}/>}/>
+						<Route path="students" element={<Students canRegister={true} canFilter={true}/>}/>
 						<Route path=":id" element={<Profile/>}/>
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market/>}/>
@@ -80,7 +80,7 @@ const App = observer(() => {
 					<Route path="/curator"
 								 element={(token && role === 'curator') ? <Menu role={"curator"}/> : <Navigate to="/login" replace/>}>
 						<Route path="employees" element={<Employees/>}/>
-						<Route path="students" element={<Students/>}/>
+						<Route path="students" element={<Students canFilter={true}/>}/>
 						<Route path=":id" element={<Profile/>}/>
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market/>}/>

@@ -182,6 +182,162 @@ body.lock {
     transition: opacity 300ms;
 }
 
+/* для элемента input c type="radio" */
+/*.custom-radio {*/
+/*    position: absolute;*/
+/*    z-index: -1;*/
+/*    opacity: 0;*/
+/*}*/
+
+/*!* для элемента label связанного с .custom-radio *!*/
+/*.custom-radio+label {*/
+/*    display: inline-flex;*/
+/*    align-items: center;*/
+/*    user-select: none;*/
+/*}*/
+
+/*!* создание в label псевдоэлемента  before со следующими стилями *!*/
+/*.custom-radio+label::before {*/
+/*    content: '';*/
+/*    display: inline-block;*/
+/*    width: 14px;*/
+/*    height: 14px;*/
+/*    flex-shrink: 0;*/
+/*    flex-grow: 0;*/
+/*    border: 1px solid #adb5bd;*/
+/*    border-radius: 50px;*/
+/*    margin-right: 0.5em;*/
+/*    background-repeat: no-repeat;*/
+/*    background-position: center center;*/
+/*    background-size: 9px 9px;*/
+/*}*/
+
+/*!* стили при наведении курсора на радио *!*/
+/*.custom-radio:not(:disabled):not(:checked)+label:hover::before {*/
+/*    border-color: #b3d7ff;*/
+/*}*/
+
+/*!* стили для активной радиокнопки (при нажатии на неё) *!*/
+/*.custom-radio:not(:disabled):active+label::before {*/
+/*    background-color: #b3d7ff;*/
+/*    border-color: #b3d7ff;*/
+/*}*/
+
+/*!* стили для радиокнопки, находящейся в фокусе *!*/
+/*!*.custom-radio:focus+label::before {*!*/
+/*!*    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);*!*/
+/*!*}*!*/
+
+/*!* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked *!*/
+/*.custom-radio:focus:not(:checked)+label::before {*/
+/*    border-color: #80bdff;*/
+/*}*/
+
+/*!* стили для радиокнопки, находящейся в состоянии checked *!*/
+/*.custom-radio:checked+label::before {*/
+/*    border-color: #111111;*/
+/*    background-image: url("../images/icons/radio-circle9.svg");*/
+/*}*/
+
+input[type="checkbox"]:checked,
+input[type="checkbox"]:not(:checked),
+input[type="radio"]:checked,
+input[type="radio"]:not(:checked)
+{
+    position: absolute;
+    left: -9999px;
+}
+
+input[type="checkbox"]:checked + label,
+input[type="checkbox"]:not(:checked) + label,
+input[type="radio"]:checked + label,
+input[type="radio"]:not(:checked) + label {
+    display: inline-block;
+    position: relative;
+    /*padding-left: 28px;*/
+    padding-left: 24px;
+    line-height: 17px;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label:before,
+input[type="checkbox"]:not(:checked) + label:before,
+input[type="radio"]:checked + label:before,
+input[type="radio"]:not(:checked) + label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    /*width: 18px;*/
+    width: 16px;
+    height: 16px;
+    /*height: 18px;*/
+    border: 1px solid #dddddd;
+    background-color: #ffffff;
+}
+
+input[type="checkbox"]:checked + label:before,
+input[type="checkbox"]:not(:checked) + label:before {
+    border-radius: 2px;
+}
+
+input[type="radio"]:checked + label:before,
+input[type="radio"]:not(:checked) + label:before {
+    border-radius: 100%;
+}
+
+input[type="checkbox"]:checked + label:after,
+input[type="checkbox"]:not(:checked) + label:after,
+input[type="radio"]:checked + label:after,
+input[type="radio"]:not(:checked) + label:after {
+    content: "";
+    position: absolute;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+input[type="checkbox"]:checked + label:after,
+input[type="checkbox"]:not(:checked) + label:after {
+    /*left: 3px;*/
+    /*top: 4px;*/
+    left: 3px;
+    top: 4px;
+    width: 10px;
+    height: 5px;
+    border-radius: 1px;
+    border-left: 4px solid #111111;
+    border-bottom: 4px solid #111111;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+input[type="radio"]:checked + label:after,
+input[type="radio"]:not(:checked) + label:after {
+    /*left: 5px;*/
+    /*top: 5px;*/
+    left: 4px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #999999;
+}
+
+input[type="checkbox"]:not(:checked) + label:after,
+input[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+}
+
+input[type="checkbox"]:checked + label:after,
+input[type="radio"]:checked + label:after {
+    opacity: 1;
+}
+
 
 @media (max-width: 768px) {
     .container {

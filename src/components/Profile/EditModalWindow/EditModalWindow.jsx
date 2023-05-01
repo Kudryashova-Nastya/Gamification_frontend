@@ -155,9 +155,10 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 						{directions?.map((dir, i) =>
 							<div className="mydirection" key={i}>
 								<input type="checkbox"
+											 id={i}
 											 ref={(el) => (directionsRef.current[dir.id] = el)}
 											 defaultChecked={StudentProfileStore.studentInfo.direction.find(d => d.id === dir.id)}/>
-								<label>{dir.name}</label>
+								<label htmlFor={i}>{dir.name}</label>
 							</div>
 						)}
 					</div>
