@@ -14,6 +14,7 @@ export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, re
 	let firstFact = useRef(null)
 	let secondFact = useRef(null)
 	let falseFact = useRef(null)
+	let password = useRef(null)
 	let imageRef = useRef(null)
 
 	const editEmployee = async (data) => {
@@ -76,7 +77,7 @@ export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, re
 			}
 		}
 
-		const data = {
+		let data = {
 			"first_name": firstName.current.value || null,
 			"last_name": lastName.current.value || null,
 			"email": email.current.value || null,
@@ -84,7 +85,9 @@ export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, re
 			"second_fact": secondFact.current.value || null,
 			"false_fact": falseFact.current.value || null,
 		}
-		console.log("data", data)
+		if (password) {
+			data = {...data, "password": password.current.value}
+		}
 		// log вернет ошибку, если пусто, значит ошибки нет
 		const log = await editEmployee(data)
 		if (log) {
@@ -108,36 +111,41 @@ export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, re
 			<form onSubmit={handleSubmit} className="edit-employee-form">
 				<div className="myrefs">
 					<label className="blockname">Имя: &nbsp;</label>
-					<input type="text" className="input" size="40" defaultValue={Auth.profileInfo.first_name}
+					<input type="text" className="input" size="35" defaultValue={Auth.profileInfo.first_name}
 								 maxLength="40" ref={firstName}/>
 				</div>
 				<div className="myrefs">
 					<label className="blockname">Фамилия: &nbsp;</label>
-					<input type="text" className="input" size="40" defaultValue={Auth.profileInfo.last_name}
+					<input type="text" className="input" size="35" defaultValue={Auth.profileInfo.last_name}
 								 maxLength="40" ref={lastName}/>
 				</div>
 				<div className="myrefs">
 					<label className="blockname">Почта TUMO: &nbsp;</label>
-					<input type="email" className="input" size="40" defaultValue={Auth.profileInfo.email}
+					<input type="email" className="input" size="35" defaultValue={Auth.profileInfo.email}
 								 maxLength="50" ref={email}/>
 				</div>
 				<div className="myrefs">
 					<label className="blockname">Первый факт: &nbsp;</label>
-					<input type="text" className="input" size="40" defaultValue={Auth.profileInfo.first_fact}
+					<input type="text" className="input" size="35" defaultValue={Auth.profileInfo.first_fact}
 								 maxLength="100" ref={firstFact}/>
 				</div>
 				<div className="myrefs">
 					<label className="blockname">Второй факт: &nbsp;</label>
-					<input type="text" className="input" size="40" defaultValue={Auth.profileInfo.second_fact}
+					<input type="text" className="input" size="35" defaultValue={Auth.profileInfo.second_fact}
 								 maxLength="100" ref={secondFact}/>
 				</div>
 				<div className="myrefs">
 					<label className="blockname">Ложный факт: &nbsp;</label>
-					<input type="text" className="input" size="40" defaultValue={Auth.profileInfo.false_fact}
+					<input type="text" className="input" size="35" defaultValue={Auth.profileInfo.false_fact}
 								 maxLength="100" ref={falseFact}/>
 				</div>
 				<div className="myrefs">
-					<label className="blockname">Загрузить аватарку: &nbsp; &nbsp; &nbsp;</label>
+					<label className="blockname">Новый пароль: &nbsp;</label>
+					<input type="text" className="input" size="35" defaultValue={null}
+								 maxLength="100" ref={password} placeholder="Оставьте пустым, если не хотите менять"/>
+				</div>
+				<div className="myrefs">
+					<label className="blockname">Новая аватарка: &nbsp; &nbsp; &nbsp;</label>
 					<input type="file" ref={imageRef} accept=".jpeg, .jpg, .png, .svg"/>
 				</div>
 				<div className="button-block">
