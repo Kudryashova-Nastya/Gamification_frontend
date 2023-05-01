@@ -8,11 +8,14 @@ export const BuyModalWindow = observer(forwardRef(({data}, ref) => {
 	const [error, setError] = useState(null)
 	const tryBuy = async () => {
 
-		const res = await MarketStore.buy(data)
+		const res = await MarketStore.buy({
+			"product_id": data.id
+		})
 		if (res) {
 			setError(res)
 		} else {
 			setError(null)
+			await MarketStore.fetchGoodsInfo()
 		}
 		MarketStore.closeModal()
 	}
