@@ -27,6 +27,31 @@ const Students = ({canRegister = false, canFilter = false}) => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const postsPerPage = 10
 
+	// сортировка
+	const [sortBy, setSortBy] = useState('id');
+
+	const handleSortChange = (event) => {
+		setSortBy(event.target.value);
+		const sortedStudents = sortStudents(event.target.value, arr)
+		setArr(sortedStudents)
+	};
+
+	const sortStudents = (by, arr) => {
+		if (arr[0].last_name) {
+			return [...arr].sort((a, b) => {
+				if (by === 'lastname') {
+					return a.last_name.localeCompare(b.last_name)
+				} else if (by === 'balance') {
+					return b.balance - a.balance
+				} else {
+					return a.id - b.id || 0
+				}
+			})
+		} else {
+			return arr
+		}
+	}
+
 
 	useEffect(() => {
 		const host = getHostInformation()
@@ -72,7 +97,7 @@ const Students = ({canRegister = false, canFilter = false}) => {
 					<div className="two-elements-right">
 						{canRegister &&
 							<button onClick={() => history("../student-registration")} className="button">Регистрация</button>}
-						<Search students={students} setArr={setArr} setCurrentPage={setCurrentPage}/>
+						<Search students={sortStudents(sortBy, students)} setArr={setArr} setCurrentPage={setCurrentPage}/>
 					</div>}
 			</div>
 			<hr color="#CCCCCC" size="4"/>
@@ -80,16 +105,19 @@ const Students = ({canRegister = false, canFilter = false}) => {
 				<div className="filter-container">
 					<div>Сортировка: </div>
 					<div className="filter-value">
-						<input type="radio" id="by-id" name="filter" value="id" defaultChecked/>
+						<input type="radio" id="by-id" name="filter" value="id" checked={sortBy === 'id'}
+									 onChange={handleSortChange}/>
 						<label htmlFor="by-id">По id</label>
 					</div>
 					<div className="filter-value">
-						<input type="radio" id="by-lastname" name="filter" value="lastname"/>
+						<input type="radio" id="by-lastname" name="filter" value="lastname" checked={sortBy === 'lastname'}
+									 onChange={handleSortChange}/>
 						<label htmlFor="by-lastname">По фамилии</label>
 
 					</div>
 					<div className="filter-value">
-						<input type="radio" id="by-balance" name="filter" value="balance"/>
+						<input type="radio" id="by-balance" name="filter" value="balance" checked={sortBy === 'balance'}
+									 onChange={handleSortChange}/>
 						<label htmlFor="by-balance">По балансу</label>
 					</div>
 				</div>
