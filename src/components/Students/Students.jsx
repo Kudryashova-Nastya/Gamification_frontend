@@ -37,8 +37,8 @@ const Students = ({canRegister = false, canFilter = false}) => {
 	};
 
 	const sortStudents = (by, arr) => {
-		if (arr[0].last_name) {
-			return [...arr].sort((a, b) => {
+		if (arr[0]?.last_name) {
+			return arr.sort((a, b) => {
 				if (by === 'lastname') {
 					return a.last_name.localeCompare(b.last_name)
 				} else if (by === 'balance') {
@@ -51,7 +51,6 @@ const Students = ({canRegister = false, canFilter = false}) => {
 			return arr
 		}
 	}
-
 
 	useEffect(() => {
 		const host = getHostInformation()
@@ -97,7 +96,7 @@ const Students = ({canRegister = false, canFilter = false}) => {
 					<div className="two-elements-right">
 						{canRegister &&
 							<button onClick={() => history("../student-registration")} className="button">Регистрация</button>}
-						<Search students={sortStudents(sortBy, students)} setArr={setArr} setCurrentPage={setCurrentPage}/>
+						<Search students={students} setArr={setArr} setCurrentPage={setCurrentPage} sort={sortStudents} by={sortBy}/>
 					</div>}
 			</div>
 			<hr color="#CCCCCC" size="4"/>
