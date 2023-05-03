@@ -70,6 +70,15 @@ const Profile = observer(() => {
 						.improved-profile .avatar img {
     					border: 6px solid ${backColor};
 						}
+						
+						.improved-profile .about-text {
+    					min-width: 140px;
+    					font-size: 13px;
+    					background-color: ${backColor}42;
+						}
+						
+						.improved-profile-message .transaction .message {
+							background-color: ${backColor}35;
 						`
 				}
 			</style>
@@ -132,41 +141,43 @@ const Profile = observer(() => {
 							<div className="label">О себе:</div>
 							<div className="about-text">
 								{StudentProfileStore.studentInfo.about ? StudentProfileStore.studentInfo.about : StudentProfileStore.studentInfo.hasOwnProperty('about') ? "no comments" : screenWidth < 769 ?
-									<Skeleton width={230} count={3}/> : <Skeleton width={300} count={3}/>}
+									<Skeleton width={200} count={3}/> : <Skeleton width={250} count={3}/>}
 							</div>
 						</div>
 					</div>
 				</div>
-					<div className="header-block">
-						<h2 className="header3">{StudentProfileStore.isMyProfile ? "Мои ачивки" : "Ачивки"}</h2>
-						{StudentProfileStore.isMyProfile &&
-							<button className="button">Все ачивки <img className="button-icon achive-icon" alt="ачивки" src={ACHI}/>
-							</button>
-						}
-					</div>
-					<hr color="#CCCCCC" size="4"/>
-					<div className="achives">
-						<div className="achive">
-							<img title="ачивка" alt="ачивка"
-									 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
-						</div>
-						<div className="achive">
-							<img title="ачивка" alt="ачивка"
-									 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
-						</div>
-						<div className="achive">
-							<img title="ачивка" alt="ачивка"
-									 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
-						</div>
-					</div>
-					<div className="header-block">
-						<h2
-							className="header3">{StudentProfileStore.isMyProfile ? "Моя история" : "История"} {screenWidth < 768 ? '' : 'операций'}</h2>
-						<button onClick={() => history("send")} className="button button-send">Перевести <img
-							className="send button-icon" alt="перевод" src={SEND}/></button>
-					</div>
+				<div className="header-block">
+					<h2 className="header3">{StudentProfileStore.isMyProfile ? "Мои ачивки" : "Ачивки"}</h2>
+					{StudentProfileStore.isMyProfile &&
+						<button className="button">Все ачивки <img className="button-icon achive-icon" alt="ачивки" src={ACHI}/>
+						</button>
+					}
+				</div>
 				<hr color="#CCCCCC" size="4"/>
-				<StudentTransactions id={StudentProfileStore.studentInfo.id}/>
+				<div className="achives">
+					<div className="achive">
+						<img title="ачивка" alt="ачивка"
+								 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+					</div>
+					<div className="achive">
+						<img title="ачивка" alt="ачивка"
+								 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+					</div>
+					<div className="achive">
+						<img title="ачивка" alt="ачивка"
+								 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+					</div>
+				</div>
+				<div className="header-block">
+					<h2
+						className="header3">{StudentProfileStore.isMyProfile ? "Моя история" : "История"} {screenWidth < 768 ? '' : 'операций'}</h2>
+					<button onClick={() => history("send")} className="button button-send">Перевести <img
+						className="send button-icon" alt="перевод" src={SEND}/></button>
+				</div>
+				<hr color="#CCCCCC" size="4"/>
+				<div className={backColor && "improved-profile-message"}>
+					<StudentTransactions id={StudentProfileStore.studentInfo.id}/>
+				</div>
 				<CSSTransition
 					in={StudentProfileStore.modalEditVisible}
 					timeout={300}
