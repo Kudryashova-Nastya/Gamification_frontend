@@ -67,7 +67,7 @@ const StudentTransactions = observer(({id}) => {
 					if (el.sender?.id === id) { // если текущий пользователь отправитель
 						return <div key={i} className="transaction-block">
 							<div className="datetime">{(new Date(el.date_time)).toLocaleString("ru-RU", options) || ""}</div>
-							<div className="transaction profile-transaction">
+							<div className="transaction">
 								<div className="groups">
 									<div className="ico"><img alt="arrow" src={ARROWTO}/></div>
 									<div className="member">{el.recipient?.first_name ||
@@ -85,7 +85,7 @@ const StudentTransactions = observer(({id}) => {
 					} else if (el.recipient?.id === id) {// если текущий пользователь получатель
 						return <div key={i} className="transaction-block">
 							<div className="datetime">{(new Date(el.date_time)).toLocaleString("ru-RU", options) || ""}</div>
-							<div className="transaction profile-transaction">
+							<div className="transaction">
 								<div className="groups">
 									<div className="ico"><img alt="arrow" src={ARROWFROM}/></div>
 									<div className="member sender">{el.sender?.first_name ||
@@ -102,10 +102,10 @@ const StudentTransactions = observer(({id}) => {
 							</div>
 						</div>
 					}
-				} else if (el.transfer_type === "buy") {
+				} else if (el.transfer_type === "buy") { // если тип транзакции это покупка
 					return <div key={i} className="transaction-block">
 						<div className="datetime">{(new Date(el.date_time)).toLocaleString("ru-RU", options) || ""}</div>
-						<div className="transaction profile-transaction">
+						<div className="transaction">
 							<div className="groups">
 								<div className="member sender">Покупка</div>
 
@@ -122,7 +122,7 @@ const StudentTransactions = observer(({id}) => {
 				} else {
 					// иначе блок скелетона
 					return <div key={i} className="transaction-block">
-						<div className="transaction profile-transaction">
+						<div className="transaction">
 							<div className="groups">
 								<div className="member sender">
 									<Skeleton width={120}/></div>
