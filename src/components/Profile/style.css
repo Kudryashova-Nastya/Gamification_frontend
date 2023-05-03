@@ -20,26 +20,25 @@
     box-sizing: border-box;
 }
 
-.improved-profile::before {
-    content: "";
-    background-color: #F50106;
-    width: 35%;
-    position: absolute;
-    height: 100%;
-    top: -5px;
-    left: -25%;
-    border: 5px solid black;
-    border-radius: 30px;
-    z-index: 1;
-}
-
-
 .profile-window .avatar {
     max-width: 140px;
     min-width: 60px;
     flex-shrink: 2;
 }
 
+.improved-profile .avatar {
+    max-width: 105px;
+    min-width: 60px;
+    flex-shrink: 2;
+    align-self: center;
+    position: absolute;
+    left: -55px;
+}
+
+.improved-profile .about-text {
+    min-width: 140px;
+    font-size: 13px;
+}
 
 .avatar img {
     border-radius: 100px;

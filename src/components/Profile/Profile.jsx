@@ -55,13 +55,21 @@ const Profile = observer(() => {
 			<style>
 				{
 					`.improved-profile {
-    				width: 80%;
-    				margin-left: 20%;
+    				width: 83%;
+    				margin-left: 17%;
     				position: relative;
     				background: white;
-    				z-index: 2;
+    				padding-left: 95px;
 						}
 						
+						.improved-profile-back {
+    					background-color: ${backColor};
+    					border-radius: 40px;
+						}
+						
+						.improved-profile .avatar img {
+    					border: 6px solid ${backColor};
+						}
 						`
 				}
 			</style>
@@ -76,85 +84,87 @@ const Profile = observer(() => {
 						<img className="button-icon" alt="копировать" src={LINK}/>
 					</button>
 				</div>
-				<div className={backColor ? "profile-window improved-profile" : "profile-window"}
-						 style={borderColor && {"border": `5px solid ${borderColor}`}}>
-					<div className="avatar">
-						{StudentProfileStore.studentInfo.image ?
-							<img alt="фото" src={`${host}${StudentProfileStore.studentInfo.image}`}/> :
-							StudentProfileStore.studentInfo.hasOwnProperty('image') ?
-								<img alt="фото" src={DEFAULT_AVATAR}/> :
-								<Skeleton width={100} height={100} circle={true}/>}
-					</div>
-					<div className="info">
-						<h2
-							className="header3">{StudentProfileStore.studentInfo.first_name ||
-							<Skeleton width={150}/>} {StudentProfileStore.studentInfo.last_name}</h2>
-						<div className="header4"> <span className="balance-icon">{StudentProfileStore.studentInfo.balance ||
-							<Skeleton width={50}/>}</span> {StudentProfileStore.studentInfo.balance &&
-							<img alt="тукоинов" className="balance-icon" src={MAINTUCOIN}/>}</div>
-						<div className="contacts">
-							<div className="contact">
-								{StudentProfileStore.studentInfo.email ? <><img alt="почта"
-																																src={MAIL}/> {StudentProfileStore.studentInfo.email}</> :
-									<Skeleton width={120} count={3} style={{marginBottom: "10px"}}/>}
+				<div className={backColor && "improved-profile-back"}>
+					<div className={backColor ? "profile-window improved-profile" : "profile-window"}
+							 style={borderColor && {"border": `5px solid ${borderColor}`}}>
+						<div className="avatar">
+							{StudentProfileStore.studentInfo.image ?
+								<img alt="фото" src={`${host}${StudentProfileStore.studentInfo.image}`}/> :
+								StudentProfileStore.studentInfo.hasOwnProperty('image') ?
+									<img alt="фото" src={DEFAULT_AVATAR}/> :
+									<Skeleton width={100} height={100} circle={true}/>}
+						</div>
+						<div className="info">
+							<h2
+								className="header3">{StudentProfileStore.studentInfo.first_name ||
+								<Skeleton width={150}/>} {StudentProfileStore.studentInfo.last_name}</h2>
+							<div className="header4"> <span className="balance-icon">{StudentProfileStore.studentInfo.balance ||
+								<Skeleton width={50}/>}</span> {StudentProfileStore.studentInfo.balance &&
+								<img alt="тукоинов" className="balance-icon" src={MAINTUCOIN}/>}</div>
+							<div className="contacts">
+								<div className="contact">
+									{StudentProfileStore.studentInfo.email ? <><img alt="почта"
+																																	src={MAIL}/> {StudentProfileStore.studentInfo.email}</> :
+										<Skeleton width={120} count={3} style={{marginBottom: "10px"}}/>}
+								</div>
+								{StudentProfileStore.studentInfo?.telegram &&
+									<div className="contact">
+										<img alt="телеграм" src={TELEGRAM}/> {StudentProfileStore.studentInfo.telegram}
+									</div>
+								}
+								{StudentProfileStore.studentInfo?.portfolio_link &&
+									<div className="contact">
+										<img alt="портфолио" src={PORTFOLIO}/> <a
+										href={StudentProfileStore.studentInfo.portfolio_link}>Портфолио</a>
+									</div>
+								}
+								{StudentProfileStore.studentInfo.direction ? StudentProfileStore.studentInfo.direction.length === 0 ? "" :
+									<div className="contact profile-directions">
+										{StudentProfileStore.studentInfo.direction?.map((icon, id) => <img alt="направление" width="29"
+																																											 title={icon.name} key={id}
+																																											 src={`${host}${icon.icon}`}/>
+										)}
+									</div> : ""
+								}
 							</div>
-							{StudentProfileStore.studentInfo?.telegram &&
-								<div className="contact">
-									<img alt="телеграм" src={TELEGRAM}/> {StudentProfileStore.studentInfo.telegram}
-								</div>
-							}
-							{StudentProfileStore.studentInfo?.portfolio_link &&
-								<div className="contact">
-									<img alt="портфолио" src={PORTFOLIO}/> <a
-									href={StudentProfileStore.studentInfo.portfolio_link}>Портфолио</a>
-								</div>
-							}
-							{StudentProfileStore.studentInfo.direction ? StudentProfileStore.studentInfo.direction.length === 0 ? "" :
-								<div className="contact profile-directions">
-									{StudentProfileStore.studentInfo.direction?.map((icon, id) => <img alt="направление" width="29"
-																																										 title={icon.name} key={id}
-																																										 src={`${host}${icon.icon}`}/>
-									)}
-								</div> : ""
-							}
 						</div>
-					</div>
-					<div className="about">
-						<div className="label">О себе:</div>
-						<div className="about-text">
-							{StudentProfileStore.studentInfo.about ? StudentProfileStore.studentInfo.about : StudentProfileStore.studentInfo.hasOwnProperty('about') ? "no comments" : screenWidth < 769 ?
-								<Skeleton width={230} count={3}/> : <Skeleton width={300} count={3}/>}
+						<div className="about">
+							<div className="label">О себе:</div>
+							<div className="about-text">
+								{StudentProfileStore.studentInfo.about ? StudentProfileStore.studentInfo.about : StudentProfileStore.studentInfo.hasOwnProperty('about') ? "no comments" : screenWidth < 769 ?
+									<Skeleton width={230} count={3}/> : <Skeleton width={300} count={3}/>}
+							</div>
 						</div>
 					</div>
 				</div>
-				<div className="header-block">
-					<h2 className="header3">{StudentProfileStore.isMyProfile ? "Мои ачивки" : "Ачивки"}</h2>
-					{StudentProfileStore.isMyProfile &&
-						<button className="button">Все ачивки <img className="button-icon achive-icon" alt="ачивки" src={ACHI}/>
-						</button>
-					}
-				</div>
-				<hr color="#CCCCCC" size="4"/>
-				<div className="achives">
-					<div className="achive">
-						<img title="ачивка" alt="ачивка"
-								 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+					<div className="header-block">
+						<h2 className="header3">{StudentProfileStore.isMyProfile ? "Мои ачивки" : "Ачивки"}</h2>
+						{StudentProfileStore.isMyProfile &&
+							<button className="button">Все ачивки <img className="button-icon achive-icon" alt="ачивки" src={ACHI}/>
+							</button>
+						}
 					</div>
-					<div className="achive">
-						<img title="ачивка" alt="ачивка"
-								 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+					<hr color="#CCCCCC" size="4"/>
+					<div className="achives">
+						<div className="achive">
+							<img title="ачивка" alt="ачивка"
+									 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+						</div>
+						<div className="achive">
+							<img title="ачивка" alt="ачивка"
+									 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+						</div>
+						<div className="achive">
+							<img title="ачивка" alt="ачивка"
+									 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+						</div>
 					</div>
-					<div className="achive">
-						<img title="ачивка" alt="ачивка"
-								 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+					<div className="header-block">
+						<h2
+							className="header3">{StudentProfileStore.isMyProfile ? "Моя история" : "История"} {screenWidth < 768 ? '' : 'операций'}</h2>
+						<button onClick={() => history("send")} className="button button-send">Перевести <img
+							className="send button-icon" alt="перевод" src={SEND}/></button>
 					</div>
-				</div>
-				<div className="header-block">
-					<h2
-						className="header3">{StudentProfileStore.isMyProfile ? "Моя история" : "История"} {screenWidth < 768 ? '' : 'операций'}</h2>
-					<button onClick={() => history("send")} className="button button-send">Перевести <img
-						className="send button-icon" alt="перевод" src={SEND}/></button>
-				</div>
 				<hr color="#CCCCCC" size="4"/>
 				<StudentTransactions id={StudentProfileStore.studentInfo.id}/>
 				<CSSTransition
