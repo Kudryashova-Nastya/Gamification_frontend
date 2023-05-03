@@ -15,18 +15,19 @@
 .market-card .avatar {
     min-width: 88px;
     min-height: 88px;
-    border-radius: 30px;
+    margin-bottom: 3px;
 }
 
 .market-card .avatar img {
-    border-radius: 0;
     width: 88px;
+    border-radius: 30px;
 }
 
 .market-card .name {
     font-weight: 600;
     font-size: 22px;
     margin-bottom: 10px;
+    margin-top: 7px;
 }
 
 .market-card .description {
@@ -80,5 +81,16 @@
     .market-card .description {
         font-size: 13px;
         line-height: 130%;
+    }
+
+    .market-card .button {
+        white-space: nowrap;
+        padding: 5px 15px;
+        font-size: 15px;
+    }
+
+    .market-card .button img {
+        height: 15px;
+        width: 15px;
     }
 }

@@ -37,22 +37,16 @@ const StudentTransactions = observer(({id}) => {
 		const fetchData = async () => {
 			const token = await Auth.getToken()
 			console.log("id", id)
-			await fetch(`${host}/api/v1/transaction/all_student_transfer/`, POSTCORS({"student_id": StudentProfileStore.studentInfo.id}, token?.access))
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.ok) {
+			let req = await fetch(`${host}/api/v1/transaction/all_student_transfer/`, POSTCORS({"student_id": StudentProfileStore.studentInfo.id}, token?.access))
+			const data = await req.json()
+				if (req.ok) {
+					console.log(data)
 					setTransactions(data)
 				} else if (data.code === "token_not_valid") {
 					return fetchData()
+				} else {
+					console.log("проблемка", data)
 				}
-			})
-			.catch((err) => {
-				console.log("err", err)
-				const data = [
-					{}, {}
-				]
-				setTransactions(data)
-			})
 		}
 
 		if (id) {
@@ -68,13 +62,12 @@ const StudentTransactions = observer(({id}) => {
 
 	return (
 		<>
-			{/*<div className="transaction-block">*/}
 			{currentPosts?.map((el, i) => {
 				if (el.transfer_type === "transfer") { // если тип транзакции это перевод
 					if (el.sender?.id === id) { // если текущий пользователь отправитель
 						return <div key={i} className="transaction-block">
 							<div className="datetime">{(new Date(el.date_time)).toLocaleString("ru-RU", options) || ""}</div>
-							<div className="transaction">
+							<div className="transaction profile-transaction">
 								<div className="groups">
 									<div className="ico"><img alt="arrow" src={ARROWTO}/></div>
 									<div className="member">{el.recipient?.first_name ||
@@ -92,7 +85,7 @@ const StudentTransactions = observer(({id}) => {
 					} else if (el.recipient?.id === id) {// если текущий пользователь получатель
 						return <div key={i} className="transaction-block">
 							<div className="datetime">{(new Date(el.date_time)).toLocaleString("ru-RU", options) || ""}</div>
-							<div className="transaction">
+							<div className="transaction profile-transaction">
 								<div className="groups">
 									<div className="ico"><img alt="arrow" src={ARROWFROM}/></div>
 									<div className="member sender">{el.sender?.first_name ||
@@ -109,10 +102,27 @@ const StudentTransactions = observer(({id}) => {
 							</div>
 						</div>
 					}
+				} else if (el.transfer_type === "buy") {
+					return <div key={i} className="transaction-block">
+						<div className="datetime">{(new Date(el.date_time)).toLocaleString("ru-RU", options) || ""}</div>
+						<div className="transaction profile-transaction">
+							<div className="groups">
+								<div className="member sender">Покупка</div>
+
+							</div>
+							<div className="groups info">
+								<div className="count">
+									<span className="balance-icon">-{el.sum_count || <Skeleton width={25}/>} </span>
+									{el.sum_count && <img className="balance-icon" alt="tucoin" src={TUCOIN}/>}
+								</div>
+								<div className="message">{el.comment || <Skeleton width={90}/>}</div>
+							</div>
+						</div>
+					</div>
 				} else {
 					// иначе блок скелетона
 					return <div key={i} className="transaction-block">
-						<div className="transaction">
+						<div className="transaction profile-transaction">
 							<div className="groups">
 								<div className="member sender">
 									<Skeleton width={120}/></div>

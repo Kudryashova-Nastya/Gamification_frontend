@@ -7,6 +7,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 5px;
+    padding-left: 30px;
 }
 
 .transaction-block {
@@ -73,7 +74,7 @@
     }
 
     .transaction {
-        padding: 16px 16px;
+        padding: 16px;
         flex-wrap: wrap;
         justify-content: space-around;
         align-items: center;
@@ -100,5 +101,13 @@
 
     .transaction .groups.info {
         gap: 8px;
+    }
+
+    .transaction .ico img {
+        width: 18px;
+    }
+
+    .transaction .count img {
+        width: 15px;
     }
 }
