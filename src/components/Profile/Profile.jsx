@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import '../base.css';
-import './style.css'
+import './style.scss'
 import '../Transaction/Transaction.css'
 import EDIT from '../../images/icons/edit.svg'
 import LINK from '../../images/icons/link.svg'
@@ -54,14 +54,7 @@ const Profile = observer(() => {
 		<>
 			<style>
 				{
-					`.improved-profile {
-    				width: 83%;
-    				margin-left: 17%;
-    				position: relative;
-    				background: white;
-    				padding-left: 95px;
-						}
-						
+					`	
 						.improved-profile-back {
     					background-color: ${backColor};
     					border-radius: 40px;
@@ -106,7 +99,7 @@ const Profile = observer(() => {
 						<div className="info">
 							<h2
 								className="header3">{StudentProfileStore.studentInfo.first_name ||
-								<Skeleton width={150}/>} {StudentProfileStore.studentInfo.last_name}</h2>
+								<Skeleton width={140}/>} {StudentProfileStore.studentInfo.last_name}</h2>
 							<div className="header4"> <span className="balance-icon">{StudentProfileStore.studentInfo.balance ||
 								<Skeleton width={50}/>}</span> {StudentProfileStore.studentInfo.balance &&
 								<img alt="тукоинов" className="balance-icon" src={MAINTUCOIN}/>}</div>
@@ -140,8 +133,8 @@ const Profile = observer(() => {
 						<div className="about">
 							<div className="label">О себе:</div>
 							<div className="about-text">
-								{StudentProfileStore.studentInfo.about ? StudentProfileStore.studentInfo.about : StudentProfileStore.studentInfo.hasOwnProperty('about') ? "no comments" : screenWidth < 769 ?
-									<Skeleton width={200} count={3}/> : <Skeleton width={250} count={3}/>}
+								{StudentProfileStore.studentInfo.about ? StudentProfileStore.studentInfo.about : StudentProfileStore.studentInfo.hasOwnProperty('about') ? "no comments" : screenWidth < 768 ?
+									<Skeleton width={200} count={3}/> : <Skeleton width={"16vw"} count={3}/>}
 							</div>
 						</div>
 					</div>

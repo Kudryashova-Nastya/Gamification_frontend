@@ -26,6 +26,17 @@
     flex-shrink: 2;
 }
 
+.improved-profile {
+    width: 83%;
+    margin-left: 17%;
+    position: relative;
+    background: white;
+    padding-left: 95px;
+    @media (max-width: 767px) {
+
+    }
+}
+
 .improved-profile .avatar {
     max-width: 105px;
     min-width: 60px;

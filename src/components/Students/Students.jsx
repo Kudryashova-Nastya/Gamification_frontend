@@ -106,7 +106,7 @@ const Students = ({canRegister = false, canFilter = false}) => {
 					<div className="filter-value">
 						<input type="radio" id="by-id" name="filter" value="id" checked={sortBy === 'id'}
 									 onChange={handleSortChange}/>
-						<label htmlFor="by-id">По id</label>
+						<label htmlFor="by-id">По умолчанию</label>
 					</div>
 					<div className="filter-value">
 						<input type="radio" id="by-lastname" name="filter" value="lastname" checked={sortBy === 'lastname'}

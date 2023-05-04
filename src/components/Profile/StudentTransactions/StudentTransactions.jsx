@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import '../../base.css';
-import '../style.css'
+import '../style.scss'
 import TUCOIN from '../../../images/icons/black-tucoin16.svg'
 import ARROWTO from '../../../images/icons/arrow-to.svg'
 import ARROWFROM from '../../../images/icons/arrow-from.svg'
@@ -131,7 +131,7 @@ const StudentTransactions = observer(({id}) => {
 								<div className="count">
 									<span className="balance-icon"><Skeleton width={25}/> </span>
 								</div>
-								<div className="message"><Skeleton width={90}/></div>
+								<div className="message"><Skeleton width={135}/></div>
 							</div>
 						</div>
 					</div>
