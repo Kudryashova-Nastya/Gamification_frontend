@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate, useParams} from 'react-router-dom';
 import Menu from "./components/Menu/Menu";
 import {observer} from "mobx-react";
 import {useEffect} from "react";
@@ -38,13 +38,28 @@ const App = observer(() => {
 		console.log('token', token, Auth.token)
 	}, []);
 
+	// для редиректа на личную страницу студента
+	const StudentRedirect = () => {
+		const { id } = useParams();
+		if (id && token) {
+			if (role === 'manager') {
+				return <Navigate to={`/manager/student/${id}`} replace/>
+			} else if (role === 'couch') {
+				return <Navigate to={`/couch/student/${id}`} replace/>
+			} else if (role === 'curator') {
+				return <Navigate to={`/curator/student/${id}`} replace/>
+			}
+		}
+		return <Navigate replace to="/login" />;
+	};
+
 	return (
 		<SkeletonTheme baseColor="#CCCCCC" highlightColor="#F0F0F0">
 			<BrowserRouter>
 				<Routes>
 					<Route path="/login" element={<Login/>}/>
 					<Route path="/student"
-								 element={(token && role === 'student') ? <Menu role={"student"}/> : <Navigate to="/login" replace/>}>
+								 element={(token && role === 'student') ? <Menu role={"student"}/> : <StudentRedirect/>}>
 						<Route path="" element={<Profile/>}/>
 						<Route path="send" element={<TransactionPage/>}/>
 						<Route path="employees" element={<Employees/>}/>
@@ -62,7 +77,7 @@ const App = observer(() => {
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="student-registration" element={<StudentRegistration/>}/>
 						<Route path="students" element={<Students canRegister={true} canFilter={true}/>}/>
-						<Route path=":id" element={<Profile/>}/>
+						<Route path="student/:id" element={<Profile/>}/>
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market/>}/>
 					</Route>
@@ -72,7 +87,7 @@ const App = observer(() => {
 						<Route path="student-registration" element={<StudentRegistration/>}/>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students canRegister={true} canFilter={true}/>}/>
-						<Route path=":id" element={<Profile/>}/>
+						<Route path="student/:id" element={<Profile/>}/>
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market/>}/>
 					</Route>
@@ -81,7 +96,7 @@ const App = observer(() => {
 								 element={(token && role === 'curator') ? <Menu role={"curator"}/> : <Navigate to="/login" replace/>}>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students canFilter={true}/>}/>
-						<Route path=":id" element={<Profile/>}/>
+						<Route path="student/:id" element={<Profile/>}/>
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market/>}/>
 					</Route>
