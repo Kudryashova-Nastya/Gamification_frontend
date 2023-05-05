@@ -14,7 +14,9 @@ export const CheckModalWindow = observer(forwardRef(({data, setIsDone, setError}
 
 	const tryTransfer = async () => {
 		// перезаписываем данные для запроса так, чтобы в поле отправителя был id
-		const form = {...data, to_id: data.to_id.id}
+		console.log(data)
+		const form = {...data, recipient_id: data.to_id.id}
+		console.log(form)
 
 		const res = await TransactionPageStore.makeTransaction(form)
 		if (res) {

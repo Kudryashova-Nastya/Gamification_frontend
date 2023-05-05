@@ -100,7 +100,7 @@ class MarketStore {
 						}
 					})
 				}
-				console.log("error", JSON.stringify(req))
+				console.log("error", JSON.stringify(res))
 				return res.detail || JSON.stringify(res) // возвращает текст ошибки в случае ошибки
 			}
 		} catch {

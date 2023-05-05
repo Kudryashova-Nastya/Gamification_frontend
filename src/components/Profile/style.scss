@@ -1,208 +1,221 @@
 .buttons-block {
-    text-align: right;
-    margin-bottom: 13px;
+  text-align: right;
+  margin-bottom: 13px;
 }
 
 .buttons-block .button {
-    font-size: 13px;
-    padding: 10px 25px;
-    margin-right: 15px;
+  font-size: 13px;
+  padding: 10px 25px;
+  margin-right: 15px;
 }
 
 .profile-window {
-    border: 3px solid #111111;
-    padding: 2.1vw 3.2vw;
-    border-radius: 40px;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: 20px;
-    box-sizing: border-box;
+  border: 3px solid #111111;
+  padding: 2.1vw 3.2vw;
+  border-radius: 40px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 20px;
+  box-sizing: border-box;
 }
 
 .profile-window .avatar {
-    max-width: 140px;
-    min-width: 60px;
-    flex-shrink: 2;
+  max-width: 140px;
+  min-width: 60px;
+  flex-shrink: 2;
 }
 
 .improved-profile {
-    width: 83%;
-    margin-left: 17%;
-    position: relative;
-    background: white;
-    padding-left: 95px;
-    @media (max-width: 767px) {
-
-    }
+  width: 83%;
+  margin-left: 17%;
+  position: relative;
+  background: white;
+  padding-left: 95px;
 }
 
 .improved-profile .avatar {
-    max-width: 105px;
-    min-width: 60px;
-    flex-shrink: 2;
-    align-self: center;
-    position: absolute;
-    left: -55px;
+  max-width: 105px;
+  min-width: 60px;
+  flex-shrink: 2;
+  align-self: center;
+  position: absolute;
+  left: -55px;
+  @media (max-width: 767px) {
+    max-width: 90px;
+    left: initial;
+    top: -85px;
+  }
 }
 
 .avatar img {
-    border-radius: 100px;
-    width: 100%;
+  border-radius: 100px;
+  width: 100%;
 }
 
 .profile-window .header3 {
-    margin: 0 0 2px;
+  margin: 0 0 2px;
 }
 
 .profile-window .header4 {
-    margin: 0;
-    font-size: 21px;
-    font-weight: 600;
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
 }
 
 
 .contact {
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 120%;
-    margin-top: 6px;
-    white-space: nowrap;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 120%;
+  margin-top: 6px;
+  white-space: nowrap;
 }
 
 .contacts {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .contact img {
-    vertical-align: text-top;
-    margin-right: 5px;
+  vertical-align: text-top;
+  margin-right: 5px;
 }
 
 .contact a {
-    transition: 0.2s;
-    color: #111111;
-    text-decoration: none;
+  transition: 0.2s;
+  color: #111111;
+  text-decoration: none;
 }
 
 .contact a:hover {
-    color: #F50106;
-    transition: 0.3s;
+  color: #F50106;
+  transition: 0.3s;
 
 }
 
 .profile-directions {
-    margin-top: 8px;
+  margin-top: 8px;
 }
 
 .profile-directions img {
-    margin-right: 7px;
+  margin-right: 7px;
 }
 
 
 .about .label {
-    font-weight: 600;
-    font-size: 17px;
-    margin-bottom: 9px;
-    margin-left: 30px;
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 9px;
+  margin-left: 30px;
 }
 
 .about-text {
-    background-color: #CCCCCC;
-    border-radius: 30px;
-    padding: 14px 2vw;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 140%;
-    max-width: 350px;
-    min-width: 230px;
-    box-sizing: border-box;
+  background-color: #CCCCCC;
+  border-radius: 30px;
+  padding: 14px 2vw;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  max-width: 350px;
+  min-width: 230px;
+  box-sizing: border-box;
 }
 
 
 .header-block .achive-icon {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 
 .achives {
-    display: flex;
-    margin-right: 15px;
-    margin-left: 15px;
+  display: flex;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 
 .achive {
-    width: 60px;
+  width: 60px;
 }
 
 .achive img {
-    width: 100%;
+  width: 100%;
 }
 
 .send {
-    height: 15px;
+  height: 15px;
 }
 
 .button-send {
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
 }
 
 
 @media (max-width: 767px) {
-    .profile-window {
-        flex-wrap: wrap;
-        justify-content: space-around;
-        padding: 4vw;
-    }
+  .profile-window {
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 4vw;
+  }
 
-    .buttons-block {
-        text-align: right;
-        margin-bottom: 13px;
-        display: flex;
-        gap: 8px;
-        flex-direction: column;
-        align-items: flex-end;
-    }
+  .improved-profile {
+    padding-left: 4vw;
+    width: 100%;
+    margin-left: 0;
+    padding-top: 75px;
+  }
 
-    .about-text {
-        padding: 16px 22px;
-    }
+  .improved-profile-back {
+    padding-top: 120px;
+  }
 
-    .about .label {
-        font-weight: 600;
-        font-size: 16px;
-        margin-bottom: 8px;
-        margin-left: 30px;
-    }
+  .buttons-block {
+    text-align: right;
+    margin-bottom: 13px;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    align-items: flex-end;
+  }
 
-    .contact a {
-        text-decoration: underline;
-    }
+  .about-text {
+    padding: 16px 22px;
+  }
 
-    .profile-window .header4 {
-        margin: 0;
-        font-size: 18px;
-    }
+  .about .label {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 8px;
+    margin-left: 30px;
+  }
 
-    .header4 img {
-        height: 15px;
-    }
+  .contact a {
+    text-decoration: underline;
+  }
 
-    .contact {
-        font-size: 14px;
-    }
+  .profile-window .header4 {
+    margin: 0;
+    font-size: 18px;
+  }
 
-    .info {
-        margin-right: auto;
-        margin-left: 30px;
-    }
+  .header4 img {
+    height: 15px;
+  }
 
-    .profile-window .avatar {
-        max-width: 130px;
-    }
+  .contact {
+    font-size: 14px;
+  }
 
-    .profile-directions img {
-        width: 24px;
-    }
+  .info {
+    margin-right: auto;
+    margin-left: 30px;
+  }
+
+  .profile-window .avatar {
+    max-width: 130px;
+  }
+
+  .profile-directions img {
+    width: 24px;
+  }
 }

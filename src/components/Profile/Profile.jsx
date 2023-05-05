@@ -72,7 +72,7 @@ const Profile = observer(() => {
 						
 						.improved-profile-message .transaction .message {
 							background-color: ${backColor}35;
-						`
+					`
 				}
 			</style>
 			<div className="container">
