@@ -24,15 +24,22 @@ const Profile = observer(() => {
 	const {id} = useParams()
 	const host = getHostInformation()
 	const [isCopy, setIsCopy] = useState(false)
+	const [borderColor, setBorderColor] = useState(null)
+	const [backColor, setBackColor] = useState(null)
+	const [emojiStatus, setEmojiStatus] = useState(null)
+	const [emojiSticker, setEmojiSticker] = useState(null)
 	const history = useNavigate()
 	const screenWidth = document.documentElement.clientWidth
 	const nodeRef = useRef(null)
-	// временно
-	const borderColor = "#4751A2"
-	const backColor = "#4751A2"
 
 	useEffect(() => {
-		void StudentProfileStore.fetchStudentInfo(id)
+		StudentProfileStore.fetchStudentInfo(id).then(() => {
+				setBorderColor(StudentProfileStore.studentInfo?.student_profile?.border_color)
+				setBackColor(StudentProfileStore.studentInfo?.student_profile?.back_color)
+				setEmojiStatus(StudentProfileStore.studentInfo?.student_profile?.emoji_status)
+				setEmojiSticker(StudentProfileStore.studentInfo?.student_profile?.emoji_sticker)
+			}
+		)
 	}, [id])
 
 	const copy = () => {
@@ -66,7 +73,6 @@ const Profile = observer(() => {
 						
 						.improved-profile .about-text {
     					min-width: 140px;
-    					font-size: 13px;
     					background-color: ${backColor}42;
 						}
 						

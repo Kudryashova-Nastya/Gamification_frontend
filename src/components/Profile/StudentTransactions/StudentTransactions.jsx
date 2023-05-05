@@ -40,7 +40,6 @@ const StudentTransactions = observer(({id}) => {
 			let req = await fetch(`${host}/api/v1/transaction/all_student_transfer/`, POSTCORS({"student_id": StudentProfileStore.studentInfo.id}, token?.access))
 			const data = await req.json()
 				if (req.ok) {
-					console.log(data)
 					setTransactions(data)
 				} else if (data.code === "token_not_valid") {
 					return fetchData()

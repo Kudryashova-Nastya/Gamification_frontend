@@ -14,11 +14,9 @@ export const EditBuyModalWindow = observer(forwardRef(({data}, ref) => {
 		let improve = {}
 		if (type === "border_color" || type === "back_color") {
 			improve[type] = sketchColor
-			console.log("improve", improve)
 			res = await StudentProfileStore.editProfile({"student_profile": improve})
 		} else if (type === "emoji_status" || type === "emoji_sticker") {
 			improve[type] = data.store_product?.image
-			console.log("improve", improve)
 			res = await StudentProfileStore.editProfile({"student_profile": improve})
 		} else {
 			res = "Не удалось применить улучшение"
