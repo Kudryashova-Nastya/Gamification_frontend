@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {observer} from "mobx-react";
-import Search from "../Search/Search";
 import {useNavigate} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "./style.css"
@@ -10,6 +9,7 @@ import MarketStore from "../../store/MarketStore";
 import BACK from "../../images/icons/back.svg";
 import {CSSTransition} from "react-transition-group";
 import {EditBuyModalWindow} from "./EditBuyModalWindow/EditBuyModalWindow";
+import BuysSearch from "../Search/BuysSearch";
 
 const MyBuys = observer(() => {
 	const [isLoading, setIsLoading] = useState(true)
@@ -20,12 +20,14 @@ const MyBuys = observer(() => {
 	const [arr, setArr] = useState([])
 
 	useEffect(() => {
-		MarketStore.fetchMyBuys().then(
-			() => {
-				setArr(MarketStore.myBuys)
-				setIsLoading(false)
-			}
-		)
+		const fetchData = async () => {
+			setIsLoading(true)
+			await MarketStore.fetchMyBuys()
+			setArr(MarketStore.myBuys)
+			setIsLoading(false)
+		}
+
+		void fetchData()
 	}, [])
 
 	return (
@@ -35,7 +37,7 @@ const MyBuys = observer(() => {
 					<img src={BACK} alt="Назад" className="header-back" onClick={() => history(-1)}/>Мои покупки
 				</h1>
 				{!isLoading &&
-					<Search students={MarketStore.myBuys} setArr={setArr}/>
+					<BuysSearch setArr={setArr}/>
 				}
 			</div>
 			<hr color="#CCCCCC" size="4"/>
@@ -44,21 +46,23 @@ const MyBuys = observer(() => {
 					<div key={i} className="market-card">
 						<div className="left-side">
 							<div className="avatar">
-								{el?.image ? <img alt="photo" src={`${host}${el.image}`}/> :
-									el.hasOwnProperty('image') ?
+								{el.store_product?.image ? <img alt="photo" src={`${host}${el.store_product?.image}`}/> :
+									el.store_product?.hasOwnProperty('image') ?
 										"" :
 										<Skeleton width={88} height={88} circle={true}/>}
 							</div>
 							<div>
 								{!isLoading &&
-									<button className="button" onClick={()=> MarketStore.setEditVisible(el)}>Забрать/Применить</button>
+									<button className="button" disabled={el.status} onClick={() => MarketStore.setEditVisible(el)}>
+										{el.store_product?.product_type === "merch" ? "Забрать" : "Применить"}
+									</button>
 								}
 							</div>
 						</div>
 						<div>
-							<div className="name">{el.name || <Skeleton width={100}/>}</div>
+							<div className="name">{el.store_product?.name || <Skeleton width={100}/>}</div>
 							<div className="description">
-								{el.description ||
+								{el.store_product?.description ||
 									<Skeleton width={150} count={2}/>}
 							</div>
 						</div>

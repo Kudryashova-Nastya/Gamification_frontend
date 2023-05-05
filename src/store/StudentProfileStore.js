@@ -84,22 +84,20 @@ class StudentProfileStore {
 		}
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/profile/`, PATCHCORS(data, token?.access))
-		const res = await req.json()
+		const res = await req.json() || {detail: "проблема сервера"}
 		if (req?.ok && req?.status === 200) {
 			return false // возвращает false в случае успеха
 		} else {
 			if (res.code === "token_not_valid") {
-				console.log("проблема протухшего токена обнаружена")
 				Auth.getToken().then((token) => {
 					if (token?.access) {
-						console.log("проблема протухания решена, перезапуск запроса")
 						return this.editProfile(data)
 					} else {
-						console.log("проблема протухания не решена", token)
 					}
 				})
 			}
-			return res // возвращает текст ошибки в случае ошибки
+			console.log("error", JSON.stringify(res))
+			return res.detail || JSON.stringify(res) // возвращает текст ошибки в случае ошибки
 		}
 	}
 

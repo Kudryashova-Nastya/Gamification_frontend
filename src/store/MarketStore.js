@@ -3,7 +3,7 @@ import {
 	bodyFixPosition,
 	bodyUnfixPosition,
 	getHostInformation,
-	CORS, POSTCORS,
+	CORS, POSTCORS
 } from "./helper/Helper";
 import Auth from "./helper/Auth";
 
@@ -60,7 +60,7 @@ class MarketStore {
 		}
 	}
 
-	myBuys = []
+	myBuys = [{},{}]
 	fetchMyBuys = async () => {
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/store_product/all_student_product/`, CORS(token?.access));
@@ -84,7 +84,7 @@ class MarketStore {
 
 	buy = async (data) => {
 		if (!data) {
-			return null
+			return "нет данных для запроса"
 		}
 		try {
 			const token = await Auth.getToken()

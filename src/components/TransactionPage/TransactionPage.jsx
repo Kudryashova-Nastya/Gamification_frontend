@@ -28,7 +28,6 @@ const TransactionPage = observer(() => {
 		e.preventDefault();
 		const form = e.target
 		setData({
-			"transfer_type": "transfer",
 			"to_id": recipient,
 			"sum_count": parseInt(form.number.value),
 			"comment": form.comment.value,

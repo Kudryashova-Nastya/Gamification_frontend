@@ -122,7 +122,7 @@ const Profile = observer(() => {
 								}
 								{StudentProfileStore.studentInfo.direction ? StudentProfileStore.studentInfo.direction.length === 0 ? "" :
 									<div className="contact profile-directions">
-										{StudentProfileStore.studentInfo.direction?.map((icon, id) => <img alt="направление" width="29"
+										{StudentProfileStore.studentInfo.direction?.map((icon, id) => <img alt="" width="29"
 																																											 title={icon.name} key={id}
 																																											 src={`${host}${icon.icon}`}/>
 										)}
