@@ -276,12 +276,13 @@ input[type="radio"]:checked + label:after {
     opacity: 1;
 }
 
-
-@media (max-width: 768px) {
+@media (max-width: 818px) {
     .container {
         padding: 30px 3vw;
     }
+}
 
+@media (max-width: 768px) {
     .header3 {
         font-size: 18px;
     }

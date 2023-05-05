@@ -16,8 +16,25 @@
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  gap: 20px;
+  gap: 12px;
   box-sizing: border-box;
+}
+
+.profile-back {
+  position: relative;
+}
+
+.emojiSticker {
+  position: absolute;
+  left: -10px;
+  top: -15px;
+  @media (max-width: 767px) {
+    left: -5px;
+  }
+}
+
+.emojiSticker img {
+  width: 47px;
 }
 
 .profile-window .avatar {
@@ -63,7 +80,6 @@
   font-weight: 600;
 }
 
-
 .contact {
   font-weight: 600;
   font-size: 13px;
@@ -90,7 +106,6 @@
 .contact a:hover {
   color: #F50106;
   transition: 0.3s;
-
 }
 
 .profile-directions {
@@ -100,7 +115,6 @@
 .profile-directions img {
   margin-right: 7px;
 }
-
 
 .about .label {
   font-weight: 600;
@@ -121,11 +135,9 @@
   box-sizing: border-box;
 }
 
-
 .header-block .achive-icon {
   vertical-align: middle;
 }
-
 
 .achives {
   display: flex;

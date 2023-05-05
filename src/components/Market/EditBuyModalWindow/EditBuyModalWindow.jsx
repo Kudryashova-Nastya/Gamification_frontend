@@ -63,7 +63,7 @@ export const EditBuyModalWindow = observer(forwardRef(({data}, ref) => {
 							<div className="rows">
 								<div className="blockname">
 									{response ? response :
-										"Этот эмоджи будет украшать ваш личный профиль и будет виден всем остальным пользователям"
+										"Этот эмоджи станет украшением вашего личного профиля и будет виден всем остальным пользователям"
 									}
 								</div>
 							</div>

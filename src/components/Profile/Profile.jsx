@@ -92,9 +92,11 @@ const Profile = observer(() => {
 						<img className="button-icon" alt="копировать" src={LINK}/>
 					</button>
 				</div>
-				<div className={backColor && "improved-profile-back"}>
+				<div className={backColor ? "improved-profile-back profile-back" : "profile-back"}>
+					{emojiSticker &&
+						<div className="emojiSticker"><img src={`${host}${emojiSticker}`} alt=""/></div>}
 					<div className={backColor ? "profile-window improved-profile" : "profile-window"}
-							 style={borderColor && {"border": `5px solid ${borderColor}`}}>
+							 style={borderColor ? {"border": `5px solid ${borderColor}`} : {}}>
 						<div className="avatar">
 							{StudentProfileStore.studentInfo.image ?
 								<img alt="фото" src={`${host}${StudentProfileStore.studentInfo.image}`}/> :
@@ -105,7 +107,9 @@ const Profile = observer(() => {
 						<div className="info">
 							<h2
 								className="header3">{StudentProfileStore.studentInfo.first_name ||
-								<Skeleton width={140}/>} {StudentProfileStore.studentInfo.last_name}</h2>
+								<Skeleton width={140}/>} {StudentProfileStore.studentInfo.last_name}&nbsp; {emojiStatus &&
+								<img src={`${host}${emojiStatus}`} height="24" alt="" className="balance-icon"/>}
+							</h2>
 							<div className="header4"> <span className="balance-icon">{StudentProfileStore.studentInfo.balance ||
 								<Skeleton width={50}/>}</span> {StudentProfileStore.studentInfo.balance &&
 								<img alt="тукоинов" className="balance-icon" src={MAINTUCOIN}/>}</div>
