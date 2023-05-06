@@ -25,12 +25,22 @@
 }
 
 .student-card:hover {
-    /*background-color: #CCCCCC;*/
+    --hover-color: rgba(204, 204, 204, 0.09);
     transition: all 0.5s ease;
-    /*border: 3px solid #8d8d8d;*/
     border: 3px solid #CCCCCC;
-    background-color: rgba(204, 204, 204, 0.11);
+    background-color: var(--hover-color, rgba(204, 204, 204, 0.09));
+}
 
+.improved-card-back {
+    --back-color: white;
+    border-radius: 100px;
+    padding-left: 21px;
+    background-color: var(--back-color)
+}
+
+.white-middle {
+    border-radius: 100px;
+    background-color: white;
 }
 
 .student-card .avatar {

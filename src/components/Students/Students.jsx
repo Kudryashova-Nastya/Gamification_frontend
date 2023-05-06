@@ -96,13 +96,14 @@ const Students = ({canRegister = false, canFilter = false}) => {
 					<div className="two-elements-right">
 						{canRegister &&
 							<button onClick={() => history("../student-registration")} className="button">Регистрация</button>}
-						<Search students={students} setArr={setArr} setCurrentPage={setCurrentPage} sort={sortStudents} by={sortBy}/>
+						<Search students={students} setArr={setArr} setCurrentPage={setCurrentPage} sort={sortStudents}
+										by={sortBy}/>
 					</div>}
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			{canFilter &&
 				<div className="filter-container">
-					<div>Сортировка: </div>
+					<div>Сортировка:</div>
 					<div className="filter-value">
 						<input type="radio" id="by-id" name="filter" value="id" checked={sortBy === 'id'}
 									 onChange={handleSortChange}/>
@@ -123,29 +124,40 @@ const Students = ({canRegister = false, canFilter = false}) => {
 			}
 			<div className="student-container">
 				{currentPosts?.map((el, i) =>
-					<Link to={`/student/${el.id}`} key={i} className="student-card">
-						<div className="avatar">
-							{el?.image ? <img alt="avatar" src={`${host}${el.image}`}/> :
-								el.hasOwnProperty('image') ?
-									<img alt="avatar" src={DEFAULT_AVATAR}/> :
-									<Skeleton width={75} height={75} circle={true}/>}
+					<div className={el.student_profile?.back_color ? "improved-card-back" : ""}
+							 style={{"--back-color": el.student_profile?.back_color}}>
+						<div className="white-middle">
+							<Link to={`/student/${el.id}`} key={i} className="student-card"
+										style={el.student_profile?.border_color ? {
+											"border": `4px solid ${el.student_profile.border_color}`,
+											"--hover-color": `${el.student_profile.back_color}40`
+										} : el.student_profile?.back_color ?
+											{"--hover-color": `${el.student_profile.back_color}40`, "border": "3px solid #111111"} : {}}
+							>
+								<div className="avatar">
+									{el?.image ? <img alt="avatar" src={`${host}${el.image}`}/> :
+										el.hasOwnProperty('image') ?
+											<img alt="avatar" src={DEFAULT_AVATAR}/> :
+											<Skeleton width={75} height={75} circle={true}/>}
+								</div>
+								<div className="info">
+									<div className="name">{el.first_name || <Skeleton width={100}/>} {el.last_name}</div>
+									<div className="balance"><span className="balance-icon">{el.balance ||
+										<Skeleton width={40}/>}</span> {el.balance &&
+										<img className="balance-icon" src={TUCOIN} alt=""/>}</div>
+									<div className="directions">
+										{el?.direction ? el.direction?.length === 0 ? "" : <>
+												{el.direction?.map((icon, id) => <img alt="направление" title={icon.name} key={id}
+																															src={`${host}${icon.icon}`}/>
+												)}
+											</> :
+											<Skeleton circle={true} height={21} width={21}/>
+										}
+									</div>
+								</div>
+							</Link>
 						</div>
-						<div className="info">
-							<div className="name">{el.first_name || <Skeleton width={100}/>} {el.last_name}</div>
-							<div className="balance"><span className="balance-icon">{el.balance ||
-								<Skeleton width={40}/>}</span> {el.balance &&
-								<img className="balance-icon" src={TUCOIN} alt=""/>}</div>
-							<div className="directions">
-								{el?.direction ? el.direction?.length === 0 ? "" : <>
-										{el.direction?.map((icon, id) => <img alt="направление" title={icon.name} key={id}
-																													src={`${host}${icon.icon}`}/>
-										)}
-									</> :
-									<Skeleton circle={true} height={21} width={21}/>
-								}
-							</div>
-						</div>
-					</Link>
+					</div>
 				)}
 			</div>
 			<Pagination pages={howManyPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
