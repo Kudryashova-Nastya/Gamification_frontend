@@ -124,10 +124,10 @@ const Students = ({canRegister = false, canFilter = false}) => {
 			}
 			<div className="student-container">
 				{currentPosts?.map((el, i) =>
-					<div className={el.student_profile?.back_color ? "improved-card-back" : ""}
+					<div key={i} className={el.student_profile?.back_color ? "improved-card-back" : ""}
 							 style={{"--back-color": el.student_profile?.back_color}}>
 						<div className="white-middle">
-							<Link to={`/student/${el.id}`} key={i} className="student-card"
+							<Link to={`/student/${el.id}`} className="student-card"
 										style={el.student_profile?.border_color ? {
 											"border": `4px solid ${el.student_profile.border_color}`,
 											"--hover-color": `${el.student_profile.back_color}40`
@@ -140,8 +140,11 @@ const Students = ({canRegister = false, canFilter = false}) => {
 											<img alt="avatar" src={DEFAULT_AVATAR}/> :
 											<Skeleton width={75} height={75} circle={true}/>}
 								</div>
-								<div className="info">
-									<div className="name">{el.first_name || <Skeleton width={100}/>} {el.last_name}</div>
+								<div>
+									<div className="name">{el.first_name || <Skeleton width={100}/>} {el.last_name}
+										&nbsp; {el.student_profile?.emoji_status &&
+											<img src={`${host}${el.student_profile.emoji_status}`} height="20" alt="" className="balance-icon"/>}
+									</div>
 									<div className="balance"><span className="balance-icon">{el.balance ||
 										<Skeleton width={40}/>}</span> {el.balance &&
 										<img className="balance-icon" src={TUCOIN} alt=""/>}</div>

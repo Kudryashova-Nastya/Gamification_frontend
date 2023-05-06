@@ -18,15 +18,16 @@
     flex-wrap: nowrap;
     align-items: center;
     gap: 15px;
-    transition: all 0.3s ease;
     color: #111111;
     text-decoration: none;
     min-height: 80px;
+    transition: all 0.5s ease;
+    width: 92%;
 }
 
 .student-card:hover {
     --hover-color: rgba(204, 204, 204, 0.09);
-    transition: all 0.5s ease;
+    transition: all 0.9s ease;
     border: 3px solid #CCCCCC;
     background-color: var(--hover-color, rgba(204, 204, 204, 0.09));
 }
@@ -34,19 +35,27 @@
 .improved-card-back {
     --back-color: white;
     border-radius: 100px;
-    padding-left: 21px;
-    background-color: var(--back-color)
+    padding-left: 5%;
+    background-color: var(--back-color);
+    transition: all 0.5s ease;
+    box-sizing: border-box;
+}
+
+.improved-card-back:hover {
+    padding-left: 8%;
+    transition: all 0.5s ease;
 }
 
 .white-middle {
-    border-radius: 100px;
+    border-radius: 100px 0 0 100px;
     background-color: white;
+    box-sizing: border-box;
+    transition: all 0.5s ease;
 }
 
 .student-card .avatar {
     max-width: 75px;
     max-height: 75px;
-    /*margin-top: 3px;*/
     overflow: hidden;
     border-radius: 50px;
 }
@@ -61,9 +70,13 @@
     font-size: 16px;
 }
 
+.student-card .directions {
+    margin-top: 5px;
+}
+
 .student-card .directions img{
-    width: 21px;
-    margin-right: 8px;
+    width: 18px;
+    margin-right: 7px;
 }
 
 .filter-container {
@@ -84,6 +97,7 @@
     border: #111111 solid 1px;
     border-radius: 40px;
 }
+
 
 @media (max-width: 767px) {
     .student-container {
@@ -114,6 +128,7 @@
     .student-card {
         padding: 5px 10px;
         gap: 13px;
+        min-width: 250px;
     }
 
     .student-card .directions img {
