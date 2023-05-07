@@ -22,12 +22,20 @@ const Market = observer(({canBuy = false}) => {
 	const [arr, setArr] = useState([{}, {}, {}, {}])
 
 	useEffect(() => {
-		MarketStore.fetchGoodsInfo().then(
-			() => {
-				setArr(MarketStore.goodsInfo)
-				setIsLoading(false)
-			}
-		)
+		if (canBuy) {
+			MarketStore.fetchEnableGoodsInfo().then(
+				() => {
+					setArr(MarketStore.goodsInfo)
+				}
+			)
+		} else {
+			MarketStore.fetchAllGoodsInfo().then(
+				() => {
+					setArr(MarketStore.goodsInfo)
+				}
+			)
+		}
+		setIsLoading(false)
 	}, [])
 
 	return (
@@ -55,7 +63,8 @@ const Market = observer(({canBuy = false}) => {
 							</div>
 							<div>
 								{!isLoading &&
-									<button className="button" onClick={()=> MarketStore.setBuyVisible(el)}><span className="balance-icon">{el.price} </span>
+									<button className="button" disabled={!canBuy} onClick={() => MarketStore.setBuyVisible(el)}><span
+										className="balance-icon">{el.price} </span>
 										<img className="balance-icon" src={TUCOIN} alt=""/></button>
 								}
 							</div>

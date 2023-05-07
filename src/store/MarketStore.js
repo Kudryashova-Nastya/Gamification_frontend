@@ -37,7 +37,7 @@ class MarketStore {
 	}
 
 	goodsInfo = [{},{},{},{}]
-	fetchGoodsInfo = async () => {
+	fetchAllGoodsInfo = async () => {
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/store_product`, CORS(token?.access));
 		const res = await req.json();
@@ -49,9 +49,30 @@ class MarketStore {
 			if (res.code === "token_not_valid") {
 				Auth.getToken().then((token) => {
 					if (token?.access) {
-						this.fetchGoodsInfo()
+						this.fetchAllGoodsInfo()
 					} else {
 						console.log("проблема протухания не решена", token)
+					}
+				})
+			} else {
+				console.log("error", JSON.stringify(res))
+			}
+		}
+	}
+
+	fetchEnableGoodsInfo = async () => {
+		const token = await Auth.getToken()
+		const req = await fetch(`${host}/api/v1/store_product/opportunity_student_buy`, CORS(token?.access));
+		const res = await req.json();
+		if (req.ok) {
+			runInAction(() => {
+				this.goodsInfo = res
+			})
+		} else {
+			if (res.code === "token_not_valid") {
+				Auth.getToken().then((token) => {
+					if (token?.access) {
+						this.fetchEnableGoodsInfo()
 					}
 				})
 			} else {
