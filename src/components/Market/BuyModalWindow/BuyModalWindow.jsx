@@ -3,9 +3,13 @@ import {observer} from 'mobx-react';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
 import MarketStore from "../../../store/MarketStore";
 import TUCOIN from "../../../images/icons/black-tucoin16.svg";
+import Auth from "../../../store/helper/Auth";
+import {useNavigate} from "react-router-dom";
 
 export const BuyModalWindow = observer(forwardRef(({data}, ref) => {
 	const [error, setError] = useState(null)
+	const history = useNavigate()
+
 	const tryBuy = async () => {
 
 		const res = await MarketStore.buy({
@@ -15,9 +19,14 @@ export const BuyModalWindow = observer(forwardRef(({data}, ref) => {
 			setError(res)
 		} else {
 			setError(null)
-			await MarketStore.fetchGoodsInfo()
+			history("my-buys")
+			// из купленных студентом товаров последним в списке и будет тот, что куплен только что
+			await MarketStore.fetchMyBuys()
+			await MarketStore.setEditVisible(MarketStore.myBuys.at(-1))
+
+			void MarketStore.fetchEnableGoodsInfo()
+			void Auth.getProfileInfo()
 		}
-		MarketStore.closeModal()
 	}
 
 	return (
