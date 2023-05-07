@@ -44,12 +44,11 @@ const Profile = observer(({canTransfer = false}) => {
 
 	const copy = () => {
 		const el = document.createElement('input')
-		// если это профиль текущего пользователя, дописать его id в конце, чтобы другие смогли перейти на его акк по ссылке
-		if (StudentProfileStore.isMyProfile) {
-			el.value = window.location.href + StudentProfileStore.studentInfo.id
-		} else {
-			el.value = window.location.href
-		}
+		// обычное копирование ссылки не подойдёт, так как для разных ролей она выглядит по-разному в адресной строке,
+		// а также у текущего пользователя в своём аккаунте не указан id,
+		// поэтому чтобы другие смогли перейти на акк по ссылке, нужен единый вид, как указано ниже
+		el.value = `${window.location.origin}/student/${StudentProfileStore.studentInfo.id}`
+
 		document.body.appendChild(el)
 		el.select()
 		document.execCommand('copy')
