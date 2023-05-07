@@ -20,7 +20,7 @@ import Skeleton from "react-loading-skeleton";
 import {getHostInformation} from "../../store/helper/Helper";
 import {CSSTransition} from "react-transition-group";
 
-const Profile = observer(() => {
+const Profile = observer(({canTransfer = false}) => {
 	const {id} = useParams()
 	const host = getHostInformation()
 	const [isCopy, setIsCopy] = useState(false)
@@ -174,8 +174,10 @@ const Profile = observer(() => {
 				<div className="header-block">
 					<h2
 						className="header3">{StudentProfileStore.isMyProfile ? "Моя история" : "История"} {screenWidth < 768 ? '' : 'операций'}</h2>
-					<button onClick={() => history("send")} className="button button-send">Перевести <img
-						className="send button-icon" alt="перевод" src={SEND}/></button>
+					{canTransfer &&
+						<button onClick={() => history("send")} className="button button-send">Перевести <img
+							className="send button-icon" alt="перевод" src={SEND}/></button>
+					}
 				</div>
 				<hr color="#CCCCCC" size="4"/>
 				<div className={backColor && "improved-profile-message"}>

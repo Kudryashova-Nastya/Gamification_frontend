@@ -11,7 +11,7 @@ import SEND from "../../images/icons/send.svg";
 import Transaction from "../Transaction/Transaction";
 import {observer} from "mobx-react";
 
-const Bank = observer(() => {
+const Bank = observer(({canTransfer = false}) => {
 	const history = useNavigate()
 
 	const [transactions, setTransactions] = useState([
@@ -70,13 +70,16 @@ const Bank = observer(() => {
 		<div className="container">
 			<div className="header-block main-header">
 				<h1 className="header1">TUCOIN Банк</h1>
-				<button onClick={() => history("/student/send")} className="button button-send">Перевести <img
-					className="send button-icon" alt="перевод" src={SEND}/></button>
+				{canTransfer &&
+					<button onClick={() => history("/student/send")} className="button button-send">Перевести <img
+						className="send button-icon" alt="перевод" src={SEND}/></button>
+				}
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="bank-value-container">
 				<div className="bank-value">
-					<span className="balance-icon">{allTucoins}</span> <img className="balance-icon" src={BIGTUCOIN} alt="tucoin"/>
+					<span className="balance-icon">{allTucoins} </span>
+					<img className="balance-icon" src={BIGTUCOIN} alt="tucoin"/>
 					<span className="bank-sub">в системе</span>
 				</div>
 			</div>

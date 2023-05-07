@@ -64,9 +64,9 @@ const App = observer(() => {
 						<Route path="send" element={<TransactionPage/>}/>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students/>}/>
-						<Route path=":id" element={<Profile/>}/>
+						<Route path=":id" canTransfer={true} element={<Profile/>}/>
 						<Route path=":id/send" element={<TransactionPage/>}/>
-						<Route path="bank" element={<Bank/>}/>
+						<Route path="bank" canTransfer={true} element={<Bank/>}/>
 						<Route path="market" element={<Market canBuy={true}/>}/>
 						<Route path="market/my-buys" element={<MyBuys/>}/>
 					</Route>
