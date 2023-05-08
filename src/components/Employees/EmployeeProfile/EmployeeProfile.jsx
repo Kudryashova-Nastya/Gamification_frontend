@@ -8,10 +8,12 @@ import "./EmployeeProfile.css"
 import {observer} from "mobx-react";
 import {CSSTransition} from "react-transition-group";
 import {EditEmployeeModalWindow} from "../../Profile/EditModalWindow/EditEmployeeModalWindow";
+import {useNavigate} from "react-router-dom";
 
-const EmployeeProfile = observer(() => {
+const EmployeeProfile = observer(({canGiveMerch = false}) => {
 	const [editVisible, setEditVisible] = useState(false)
 	const nodeRef = useRef(null)
+	const history = useNavigate()
 
 	return (
 		<div className="container">
@@ -28,6 +30,9 @@ const EmployeeProfile = observer(() => {
 				<button className="button" onClick={() => setEditVisible(true)}>Редактировать
 					<img className="button-icon" alt="редактировать" src={EDIT}/>
 				</button>
+				{canGiveMerch && <button className="button" onClick={() => history('market/merch')}>
+					Выдать мерч
+				</button>}
 			</div>
 
 			<CSSTransition

@@ -8,10 +8,9 @@ import {getHostInformation} from "../../store/helper/Helper";
 import MarketStore from "../../store/MarketStore";
 import BACK from "../../images/icons/back.svg";
 import {CSSTransition} from "react-transition-group";
-import {EditBuyModalWindow} from "./EditBuyModalWindow/EditBuyModalWindow";
-import BuysSearch from "../Search/BuysSearch";
+import {GiveMerchModalWindow} from "./GiveMerchModalWindow/GiveMerchModalWindow";
 
-const MyBuys = observer(() => {
+const MarketMerch = observer(() => {
 	const [isLoading, setIsLoading] = useState(true)
 	const host = getHostInformation()
 	const history = useNavigate()
@@ -22,8 +21,8 @@ const MyBuys = observer(() => {
 	useEffect(() => {
 		const fetchData = async () => {
 			setIsLoading(true)
-			await MarketStore.fetchMyBuys()
-			setArr(MarketStore.myBuys)
+			await MarketStore.fetchMerchToGive()
+			setArr(MarketStore.merchToGive)
 			setIsLoading(false)
 		}
 
@@ -34,11 +33,8 @@ const MyBuys = observer(() => {
 		<div className="container">
 			<div className="header-block header-search main-header">
 				<h1 className="header1">
-					<img src={BACK} alt="Назад" className="header-back" onClick={() => history(-1)}/>Мои покупки
+					<img src={BACK} alt="Назад" className="header-back" onClick={() => history(-1)}/>Выдать мерч
 				</h1>
-				{!isLoading &&
-					<BuysSearch setArr={setArr}/>
-				}
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="student-container">
@@ -53,8 +49,8 @@ const MyBuys = observer(() => {
 							</div>
 							<div>
 								{!isLoading &&
-									<button className="button" disabled={el.status} onClick={() => MarketStore.setEditVisible(el)}>
-										{el.store_product?.product_type === "merch" ? el.status ? "Выдано" : "Забрать" : "Применить"}
+									<button className="button" onClick={() => MarketStore.setModalGiveMerchVisible(el)}>
+										Выдать
 									</button>
 								}
 							</div>
@@ -69,18 +65,18 @@ const MyBuys = observer(() => {
 					</div>
 				)}
 			</div>
-			{arr.length === 0 && <div className="noinformation">Товары не найдены</div>}
+			{arr.length === 0 && <div className="noinformation">На данный момент нет невыданных товаров</div>}
 			<CSSTransition
-				in={MarketStore.modalEditVisible}
+				in={MarketStore.modalGiveMerchVisible}
 				timeout={300}
 				classNames="alert"
 				unmountOnExit
 				nodeRef={nodeRef}
 			>
-				<EditBuyModalWindow ref={nodeRef} data={MarketStore.currentMyBuy}/>
+				<GiveMerchModalWindow ref={nodeRef} data={MarketStore.currentMyBuy}/>
 			</CSSTransition>
 		</div>
 	);
 });
 
-export default MyBuys;
+export default MarketMerch;

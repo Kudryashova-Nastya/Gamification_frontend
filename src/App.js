@@ -15,6 +15,7 @@ import Bank from "./components/Bank/Bank";
 import EmployeeProfile from "./components/Employees/EmployeeProfile/EmployeeProfile";
 import Market from "./components/Market/Market";
 import MyBuys from "./components/Market/MyBuys";
+import MarketMerch from "./components/Market/MarketMerch";
 
 
 const App = observer(() => {
@@ -73,27 +74,31 @@ const App = observer(() => {
 
 					<Route path="/manager"
 								 element={(token && role === 'manager') ? <Menu role={"manager"}/> : <Navigate to="/login" replace/>}>
-						<Route path="" element={<EmployeeProfile/>}/>
+						<Route path="" element={<EmployeeProfile canGiveMerch={true}/>}/>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="student-registration" element={<StudentRegistration/>}/>
 						<Route path="students" element={<Students canRegister={true} canFilter={true}/>}/>
 						<Route path="student/:id" element={<Profile/>}/>
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market/>}/>
+						<Route path="market/merch" element={<MarketMerch/>}/>
 					</Route>
 
 					<Route path="/couch"
 								 element={(token && role === 'couch') ? <Menu role={"couch"}/> : <Navigate to="/login" replace/>}>
+						<Route path="" element={<EmployeeProfile canGiveMerch={true}/>}/>
 						<Route path="student-registration" element={<StudentRegistration/>}/>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students canRegister={true} canFilter={true}/>}/>
 						<Route path="student/:id" element={<Profile/>}/>
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market/>}/>
+						<Route path="market/merch" element={<MarketMerch/>}/>
 					</Route>
 
 					<Route path="/curator"
 								 element={(token && role === 'curator') ? <Menu role={"curator"}/> : <Navigate to="/login" replace/>}>
+						<Route path="" element={<EmployeeProfile/>}/>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students canFilter={true}/>}/>
 						<Route path="student/:id" element={<Profile/>}/>
