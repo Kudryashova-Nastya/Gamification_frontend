@@ -54,6 +54,8 @@ const MarketMerch = observer(() => {
 						</div>
 						<div>
 							<div className="name">{el.product_name || <Skeleton width={100}/>}</div>
+							<div className="merch-info">to: {el.student_first_name} {el.student_last_name}</div>
+							<div className="merch-info">id: {el.id}</div>
 							<div className="description">
 								{el.product_description ||
 									<Skeleton width={150} count={2}/>}

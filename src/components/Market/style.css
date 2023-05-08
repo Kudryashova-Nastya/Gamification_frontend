@@ -48,6 +48,12 @@
     align-items: center;
 }
 
+.market-card .merch-info {
+    font-weight: 500;
+    margin-bottom: 5px;
+    margin-top: -4px;
+}
+
 .setcolor {
     margin: auto;
 }
