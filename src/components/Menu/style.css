@@ -140,6 +140,27 @@ nav a:hover .value {
     display: none;
 }
 
+.settings-text {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 130%;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.settings-header {
+    text-align: center;
+}
+
+.button.btn-large.settings-button {
+    font-size: 15px;
+}
+
+.settings-button img {
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
 @media (max-width: 1330px) {
     .social {
         max-width: 190px;
@@ -257,6 +278,17 @@ nav a:hover .value {
 
     .menu__info .name {
         font-size: 15px;
+    }
+
+    .button.btn-large.settings-button {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .settings-text {
+        font-size: 15px;
+        margin-top: 14px;
+        margin-bottom: 20px;
     }
 
 }

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import './style.css';
 import {Link, Outlet} from "react-router-dom";
 import TUCOIN_MENU_MINI from "../../images/icons/Tucoin_menu_mini.svg"
@@ -19,10 +19,14 @@ import {bodyFixPosition, bodyUnfixPosition, getHostInformation} from "../../stor
 import {observer} from "mobx-react";
 import Auth from "../../store/helper/Auth";
 import DEFAULT_AVATAR from "../../images/icons/default-avatar.svg";
+import {CSSTransition} from "react-transition-group";
+import {SettingsModalWindow} from "../SettingsModalWindow/SettingsModalWindow";
 
 
 const Menu = observer(({role}) => {
 	const host = getHostInformation()
+	const nodeRef = useRef(null)
+
 	const toggleMenu = () => {
 		if (document.documentElement.clientWidth < 768) {
 			document.getElementsByClassName("burger-container")[0].classList.toggle("active")
@@ -134,7 +138,7 @@ const Menu = observer(({role}) => {
 																																						alt="TELEGRAM"/></a><br/>
 							<a target="_blank" href="https://vk.com/tumomoscow/"><img src={VK} className="networks"
 																																				alt="VK"/></a><br/>
-							<span onClick={() => Auth.logout()}><img src={SETTINGS} className="networks" alt="SETTINGS"/></span><br/>
+							<span onClick={() => Auth.setSettingsVisible(true)}><img src={SETTINGS} className="networks" alt="SETTINGS"/></span><br/>
 						</div>
 						<div>
 							<a target="_blank" href="https://tumo.moscow/"><img src={LOGO} className="networks logo" alt="LOGO"/></a>
@@ -149,7 +153,15 @@ const Menu = observer(({role}) => {
 				</div>
 				<Outlet/>
 			</div>
-
+			<CSSTransition
+				in={Auth.modalSettingsVisible}
+				timeout={300}
+				classNames="alert"
+				unmountOnExit
+				nodeRef={nodeRef}
+			>
+				<SettingsModalWindow ref={nodeRef}/>
+			</CSSTransition>
 		</>
 	);
 })

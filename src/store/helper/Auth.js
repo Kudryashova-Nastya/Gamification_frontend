@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {getHostInformation, CORS, POSTCORS} from "./Helper";
+import {getHostInformation, CORS, POSTCORS, bodyFixPosition} from "./Helper";
 
 const host = getHostInformation()
 
@@ -139,6 +139,14 @@ class Auth {
 				console.log("ошибка получения данных профиля")
 			}
 		}
+	}
+
+	modalSettingsVisible = false
+	setSettingsVisible = (isVisible) => {
+		runInAction(() => {
+			this.modalSettingsVisible = isVisible
+		})
+		bodyFixPosition()
 	}
 }
 
