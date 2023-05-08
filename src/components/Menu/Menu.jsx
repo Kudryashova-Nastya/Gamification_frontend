@@ -65,7 +65,7 @@ const Menu = observer(({role}) => {
 								{role === "student" ? <div className="value"> {Auth.profileInfo.balance}
 									{Auth.profileInfo.balance && <img src={TUCOIN_MENU_MINI} className="tucoin" alt="игровой валюты"/>}
 								</div> : role === "manager" ? <div className="value">Админ</div>
-									: role === "couch" ? <div className="value">Коуч</div>
+									: role === "coach" ? <div className="value">Коуч</div>
 										: role === "curator" ? <div className="value">Куратор</div>
 											: ""
 								}

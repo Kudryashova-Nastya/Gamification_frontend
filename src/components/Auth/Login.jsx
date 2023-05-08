@@ -41,8 +41,8 @@ const Login = observer(() => {
 				case "curator":
 					history("/curator")
 					break;
-				case "couch":
-					history("/couch")
+				case "coach":
+					history("/coach")
 					break;
 				default:
 					alert("Ты кто?")

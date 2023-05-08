@@ -45,8 +45,8 @@ const App = observer(() => {
 		if (id && token) {
 			if (role === 'manager') {
 				return <Navigate to={`/manager/student/${id}`} replace/>
-			} else if (role === 'couch') {
-				return <Navigate to={`/couch/student/${id}`} replace/>
+			} else if (role === 'coach') {
+				return <Navigate to={`/coach/student/${id}`} replace/>
 			} else if (role === 'curator') {
 				return <Navigate to={`/curator/student/${id}`} replace/>
 			}
@@ -84,8 +84,8 @@ const App = observer(() => {
 						<Route path="market/merch" element={<MarketMerch/>}/>
 					</Route>
 
-					<Route path="/couch"
-								 element={(token && role === 'couch') ? <Menu role={"couch"}/> : <Navigate to="/login" replace/>}>
+					<Route path="/coach"
+								 element={(token && role === 'coach') ? <Menu role={"coach"}/> : <Navigate to="/login" replace/>}>
 						<Route path="" element={<EmployeeProfile canGiveMerch={true}/>}/>
 						<Route path="student-registration" element={<StudentRegistration/>}/>
 						<Route path="employees" element={<Employees/>}/>
