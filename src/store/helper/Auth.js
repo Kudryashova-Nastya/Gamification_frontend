@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {getHostInformation, CORS, POSTCORS, bodyFixPosition} from "./Helper";
+import {getHostInformation, CORS, POSTCORS} from "./Helper";
 
 const host = getHostInformation()
 
@@ -46,6 +46,7 @@ class Auth {
 
 	logout = () => {
 		this.setToken(null)
+		this.setSettingsVisible(false)
 	};
 
 	// узнать дату окончания жизни токена
@@ -146,7 +147,6 @@ class Auth {
 		runInAction(() => {
 			this.modalSettingsVisible = isVisible
 		})
-		bodyFixPosition()
 	}
 }
 

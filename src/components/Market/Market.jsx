@@ -12,7 +12,7 @@ import MarketStore from "../../store/MarketStore";
 import {CSSTransition} from "react-transition-group";
 import {BuyModalWindow} from "./BuyModalWindow/BuyModalWindow";
 
-const Market = observer(({canBuy = false}) => {
+const Market = observer(({canBuy = false, canGiveMerch = false}) => {
 	const [isLoading, setIsLoading] = useState(true)
 	const host = getHostInformation()
 	const history = useNavigate()
@@ -44,11 +44,15 @@ const Market = observer(({canBuy = false}) => {
 				<h1 className="header1">Маркет</h1>
 				{!isLoading &&
 					<div className="two-elements-right">
+						{canGiveMerch &&
+							<button onClick={() => history("merch")} className="button">Выдать мерч
+							</button>}
 						<Search students={MarketStore.goodsInfo} setArr={setArr}/>
 						{canBuy &&
 							<button onClick={() => history("my-buys")} className="button">Мои покупки
 								<img className="button-icon" alt="buy" src={MY_BUYS}/></button>}
 					</div>}
+
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="student-container">

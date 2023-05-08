@@ -15,14 +15,11 @@ const MarketMerch = observer(() => {
 	const host = getHostInformation()
 	const history = useNavigate()
 	const nodeRef = useRef(null)
-	// массив с результатами поиска
-	const [arr, setArr] = useState([])
 
 	useEffect(() => {
 		const fetchData = async () => {
 			setIsLoading(true)
 			await MarketStore.fetchMerchToGive()
-			setArr(MarketStore.merchToGive)
 			setIsLoading(false)
 		}
 
@@ -38,12 +35,12 @@ const MarketMerch = observer(() => {
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="student-container">
-				{arr?.map((el, i) =>
+				{MarketStore.merchToGive?.map((el, i) =>
 					<div key={i} className="market-card">
 						<div className="left-side">
 							<div className="avatar">
-								{el.store_product?.image ? <img alt="photo" src={`${host}${el.store_product?.image}`}/> :
-									el.store_product?.hasOwnProperty('image') ?
+								{el.product_image ? <img alt="photo" src={`${host}${el.product_image}`}/> :
+									el?.hasOwnProperty('product_image') ?
 										"" :
 										<Skeleton width={88} height={88} circle={true}/>}
 							</div>
@@ -56,16 +53,16 @@ const MarketMerch = observer(() => {
 							</div>
 						</div>
 						<div>
-							<div className="name">{el.store_product?.name || <Skeleton width={100}/>}</div>
+							<div className="name">{el.product_name || <Skeleton width={100}/>}</div>
 							<div className="description">
-								{el.store_product?.description ||
+								{el.product_description ||
 									<Skeleton width={150} count={2}/>}
 							</div>
 						</div>
 					</div>
 				)}
 			</div>
-			{arr.length === 0 && <div className="noinformation">На данный момент нет невыданных товаров</div>}
+			{MarketStore.merchToGive.length === 0 && <div className="noinformation">На данный момент нет невыданных товаров</div>}
 			<CSSTransition
 				in={MarketStore.modalGiveMerchVisible}
 				timeout={300}

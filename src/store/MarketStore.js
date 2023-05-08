@@ -165,7 +165,7 @@ class MarketStore {
 		}
 		try {
 			const token = await Auth.getToken()
-			const req = await fetch(`${host}/api/v1/store_history/${id}`, PATCHCORS({"status": true}, token?.access))
+			const req = await fetch(`${host}/api/v1/store_history/${id}/`, PATCHCORS({"status": true}, token?.access))
 			const res = await req.json() || {detail: "проблема сервера"}
 			if (req?.ok) {
 				return false // возвращает false в случае успеха

@@ -7,13 +7,12 @@ export const GiveMerchModalWindow = observer(forwardRef(({data}, ref) => {
 	const [error, setError] = useState(null)
 
 	const tryGive = async () => {
-
 		const res = await MarketStore.giveMerch(data.id)
 		if (res) {
 			setError(res)
 		} else {
 			setError(null)
-			await MarketStore.fetchMyBuys()
+			await MarketStore.fetchMerchToGive()
 			MarketStore.closeModal()
 		}
 	}
@@ -32,7 +31,7 @@ export const GiveMerchModalWindow = observer(forwardRef(({data}, ref) => {
 				<div className="header3">{error ? "Что-то пошло не так" : "Подтверждение выдачи"}</div>
 				<div className="rows">
 					{!error ? <div className="blockname">
-							Товар «{data.name}» выдан лично в руки студента?
+							Товар «{data.product_name}» выдан лично в руки студента {data.student_first_name} {data.student_last_name}?
 						</div> :
 						<div className="blockname">
 							<span className="balance-icon">{error}</span>
@@ -42,7 +41,7 @@ export const GiveMerchModalWindow = observer(forwardRef(({data}, ref) => {
 
 			</div>
 			{!error &&
-				<button onClick={() => tryGive(data)} className="button btn-large">Выдать</button>
+				<button onClick={() => tryGive()} className="button btn-large">Выдать</button>
 			}
 		</ModalWindow>
 	);

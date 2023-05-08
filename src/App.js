@@ -80,7 +80,7 @@ const App = observer(() => {
 						<Route path="students" element={<Students canRegister={true} canFilter={true}/>}/>
 						<Route path="student/:id" element={<Profile/>}/>
 						<Route path="bank" element={<Bank/>}/>
-						<Route path="market" element={<Market/>}/>
+						<Route path="market" element={<Market canGiveMerch={true}/>}/>
 						<Route path="market/merch" element={<MarketMerch/>}/>
 					</Route>
 
@@ -92,7 +92,7 @@ const App = observer(() => {
 						<Route path="students" element={<Students canRegister={true} canFilter={true}/>}/>
 						<Route path="student/:id" element={<Profile/>}/>
 						<Route path="bank" element={<Bank/>}/>
-						<Route path="market" element={<Market/>}/>
+						<Route path="market" element={<Market canGiveMerch={true}/>}/>
 						<Route path="market/merch" element={<MarketMerch/>}/>
 					</Route>
 
