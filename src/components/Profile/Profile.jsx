@@ -157,15 +157,7 @@ const Profile = observer(({canTransfer = false}) => {
 				</div>
 				<hr color="#CCCCCC" size="4"/>
 				<div className="achives">
-					<div className="achive">
-						<img title="ачивка" alt="ачивка"
-								 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
-					</div>
-					<div className="achive">
-						<img title="ачивка" alt="ачивка"
-								 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
-					</div>
-					<div className="achive">
+					<div className="my-achive">
 						<img title="ачивка" alt="ачивка"
 								 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
 					</div>

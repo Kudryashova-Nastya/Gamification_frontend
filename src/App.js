@@ -16,6 +16,7 @@ import EmployeeProfile from "./components/Employees/EmployeeProfile/EmployeeProf
 import Market from "./components/Market/Market";
 import MyBuys from "./components/Market/MyBuys";
 import MarketMerch from "./components/Market/MarketMerch";
+import Achievements from "./components/Achievements/Achievements";
 
 
 const App = observer(() => {
@@ -65,11 +66,12 @@ const App = observer(() => {
 						<Route path="send" element={<TransactionPage/>}/>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students/>}/>
-						<Route path=":id" canTransfer={true} element={<Profile/>}/>
+						<Route path=":id" element={<Profile canTransfer={true}/>}/>
 						<Route path=":id/send" element={<TransactionPage/>}/>
-						<Route path="bank" canTransfer={true} element={<Bank/>}/>
+						<Route path="bank" element={<Bank canTransfer={true}/>}/>
 						<Route path="market" element={<Market canBuy={true}/>}/>
 						<Route path="market/my-buys" element={<MyBuys/>}/>
+						<Route path="achievements" element={<Achievements canGet={true}/>}/>
 					</Route>
 
 					<Route path="/manager"
@@ -82,6 +84,7 @@ const App = observer(() => {
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market canGiveMerch={true}/>}/>
 						<Route path="market/merch" element={<MarketMerch/>}/>
+						<Route path="achievements" element={<Achievements/>}/>
 					</Route>
 
 					<Route path="/coach"
@@ -94,6 +97,7 @@ const App = observer(() => {
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market canGiveMerch={true}/>}/>
 						<Route path="market/merch" element={<MarketMerch/>}/>
+						<Route path="achievements" element={<Achievements/>}/>
 					</Route>
 
 					<Route path="/curator"
@@ -104,6 +108,7 @@ const App = observer(() => {
 						<Route path="student/:id" element={<Profile/>}/>
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market/>}/>
+						<Route path="achievements" element={<Achievements/>}/>
 					</Route>
 
 				</Routes>

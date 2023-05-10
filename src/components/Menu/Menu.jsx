@@ -63,7 +63,7 @@ const Menu = observer(({role}) => {
 							<div>
 								<div className="name">{Auth.profileInfo.first_name} {Auth.profileInfo.last_name}</div>
 								{role === "student" ? <div className="value"> {Auth.profileInfo.balance}
-									{Auth.profileInfo.balance && <img src={TUCOIN_MENU_MINI} className="tucoin" alt="игровой валюты"/>}
+									{Auth.profileInfo.balance && <img src={TUCOIN_MENU_MINI} className="tucoin" alt=""/>}
 								</div> : role === "manager" ? <div className="value">Админ</div>
 									: role === "coach" ? <div className="value">Коуч</div>
 										: role === "curator" ? <div className="value">Куратор</div>
@@ -102,7 +102,7 @@ const Menu = observer(({role}) => {
 							</Link>
 						</li>
 						<li>
-							<Link to='/one' onClick={() => toggleMenu()}>
+							<Link to='achievements' onClick={() => toggleMenu()}>
 								<img src={Achievements} className="ico" alt="Achievements"/>
 								Зал ачивок
 							</Link>
@@ -115,7 +115,7 @@ const Menu = observer(({role}) => {
 						</li>
 						<li>
 							<Link to='students' onClick={() => toggleMenu()}>
-								<img src={Students} className="ico" alt="Students"/>
+								<img src={Students} className="ico" alt="Achievements"/>
 								Студенты
 							</Link>
 						</li>
