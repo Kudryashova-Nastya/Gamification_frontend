@@ -36,6 +36,36 @@
     margin-top: 5px;
 }
 
+.achive-question {
+    position: relative;
+}
+
+.achive-question .achive-info {
+    opacity: 0;
+    font-weight: 500;
+    font-size: 11px;
+    width: 240px;
+    padding: 18px;
+    line-height: 130%;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 20px;
+    color: white;
+    left: -250px;
+    top: -20px;
+    transition: 0.5s;
+}
+
+.achive-question:hover .achive-info {
+    opacity: 1;
+    transition: 0.8s;
+    background: #6F5FFE;
+}
+
+.achive-question img {
+    cursor: pointer;
+}
+
 @media (max-width: 1200px) {
     .achive-container {
         grid-template-columns: 1fr 1fr;

@@ -6,6 +6,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Auth from "../../store/helper/Auth";
 import DEFAULT_ACH from "../../images/icons/default_achive.svg";
+import QUESTION from "../../images/icons/question.svg";
 
 const Achievements = ({canGet = false}) => {
 	const host = getHostInformation()
@@ -43,7 +44,12 @@ const Achievements = ({canGet = false}) => {
 		<div className="container">
 			<div className="header-block header-search main-header">
 				<h1 className="header1">{canGet ? "Мой зал" : "Зал"} ачивок</h1>
-				<div>?</div>
+				<div className="achive-question">
+					<div className="achive-info">
+						Ачивка - это игровое достижение, которое можно получить, выполнив определённые действия
+					</div>
+					<img title="Что такое ачивка?" width="30" src={QUESTION} alt="?"/>
+				</div>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="achive-container">
