@@ -8,7 +8,6 @@ import DEFAULT_ACH from "../../images/icons/default_achive.svg";
 import QUESTION from "../../images/icons/question.svg";
 import AchievementStore from "../../store/AchievementStore";
 import {observer} from "mobx-react";
-import Auth from "../../store/helper/Auth";
 
 const Achievements = observer(({canGet = false}) => {
 	const host = getHostInformation()
@@ -18,7 +17,7 @@ const Achievements = observer(({canGet = false}) => {
 		if (canGet) {
 			await AchievementStore.fetchAllAchives()
 			const all = AchievementStore.achives
-			await AchievementStore.fetchMyAchives(Auth.profileInfo.id)
+			await AchievementStore.fetchMyAchives()
 			const my = AchievementStore.myAchives
 			//получаем новый массив, содержащий все объекты достижений, но сначала те, которые студент успел получить,
 			// а затем все остальные достижения без иконок

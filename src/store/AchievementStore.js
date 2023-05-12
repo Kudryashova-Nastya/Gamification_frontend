@@ -11,7 +11,7 @@ class AchievementStore {
 
 
 // 	Запрос на все ачивки
-	achives = [{},{},{},{}]
+	achives = [{}, {}, {}, {}]
 	fetchAllAchives = async () => {
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/achievement`, CORS(token?.access))
@@ -33,8 +33,13 @@ class AchievementStore {
 		}
 	}
 
-	myAchives = [{},{},{}]
+	// 	Запрос на ачивки студента по id
+	myAchives = [{}, {}, {}]
 	fetchMyAchives = async (id) => {
+		if (!id) {
+			id = Auth.profileInfo.id
+		}
+		console.log("fkbvkfbvkfb")
 		const token = await Auth.getToken()
 		const data = {"student_id": id}
 		const req = await fetch(`${host}/api/v1/achievement/student_achievement`, POSTCORS(data, token?.access))

@@ -62,7 +62,7 @@ const App = observer(() => {
 					<Route path="/login" element={<Login/>}/>
 					<Route path="/student"
 								 element={(token && role === 'student') ? <Menu role={"student"}/> : <StudentRedirect/>}>
-						<Route path="" element={<Profile/>}/>
+						<Route path="" element={<Profile canTransfer={true}/>}/>
 						<Route path="send" element={<TransactionPage/>}/>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students/>}/>

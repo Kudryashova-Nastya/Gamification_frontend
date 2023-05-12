@@ -19,6 +19,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import {getHostInformation} from "../../store/helper/Helper";
 import {CSSTransition} from "react-transition-group";
+import AchievementStore from "../../store/AchievementStore";
 
 const Profile = observer(({canTransfer = false}) => {
 	const {id} = useParams()
@@ -28,6 +29,7 @@ const Profile = observer(({canTransfer = false}) => {
 	const [backColor, setBackColor] = useState(null)
 	const [emojiStatus, setEmojiStatus] = useState(null)
 	const [emojiSticker, setEmojiSticker] = useState(null)
+	const [studentAchives, setStudentAchives] = useState([])
 	const history = useNavigate()
 	const screenWidth = document.documentElement.clientWidth
 	const nodeRef = useRef(null)
@@ -38,6 +40,11 @@ const Profile = observer(({canTransfer = false}) => {
 				setBackColor(StudentProfileStore.studentInfo?.student_profile?.back_color)
 				setEmojiStatus(StudentProfileStore.studentInfo?.student_profile?.emoji_status)
 				setEmojiSticker(StudentProfileStore.studentInfo?.student_profile?.emoji_sticker)
+			}
+		)
+
+		AchievementStore.fetchMyAchives(id).then(() => {
+				setStudentAchives(AchievementStore.myAchives)
 			}
 		)
 	}, [id])
@@ -151,17 +158,21 @@ const Profile = observer(({canTransfer = false}) => {
 				<div className="header-block">
 					<h2 className="header3">{StudentProfileStore.isMyProfile ? "Мои ачивки" : "Ачивки"}</h2>
 					{StudentProfileStore.isMyProfile &&
-						<button className="button">Все ачивки <img className="button-icon achive-icon" alt="ачивки" src={ACHI}/>
+						<button onClick={() => history("achievements")} className="button">Все ачивки <img className="button-icon achive-icon" alt="ачивки" src={ACHI}/>
 						</button>
 					}
 				</div>
 				<hr color="#CCCCCC" size="4"/>
-				<div className="achives">
-					<div className="my-achive">
-						<img title="ачивка" alt="ачивка"
-								 src="https://assets.htmlacademy.ru/img/achievements/general/task-1.v2.svg"/>
+
+				{studentAchives.length === 0 ? <div className="noinformation">У пользователя пока что нет ачивок</div> :
+					<div className="achives">{studentAchives.map((el, i) =>
+						<div className="my-achive" key={i}>
+							<img title={el.name} alt="ачивка" src={`${host}${el.image}`}/>
+						</div>
+					)}
 					</div>
-				</div>
+				}
+
 				<div className="header-block">
 					<h2
 						className="header3">{StudentProfileStore.isMyProfile ? "Моя история" : "История"} {screenWidth < 768 ? '' : 'операций'}</h2>
