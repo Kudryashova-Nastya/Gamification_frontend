@@ -1,4 +1,4 @@
-export const getHostInformation = () => process.env.SERVER_APP_IP
+export const getHostInformation = () => process.env.REACT_APP_IP
 
 export const POSTCORS = (data, token = '') => {
 	return ({

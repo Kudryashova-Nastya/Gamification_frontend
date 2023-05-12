@@ -22,7 +22,7 @@ export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, re
 			return "Ничего не передано"
 		}
 		const token = await Auth.getToken()
-		const req = await fetch(`${host}/api/v1/employee/${Auth.profileInfo.id}/`, PATCHCORS(data, token?.access))
+		const req = await fetch(`${host}/api/v1/profile/`, PATCHCORS(data, token?.access))
 		const res = await req.json()
 		if (req?.ok && req?.status === 200) {
 			return false // возвращает false в случае успеха
@@ -43,7 +43,7 @@ export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, re
 			return "Ничего не передано"
 		}
 		const token = await Auth.getToken()
-		const req = await fetch(`${host}/api/v1/employee/${Auth.profileInfo.id}/`, PATCHIMAGECORS(data, token?.access))
+		const req = await fetch(`${host}/api/v1/profile/`, PATCHIMAGECORS(data, token?.access))
 		const res = await req.json()
 		if (req?.ok && req?.status === 200) {
 			return false
@@ -85,7 +85,7 @@ export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, re
 			"second_fact": secondFact.current.value || null,
 			"false_fact": falseFact.current.value || null,
 		}
-		if (password) {
+		if (password.current.value) {
 			data = {...data, "password": password.current.value}
 		}
 		// log вернет ошибку, если пусто, значит ошибки нет

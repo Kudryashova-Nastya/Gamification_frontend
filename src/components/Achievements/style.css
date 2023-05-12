@@ -16,12 +16,8 @@
     gap: 18px;
 }
 
-.achive .image {
-    max-width: 90px;
-}
-
-.achive .image {
-    width: 100%;
+.achive .image img {
+    width: 90px;
 }
 
 .achive .name {

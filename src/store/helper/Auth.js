@@ -31,6 +31,7 @@ class Auth {
 		// console.log(LOGIN_CORS)
 
 		const req = await fetch(`${host}/api/v1/token/`, LOGIN_CORS)
+		console.log(host)
 		const res = await req.json()
 		// console.log('req', req)
 		if (req?.ok && req?.status === 200) {
