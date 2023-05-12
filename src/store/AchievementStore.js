@@ -39,7 +39,6 @@ class AchievementStore {
 		if (!id) {
 			id = Auth.profileInfo.id
 		}
-		console.log("fkbvkfbvkfb")
 		const token = await Auth.getToken()
 		const data = {"student_id": id}
 		const req = await fetch(`${host}/api/v1/achievement/student_achievement`, POSTCORS(data, token?.access))
@@ -48,6 +47,7 @@ class AchievementStore {
 			runInAction(() => {
 				this.myAchives = res
 			})
+			console.log(res)
 		} else {
 			if (res.code === "token_not_valid") {
 				Auth.getToken().then((token) => {

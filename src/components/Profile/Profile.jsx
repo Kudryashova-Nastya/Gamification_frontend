@@ -40,11 +40,11 @@ const Profile = observer(({canTransfer = false}) => {
 				setBackColor(StudentProfileStore.studentInfo?.student_profile?.back_color)
 				setEmojiStatus(StudentProfileStore.studentInfo?.student_profile?.emoji_status)
 				setEmojiSticker(StudentProfileStore.studentInfo?.student_profile?.emoji_sticker)
-			}
-		)
 
-		AchievementStore.fetchMyAchives(id).then(() => {
-				setStudentAchives(AchievementStore.myAchives)
+				AchievementStore.fetchMyAchives(StudentProfileStore.studentInfo.id).then(() => {
+						setStudentAchives(AchievementStore.myAchives)
+					}
+				)
 			}
 		)
 	}, [id])
@@ -158,7 +158,8 @@ const Profile = observer(({canTransfer = false}) => {
 				<div className="header-block">
 					<h2 className="header3">{StudentProfileStore.isMyProfile ? "Мои ачивки" : "Ачивки"}</h2>
 					{StudentProfileStore.isMyProfile &&
-						<button onClick={() => history("achievements")} className="button">Все ачивки <img className="button-icon achive-icon" alt="ачивки" src={ACHI}/>
+						<button onClick={() => history("achievements")} className="button">Все ачивки <img
+							className="button-icon achive-icon" alt="ачивки" src={ACHI}/>
 						</button>
 					}
 				</div>
