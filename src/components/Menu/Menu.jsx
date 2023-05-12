@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import './style.css';
 import {Link, Outlet} from "react-router-dom";
 import TUCOIN_MENU_MINI from "../../images/icons/Tucoin_menu_mini.svg"
-import NOTIFICATION from "../../images/icons/Notification.svg"
+// import NOTIFICATION from "../../images/icons/Notification.svg"
 import TUCOIN from "../../images/icons/Tucoin_menu.svg"
 import MARKET from "../../images/icons/Market.svg"
 import QUESTS from "../../images/icons/Quests.svg"
@@ -15,6 +15,7 @@ import TELEGRAM from "../../images/icons/Telegram.svg"
 import VK from "../../images/icons/VK.svg"
 import SETTINGS from "../../images/icons/Settings.svg"
 import LOGO from "../../images/icons/Logo_white.svg"
+import EXIT from "../../images/icons/exit.svg";
 import {bodyFixPosition, bodyUnfixPosition, getHostInformation} from "../../store/helper/Helper";
 import {observer} from "mobx-react";
 import Auth from "../../store/helper/Auth";
@@ -77,16 +78,16 @@ const Menu = observer(({role}) => {
 						</div>
 					</Link>
 					<ul className="menu__links">
-						<li>
-							<Link to='/one' onClick={() => toggleMenu()}>
-								<img src={NOTIFICATION} className="ico" alt="уведомления"/>
-								Уведомления
-							</Link>
-						</li>
+						{/*<li>*/}
+						{/*	<Link to='/one' onClick={() => toggleMenu()}>*/}
+						{/*		<img src={NOTIFICATION} className="ico" alt="уведомления"/>*/}
+						{/*		Уведомления*/}
+						{/*	</Link>*/}
+						{/*</li>*/}
 						<li>
 							<Link to='bank' onClick={() => toggleMenu()}>
 								<img src={TUCOIN} className="ico" alt="TUCOIN"/>
-								TUCOIN
+								TUCOIN Банк
 							</Link>
 						</li>
 						<li>
@@ -160,7 +161,7 @@ const Menu = observer(({role}) => {
 				unmountOnExit
 				nodeRef={nodeRef}
 			>
-				<SettingsModalWindow ref={nodeRef}/>
+				<SettingsModalWindow ref={nodeRef} exit={EXIT}/>
 			</CSSTransition>
 		</>
 	);

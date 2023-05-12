@@ -2,9 +2,8 @@ import React, {forwardRef} from 'react';
 import {observer} from 'mobx-react';
 import {ModalWindow} from '../ModalWindow/ModalWindow';
 import Auth from "../../store/helper/Auth";
-import EXIT from "../../images/icons/exit.svg";
 
-export const SettingsModalWindow = observer(forwardRef(({}, ref) => {
+export const SettingsModalWindow = observer(forwardRef(({exit}, ref) => {
 
 	return (
 		<ModalWindow ref={ref}>
@@ -25,7 +24,7 @@ export const SettingsModalWindow = observer(forwardRef(({}, ref) => {
 			</div>
 			<button onClick={() => Auth.logout()} className="settings-button button btn-large">
 				Выход из системы
-				<img alt="" src={EXIT}/>
+				<img alt="" src={exit}/>
 			</button>
 		</ModalWindow>
 	);
