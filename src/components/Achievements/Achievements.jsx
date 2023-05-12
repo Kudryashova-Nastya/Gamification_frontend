@@ -1,42 +1,38 @@
 import React, {useEffect, useState} from 'react';
 import "./style.css"
 import '../base.css';
-import {CORS, getHostInformation} from "../../store/helper/Helper";
+import {getHostInformation} from "../../store/helper/Helper";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import Auth from "../../store/helper/Auth";
 import DEFAULT_ACH from "../../images/icons/default_achive.svg";
 import QUESTION from "../../images/icons/question.svg";
+import AchievementStore from "../../store/AchievementStore";
+import {observer} from "mobx-react";
+import Auth from "../../store/helper/Auth";
 
-const Achievements = ({canGet = false}) => {
+const Achievements = observer(({canGet = false}) => {
 	const host = getHostInformation()
 
 	const [arr, setArr] = useState([{}, {}, {}, {}, {}, {}])
+	const fetchAchive = async () => {
+		if (canGet) {
+			await AchievementStore.fetchAllAchives()
+			const all = AchievementStore.achives
+			await AchievementStore.fetchMyAchives(Auth.profileInfo.id)
+			const my = AchievementStore.myAchives
+			//получаем новый массив, содержащий все объекты достижений, но сначала те, которые студент успел получить,
+			// а затем все остальные достижения без иконок
+			const ach = my.concat(all.filter(item => !my.some(i => i.id === item.id)).map(({image, ...rest}) => rest));
+			setArr(ach)
+		} else {
+			// сотрудникам сразу видны все достижения
+			await AchievementStore.fetchAllAchives()
+			setArr(AchievementStore.achives)
+		}
+	}
 
 	useEffect(() => {
-		const host = getHostInformation()
-		const fetchData = async () => {
-			const token = await Auth.getToken()
-			await fetch(`${host}/api/v1/achievement`, CORS(token?.access))
-			.then((res) => res.json())
-			.then((data) => {
-				console.log("data", data)
-				if (data.code === "token_not_valid") {
-					fetchData()
-				} else {
-					setArr(data)
-				}
-			})
-			.catch((err) => {
-				console.log("err", err)
-				const data = [
-					{}, {}, {}
-				]
-				setArr(data)
-			})
-		}
-
-		void fetchData()
+		void fetchAchive()
 	}, [])
 
 
@@ -69,6 +65,6 @@ const Achievements = ({canGet = false}) => {
 			</div>
 		</div>
 	);
-};
+});
 
 export default Achievements;
