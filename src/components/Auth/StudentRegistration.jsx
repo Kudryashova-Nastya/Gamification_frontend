@@ -108,10 +108,10 @@ const StudentRegistration = observer(() => {
 					<div>
 						<label>&nbsp;&nbsp;Тариф</label>
 						<input onChange={(e) => setTarif(e.target.value)} type="radio" id="tarif1" name="tarif" value="Standart"
-									 checked/><label className="radio-label"
+									 checked={tarif ==="Standart"}/><label className="radio-label"
 																	 htmlFor="tarif1">Standart</label>
 						<input onChange={(e) => setTarif(e.target.value)} type="radio" id="tarif2" name="tarif"
-									 value="Lite"/><label className="radio-label"
+									 value="Lite" checked={tarif ==="Lite"}/><label className="radio-label"
 																				htmlFor="tarif2">Lite</label>
 					</div>
 					<button className="button">Зарегистрировать</button>

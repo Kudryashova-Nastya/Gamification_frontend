@@ -33,3 +33,51 @@
 #namelabel {
     margin-left: 66px;
 }
+
+.inputs-block {
+    text-align: left;
+}
+
+.input-container {
+    width: 90%;
+    margin: auto;
+    position: relative;
+}
+
+.inputs-block > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.select-content {
+    position: absolute;
+    z-index: 5;
+    background: white;
+}
+
+.select-content .options li {
+    font-size: 14px;
+    height: 30px;
+}
+
+.select-container .select-content {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.content.select-content .options {
+    margin-top: 5px;
+    max-height: 140px;
+    overflow-y: auto;
+    padding-right: 6px;
+    padding-left: 6px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 767px) {
+    .input-container {
+        width: 100%;
+    }
+}

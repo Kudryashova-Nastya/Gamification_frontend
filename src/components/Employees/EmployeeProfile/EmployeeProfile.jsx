@@ -10,7 +10,7 @@ import {CSSTransition} from "react-transition-group";
 import {EditEmployeeModalWindow} from "../../Profile/EditModalWindow/EditEmployeeModalWindow";
 import {useNavigate} from "react-router-dom";
 
-const EmployeeProfile = observer(({canGiveMerch = false}) => {
+const EmployeeProfile = observer(({canGiveMerch = false, canRegStudent = false, canRegEmployee = false}) => {
 	const [editVisible, setEditVisible] = useState(false)
 	const nodeRef = useRef(null)
 	const history = useNavigate()
@@ -30,9 +30,21 @@ const EmployeeProfile = observer(({canGiveMerch = false}) => {
 				<button className="button" onClick={() => setEditVisible(true)}>Редактировать
 					<img className="button-icon" alt="редактировать" src={EDIT}/>
 				</button>
-				{canGiveMerch && <button className="button" onClick={() => history('market/merch')}>
-					Выдать мерч
-				</button>}
+				{canGiveMerch &&
+					<button className="button" onClick={() => history('market/merch')}>
+						Выдать мерч
+					</button>
+				}
+				{canRegStudent &&
+					<button className="button" onClick={() => history('student-registration')}>
+						Регистрация студента
+					</button>
+				}
+				{canRegEmployee &&
+					<button className="button" onClick={() => history('employee-registration')}>
+						Регистрация сотрудника
+					</button>
+				}
 			</div>
 
 			<CSSTransition

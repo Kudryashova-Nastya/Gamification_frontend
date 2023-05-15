@@ -17,6 +17,7 @@ import Market from "./components/Market/Market";
 import MyBuys from "./components/Market/MyBuys";
 import MarketMerch from "./components/Market/MarketMerch";
 import Achievements from "./components/Achievements/Achievements";
+import EmployeeRegistration from "./components/Auth/EmployeeRegistration";
 
 
 const App = observer(() => {
@@ -42,7 +43,7 @@ const App = observer(() => {
 
 	// для редиректа на личную страницу студента
 	const StudentRedirect = () => {
-		const { id } = useParams();
+		const {id} = useParams();
 		if (id && token) {
 			if (role === 'manager') {
 				return <Navigate to={`/manager/student/${id}`} replace/>
@@ -52,7 +53,7 @@ const App = observer(() => {
 				return <Navigate to={`/curator/student/${id}`} replace/>
 			}
 		}
-		return <Navigate replace to="/login" />;
+		return <Navigate replace to="/login"/>;
 	};
 
 	return (
@@ -76,9 +77,10 @@ const App = observer(() => {
 
 					<Route path="/manager"
 								 element={(token && role === 'manager') ? <Menu role={"manager"}/> : <Navigate to="/login" replace/>}>
-						<Route path="" element={<EmployeeProfile canGiveMerch={true}/>}/>
+						<Route path="" element={<EmployeeProfile canGiveMerch={true} canRegStudent={true} canRegEmployee={true}/>}/>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="student-registration" element={<StudentRegistration/>}/>
+						<Route path="employee-registration" element={<EmployeeRegistration/>}/>
 						<Route path="students" element={<Students canRegister={true} canFilter={true}/>}/>
 						<Route path="student/:id" element={<Profile/>}/>
 						<Route path="bank" element={<Bank/>}/>
@@ -89,7 +91,7 @@ const App = observer(() => {
 
 					<Route path="/coach"
 								 element={(token && role === 'coach') ? <Menu role={"coach"}/> : <Navigate to="/login" replace/>}>
-						<Route path="" element={<EmployeeProfile canGiveMerch={true}/>}/>
+						<Route path="" element={<EmployeeProfile canGiveMerch={true} canRegStudent={true}/>}/>
 						<Route path="student-registration" element={<StudentRegistration/>}/>
 						<Route path="employees" element={<Employees/>}/>
 						<Route path="students" element={<Students canRegister={true} canFilter={true}/>}/>
