@@ -28,7 +28,6 @@ const StudentRegistration = observer(() => {
 		}
 
 		setData(request)
-		console.log(data)
 
 		// log вернет ошибку, если пусто, значит ошибки нет
 		const log = await StudentProfileStore.registerStudent(request)

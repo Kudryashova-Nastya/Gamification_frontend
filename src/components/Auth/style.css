@@ -62,6 +62,10 @@
     height: 30px;
 }
 
+.select-container {
+    margin-top: 15px;
+}
+
 .select-container .select-content {
     width: 100%;
     box-sizing: border-box;

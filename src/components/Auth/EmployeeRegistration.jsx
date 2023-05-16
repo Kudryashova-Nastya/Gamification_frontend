@@ -76,13 +76,13 @@ const EmployeeRegistration = observer(() => {
 			"first_name": name,
 			"last_name": lastname,
 			"email": email,
-			"direction": direction,
+			"direction": role === "curator" ? direction?.id || null: null,
 			"password": password,
 			"user_role": role,
 		}
 
 		setData(request)
-		console.log(data)
+		console.log(request)
 
 		// log вернет ошибку, если пусто, значит ошибки нет
 		const log = await registerEmployee(request)
@@ -170,9 +170,11 @@ const EmployeeRegistration = observer(() => {
 									 checked={role === 'coach'}/>
 						<label className="radio-label" htmlFor="role3">Коуч</label>
 					</div>
+					{role === "curator" &&
 					<div className="input-container select-container">
 						<Select allArr={allDirections} setElement={setDirection}/>
 					</div>
+					}
 					<button className="button">Зарегистрировать</button>
 				</form>
 			</div>
