@@ -1,13 +1,16 @@
-import React, {forwardRef, useRef} from 'react';
+import React, {forwardRef, useRef, useState} from 'react';
 import {observer} from 'mobx-react';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
 import './EditModalWindow.css';
 import {getHostInformation, PATCHCORS, PATCHIMAGECORS} from "../../../store/helper/Helper";
 import Auth from "../../../store/helper/Auth";
+import Select from "../../SearchSelect/Select";
+import directionsStore from "../../../store/DirectionsStore";
 
 export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, ref) => {
 	const host = getHostInformation()
 
+	const [direction, setDirection] = useState(null)
 	const firstName = useRef(null)
 	const lastName = useRef(null)
 	let email = useRef(null)
@@ -84,12 +87,14 @@ export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, re
 			"first_fact": firstFact.current.value || null,
 			"second_fact": secondFact.current.value || null,
 			"false_fact": falseFact.current.value || null,
+			"direction": direction || Auth.profileInfo.direction
 		}
 		if (password.current.value) {
 			data = {...data, "password": password.current.value}
 		}
 		// log вернет ошибку, если пусто, значит ошибки нет
 		const log = await editEmployee(data)
+		console.log(data)
 		if (log) {
 			console.log("косяк в общих данных", log)
 		} else {
@@ -124,6 +129,12 @@ export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, re
 					<input type="email" className="input" size="35" defaultValue={Auth.profileInfo.email}
 								 maxLength="50" ref={email}/>
 				</div>
+				{Auth.profileInfo.user_role === "curator" &&
+					<div className="myrefs input-container">
+						<label className="blockname">Направление: &nbsp;</label>
+						<Select allArr={directionsStore.directions} setElement={setDirection}/>
+					</div>
+				}
 				<div className="myrefs">
 					<label className="blockname">Первый факт: &nbsp;</label>
 					<input type="text" className="input" size="35" defaultValue={Auth.profileInfo.first_fact}

@@ -78,6 +78,10 @@
     margin: 0;
 }
 
+.myrefs .wrapper {
+    width: 312px;
+}
+
 .mydirections input[type=checkbox] {
     transform: scale(1.2);
 }
@@ -123,5 +127,10 @@
 
     .edit-employee-form {
         margin-top: 15px;
+    }
+
+    .myrefs .wrapper {
+        width: 99%;
+        margin-top: 10px;
     }
 }

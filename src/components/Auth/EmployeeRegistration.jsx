@@ -3,9 +3,10 @@ import '../base.css';
 import './style.css'
 import {observer} from "mobx-react";
 import ERROR from "../../images/icons/error.svg";
-import {CORS, getHostInformation, POSTCORS} from "../../store/helper/Helper";
+import {getHostInformation, POSTCORS} from "../../store/helper/Helper";
 import Auth from "../../store/helper/Auth";
 import Select from "../SearchSelect/Select";
+import directionsStore from "../../store/DirectionsStore";
 
 const EmployeeRegistration = observer(() => {
 	const [name, setName] = useState("")
@@ -19,7 +20,6 @@ const EmployeeRegistration = observer(() => {
 	const [error, setError] = useState(false)
 	const [data, setData] = useState({})
 
-	const [allDirections, setAllDirections] = useState([])
 	const host = getHostInformation()
 
 	const registerEmployee = async (data) => {
@@ -49,25 +49,25 @@ const EmployeeRegistration = observer(() => {
 		}
 	}
 
-	const fetchDirections = async () => {
-		const host = getHostInformation()
-		const token = await Auth.getToken()
-		await fetch(`${host}/api/v1/direction`, CORS(token?.access))
-		.then(async (res) => await res.json())
-		.then((dir) => {
-			if (dir?.code === "token_not_valid") {
-				fetchDirections()
-			} else {
-				setAllDirections(dir)
-			}
-		})
-		.catch((err) => {
-			console.log("err", err)
-		})
-	}
+	// const fetchDirections = async () => {
+	// 	const host = getHostInformation()
+	// 	const token = await Auth.getToken()
+	// 	await fetch(`${host}/api/v1/direction`, CORS(token?.access))
+	// 	.then(async (res) => await res.json())
+	// 	.then((dir) => {
+	// 		if (dir?.code === "token_not_valid") {
+	// 			fetchDirections()
+	// 		} else {
+	// 			setAllDirections(dir)
+	// 		}
+	// 	})
+	// 	.catch((err) => {
+	// 		console.log("err", err)
+	// 	})
+	// }
 
 	useEffect(() => {
-		void fetchDirections()
+		void directionsStore.fetchDirections()
 	}, [])
 
 	const handleSubmit = async (e) => {
@@ -172,7 +172,7 @@ const EmployeeRegistration = observer(() => {
 					</div>
 					{role === "curator" &&
 					<div className="input-container select-container">
-						<Select allArr={allDirections} setElement={setDirection}/>
+						<Select allArr={directionsStore.directions} setElement={setDirection}/>
 					</div>
 					}
 					<button className="button">Зарегистрировать</button>

@@ -15,7 +15,7 @@ class AchievementStore {
 	fetchAllAchives = async () => {
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/achievement`, CORS(token?.access))
-		const res = await req.json();
+		const res = await req.json()
 		if (req.ok) {
 			runInAction(() => {
 				this.achives = res

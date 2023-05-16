@@ -3,8 +3,8 @@ import {observer} from 'mobx-react';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
 import StudentProfileStore from "../../../store/StudentProfileStore";
 import './EditModalWindow.css';
-import {CORS, getHostInformation} from "../../../store/helper/Helper";
 import Auth from "../../../store/helper/Auth";
+import directionsStore from "../../../store/DirectionsStore";
 
 export const EditModalWindow = observer(forwardRef((props, ref) => {
 
@@ -26,40 +26,7 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 		})
 	})
 
-	const [directions, setDirections] = useState([
-		{
-			"name": "Анимация",
-			"id": 1
-		},
-		{
-			"name": "Робототехника",
-			"id": 2
-		},
-		{
-			"name": "Музыка",
-			"id": 3
-		},
-		{
-			"name": "3D-моделирование",
-			"id": 4
-		},
-		{
-			"name": "Графический дизайн",
-			"id": 5
-		},
-		{
-			"name": "Разработка игр",
-			"id": 6
-		},
-		{
-			"name": "Кинопроизводство",
-			"id": 7
-		},
-		{
-			"name": "Программирование",
-			"id": 8
-		}
-	])
+	// const [directions, setDirections] = useState()
 
 	const aboutRef = useRef(null)
 	const telegramRef = useRef(null)
@@ -68,7 +35,7 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		let dirArray = []
-		directions.forEach((d) => {
+		directionsStore.directions.forEach((d) => {
 			if (directionsRef.current[d.id].checked) {
 				dirArray.push(d.id)
 			}
@@ -114,27 +81,13 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 		}
 	}
 
-	const fetchDirections = async () => {
-		const host = getHostInformation()
-		const token = await Auth.getToken()
-		await fetch(`${host}/api/v1/direction`, CORS(token?.access))
-		.then(async (res) => await res.json())
-		.then((data) => {
-			if (data?.code === "token_not_valid") {
-				fetchDirections()
-			} else {
-				setDirections(data)
-				setIsLoading(false)
-			}
-		})
-		.catch((err) => {
-			console.log("err", err)
-		})
-	}
-
 	useEffect(() => {
 		setIsLoading(true)
-		void fetchDirections()
+		directionsStore.fetchDirections().then(
+			() => {
+				setIsLoading(false)
+			}
+		)
 	}, [])
 
 
@@ -152,7 +105,7 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 				<div className="columns">
 					<div className="mydirections">
 						<div className="blockname">Мои направления (max 4):</div>
-						{directions?.map((dir, i) =>
+						{directionsStore.directions?.map((dir, i) =>
 							<div className="mydirection" key={i}>
 								<input type="checkbox"
 											 id={i}
