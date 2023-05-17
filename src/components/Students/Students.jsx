@@ -135,9 +135,9 @@ const Students = ({canRegister = false, canFilter = false}) => {
 											{"--hover-color": `${el.student_profile.back_color}40`, "border": "3px solid #111111"} : {}}
 							>
 								<div className="avatar">
-									{el?.image ? <img alt="avatar" src={`${host}${el.image}`}/> :
+									{el?.image ? <img alt="ava" src={`${host}${el.image}`}/> :
 										el.hasOwnProperty('image') ?
-											<img alt="avatar" src={DEFAULT_AVATAR}/> :
+											<img alt="ava" src={DEFAULT_AVATAR}/> :
 											<Skeleton width={75} height={75} circle={true}/>}
 								</div>
 								<div>
@@ -150,7 +150,7 @@ const Students = ({canRegister = false, canFilter = false}) => {
 										<img className="balance-icon" src={TUCOIN} alt=""/>}</div>
 									<div className="directions">
 										{el?.direction ? el.direction?.length === 0 ? "" : <>
-												{el.direction?.map((icon, id) => <img alt="направление" title={icon.name} key={id}
+												{el.direction?.map((icon, id) => <img alt="n" title={icon.name} key={id}
 																															src={`${host}${icon.icon}`}/>
 												)}
 											</> :

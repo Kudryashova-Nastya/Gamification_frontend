@@ -1,4 +1,4 @@
-import React, {forwardRef, useRef, useState} from 'react';
+import React, {forwardRef, useEffect, useRef, useState} from 'react';
 import {observer} from 'mobx-react';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
 import './EditModalWindow.css';
@@ -87,14 +87,14 @@ export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, re
 			"first_fact": firstFact.current.value || null,
 			"second_fact": secondFact.current.value || null,
 			"false_fact": falseFact.current.value || null,
-			"direction": direction || Auth.profileInfo.direction
+			"direction": direction?.id || Auth.profileInfo?.direction?.id
 		}
 		if (password.current.value) {
 			data = {...data, "password": password.current.value}
 		}
 		// log вернет ошибку, если пусто, значит ошибки нет
 		const log = await editEmployee(data)
-		console.log(data)
+		// console.log(data)
 		if (log) {
 			console.log("косяк в общих данных", log)
 		} else {
@@ -102,6 +102,10 @@ export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, re
 			setEditVisible(false)
 		}
 	}
+
+	useEffect(() => {
+		void directionsStore.fetchDirections()
+	}, [])
 
 	return (
 		<ModalWindow isBig={true} ref={ref}>
