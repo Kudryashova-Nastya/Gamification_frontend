@@ -32,7 +32,12 @@ const TransactionPage = observer(() => {
 			"sum_count": parseInt(form.number.value),
 			"comment": form.comment.value,
 		})
+		if (recipient.id) {
 		TransactionPageStore.setModalVisible()
+			setError(false)
+		} else {
+			setError("Для совершения перевода необходимо указать получателя")
+		}
 	}
 
 	useEffect(() => {

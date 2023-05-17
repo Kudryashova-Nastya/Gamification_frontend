@@ -26,7 +26,6 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 		})
 	})
 
-	// const [directions, setDirections] = useState()
 
 	const aboutRef = useRef(null)
 	const telegramRef = useRef(null)
