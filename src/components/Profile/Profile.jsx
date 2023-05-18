@@ -91,7 +91,7 @@ const Profile = observer(({canTransfer = false}) => {
 				<div className="buttons-block">
 					{StudentProfileStore.isMyProfile &&
 						<button className="button" onClick={() => StudentProfileStore.setEditVisible()}>Редактировать
-							<img className="button-icon" alt="редактировать" src={EDIT}/>
+							<img className="button-icon" alt="" src={EDIT}/>
 						</button>
 					}
 					<button onClick={copy} className="button">{isCopy ? "Успешно скопировано" : "Копировать ссылку"}

@@ -18,6 +18,7 @@ import MyBuys from "./components/Market/MyBuys";
 import MarketMerch from "./components/Market/MarketMerch";
 import Achievements from "./components/Achievements/Achievements";
 import EmployeeRegistration from "./components/Auth/EmployeeRegistration";
+import Quests from "./components/Quests/Quests";
 
 
 const App = observer(() => {
@@ -73,6 +74,8 @@ const App = observer(() => {
 						<Route path="market" element={<Market canBuy={true}/>}/>
 						<Route path="market/my-buys" element={<MyBuys/>}/>
 						<Route path="achievements" element={<Achievements canGet={true}/>}/>
+						<Route path="quests" element={<Quests/>}/>
+						<Route path="quests/my-quests" element={<Quests/>}/>
 					</Route>
 
 					<Route path="/manager"

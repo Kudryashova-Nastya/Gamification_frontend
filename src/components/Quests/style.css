@@ -1,0 +1,53 @@
+.quest-card {
+    background-color: #CCCCCC;
+    border-radius: 40px;
+    padding: 25px 2.3vw;
+    max-width: 450px;
+    min-width: 330px;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.quest-card .title {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 13px;
+}
+
+.quest-card .body {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+.quest-card .sum {
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+
+.quest-card .description {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 13px 18px;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 140%;
+    display: -webkit-box;
+    max-width: 400px;
+}
+
+@media (max-width: 767px) {
+    .quest-card {
+        padding: 26px 24px;
+        max-width: 450px;
+        min-width: 330px;
+    }
+
+    .quest-card .body {
+        gap: 15px;
+    }
+}

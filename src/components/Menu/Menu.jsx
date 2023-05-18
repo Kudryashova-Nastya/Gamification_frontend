@@ -97,7 +97,7 @@ const Menu = observer(({role}) => {
 							</Link>
 						</li>
 						<li>
-							<Link to='/one' onClick={() => toggleMenu()}>
+							<Link to='quests' onClick={() => toggleMenu()}>
 								<img src={QUESTS} className="ico" alt="QUESTS"/>
 								Витрина заданий
 							</Link>

@@ -45,7 +45,7 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 		console.log(dirArray)
 		if (imageRef.current.files.length > 0) {
 			if (imageRef.current.files[0].size < maxSize) {
-				let formData = new FormData();
+				let formData = new FormData()
 				formData.append("image", imageRef.current.files[0])
 				const logImg = await StudentProfileStore.editProfileImage(formData)
 				if (logImg) {
@@ -53,6 +53,8 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 					if (logImg?.code === "token_not_valid") {
 						await StudentProfileStore.editProfileImage(formData)
 					}
+				} else {
+					console.log("успешно изменено")
 				}
 			} else {
 				alert("Размер изображения не должен превышать 5 Мб")

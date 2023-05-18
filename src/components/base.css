@@ -100,6 +100,12 @@
     width: 70%;
 }
 
+.button.btn-mini {
+    padding: 7px 14px;
+    font-weight: 500;
+    font-size: 11px;
+}
+
 .button:hover {
     background: #F50106;
     transition: 0.3s;
