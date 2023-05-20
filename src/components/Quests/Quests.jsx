@@ -36,15 +36,12 @@ const Quests = () => {
 
 	const handleFilterChange = (event) => {
 		setSortBy(event.target.value);
-		const sorted = filterQuests(event.target.value, quests)
-		setArr(sorted)
 	};
 
 	const filterQuests = (by, arr) => {
 		if (by === "all") {
 			return arr
 		} else {
-			console.log(by)
 		return arr.filter((el)=>el.type == by)
 		}
 	}
@@ -64,8 +61,8 @@ const Quests = () => {
 
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
-	const howManyPages = Math.ceil(arr?.length / postsPerPage)
-	const currentPosts = arr.slice(indexOfFirstPost, indexOfLastPost)
+	const howManyPages = Math.ceil(filterQuests(sortBy, arr)?.length / postsPerPage)
+	const currentPosts = filterQuests(sortBy, arr)?.slice(indexOfFirstPost, indexOfLastPost)
 
 	return (
 		<div className="container">
@@ -73,8 +70,7 @@ const Quests = () => {
 				<h1 className="header1">Витрина заданий</h1>
 				{!isLoading &&
 					<div className="two-elements-right">
-						<Search students={quests} setArr={setArr} setCurrentPage={setCurrentPage} sort={filterQuests}
-										by={sortBy}/>
+						<Search students={quests} setArr={setArr} setCurrentPage={setCurrentPage}/>
 						<button onClick={() => history("my-quests")} className="button">
 							Мои задания <img src={MYQUESTS} className="button-icon" alt=""/>
 						</button>
