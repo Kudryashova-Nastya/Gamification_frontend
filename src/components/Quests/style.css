@@ -40,6 +40,22 @@
     max-width: 400px;
 }
 
+.filter-value.tag {
+    box-sizing: border-box;
+}
+
+.filter-value.tag label {
+    padding-left: 0 !important;
+}
+
+.filter-value.tag label::before {
+    display: none;
+}
+
+.filter-value.tag label::after {
+    display: none;
+}
+
 @media (max-width: 767px) {
     .quest-card {
         padding: 26px 24px;
