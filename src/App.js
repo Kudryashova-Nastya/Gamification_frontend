@@ -19,6 +19,7 @@ import MarketMerch from "./components/Market/MarketMerch";
 import Achievements from "./components/Achievements/Achievements";
 import EmployeeRegistration from "./components/Auth/EmployeeRegistration";
 import Quests from "./components/Quests/Quests";
+import StudentQuests from "./components/Quests/StudentQuests";
 
 
 const App = observer(() => {
@@ -75,7 +76,7 @@ const App = observer(() => {
 						<Route path="market/my-buys" element={<MyBuys/>}/>
 						<Route path="achievements" element={<Achievements canGet={true}/>}/>
 						<Route path="quests" element={<Quests/>}/>
-						<Route path="quests/my-quests" element={<Quests/>}/>
+						<Route path="quests/my-quests" element={<StudentQuests/>}/>
 					</Route>
 
 					<Route path="/manager"
@@ -90,6 +91,7 @@ const App = observer(() => {
 						<Route path="market" element={<Market canGiveMerch={true}/>}/>
 						<Route path="market/merch" element={<MarketMerch/>}/>
 						<Route path="achievements" element={<Achievements/>}/>
+						<Route path="quests" element={<Quests/>}/>
 					</Route>
 
 					<Route path="/coach"
@@ -103,6 +105,7 @@ const App = observer(() => {
 						<Route path="market" element={<Market canGiveMerch={true}/>}/>
 						<Route path="market/merch" element={<MarketMerch/>}/>
 						<Route path="achievements" element={<Achievements/>}/>
+						<Route path="quests" element={<Quests/>}/>
 					</Route>
 
 					<Route path="/curator"
@@ -114,6 +117,7 @@ const App = observer(() => {
 						<Route path="bank" element={<Bank/>}/>
 						<Route path="market" element={<Market/>}/>
 						<Route path="achievements" element={<Achievements/>}/>
+						<Route path="quests" element={<Quests/>}/>
 					</Route>
 
 				</Routes>

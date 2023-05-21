@@ -36,7 +36,7 @@ class QuestStore {
 	// }
 
 
-	quests = [{},{},{},{},{}]
+	quests = [{}, {}, {}, {}, {}]
 	fetchActiveQuests = async () => {
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/quest/all_is_active_quest`, CORS(token?.access));
@@ -58,7 +58,7 @@ class QuestStore {
 		}
 	}
 
-	questTypes = [{},{},{},{},{}]
+	questTypes = [{}, {}, {}, {}, {}]
 	fetchQuestTypes = async () => {
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/quest_type`, CORS(token?.access));
@@ -81,10 +81,10 @@ class QuestStore {
 	}
 
 
-	myQuests = [{},{}]
+	myQuests = [{}, {}]
 	fetchMyQuests = async () => {
 		const token = await Auth.getToken()
-		const req = await fetch(`${host}/api/v1/store_product/all_student_product/`, CORS(token?.access));
+		const req = await fetch(`${host}/api/v1/quest/student_quest/`, POSTCORS({"student_id": Auth.profileInfo.id}, token?.access));
 		const res = await req.json();
 		if (req.ok) {
 			runInAction(() => {

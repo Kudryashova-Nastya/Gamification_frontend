@@ -2,7 +2,7 @@ import React, {forwardRef} from 'react';
 import {observer} from 'mobx-react';
 import {ModalWindow} from '../ModalWindow/ModalWindow';
 import QuestStore from "../../store/QuestStore";
-import TUCOIN from "../../images/icons/black-tucoin16.svg";
+import TUCOIN from "../../images/icons/black-tucoin14.svg";
 
 export const QuestDetailWindow = observer(forwardRef(({data}, ref) => {
 
@@ -30,7 +30,7 @@ export const QuestDetailWindow = observer(forwardRef(({data}, ref) => {
 					<div className="quest-info-block">
 						<span className="quest-label">Вознаграждение: </span>
 						<span className="quest-info balance-icon">{data.sum} </span>
-						<img src={TUCOIN} alt="" height="14" width="14" className="balance-icon"/>
+						<img src={TUCOIN} alt="" className="balance-icon"/>
 					</div>
 					<div className="quest-info-block quest-hint">
 						<div>
