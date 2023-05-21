@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import TUCOIN from "../../images/icons/black-tucoin16.svg";
 import MYQUESTS from "../../images/icons/my-quests.svg";
 import "./style.css"
@@ -9,9 +9,13 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import Pagination from "../Pagination/Pagination";
 import {useNavigate} from "react-router-dom";
 import QuestStore from "../../store/QuestStore";
+import {CSSTransition} from "react-transition-group";
+import {QuestDetailWindow} from "./QuestDetailWindow";
+import {observer} from "mobx-react";
 
-const Quests = () => {
+const Quests = observer(() => {
 	const history = useNavigate()
+	const nodeRef = useRef(null)
 	const [isLoading, setIsLoading] = useState(true)
 
 	const cutText = (text) => {
@@ -42,7 +46,7 @@ const Quests = () => {
 		if (by === "all") {
 			return arr
 		} else {
-		return arr.filter((el)=>el.type == by)
+			return arr.filter((el) => el.type == by)
 		}
 	}
 
@@ -80,7 +84,8 @@ const Quests = () => {
 			<div className="filter-container">
 				<div>Теги:</div>
 				<div className="filter-value tag"
-						 style={{"background": '#CCCCCC40',
+						 style={{
+							 "background": '#CCCCCC40',
 							 "border": sortBy === 'all' ? '2px solid #CCCCCC' : 'none',
 							 "padding": sortBy === 'all' ? '5px 15px' : '7px 17px'
 						 }}>
@@ -116,7 +121,7 @@ const Quests = () => {
 											<img src={TUCOIN} alt="" className="balance-icon"/></>
 										: ""}
 								</div>
-								<button className="button btn-mini">Подробнее</button>
+								<button onClick={() => QuestStore.setQuestVisible(el)} className="button btn-mini">Подробнее</button>
 							</div>
 							<div className="description">
 								{el.description ? cutText(el.description) : <Skeleton width={150} count={2.5}/>}
@@ -126,8 +131,17 @@ const Quests = () => {
 				)}
 			</div>
 			<Pagination pages={howManyPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+			<CSSTransition
+				in={QuestStore.modalQuestVisible}
+				timeout={300}
+				classNames="alert"
+				unmountOnExit
+				nodeRef={nodeRef}
+			>
+				<QuestDetailWindow ref={nodeRef} data={QuestStore.currentQuest}/>
+			</CSSTransition>
 		</div>
 	);
-};
+});
 
 export default Quests;

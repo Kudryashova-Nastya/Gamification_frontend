@@ -24,7 +24,7 @@
     font-weight: 700;
     font-size: 18px;
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
 }
 
 
@@ -56,14 +56,57 @@
     display: none;
 }
 
+.detailquest {
+    max-width: 450px;
+    margin-top: 5px;
+}
+
+.detailquest .header3 {
+    text-align: center;
+}
+
+.detailquest .quest-description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    padding: 17px;
+    border-radius: 20px;
+}
+
+.detailquest .quest-label {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.detailquest .quest-info-block {
+    margin: 0 17px;
+}
+
+.detailquest .quest-info {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.detailquest .quest-hint {
+    font-weight: 400;
+    font-size: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 @media (max-width: 767px) {
     .quest-card {
         padding: 26px 24px;
         max-width: 450px;
-        min-width: 330px;
+        min-width: 280px;
     }
 
     .quest-card .body {
-        gap: 15px;
+        gap: 12px;
+    }
+
+    .detailquest {
+        margin-top: 0;
     }
 }
