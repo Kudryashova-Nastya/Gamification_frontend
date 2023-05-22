@@ -82,7 +82,7 @@ class QuestStore {
 
 
 	myQuests = [{}, {}]
-	fetchMyQuests = async () => {
+	fetchStudentQuests = async () => {
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/quest/student_quest/`, POSTCORS({"student_id": Auth.profileInfo.id}, token?.access));
 		const res = await req.json();
@@ -94,7 +94,28 @@ class QuestStore {
 			if (res.code === "token_not_valid") {
 				Auth.getToken().then((token) => {
 					if (token?.access) {
-						this.fetchMyQuests()
+						this.fetchStudentQuests()
+					}
+				})
+			} else {
+				console.log("error", JSON.stringify(res))
+			}
+		}
+	}
+
+	fetchEmployeeQuests = async () => {
+		const token = await Auth.getToken()
+		const req = await fetch(`${host}/api/v1/quest/employee_quest/`, POSTCORS({"employee_id": Auth.profileInfo.id}, token?.access));
+		const res = await req.json();
+		if (req.ok) {
+			runInAction(() => {
+				this.myQuests = res
+			})
+		} else {
+			if (res.code === "token_not_valid") {
+				Auth.getToken().then((token) => {
+					if (token?.access) {
+						this.fetchEmployeeQuests()
 					}
 				})
 			} else {

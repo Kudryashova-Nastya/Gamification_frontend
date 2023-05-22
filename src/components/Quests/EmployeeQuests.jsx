@@ -11,8 +11,9 @@ import {CSSTransition} from "react-transition-group";
 import {QuestDetailWindow} from "./QuestDetailWindow";
 import {observer} from "mobx-react";
 import BACK from "../../images/icons/back.svg";
+import DONE from "../../images/icons/done.svg";
 
-const StudentQuests = observer(() => {
+const EmployeeQuests = observer(() => {
 	const history = useNavigate()
 	const nodeRef = useRef(null)
 	const screenWidth = document.documentElement.clientWidth
@@ -34,7 +35,7 @@ const StudentQuests = observer(() => {
 	useEffect(() => {
 		const fetchData = async () => {
 			await QuestStore.fetchQuestTypes()
-			await QuestStore.fetchStudentQuests()
+			await QuestStore.fetchEmployeeQuests()
 			setQuests(QuestStore.myQuests)
 		}
 
@@ -50,8 +51,13 @@ const StudentQuests = observer(() => {
 		<div className="container">
 			<div className="header-block header-search main-header">
 				<h1 className="header1">
-					<img src={BACK} alt="Назад" className="header-back" onClick={() => history(-1)}/>Мои выполненные задания
+					<img src={BACK} alt="Назад" className="header-back" onClick={() => history(-1)}/>Мои задания
 				</h1>
+				<div className="">
+					<button onClick={() => {}} className="button btn-tall">
+						Новое задание<img src={DONE} className="button-icon" alt=""/>
+					</button>
+				</div>
 			</div>
 			<hr color="#CCCCCC" size="4"/>
 			<div className="student-container">
@@ -92,4 +98,4 @@ const StudentQuests = observer(() => {
 	);
 });
 
-export default StudentQuests;
+export default EmployeeQuests;

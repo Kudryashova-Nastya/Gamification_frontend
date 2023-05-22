@@ -20,6 +20,7 @@ import Achievements from "./components/Achievements/Achievements";
 import EmployeeRegistration from "./components/Auth/EmployeeRegistration";
 import Quests from "./components/Quests/Quests";
 import StudentQuests from "./components/Quests/StudentQuests";
+import EmployeeQuests from "./components/Quests/EmployeeQuests";
 
 
 const App = observer(() => {
@@ -92,6 +93,7 @@ const App = observer(() => {
 						<Route path="market/merch" element={<MarketMerch/>}/>
 						<Route path="achievements" element={<Achievements/>}/>
 						<Route path="quests" element={<Quests/>}/>
+						<Route path="quests/my-quests" element={<EmployeeQuests/>}/>
 					</Route>
 
 					<Route path="/coach"
@@ -106,6 +108,7 @@ const App = observer(() => {
 						<Route path="market/merch" element={<MarketMerch/>}/>
 						<Route path="achievements" element={<Achievements/>}/>
 						<Route path="quests" element={<Quests/>}/>
+						<Route path="quests/my-quests" element={<EmployeeQuests/>}/>
 					</Route>
 
 					<Route path="/curator"
@@ -118,6 +121,7 @@ const App = observer(() => {
 						<Route path="market" element={<Market/>}/>
 						<Route path="achievements" element={<Achievements/>}/>
 						<Route path="quests" element={<Quests/>}/>
+						<Route path="quests/my-quests" element={<EmployeeQuests/>}/>
 					</Route>
 
 				</Routes>

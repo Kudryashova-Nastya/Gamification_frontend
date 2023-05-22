@@ -106,6 +106,10 @@
     font-size: 11px;
 }
 
+.button.btn-tall {
+    height: 40px;
+}
+
 .button:hover {
     background: #F50106;
     transition: 0.3s;
