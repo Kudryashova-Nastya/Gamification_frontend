@@ -16,6 +16,7 @@ import {observer} from "mobx-react";
 const Quests = observer(() => {
 	const history = useNavigate()
 	const nodeRef = useRef(null)
+	const screenWidth = document.documentElement.clientWidth
 	const [isLoading, setIsLoading] = useState(true)
 
 	const cutText = (text) => {
@@ -111,7 +112,7 @@ const Quests = observer(() => {
 					<div key={i} className="quest-card"
 							 style={{"background": `${QuestStore.questTypes.find(color => color.id === el.type)?.color || '#CCCCCC'}40`}}>
 						<div className="title">
-							{el.name || <Skeleton width={100}/>}
+							{el.name || <Skeleton width={180}/>}
 						</div>
 						<div className="body">
 							<div>
@@ -124,7 +125,7 @@ const Quests = observer(() => {
 								<button onClick={() => QuestStore.setQuestVisible(el)} className="button btn-mini">Подробнее</button>
 							</div>
 							<div className="description">
-								{el.description ? cutText(el.description) : <Skeleton width={150} count={2.5}/>}
+								{el.description ? cutText(el.description) : <Skeleton width={screenWidth > 767 ? '14vw' : '35vw'} count={2.5}/>}
 							</div>
 						</div>
 					</div>
