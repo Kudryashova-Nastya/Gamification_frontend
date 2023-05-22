@@ -7,6 +7,18 @@ import TUCOIN from "../../images/icons/black-tucoin14.svg";
 export const QuestDetailWindow = observer(forwardRef(({data}, ref) => {
 
 	const color = QuestStore.questTypes.find(color => color.id === data.type)?.color || '#111111'
+	const checkRole = (role) => {
+		switch (role) {
+			case "manager":
+				return '(Админ)'
+			case "curator":
+				return '(Куратор)'
+			case "coach":
+				return '(Коуч)'
+			default:
+				return ''
+		}
+	}
 
 	return (
 		<ModalWindow isBig={true} colorBorder={`${color}85`} ref={ref}>
@@ -25,7 +37,11 @@ export const QuestDetailWindow = observer(forwardRef(({data}, ref) => {
 						{data.description}
 					</div>
 					<div className="quest-info-block">
-						<span className="quest-label">Автор: </span><span className="quest-info">{data.employee_id}</span>
+						<span className="quest-label">Автор: </span>
+						<span
+							className="quest-info">
+							{data.employee_id?.first_name} {data.employee_id?.last_name} {checkRole(data.employee_id?.user_role)}
+						</span>
 					</div>
 					<div className="quest-info-block">
 						<span className="quest-label">Вознаграждение: </span>
