@@ -95,6 +95,14 @@
     justify-content: flex-end;
 }
 
+.myrefs .select-container {
+    margin-top: 0;
+}
+
+.myrefs .input-container {
+    width: initial;
+}
+
 .edit-employee-form .button-block {
     margin-top: 20px;
 }

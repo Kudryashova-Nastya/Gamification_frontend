@@ -136,7 +136,9 @@ export const EditEmployeeModalWindow = observer(forwardRef(({setEditVisible}, re
 				{Auth.profileInfo.user_role === "curator" &&
 					<div className="myrefs input-container">
 						<label className="blockname">Направление: &nbsp;</label>
+						<div className="input-container select-container">
 						<Select allArr={directionsStore.directions} setElement={setDirection}/>
+						</div>
 					</div>
 				}
 				<div className="myrefs">
