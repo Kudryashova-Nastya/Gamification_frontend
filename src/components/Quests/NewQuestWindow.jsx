@@ -18,15 +18,24 @@ export const NewQuestWindow = observer(forwardRef(({}, ref) => {
 	}, [])
 
 	const handleSubmit = async (e) => {
-		e.preventDefault();
+		e.preventDefault()
+		if (!type?.id) {
+			setError('Выберите тип задания')
+			return false
+		}
+		if (sum > type.max_sum || sum < type.min_sum) {
+			setError('Сумма вознаграждения выходит за пределы диапазона')
+			return false
+		}
+
 		const request = {
 			"name": name,
 			"description": description,
 			"type": type.id,
 			"sum": sum
 		}
-
 		console.log(request)
+
 
 		// log вернет ошибку, если пусто, значит ошибки нет
 		const log = await QuestStore.createQuest(request)
@@ -34,6 +43,7 @@ export const NewQuestWindow = observer(forwardRef(({}, ref) => {
 			setError(log)
 			console.log("косяк", log)
 		} else {
+			void QuestStore.fetchEmployeeQuests()
 			setError(false)
 			// сброс данных формы
 			setName("")
@@ -86,6 +96,7 @@ export const NewQuestWindow = observer(forwardRef(({}, ref) => {
 						<label>Тип задания</label>
 						<div className="input-container select-container">
 							<Select allArr={QuestStore.questTypes} setElement={setType} defaultText={"Выберите тип"}/>
+							<input type="text" name="select" value={type?.id || ''} onChange={()=>{}} required className="hidden-select"/>
 						</div>
 					</div>
 					<div>
@@ -97,6 +108,11 @@ export const NewQuestWindow = observer(forwardRef(({}, ref) => {
 							name="sum"
 							type="number"
 							value={sum}
+							min={type?.min_sum || 1}
+							max={type?.max_sum || 500}
+							placeholder={type?.min_sum ? `от ${type.min_sum} до ${type.max_sum}` : 'Сначала выберите тип'}
+							step="1"
+							disabled={!type?.min_sum}
 							onChange={(e) => setSum(e.target.value)}
 						/>
 					</div>

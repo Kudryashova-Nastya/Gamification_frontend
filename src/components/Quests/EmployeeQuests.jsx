@@ -24,10 +24,6 @@ const EmployeeQuests = observer(() => {
 		return text.length > maxLength ? text.substring(0, text.lastIndexOf(" ", maxLength)) + "..." : text
 	}
 
-	const [quests, setQuests] = useState([
-		{}, {}, {}, {}, {}
-	])
-
 
 	// пагинация
 	const [currentPage, setCurrentPage] = useState(1)
@@ -37,7 +33,6 @@ const EmployeeQuests = observer(() => {
 		const fetchData = async () => {
 			await QuestStore.fetchQuestTypes()
 			await QuestStore.fetchEmployeeQuests()
-			setQuests(QuestStore.myQuests)
 		}
 
 		void fetchData()
@@ -45,8 +40,8 @@ const EmployeeQuests = observer(() => {
 
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
-	const howManyPages = Math.ceil(quests?.length / postsPerPage)
-	const currentPosts = quests?.slice(indexOfFirstPost, indexOfLastPost)
+	const howManyPages = Math.ceil(QuestStore.myQuests?.length / postsPerPage)
+	const currentPosts = QuestStore.myQuests?.slice(indexOfFirstPost, indexOfLastPost)
 
 	return (
 		<div className="container">

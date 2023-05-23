@@ -88,7 +88,7 @@ class QuestStore {
 	}
 
 
-	myQuests = [{}, {}]
+	myQuests = [{}, {}, {}]
 	fetchStudentQuests = async () => {
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/quest/student_quest/`, POSTCORS({"student_id": Auth.profileInfo.id}, token?.access));

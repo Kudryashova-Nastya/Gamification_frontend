@@ -130,6 +130,13 @@ textarea::-webkit-scrollbar {
     width: 0;
 }
 
+.hidden-select {
+    opacity: 0;
+    height: 1px;
+    margin-left: 50px;
+    position: absolute;
+}
+
 hr {
     border-radius: 10px;
     margin-top: 0;
