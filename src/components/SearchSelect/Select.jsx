@@ -4,7 +4,7 @@ import '../base.css';
 import './SearchSelect.css'
 import ARROW from "../../images/icons/arrow-bottom.svg";
 
-const Select = observer(({allArr, setElement}) => {
+const Select = observer(({allArr, setElement, defaultText = "Выберите направление"}) => {
 	const [arr, setArr] = useState(allArr)
 	const [mainValue, setMainValue] = useState('')
 	const toggleSelect = () => {
@@ -25,7 +25,7 @@ const Select = observer(({allArr, setElement}) => {
 	return (
 		<div className="wrapper">
 			<div className="select-btn datalist" onClick={() => toggleSelect()}>
-				<span>{mainValue ? mainValue : "Выберите направление"}</span>
+				<span>{mainValue ? mainValue : defaultText}</span>
 				<img src={ARROW} alt=""/>
 			</div>
 			<div className="content select-content">

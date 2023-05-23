@@ -122,6 +122,12 @@
 
 textarea {
     resize: none;
+    scrollbar-width: thin;
+    line-height: 150%;
+}
+
+textarea::-webkit-scrollbar {
+    width: 0;
 }
 
 hr {
@@ -138,9 +144,6 @@ hr {
     box-sizing: border-box;
 }
 
-textarea {
-    line-height: 150%;
-}
 
 body.lock {
     /*height: 100vh;*/

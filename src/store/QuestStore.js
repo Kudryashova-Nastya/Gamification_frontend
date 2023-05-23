@@ -21,7 +21,14 @@ class QuestStore {
 		runInAction(() => {
 			this.currentQuest = el
 			this.modalQuestVisible = true
-			// document.body.style.overflowY = 'scroll';
+		})
+		bodyFixPosition()
+	}
+
+	modalNewQuestVisible = false
+	setNewQuestVisible = () => {
+		runInAction(() => {
+			this.modalNewQuestVisible = true
 		})
 		bodyFixPosition()
 	}
@@ -131,7 +138,7 @@ class QuestStore {
 		}
 		try {
 			const token = await Auth.getToken()
-			const req = await fetch(`${host}/api/v1/store/market_shop`, POSTCORS(data, token?.access))
+			const req = await fetch(`${host}/api/v1/quest/`, POSTCORS(data, token?.access))
 			const res = await req.json() || {detail: "проблема сервера"}
 			if (req?.ok && req?.status === 201) {
 				return false // возвращает false в случае успеха
@@ -182,6 +189,7 @@ class QuestStore {
 		bodyUnfixPosition()
 		runInAction(() => {
 			this.modalQuestVisible = false
+			this.modalNewQuestVisible = false
 		})
 
 	}

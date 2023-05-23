@@ -12,6 +12,7 @@ import {QuestDetailWindow} from "./QuestDetailWindow";
 import {observer} from "mobx-react";
 import BACK from "../../images/icons/back.svg";
 import DONE from "../../images/icons/done.svg";
+import {NewQuestWindow} from "./NewQuestWindow";
 
 const EmployeeQuests = observer(() => {
 	const history = useNavigate()
@@ -54,7 +55,7 @@ const EmployeeQuests = observer(() => {
 					<img src={BACK} alt="Назад" className="header-back" onClick={() => history(-1)}/>Мои задания
 				</h1>
 				<div className="">
-					<button onClick={() => {}} className="button btn-tall">
+					<button onClick={() => {QuestStore.setNewQuestVisible()}} className="button btn-tall">
 						Новое задание<img src={DONE} className="button-icon" alt=""/>
 					</button>
 				</div>
@@ -93,6 +94,15 @@ const EmployeeQuests = observer(() => {
 				nodeRef={nodeRef}
 			>
 				<QuestDetailWindow ref={nodeRef} data={QuestStore.currentQuest}/>
+			</CSSTransition>
+			<CSSTransition
+				in={QuestStore.modalNewQuestVisible}
+				timeout={300}
+				classNames="alert"
+				unmountOnExit
+				nodeRef={nodeRef}
+			>
+				<NewQuestWindow ref={nodeRef}/>
 			</CSSTransition>
 		</div>
 	);

@@ -95,6 +95,47 @@
     align-items: center;
 }
 
+.quest-form .input-container {
+    width: 100%;
+}
+
+.quest-form .input-container.select-container {
+    width: initial;
+    margin: 0;
+}
+
+.quest-form .quest-textarea {
+    border-radius: 20px;
+    border: none;
+    padding: 10px 20px;
+    background-color: #CCCCCC;
+}
+
+.quest-textarea:focus-visible {
+    outline: none
+}
+
+.quest-form .datalist {
+    padding: 8px 20px;
+    margin: 0;
+}
+
+.quest-form .wrapper {
+    margin: 0;
+}
+
+.quest-form .input, .quest-form .quest-textarea, .quest-form .datalist {
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.quest-form .inputs-block > div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
 @media (max-width: 767px) {
     .quest-card {
         padding: 26px 24px;
@@ -108,5 +149,27 @@
 
     .detailquest {
         margin-top: 0;
+    }
+
+    .quest-form .input, .quest-form .quest-textarea, .quest-form .datalist {
+        width: 260px;
+        margin-top: 3px;
+    }
+
+    .quest-form .inputs-block > div {
+        display: block
+    }
+
+    .quest-form label {
+        margin-left: 15px;
+    }
+
+    .quest-form .quest-textarea {
+        padding: 10px 15px;
+    }
+
+    .quest-form .input {
+        padding: 9px 15px;
+        max-width: 100%;
     }
 }
