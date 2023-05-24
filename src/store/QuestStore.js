@@ -25,6 +25,15 @@ class QuestStore {
 		bodyFixPosition()
 	}
 
+	employeeQuestVisible = false
+	setEmployeeQuestVisible = (el) => {
+		runInAction(() => {
+			this.currentQuest = el
+			this.employeeQuestVisible = true
+		})
+		bodyFixPosition()
+	}
+
 	modalNewQuestVisible = false
 	setNewQuestVisible = () => {
 		runInAction(() => {
@@ -158,13 +167,13 @@ class QuestStore {
 		}
 	}
 
-	editQuest = async (id) => {
-		if (!id) {
+	editQuest = async (data, id) => {
+		if (!data || !id) {
 			return "нет данных для запроса"
 		}
 		try {
 			const token = await Auth.getToken()
-			const req = await fetch(`${host}/api/v1/store_history/${id}/`, PATCHCORS({"status": true}, token?.access))
+			const req = await fetch(`${host}/api/v1/quest/${id}/`, PATCHCORS(data, token?.access))
 			const res = await req.json() || {detail: "проблема сервера"}
 			if (req?.ok) {
 				return false // возвращает false в случае успеха
@@ -172,7 +181,7 @@ class QuestStore {
 				if (res.code === "token_not_valid") {
 					Auth.getToken().then((token) => {
 						if (token?.access) {
-							return this.editQuest(id)
+							return this.editQuest(data)
 						}
 					})
 				}
@@ -184,14 +193,13 @@ class QuestStore {
 		}
 	}
 
-
 	closeModal = () => {
 		bodyUnfixPosition()
 		runInAction(() => {
 			this.modalQuestVisible = false
 			this.modalNewQuestVisible = false
+			this.employeeQuestVisible = false
 		})
-
 	}
 
 }

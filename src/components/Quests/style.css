@@ -63,6 +63,8 @@
 
 .detailquest .header3 {
     text-align: center;
+    padding: 0 34px;
+    box-sizing: border-box;
 }
 
 .detailquest .quest-description {
@@ -93,6 +95,10 @@
     display: flex;
     gap: 10px;
     align-items: center;
+}
+
+.detailquest .rows {
+    margin-bottom: 14px;
 }
 
 .quest-form .input-container {

@@ -118,7 +118,7 @@ export const NewQuestWindow = observer(forwardRef(({}, ref) => {
 					</div>
 				</div>
 				<div className="button-block">
-					<button className="button btn-large">Создать</button>
+					<button className="button btn-large" type="submit">Создать</button>
 				</div>
 			</form>
 			{error &&

@@ -40,7 +40,7 @@ export const QuestDetailWindow = observer(forwardRef(({data}, ref) => {
 						<span className="quest-label">Автор: </span>
 						<span
 							className="quest-info">
-							{data.employee_id?.first_name} {data.employee_id?.last_name} {checkRole(data.employee_id?.user_role)}
+							{data.employee?.first_name} {data.employee?.last_name} {checkRole(data.employee?.user_role)}
 						</span>
 					</div>
 					<div className="quest-info-block">

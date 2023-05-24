@@ -120,6 +120,19 @@
     margin-left: 10px;
 }
 
+.two-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.two-buttons button {
+    font-weight: 500;
+    font-size: 14px;
+    padding: 9px 25px;
+}
+
 textarea {
     resize: none;
     scrollbar-width: thin;
@@ -190,13 +203,16 @@ body.lock {
 .alert-enter {
     opacity: 0;
 }
+
 .alert-enter-active {
     opacity: 1;
     transition: opacity 500ms;
 }
+
 .alert-exit {
     opacity: 1;
 }
+
 .alert-exit-active {
     opacity: 0;
     transition: opacity 300ms;
@@ -205,8 +221,7 @@ body.lock {
 input[type="checkbox"]:checked,
 input[type="checkbox"]:not(:checked),
 input[type="radio"]:checked,
-input[type="radio"]:not(:checked)
-{
+input[type="radio"]:not(:checked) {
     position: absolute;
     left: -9999px;
 }
@@ -336,5 +351,14 @@ input[type="radio"]:checked + label:after {
     .window .form label {
         font-size: 14px;
         margin-right: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .two-buttons {
+        gap: 8px;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: stretch;
     }
 }

@@ -8,11 +8,11 @@ import Pagination from "../Pagination/Pagination";
 import {useNavigate} from "react-router-dom";
 import QuestStore from "../../store/QuestStore";
 import {CSSTransition} from "react-transition-group";
-import {QuestDetailWindow} from "./QuestDetailWindow";
 import {observer} from "mobx-react";
 import BACK from "../../images/icons/back.svg";
 import DONE from "../../images/icons/done.svg";
 import {NewQuestWindow} from "./NewQuestWindow";
+import {QuestEmployeeWindow} from "./QuestEmployeeWindow";
 
 const EmployeeQuests = observer(() => {
 	const history = useNavigate()
@@ -71,7 +71,7 @@ const EmployeeQuests = observer(() => {
 											<img src={TUCOIN} alt="" className="balance-icon"/></>
 										: ""}
 								</div>
-								<button onClick={() => QuestStore.setQuestVisible(el)} className="button btn-mini">Подробнее</button>
+								<button onClick={() => QuestStore.setEmployeeQuestVisible(el)} className="button btn-mini">Подробнее</button>
 							</div>
 							<div className="description">
 								{el.description ? cutText(el.description) : <Skeleton width={screenWidth > 767 ? '14vw' : '35vw'} count={2.5}/>}
@@ -82,13 +82,13 @@ const EmployeeQuests = observer(() => {
 			</div>
 			<Pagination pages={howManyPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 			<CSSTransition
-				in={QuestStore.modalQuestVisible}
+				in={QuestStore.employeeQuestVisible}
 				timeout={300}
 				classNames="alert"
 				unmountOnExit
 				nodeRef={nodeRef}
 			>
-				<QuestDetailWindow ref={nodeRef} data={QuestStore.currentQuest}/>
+				<QuestEmployeeWindow ref={nodeRef} data={QuestStore.currentQuest}/>
 			</CSSTransition>
 			<CSSTransition
 				in={QuestStore.modalNewQuestVisible}
