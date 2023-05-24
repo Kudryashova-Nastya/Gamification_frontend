@@ -4,17 +4,13 @@ import QuestStore from "../../store/QuestStore";
 import Select from "../SearchSelect/Select";
 import ERROR from "../../images/icons/error.svg";
 
-export const EditQuest = observer(({data}) => {
+export const EditQuest = observer(({data, setCurrentTab}) => {
 	const [name, setName] = useState(data.name)
 	const [description, setDescription] = useState(data.description)
 	const [sum, setSum] = useState(data.sum)
 	const [type, setType] = useState(QuestStore.questTypes.find(type => type.id === data.type) || null)
 
 	const [error, setError] = useState(false)
-
-	// useEffect(() => {
-	// 	void QuestStore.fetchQuestTypes()
-	// }, [])
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -33,7 +29,6 @@ export const EditQuest = observer(({data}) => {
 			"type": type.id,
 			"sum": sum
 		}
-		console.log(request)
 
 
 		// log вернет ошибку, если пусто, значит ошибки нет
@@ -42,15 +37,16 @@ export const EditQuest = observer(({data}) => {
 			setError(log)
 			console.log("косяк", log)
 		} else {
-			void QuestStore.fetchEmployeeQuests()
 			setError(false)
-			QuestStore.closeModal()
+			await QuestStore.fetchQuestById(data.id)
+			void QuestStore.fetchEmployeeQuests()
+			setCurrentTab('detail')
 		}
 	}
 
 	return (
 		<>
-			<div className="header3">Редактирование задания</div>
+			<div className="header3">Редактирование задание</div>
 			<form className="form quest-form" onSubmit={handleSubmit}>
 				<div className="inputs-block input-container">
 					<div>

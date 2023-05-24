@@ -73,6 +73,9 @@
     line-height: 140%;
     padding: 17px;
     border-radius: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
 }
 
 .detailquest .quest-label {
@@ -135,11 +138,27 @@
     box-sizing: border-box;
 }
 
+.quest-form .search-select .datalist {
+    width: 325px;
+}
+
 .quest-form .inputs-block > div {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     flex-wrap: nowrap;
+}
+
+.quest-form .top-label {
+    margin-left: 20px;
+}
+
+.close-quest-text {
+    margin: 20px 0;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 140%;
+    max-width: 400px;
 }
 
 @media (max-width: 767px) {
@@ -162,6 +181,10 @@
         margin-top: 3px;
     }
 
+    .quest-form .search-select .datalist {
+        width: 270px;
+    }
+
     .quest-form .inputs-block > div {
         display: block
     }
@@ -177,5 +200,9 @@
     .quest-form .input {
         padding: 9px 15px;
         max-width: 100%;
+    }
+
+    .detailquest .header3 {
+        padding: 0;
     }
 }

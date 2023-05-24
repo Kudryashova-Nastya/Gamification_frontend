@@ -6,6 +6,8 @@ import TUCOIN from "../../images/icons/black-tucoin14.svg";
 import EDIT from "../../images/icons/edit.svg";
 import DONE from "../../images/icons/done.svg";
 import {EditQuest} from "./EditQuest";
+import {RewardQuest} from "./RewardQuest";
+import {CloseQuest} from "./CloseQuest";
 
 export const QuestEmployeeWindow = observer(forwardRef(({data}, ref) => {
 
@@ -65,7 +67,8 @@ export const QuestEmployeeWindow = observer(forwardRef(({data}, ref) => {
 					</div>
 				</div>
 				: currentTab === 'edit' ? <EditQuest data={data} setCurrentTab={setCurrentTab}/> : currentTab === 'reward' ?
-					<EditQuest data={data} setCurrentTab={setCurrentTab}/> : ''}
+					<RewardQuest data={data} setCurrentTab={setCurrentTab}/> : currentTab === 'close' ?
+						<CloseQuest data={data} setCurrentTab={setCurrentTab}/> : ''}
 		</ModalWindow>
 	)
 }));

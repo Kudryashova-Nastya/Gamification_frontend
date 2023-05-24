@@ -61,7 +61,7 @@ const EmployeeQuests = observer(() => {
 					<div key={i} className="quest-card"
 							 style={{"background": `${QuestStore.questTypes.find(color => color.id === el.type)?.color || '#CCCCCC'}40`}}>
 						<div className="title">
-							{el.name || <Skeleton width={180}/>}
+							{el.name || <Skeleton width={180}/>} {el.name && !el.is_active && '(Закрыто)'}
 						</div>
 						<div className="body">
 							<div>

@@ -6,7 +6,7 @@ import ARROW from "../../images/icons/arrow-bottom.svg";
 import SEARCH from "../../images/icons/search-gray.svg";
 import Auth from "../../store/helper/Auth";
 
-const SearchSelect = observer(({allArr, setRecipient, id}) => {
+const SearchSelect = observer(({allArr, setRecipient, id, defaultOpen=false}) => {
 	const [arr, setArr] = useState(allArr)
 	const [mainValue, setMainValue] = useState('')
 	const toggleSelect = () => {
@@ -24,9 +24,7 @@ const SearchSelect = observer(({allArr, setRecipient, id}) => {
 	useEffect(() => {
 		setArr(allArr)
 		if (id) {
-			// console.log("allArr", allArr)
 			let defaultRec = allArr.find(item => item.id === +id)
-			// console.log(defaultRec)
 			setRecipient(defaultRec)
 			setMainValue(`${defaultRec?.first_name} ${defaultRec?.last_name}`)
 		}
@@ -44,7 +42,7 @@ const SearchSelect = observer(({allArr, setRecipient, id}) => {
 	}, [allArr])
 
 	return (
-		<div className="wrapper">
+		<div className={defaultOpen ? "wrapper active" : "wrapper"}>
 			<div className="select-btn datalist" onClick={() => toggleSelect()}>
 				<span>{mainValue ? mainValue : "Выберите получателя"}</span>
 				<img src={ARROW} alt=""/>

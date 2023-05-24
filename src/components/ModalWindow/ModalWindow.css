@@ -24,6 +24,13 @@
     padding: 25px 35px;
 }
 
+.big-modal {
+    overflow-y: auto;
+    max-height: 100%;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+}
+
 .close-ico {
     position: absolute;
     top: 25px;
