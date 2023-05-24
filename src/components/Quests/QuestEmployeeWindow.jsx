@@ -56,14 +56,20 @@ export const QuestEmployeeWindow = observer(forwardRef(({data}, ref) => {
 							<span className="quest-info balance-icon">{data.sum} </span>
 							<img src={TUCOIN} alt="" className="balance-icon"/>
 						</div>
-						<div className="quest-info-block two-buttons">
-							<button className="button" onClick={() => setCurrentTab('edit')}>Изменить
-								<img className="button-icon" alt="" src={EDIT}/>
-							</button>
-							<button className="button" onClick={() => setCurrentTab('reward')}>Наградить
-								<img src={DONE} className="button-icon" alt=""/>
-							</button>
+						{data.student?.first_name && <div className="quest-info-block">
+							<span className="quest-label">Исполнитель: </span>
+							<span className="quest-info balance-icon">{data.student?.first_name} {data.student?.last_name}</span>
 						</div>
+						}
+						{data.is_active ?
+							<div className="quest-info-block two-buttons">
+								<button className="button" onClick={() => setCurrentTab('edit')}>Изменить
+									<img className="button-icon" alt="" src={EDIT}/>
+								</button>
+								<button className="button" onClick={() => setCurrentTab('reward')}>Наградить
+									<img src={DONE} className="button-icon" alt=""/>
+								</button>
+							</div> : <div className="close-quest-text">Задача закрыта</div>}
 					</div>
 				</div>
 				: currentTab === 'edit' ? <EditQuest data={data} setCurrentTab={setCurrentTab}/> : currentTab === 'reward' ?

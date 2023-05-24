@@ -128,7 +128,7 @@ const StudentTransactions = observer(({id}) => {
 							</div>
 							<div className="groups info">
 								<div className="count">
-									<span className="balance-icon">-{el.sum_count || <Skeleton width={25}/>} </span>
+									<span className="balance-icon">+{el.sum_count || <Skeleton width={25}/>} </span>
 									{el.sum_count && <img className="balance-icon" alt="tucoin" src={TUCOIN}/>}
 								</div>
 								<div className="message">{el.comment || <Skeleton width={90}/>}</div>

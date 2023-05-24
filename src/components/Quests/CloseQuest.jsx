@@ -25,7 +25,7 @@ export const CloseQuest = observer(({data, setCurrentTab}) => {
 	return (
 		<>
 			<div className="header3">Подтверждение</div>
-				<div className="close-quest-text">
+				<div className="close-quest-check">
 					Вы уверены, что хотите закрыть задачу без награждения студента?
 					После закрытия задача станет неактивной, и вновь открыть её будет нельзя
 				</div>
