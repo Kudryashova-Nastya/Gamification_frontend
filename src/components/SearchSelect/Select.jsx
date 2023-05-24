@@ -4,9 +4,9 @@ import '../base.css';
 import './SearchSelect.css'
 import ARROW from "../../images/icons/arrow-bottom.svg";
 
-const Select = observer(({allArr, setElement, defaultText = "Выберите направление"}) => {
+const Select = observer(({allArr, setElement, defaultText = "Выберите направление", defaultValue = null}) => {
 	const [arr, setArr] = useState(allArr)
-	const [mainValue, setMainValue] = useState('')
+	const [mainValue, setMainValue] = useState(defaultValue?.name || '')
 	const toggleSelect = () => {
 		document.getElementsByClassName("wrapper")[0].classList.toggle("active")
 	}
@@ -31,9 +31,9 @@ const Select = observer(({allArr, setElement, defaultText = "Выберите н
 			<div className="content select-content">
 				<ul className="options">
 					{arr.length > 0 ? arr.map((el, index) => {
-							return (<li onClick={(e) => updateName(e, el)}
-													className={el?.name === mainValue ? "selected" : ""}
-													key={index}>{el.name}</li>)
+						return (<li onClick={(e) => updateName(e, el)}
+												className={el?.name === mainValue ? "selected" : ""}
+												key={index}>{el.name}</li>)
 					}) : "По вашему запросу ничего не найдено"}
 				</ul>
 			</div>
