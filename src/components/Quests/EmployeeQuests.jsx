@@ -50,7 +50,9 @@ const EmployeeQuests = observer(() => {
 					<img src={BACK} alt="Назад" className="header-back" onClick={() => history(-1)}/>Мои задания
 				</h1>
 				<div className="">
-					<button onClick={() => {QuestStore.setNewQuestVisible()}} className="button btn-tall">
+					<button onClick={() => {
+						QuestStore.setNewQuestVisible()
+					}} className="button btn-tall">
 						Новое задание<img src={DONE} className="button-icon" alt=""/>
 					</button>
 				</div>
@@ -59,7 +61,10 @@ const EmployeeQuests = observer(() => {
 			<div className="student-container">
 				{currentPosts?.map((el, i) =>
 					<div key={i} className="quest-card"
-							 style={{"background": `${QuestStore.questTypes.find(color => color.id === el.type)?.color || '#CCCCCC'}40`}}>
+							 style={{
+								 "background": `${!el.is_active ? '#6b6b6b' :
+									 QuestStore.questTypes.find(color => color.id === el.type)?.color || '#CCCCCC'}40`
+							 }}>
 						<div className="title">
 							{el.name || <Skeleton width={180}/>} {el.name && !el.is_active && '(Закрыто)'}
 						</div>
@@ -71,10 +76,12 @@ const EmployeeQuests = observer(() => {
 											<img src={TUCOIN} alt="" className="balance-icon"/></>
 										: ""}
 								</div>
-								<button onClick={() => QuestStore.setEmployeeQuestVisible(el)} className="button btn-mini">Подробнее</button>
+								<button onClick={() => QuestStore.setEmployeeQuestVisible(el)} className="button btn-mini">Подробнее
+								</button>
 							</div>
 							<div className="description">
-								{el.description ? cutText(el.description) : <Skeleton width={screenWidth > 767 ? '14vw' : '35vw'} count={2.5}/>}
+								{el.description ? cutText(el.description) :
+									<Skeleton width={screenWidth > 767 ? '14vw' : '35vw'} count={2.5}/>}
 							</div>
 						</div>
 					</div>

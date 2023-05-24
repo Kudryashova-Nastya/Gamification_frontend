@@ -119,13 +119,26 @@ class QuestStore {
 		}
 	}
 
+
+	compareTasks = (a, b) => {
+		if (a.is_active && !b.is_active) {
+			return -1
+		} else if (!a.is_active && b.is_active) {
+			return 1
+		} else {
+			return 0
+		}
+	}
+
+	// tasks.sort(compareTasks)
+
 	fetchEmployeeQuests = async () => {
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/quest/employee_quest/`, POSTCORS({"employee_id": Auth.profileInfo.id}, token?.access));
 		const res = await req.json();
 		if (req.ok) {
 			runInAction(() => {
-				this.myQuests = res
+				this.myQuests = res.sort(this.compareTasks)
 			})
 		} else {
 			if (res.code === "token_not_valid") {
