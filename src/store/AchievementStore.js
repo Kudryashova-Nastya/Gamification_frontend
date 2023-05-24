@@ -47,7 +47,6 @@ class AchievementStore {
 			runInAction(() => {
 				this.myAchives = res
 			})
-			console.log(res)
 		} else {
 			if (res.code === "token_not_valid") {
 				Auth.getToken().then((token) => {

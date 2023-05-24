@@ -29,6 +29,7 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 
 	const aboutRef = useRef(null)
 	const telegramRef = useRef(null)
+	const portfolioRef = useRef(null)
 	let directionsRef = useRef({}) // для чекбоксов
 	let imageRef = useRef(null)
 	const handleSubmit = async (e) => {
@@ -64,6 +65,7 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 		const data = {
 			"about": aboutRef.current.value || null,
 			"telegram": telegramRef.current.value || null,
+			"portfolio_link": portfolioRef.current.value || null,
 			"direction": dirArray
 		}
 		console.log("data", data)
@@ -122,9 +124,14 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 					</div>
 				</div>
 				<div className="myrefs">
-					<label className="blockname">Мой телеграм: &nbsp;</label>
-					<input type="text" className="input" size="40" defaultValue={StudentProfileStore.studentInfo?.telegram}
-								 maxLength="40" ref={telegramRef}/>
+					<label className="blockname">Мой ник в телеграм: &nbsp;</label>
+					<input type="text" className="input" size="32" defaultValue={StudentProfileStore.studentInfo?.telegram}
+								 maxLength="50" ref={telegramRef}/>
+				</div>
+				<div className="myrefs">
+					<label className="blockname">Ссылка на портфолио: &nbsp;</label>
+					<input type="url" className="input" size="32" defaultValue={StudentProfileStore.studentInfo?.portfolio_link}
+								 maxLength="100" ref={portfolioRef}/>
 				</div>
 				<div className="myrefs">
 					<label className="blockname">Загрузить аватарку: &nbsp; &nbsp; &nbsp;</label>
