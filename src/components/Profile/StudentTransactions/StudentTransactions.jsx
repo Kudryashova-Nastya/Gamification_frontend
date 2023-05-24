@@ -118,6 +118,23 @@ const StudentTransactions = observer(({id}) => {
 							</div>
 						</div>
 					</div>
+				} else if (el.transfer_type === "quest") { // если тип транзакции это выполнение задания
+					return <div key={i} className="transaction-block">
+						<div className="datetime">{(new Date(el.date_time)).toLocaleString("ru-RU", options) || ""}</div>
+						<div className="transaction">
+							<div className="groups">
+								<div className="member sender">Задание</div>
+
+							</div>
+							<div className="groups info">
+								<div className="count">
+									<span className="balance-icon">-{el.sum_count || <Skeleton width={25}/>} </span>
+									{el.sum_count && <img className="balance-icon" alt="tucoin" src={TUCOIN}/>}
+								</div>
+								<div className="message">{el.comment || <Skeleton width={90}/>}</div>
+							</div>
+						</div>
+					</div>
 				} else {
 					// иначе блок скелетона
 					return <div key={i} className="transaction-block">
