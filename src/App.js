@@ -123,7 +123,7 @@ const App = observer(() => {
 						<Route path="quests" element={<Quests/>}/>
 						<Route path="quests/my-quests" element={<EmployeeQuests/>}/>
 					</Route>
-
+					<Route path="/" element={<Navigate to="/login" replace/>}/>
 				</Routes>
 			</BrowserRouter>
 		</SkeletonTheme>

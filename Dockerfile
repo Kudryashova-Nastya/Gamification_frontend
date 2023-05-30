@@ -5,7 +5,7 @@ FROM node:16.17.0
 WORKDIR /app
 
 # Копируем package.json и package-lock.json для установки зависимостей
-COPY package*.json ./
+COPY package.json ./
 
 # Устанавливаем зависимости
 RUN npm install

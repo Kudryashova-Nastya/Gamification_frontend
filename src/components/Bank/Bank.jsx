@@ -64,7 +64,7 @@ const Bank = observer(({canTransfer = false}) => {
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
 	const howManyPages = Math.ceil(transactions.length / postsPerPage)
-	const currentPosts = transactions.slice(indexOfFirstPost, indexOfLastPost)
+	const currentPosts = transactions?.slice(indexOfFirstPost, indexOfLastPost) || [{}]
 
 	return (
 		<div className="container">
