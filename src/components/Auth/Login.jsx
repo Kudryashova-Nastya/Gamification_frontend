@@ -9,7 +9,7 @@ import ERROR from "../../images/icons/error.svg";
 const Login = observer(() => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [error, setError] = useState(false)
+	const [error, setError] = useState(null)
 	const history = useNavigate()
 
 	const handleSubmit = async (e) => {
@@ -27,7 +27,7 @@ const Login = observer(() => {
 		} else {
 			setError(false)
 			const role = await Auth.getRole()
-			console.log("успех", role)
+			// console.log("успех", role)
 			switch (role) {
 				case "student":
 					history("/student")
@@ -35,9 +35,9 @@ const Login = observer(() => {
 				case "manager":
 					history("/manager")
 					break;
-				case "main-admin":
-					history("/main-admin")
-					break;
+				// case "admin":
+				// 	history("/admin")
+				// 	break;
 				case "curator":
 					history("/curator")
 					break;

@@ -61,13 +61,9 @@ class StudentProfileStore {
 			})
 		} else {
 			if (res.code === "token_not_valid") {
-				console.log("проблема протухшего токена обнаружена")
 				Auth.getToken().then((token) => {
 					if (token?.access) {
-						console.log("проблема протухания решена, перезапуск запроса")
 						this.fetchStudentInfo()
-					} else {
-						console.log("проблема протухания не решена", token)
 					}
 				})
 			} else {
@@ -112,13 +108,9 @@ class StudentProfileStore {
 			return false // возвращает false в случае успеха
 		} else {
 			if (res.code === "token_not_valid") {
-				console.log("проблема протухшего токена обнаружена")
 				Auth.getToken().then((token) => {
 					if (token?.access) {
-						console.log("проблема протухания решена, перезапуск запроса")
 						return this.editProfileImage(data)
-					} else {
-						console.log("проблема протухания не решена", token)
 					}
 				})
 			}
@@ -133,19 +125,14 @@ class StudentProfileStore {
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/student/`, POSTCORS(data, token?.access))
 		const res = await req.json()
-		console.log("res", res)
+		// console.log("res", res)
 		if (req?.ok && req?.status === 201) {
-			console.log("всё ок, статус 201")
 			return false // возвращает false в случае успеха
 		} else {
 			if (res.code === "token_not_valid") {
-				console.log("проблема протухшего токена обнаружена")
 				Auth.getToken().then((token) => {
 					if (token?.access) {
-						console.log("проблема протухания решена, перезапуск запроса")
 						return this.registerStudent(data)
-					} else {
-						console.log("проблема протухания не решена", token)
 					}
 				})
 			}
@@ -164,4 +151,5 @@ class StudentProfileStore {
 
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default new StudentProfileStore()

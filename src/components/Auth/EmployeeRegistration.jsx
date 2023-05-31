@@ -17,7 +17,7 @@ const EmployeeRegistration = observer(() => {
 	const [password, setPassword] = useState("")
 
 	const [isDone, setIsDone] = useState(false)
-	const [error, setError] = useState(false)
+	const [error, setError] = useState(null)
 	const [data, setData] = useState({})
 
 	const host = getHostInformation()
@@ -29,19 +29,15 @@ const EmployeeRegistration = observer(() => {
 		const token = await Auth.getToken()
 		const req = await fetch(`${host}/api/v1/employee/`, POSTCORS(data, token?.access))
 		const res = await req.json()
-		console.log("res", res)
+		// console.log("res", res)
 		if (req?.ok && req?.status === 201) {
-			console.log("всё ок, статус 201")
+			// console.log("всё ок, статус 201")
 			return false // возвращает false в случае успеха
 		} else {
 			if (res.code === "token_not_valid") {
-				console.log("проблема протухшего токена обнаружена")
 				Auth.getToken().then((token) => {
 					if (token?.access) {
-						console.log("проблема протухания решена, перезапуск запроса")
 						return registerEmployee(data)
-					} else {
-						console.log("проблема протухания не решена", token)
 					}
 				})
 			}
@@ -82,7 +78,7 @@ const EmployeeRegistration = observer(() => {
 		}
 
 		setData(request)
-		console.log(request)
+		// console.log(request)
 
 		// log вернет ошибку, если пусто, значит ошибки нет
 		const log = await registerEmployee(request)

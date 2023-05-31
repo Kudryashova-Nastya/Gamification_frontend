@@ -5,7 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import "./style.css"
 import '../base.css';
 import {getHostInformation} from "../../store/helper/Helper";
-import MarketStore from "../../store/MarketStore";
+import {marketStore as MarketStore} from "../../store/MarketStore";
 import BACK from "../../images/icons/back.svg";
 import {CSSTransition} from "react-transition-group";
 import {EditBuyModalWindow} from "./EditBuyModalWindow/EditBuyModalWindow";
@@ -46,7 +46,7 @@ const MyBuys = observer(() => {
 					<div key={i} className="market-card">
 						<div className="left-side">
 							<div className="avatar">
-								{el.store_product?.image ? <img alt="photo" src={`${host}${el.store_product?.image}`}/> :
+								{el.store_product?.image ? <img alt="" src={`${host}${el.store_product?.image}`}/> :
 									el.store_product?.hasOwnProperty('image') ?
 										"" :
 										<Skeleton width={88} height={88} circle={true}/>}

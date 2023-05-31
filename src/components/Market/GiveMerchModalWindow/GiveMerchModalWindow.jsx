@@ -1,7 +1,7 @@
 import React, {forwardRef, useState} from 'react';
 import {observer} from 'mobx-react';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
-import MarketStore from "../../../store/MarketStore";
+import {marketStore as MarketStore} from "../../../store/MarketStore";
 
 export const GiveMerchModalWindow = observer(forwardRef(({data}, ref) => {
 	const [error, setError] = useState(null)

@@ -8,7 +8,7 @@ import TUCOIN from "../../images/icons/white-tucoin16.svg";
 import "./style.css"
 import '../base.css';
 import {getHostInformation} from "../../store/helper/Helper";
-import MarketStore from "../../store/MarketStore";
+import {marketStore as MarketStore} from "../../store/MarketStore";
 import {CSSTransition} from "react-transition-group";
 import {BuyModalWindow} from "./BuyModalWindow/BuyModalWindow";
 
@@ -36,7 +36,7 @@ const Market = observer(({canBuy = false, canGiveMerch = false}) => {
 			)
 		}
 		setIsLoading(false)
-	}, [])
+	}, [canBuy])
 
 	return (
 		<div className="container">
@@ -60,7 +60,7 @@ const Market = observer(({canBuy = false, canGiveMerch = false}) => {
 					<div key={i} className="market-card">
 						<div className="left-side">
 							<div className="avatar">
-								{el?.image ? <img alt="photo" src={`${host}${el.image}`}/> :
+								{el?.image ? <img alt="" src={`${host}${el.image}`}/> :
 									el.hasOwnProperty('image') ?
 										"" :
 										<Skeleton width={88} height={88} circle={true}/>}

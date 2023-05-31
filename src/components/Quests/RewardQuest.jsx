@@ -9,7 +9,7 @@ import Auth from "../../store/helper/Auth";
 export const RewardQuest = observer(({data, setCurrentTab}) => {
 
 	const [recipient, setRecipient] = useState({})
-	const [error, setError] = useState(false)
+	const [error, setError] = useState(null)
 	const [students, setStudents] = useState([])
 
 	useEffect(() => {

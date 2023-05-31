@@ -20,7 +20,7 @@ const TransactionPage = observer(() => {
 	const nodeRef = useRef(null)
 
 	const [data, setData] = useState({})
-	const [error, setError] = useState(false)
+	const [error, setError] = useState(null)
 	const [recipient, setRecipient] = useState({})
 	const [names, setNames] = useState([])
 	const [isDone, setIsDone] = useState(false)
@@ -48,7 +48,6 @@ const TransactionPage = observer(() => {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.code === "token_not_valid") {
-					console.log("проблема протухшего токена в селекторе студентов, перезапуск запроса")
 					fetchData()
 				} else {
 					setNames(data)

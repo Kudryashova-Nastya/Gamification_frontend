@@ -32,7 +32,6 @@ const Employees = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.code === "token_not_valid") {
-					console.log("проблема протухшего токена в студентах, перезапуск запроса")
 					fetchData()
 				} else {
 					setEmployees(data)

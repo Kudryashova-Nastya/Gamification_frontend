@@ -22,31 +22,34 @@ import Quests from "./components/Quests/Quests";
 import StudentQuests from "./components/Quests/StudentQuests";
 import EmployeeQuests from "./components/Quests/EmployeeQuests";
 
-
 const App = observer(() => {
 	let token = Auth.token
 	let role = Auth.role
 
 	const getToken = async () => {
-		token = await Auth.getToken();
-	};
+		token = await Auth.getToken()
+	}
 
 	const getRole = async () => {
-		role = await Auth.getRole();
-	};
+		role = await Auth.getRole()
+	}
 
 	useEffect(() => {
 		// проверяем наличие токенов и роль пользователя
 		getToken().then((token) => {
-			token?.access ? role = getRole() : role = null
-		});
-		console.log('role', role, Auth.role)
-		console.log('token', token, Auth.token)
-	}, []);
+			if (token?.access) {
+				void getRole()
+			} else {
+				role = null
+			}
+		})
+		// console.log('role', role, Auth.role)
+		// console.log('token', token, Auth.token)
+	}, [])
 
 	// для редиректа на личную страницу студента
 	const StudentRedirect = () => {
-		const {id} = useParams();
+		const {id} = useParams()
 		if (id && token) {
 			if (role === 'manager') {
 				return <Navigate to={`/manager/student/${id}`} replace/>
@@ -56,7 +59,7 @@ const App = observer(() => {
 				return <Navigate to={`/curator/student/${id}`} replace/>
 			}
 		}
-		return <Navigate replace to="/login"/>;
+		return <Navigate replace to="/login"/>
 	};
 
 	return (

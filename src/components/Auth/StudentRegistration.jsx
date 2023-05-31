@@ -13,7 +13,7 @@ const StudentRegistration = observer(() => {
 	const [password, setPassword] = useState("");
 
 	const [isDone, setIsDone] = useState(false)
-	const [error, setError] = useState(false)
+	const [error, setError] = useState(null)
 	const [data, setData] = useState({})
 
 	const handleSubmit = async (e) => {

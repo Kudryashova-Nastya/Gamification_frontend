@@ -1,7 +1,7 @@
 import React, {forwardRef, useState} from 'react';
 import {observer} from 'mobx-react';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
-import MarketStore from "../../../store/MarketStore";
+import {marketStore as MarketStore} from "../../../store/MarketStore";
 import TUCOIN from "../../../images/icons/black-tucoin16.svg";
 import Auth from "../../../store/helper/Auth";
 import {useNavigate} from "react-router-dom";

@@ -61,7 +61,6 @@ const Students = ({canRegister = false, canFilter = false}) => {
 			.then((data) => {
 				// console.log("data", data)
 				if (data.code === "token_not_valid") {
-					console.log("проблема протухшего токена в студентах, перезапуск запроса")
 					fetchData()
 				} else {
 					setStudents(data)

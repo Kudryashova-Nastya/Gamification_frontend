@@ -28,10 +28,8 @@ class Auth {
 				"Content-Type": "application/json"
 			},
 		}
-		// console.log(LOGIN_CORS)
 
 		const req = await fetch(`${host}/api/v1/token/`, LOGIN_CORS)
-		console.log(host)
 		const res = await req.json()
 		// console.log('req', req)
 		if (req?.ok && req?.status === 200) {
@@ -72,15 +70,14 @@ class Auth {
 		}
 		// проверка не протух ли аксес-токен
 		if (this.isExpired(this.getExpirationDate(this.token.access))) {
-			console.log("токен протух")
 			const req = await fetch(`${host}/api/v1/token/refresh/`, POSTCORS({"refresh": this.token?.refresh}))
 			const res = await req.json()
-			console.log("попытка рефреша ответ", res)
+			// console.log("попытка рефреша ответ", res)
 			if (res?.access) {
-				console.log("новый токен получен после рефреш")
+				// console.log("новый токен получен после рефреш")
 				this.setToken(res)
 			} else {
-				console.log("токен удалён, рефреш не удался")
+				// console.log("токен удалён, рефреш не удался")
 				this.setToken(null)
 			}
 		}
@@ -89,7 +86,7 @@ class Auth {
 
 	setToken = (token) => {
 		if (token) {
-			console.log("кладём в локальное хранилище")
+			// console.log("кладём в локальное хранилище")
 			localStorage.setItem("TOKEN_AUTH", JSON.stringify(token))
 		} else {
 			localStorage.removeItem("TOKEN_AUTH")
@@ -100,7 +97,7 @@ class Auth {
 		runInAction(() => {
 			this.token = token
 		})
-		console.log("обновление/удаление токена", this.token)
+		// console.log("обновление/удаление токена", this.token)
 	}
 
 	getRole = async () => {
@@ -109,7 +106,7 @@ class Auth {
 			const usersInfoRes = await usersInfoReq.json()
 			if (usersInfoReq.ok && usersInfoReq?.status === 200) {
 				runInAction(() => {
-					console.log("запрос на роль")
+					// console.log("запрос на роль")
 					this.profileInfo = usersInfoRes
 					this.role = usersInfoRes?.user_role
 					localStorage.setItem("ROLE", usersInfoRes?.user_role)
@@ -128,14 +125,13 @@ class Auth {
 		const usersInfoRes = await usersInfoReq.json()
 		if (usersInfoReq.ok && usersInfoReq?.status === 200) {
 			runInAction(() => {
-				console.log("запрос на инфу о профиле")
+				// console.log("запрос на инфу о профиле")
 				this.profileInfo = usersInfoRes
 				this.role = usersInfoRes?.user_role
 				localStorage.setItem("ROLE", usersInfoRes?.user_role)
 			})
 		} else {
 			if (usersInfoRes.code === "token_not_valid") {
-				console.log("проблема протухшего токена в меню, перезапуск запроса")
 				void this.getProfileInfo()
 			} else {
 				console.log("ошибка получения данных профиля")
@@ -151,4 +147,5 @@ class Auth {
 	}
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default new Auth();

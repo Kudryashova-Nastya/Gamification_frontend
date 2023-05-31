@@ -5,13 +5,13 @@ import QuestStore from "../../store/QuestStore";
 import Select from "../SearchSelect/Select";
 import ERROR from "../../images/icons/error.svg";
 
-export const NewQuestWindow = observer(forwardRef(({}, ref) => {
+export const NewQuestWindow = observer(forwardRef((props = {}, ref) => {
 	const [name, setName] = useState("")
 	const [description, setDescription] = useState("")
 	const [sum, setSum] = useState("")
 	const [type, setType] = useState(null)
 
-	const [error, setError] = useState(false)
+	const [error, setError] = useState(null)
 
 	useEffect(() => {
 		void QuestStore.fetchQuestTypes()
@@ -34,7 +34,7 @@ export const NewQuestWindow = observer(forwardRef(({}, ref) => {
 			"type": type.id,
 			"sum": sum
 		}
-		console.log(request)
+		// console.log(request)
 
 
 		// log вернет ошибку, если пусто, значит ошибки нет

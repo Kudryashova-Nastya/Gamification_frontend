@@ -49,7 +49,7 @@ const Menu = observer(({role}) => {
 	useEffect(() => {
 		// проверяем наличие токенов и роль пользователя
 		void getProfileInfo()
-		console.log('info from menu', JSON.stringify(Auth.profileInfo))
+		// console.log('info from menu', JSON.stringify(Auth.profileInfo))
 	}, []);
 
 	return (
@@ -121,13 +121,13 @@ const Menu = observer(({role}) => {
 							</Link>
 						</li>
 						<li>
-							<a href="https://ru.tumo.world" target="_blank">
+							<a href="https://ru.tumo.world" target="_blank" rel="noreferrer">
 								<img src={Traectoria} className="ico" alt="Traectoria"/>
 								Траектория
 							</a>
 						</li>
 						<li>
-							<a href="http://eventtumo.tilda.ws/" target="_blank">
+							<a href="http://eventtumo.tilda.ws/" target="_blank" rel="noreferrer">
 								<img src={Events} className="ico" alt="Events"/>
 								Календарь мероприятий
 							</a>
@@ -135,14 +135,19 @@ const Menu = observer(({role}) => {
 					</ul>
 					<div className="social">
 						<div>
-							<a target="_blank" href="https://t.me/+VyZ5tKf3SOoyMGYy"><img src={TELEGRAM} className="networks"
-																																						alt="TELEGRAM"/></a><br/>
-							<a target="_blank" href="https://vk.com/tumomoscow/"><img src={VK} className="networks"
-																																				alt="VK"/></a><br/>
-							<span onClick={() => Auth.setSettingsVisible(true)}><img src={SETTINGS} className="networks" alt="SETTINGS"/></span><br/>
+							<a target="_blank" href="https://t.me/+VyZ5tKf3SOoyMGYy" rel="noreferrer">
+								<img src={TELEGRAM} className="networks" alt="TELEGRAM"/>
+							</a><br/>
+							<a target="_blank" href="https://vk.com/tumomoscow/" rel="noreferrer">
+								<img src={VK} className="networks" alt="VK"/>
+							</a><br/>
+							<span onClick={() => Auth.setSettingsVisible(true)}>
+								<img src={SETTINGS} className="networks" alt="SETTINGS"/></span><br/>
 						</div>
 						<div>
-							<a target="_blank" href="https://tumo.moscow/"><img src={LOGO} className="networks logo" alt="LOGO"/></a>
+							<a target="_blank" rel="noreferrer" href="https://tumo.moscow/">
+								<img src={LOGO} className="networks logo" alt="LOGO"/>
+							</a>
 							<br/>
 						</div>
 					</div>

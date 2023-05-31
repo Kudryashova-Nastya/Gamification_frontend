@@ -36,16 +36,16 @@ const StudentTransactions = observer(({id}) => {
 		const host = getHostInformation()
 		const fetchData = async () => {
 			const token = await Auth.getToken()
-			console.log("id", id)
+			// console.log("id", id)
 			let req = await fetch(`${host}/api/v1/transaction/all_student_transfer/`, POSTCORS({"student_id": StudentProfileStore.studentInfo.id}, token?.access))
 			const data = await req.json()
-				if (req.ok) {
-					setTransactions(data)
-				} else if (data.code === "token_not_valid") {
-					return fetchData()
-				} else {
-					console.log("проблемка", data)
-				}
+			if (req.ok) {
+				setTransactions(data)
+			} else if (data.code === "token_not_valid") {
+				return fetchData()
+			} else {
+				console.log("проблемка", data)
+			}
 		}
 
 		if (id) {
@@ -152,6 +152,7 @@ const StudentTransactions = observer(({id}) => {
 						</div>
 					</div>
 				}
+				return ''
 			})}
 
 			<Pagination pages={howManyPages} currentPage={currentPage} setCurrentPage={setCurrentPage}

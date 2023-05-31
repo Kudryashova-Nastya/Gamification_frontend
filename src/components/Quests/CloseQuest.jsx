@@ -4,7 +4,7 @@ import QuestStore from "../../store/QuestStore";
 import ERROR from "../../images/icons/error.svg";
 export const CloseQuest = observer(({data, setCurrentTab}) => {
 
-	const [error, setError] = useState(false)
+	const [error, setError] = useState(null)
 
 	const closeTask = async () => {
 		const request = {

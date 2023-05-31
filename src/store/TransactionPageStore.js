@@ -9,7 +9,6 @@ class TransactionPageStore {
 		makeAutoObservable(this)
 	}
 
-
 	// Модальные окна
 	modalVisible = false
 	setModalVisible = () => {
@@ -42,13 +41,9 @@ class TransactionPageStore {
 				return false // возвращает false в случае успеха
 			} else {
 				if (res.code === "token_not_valid") {
-					console.log("проблема протухшего токена обнаружена")
 					Auth.getToken().then((token) => {
 						if (token?.access) {
-							console.log("проблема протухания решена, перезапуск запроса")
 							return this.makeTransaction(data)
-						} else {
-							console.log("проблема протухания не решена", token)
 						}
 					})
 				}
@@ -59,7 +54,7 @@ class TransactionPageStore {
 			return "Что-то пошло не так, попробуйте повторить запрос позже"
 		}
 	}
-
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default new TransactionPageStore()

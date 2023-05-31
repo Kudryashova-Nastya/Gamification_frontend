@@ -58,8 +58,6 @@ class MarketStore {
 				Auth.getToken().then((token) => {
 					if (token?.access) {
 						this.fetchAllGoodsInfo()
-					} else {
-						console.log("проблема протухания не решена", token)
 					}
 				})
 			} else {
@@ -185,7 +183,6 @@ class MarketStore {
 		}
 	}
 
-
 	closeModal = () => {
 		bodyUnfixPosition()
 		runInAction(() => {
@@ -193,9 +190,7 @@ class MarketStore {
 			this.modalEditVisible = false
 			this.modalGiveMerchVisible = false
 		})
-
 	}
-
 }
 
-export default new MarketStore()
+export const marketStore = new MarketStore()

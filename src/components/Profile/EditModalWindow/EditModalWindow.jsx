@@ -43,7 +43,6 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 
 		let maxSize = 5 * 1024 * 1024 // ограничение по размеру файла 5 Мб
 
-		console.log(dirArray)
 		if (imageRef.current.files.length > 0) {
 			if (imageRef.current.files[0].size < maxSize) {
 				let formData = new FormData()
@@ -54,8 +53,6 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 					if (logImg?.code === "token_not_valid") {
 						await StudentProfileStore.editProfileImage(formData)
 					}
-				} else {
-					console.log("успешно изменено")
 				}
 			} else {
 				alert("Размер изображения не должен превышать 5 Мб")
@@ -68,7 +65,7 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 			"portfolio_link": portfolioRef.current.value || null,
 			"direction": dirArray
 		}
-		console.log("data", data)
+		// console.log("data", data)
 		// log вернет ошибку, если пусто, значит ошибки нет
 		const log = await StudentProfileStore.editProfile(data)
 		if (log) {
@@ -79,7 +76,6 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 		} else {
 			void StudentProfileStore.fetchStudentInfo()
 			void Auth.getProfileInfo()
-			console.log("успех")
 			StudentProfileStore.closeModal()
 		}
 	}
@@ -111,10 +107,10 @@ export const EditModalWindow = observer(forwardRef((props, ref) => {
 						{directionsStore.directions?.map((dir, i) =>
 							<div className="mydirection" key={i}>
 								<input type="checkbox"
-											 id={i}
+											 id={i.toString()}
 											 ref={(el) => (directionsRef.current[dir.id] = el)}
 											 defaultChecked={StudentProfileStore.studentInfo.direction.find(d => d.id === dir.id)}/>
-								<label htmlFor={i}>{dir.name}</label>
+								<label htmlFor={i.toString()}>{dir.name}</label>
 							</div>
 						)}
 					</div>

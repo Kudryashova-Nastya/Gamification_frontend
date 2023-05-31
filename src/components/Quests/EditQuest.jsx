@@ -5,12 +5,12 @@ import Select from "../SearchSelect/Select";
 import ERROR from "../../images/icons/error.svg";
 
 export const EditQuest = observer(({data, setCurrentTab}) => {
-	const [name, setName] = useState(data.name)
-	const [description, setDescription] = useState(data.description)
+	const [name, setName] = useState(data.name || "")
+	const [description, setDescription] = useState(data.description || "")
 	const [sum, setSum] = useState(data.sum)
 	const [type, setType] = useState(QuestStore.questTypes.find(type => type.id === data.type) || null)
 
-	const [error, setError] = useState(false)
+	const [error, setError] = useState(null)
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
