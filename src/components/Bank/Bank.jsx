@@ -45,7 +45,7 @@ const Bank = observer(({canTransfer = false}) => {
 			.then((data) => {
 				if (data.code === "token_not_valid") {
 					return fetchData()
-				} else {
+				} else if (!data.code && !data.error) {
 					setTransactions(data)
 				}
 			})
