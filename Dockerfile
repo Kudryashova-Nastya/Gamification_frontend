@@ -4,7 +4,7 @@ FROM node:16.17.0
 # Устанавливаем рабочую директорию внутри контейнера
 WORKDIR /app
 
-# Копируем package.json и package-lock.json для установки зависимостей
+# Копируем package.json для установки зависимостей
 COPY package.json ./
 
 # Устанавливаем зависимости
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Собираем статические файлы
-RUN npm run build
+# RUN npm run build
 
 # Указываем порт, на котором будет работать приложение
 EXPOSE 3000

@@ -47,6 +47,9 @@ const Bank = observer(({canTransfer = false}) => {
 					return fetchData()
 				} else if (!data.code && !data.error) {
 					setTransactions(data)
+				} else {
+					setTransactions([])
+					console.log("error", data.error, "data.code", data.code)
 				}
 			})
 			.catch((err) => {

@@ -20,7 +20,8 @@ nav a {
     text-decoration: none;
     transition: 0.1s;
     margin-bottom: 2vh;
-    display: inline-block;
+    display: flex;
+    align-items: center;
 }
 
 nav a:hover {
