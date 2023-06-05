@@ -20,13 +20,15 @@ nav a {
     text-decoration: none;
     transition: 0.1s;
     margin-bottom: 2vh;
+}
+
+nav .menu__links a {
     display: flex;
     align-items: center;
 }
 
 nav a:hover {
     color: #6F5FFE;
-    /*color: #F50106;*/
     transition: 0.25s;
 }
 
