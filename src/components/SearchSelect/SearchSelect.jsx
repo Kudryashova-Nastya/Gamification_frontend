@@ -39,7 +39,7 @@ const SearchSelect = observer(({allArr, setRecipient, id, defaultOpen=false}) =>
 			}))
 		});
 
-	}, [allArr])
+	}, [allArr, id, setRecipient])
 
 	return (
 		<div className={defaultOpen ? "wrapper active" : "wrapper"}>
@@ -59,6 +59,7 @@ const SearchSelect = observer(({allArr, setRecipient, id, defaultOpen=false}) =>
 													className={`${name?.first_name} ${name?.last_name}` === mainValue ? "selected" : ""}
 													key={index}>{name.first_name} {name.last_name}</li>)
 						}
+						return ""
 					}) : "Студентов по вашему запросу не найдено"}
 				</ul>
 			</div>

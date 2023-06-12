@@ -31,23 +31,22 @@ const Quests = observer(() => {
 	// массив с результатами поиска
 	const [arr, setArr] = useState(quests)
 
-
 	// пагинация
 	const [currentPage, setCurrentPage] = useState(1)
 	const postsPerPage = 10
 
 	// фильтрация
-	const [sortBy, setSortBy] = useState('all');
+	const [sortBy, setSortBy] = useState('all')
 
 	const handleFilterChange = (event) => {
-		setSortBy(event.target.value);
-	};
+		setSortBy(String(event.target.value))
+	}
 
 	const filterQuests = (by, arr) => {
 		if (by === "all") {
 			return arr
 		} else {
-			return arr.filter((el) => el.type == by)
+			return arr.filter((el) => String(el.type) === by)
 		}
 	}
 
@@ -59,13 +58,12 @@ const Quests = observer(() => {
 			setQuests(QuestStore.quests)
 			setArr(QuestStore.quests)
 		}
-
 		void fetchData()
 		setIsLoading(false)
 	}, [])
 
-	const indexOfLastPost = currentPage * postsPerPage;
-	const indexOfFirstPost = indexOfLastPost - postsPerPage;
+	const indexOfLastPost = currentPage * postsPerPage
+	const indexOfFirstPost = indexOfLastPost - postsPerPage
 	const howManyPages = Math.ceil(filterQuests(sortBy, arr)?.length / postsPerPage)
 	const currentPosts = filterQuests(sortBy, arr)?.slice(indexOfFirstPost, indexOfLastPost)
 
@@ -98,8 +96,8 @@ const Quests = observer(() => {
 					<div className="filter-value tag" key={i}
 							 style={{
 								 "background": `${tag?.color || '#CCCCCC'}40`,
-								 "border": sortBy == tag.id ? `2px solid ${tag?.color || '#CCCCCC'}70` : 'none',
-								 "padding": sortBy == tag.id ? '5px 15px' : '7px 17px'
+								 "border": sortBy === String(tag.id) ? `2px solid ${tag?.color || '#CCCCCC'}70` : 'none',
+								 "padding": sortBy === String(tag.id) ? '5px 15px' : '7px 17px'
 							 }}>
 						<input type="radio" id={tag.id} name="tags" value={tag.id} checked={sortBy === tag.id}
 									 onChange={handleFilterChange}/>
